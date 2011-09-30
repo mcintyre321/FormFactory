@@ -1,0 +1,126 @@
+﻿@using FormFactory
+@using FormFactory.Example.Controllers
+@using FormFactory.Example.Models
+@{
+    ViewBag.Title = "title";
+}
+<script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+<script type="text/javascript">    $.SyntaxHighlighter.init();</script>
+<h1>
+    FormFactory
+</h1>
+<p>
+    Fluent, conventional, extensible, statically typed form builder. Default templates
+    are for Twitter bootstrap css
+    <pre>
+Nuget install-package FormFactory
+</pre>
+</p>
+<p>
+    In the controller:
+    <pre class="highlight">
+        [HttpPost]
+        public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, bool remember, string returnUrl)
+        {
+            //...
+        }
+</pre>
+</p>
+<p>
+    and in the view...
+    <pre class="highlight">
+@@{ 
+    using(var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
+    {
+        form.SideMessage = "The password is 'password'"; //Set up some options
+        form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
+        form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+    } //.Dispose() closes the form
+}
+</pre>
+</p>
+<div class="page-header">
+    <h1>
+        Form from an action <small>The password is 'password'</small>
+    </h1>
+</div>
+<p>
+    @{
+        Func<dynamic, HelperResult> sideMessage = @<text>
+                                                 <p>
+                                                     When FormHelper renders an input, it examines the type of the action parameter or
+                                                     object property and looks for the best view for the object. E.g. if you were rendering
+                                                     a string, it would render the view "Property.System.String". If it can't find a
+                                                     suitable view, it looks at the basetype, and tries that. If it still can't find
+                                                     on, it defaults to the "Property.System.Object" render.
+                                                 </p>
+                                                 <p>
+                                                     You can override these templates by creating your own partials with the same names
+                                                     in your own project, so if you don't want to use Twitter bootstrap, you don't have
+                                                     to.
+                                                 </p>
+                                             </text>;
+        
+        using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
+        {
+            form.SideMessage = new MvcHtmlString(sideMessage(null).ToHtmlString()); //Set up some options
+            form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
+            form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+        } //.Dispose() closes the form
+    }
+</p>
+<h2>
+    So whats actually going on here?</h2>
+<h1>
+    Rendering objects
+</h1>
+<p>
+    You can also render objects using this system to create dynamic pages that don't
+    need updating
+    <pre class="highlight">
+    class Person
+    {
+        DateTime _dateOfBirth;
+        public Person(DateTime dateOfBirth)
+        {
+            _dateOfBirth = dateOfBirth;
+        }
+
+        //readonly property
+        public int Age { get { ... } }
+        
+        //writable property
+        public string Name { get; set; }
+    }
+
+    var me = new Person(DateTime.Parse("22 Dec 1981")) { Name = "Harry" };
+
+    //render the readonly properties
+    @@{ Html.RenderPropertiesFor(me, property => !property.IsWritable); }
+
+    //render the writable properties as inputs
+    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
+
+    //render the writable properties as readonly
+    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable, displayOnly:true); }
+
+    </pre>
+    @{
+   
+
+        var me = new Person(DateTime.Parse("22 Dec 1981")) { Name = "Harry" };
+    }
+    <p>
+        <form>
+        <div>
+            render the readonly properties</div>
+        @{ Html.RenderPropertiesFor(me, property => !property.IsWritable); }
+        <div>
+            render the writable properties as inputs</div>
+        @{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
+        <div>
+            render the writable properties as readonly</div>
+        @{ Html.RenderPropertiesFor(me, property => property.IsWritable, displayOnly: true);}
+        </form>
+    </p>
+</p>

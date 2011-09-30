@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{79136CF6-B39B-47A4-83A3-37D6C8D82ADF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FormFactory</RootNamespace>
+    <AssemblyName>FormFactory</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PrecompiledMvcViewEngine">
+      <HintPath>..\packages\PrecompiledMvcViewEngine.1.1.5\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllValidationMessagesHelper.cs" />
+    <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
+    <Compile Include="FormHelperExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextExtensions.cs" />
+    <Compile Include="Views\Shared\Form.Actions.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form.Actions.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Form.Close.generated.cs">
+      <DependentUpon>Form.Close.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Form.Property.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form.Property.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Form.Start.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Form.Start.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Boolean.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.Boolean.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.DateTime.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.DateTime.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Double.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.Double.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Enum1.generated.cs">
+      <DependentUpon>Property.System.Enum.cshtml</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Int32.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.Int32.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Int64.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.Int64.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.Object.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.Object.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Shared\Property.System.String.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.System.String.cshtml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Form.Actions.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Form.Actions.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Property.System.String.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.String.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Form.Close.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Form.Close.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Form.Property.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Form.Property.generated.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Views\Shared\Form.Start.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Form.Start.generated.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Shared\Property.System.Boolean.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Boolean.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.DateTime.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.DateTime.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.Double.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Double.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.Enum.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Enum1.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.Int32.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Int32.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.Int64.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Int64.generated.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\Shared\Property.System.Object.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.System.Object.generated.cs</LastGenOutput>
+    </Content>
+    <None Include="Views\Web.config" />
+    <None Include="Web.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
