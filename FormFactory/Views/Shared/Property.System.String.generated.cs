@@ -51,25 +51,22 @@ namespace FormFactory.Views.Shared
 
 
 
-WriteLiteral("           \r\n");
-
 
             
-            #line 5 "..\..\Views\Shared\Property.System.String.cshtml"
-  
-    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
-    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
-
+            #line 4 "..\..\Views\Shared\Property.System.String.cshtml"
+ if (Model.Choices != null)
+{
+    var choices = Model.Choices.Cast<string>();
 
             
             #line default
             #line hidden
-WriteLiteral("\r\n<input class=\"xlarge ");
+WriteLiteral("    <select name=\"");
 
 
             
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                 Write(Model.IsWritable ? "" : "disabled");
+            #line 7 "..\..\Views\Shared\Property.System.String.cshtml"
+             Write(Model.Name);
 
             
             #line default
@@ -78,38 +75,18 @@ WriteLiteral("\" id=\"");
 
 
             
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                                                           Write(Model.Name);
+            #line 7 "..\..\Views\Shared\Property.System.String.cshtml"
+                              Write(Model.Name);
 
             
             #line default
             #line hidden
-WriteLiteral("\" name=\"");
+WriteLiteral("\" class=\"");
 
 
             
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                                                                              Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\" size=\"30\" type=\"");
-
-
-            
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                                                                                                           Write(inputType);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\" value=\"");
-
-
-            
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                                                                                                                              Write(Model.Value);
+            #line 7 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                   Write(Model.IsWritable ? "" : "disabled");
 
             
             #line default
@@ -118,14 +95,138 @@ WriteLiteral("\" ");
 
 
             
-            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
-                                                                                                                                             Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
+            #line 7 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                                                          Write(Model.IsWritable ? "" : "disabled=disabled");
 
             
             #line default
             #line hidden
-WriteLiteral("/>");
+WriteLiteral(">\r\n");
 
+
+            
+            #line 8 "..\..\Views\Shared\Property.System.String.cshtml"
+         foreach (var option in choices)
+        {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <option value=\"");
+
+
+            
+            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
+                      Write(option);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\">");
+
+
+            
+            #line 10 "..\..\Views\Shared\Property.System.String.cshtml"
+                               Write(option);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</option>    \r\n");
+
+
+            
+            #line 11 "..\..\Views\Shared\Property.System.String.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </select>\r\n");
+
+
+            
+            #line 13 "..\..\Views\Shared\Property.System.String.cshtml"
+}
+else
+{
+    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
+
+
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <input class=\"xlarge ");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                     Write(Model.IsWritable ? "" : "disabled");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" id=\"");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                               Write(Model.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" name=\"");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                                                  Write(Model.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" size=\"30\" type=\"");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                                                                               Write(inputType);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" value=\"");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                                                                                                  Write(Model.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" ");
+
+
+            
+            #line 20 "..\..\Views\Shared\Property.System.String.cshtml"
+                                                                                                                                                 Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("/>\r\n");
+
+
+            
+            #line 21 "..\..\Views\Shared\Property.System.String.cshtml"
+}
+            
+            #line default
+            #line hidden
 
         }
     }

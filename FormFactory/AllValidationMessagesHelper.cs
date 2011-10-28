@@ -5,7 +5,6 @@ namespace FormFactory
 {
     public static class AllValidationMessagesHelper
     {
-
         public static MvcHtmlString AllValidationMessages(this HtmlHelper helper, string modelName)
         {
             if (HasErrors(helper, modelName))

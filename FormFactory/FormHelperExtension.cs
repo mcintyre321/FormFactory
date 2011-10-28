@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -179,9 +180,18 @@ namespace FormFactory
 
             foreach (var property in properties)
             {
-
+                if (properties.Any(p => p.Name + "Choices" == property.Name))
+                {
+                    continue; //skip this is it is choice
+                }
+                
                 var methodInfo = (displayOnly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
                 var inputVm = new PropertyVm(model, property, helper);
+                PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "Choices");
+                if (choices != null)
+                {
+                    inputVm.Choices = (IEnumerable) choices.GetGetMethod().Invoke(model, null);
+                }
                 if (methodInfo != null && filter(inputVm))
                 {
                     if (displayOnly) inputVm.IsWritable = false;
@@ -191,54 +201,5 @@ namespace FormFactory
                 }
             }
         }
-    }
-
-    public class PropertyVm
-    {
-        public PropertyVm(ParameterInfo pi, HtmlHelper html)
-        {
-            Type = pi.ParameterType;
-            Name = pi.Name;
-            DisplayName = pi.Name.Sentencise();
-            ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
-            IsWritable = true;
-            GetCustomAttributes = () => pi.GetCustomAttributes(true);
-        }
-
-        public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null)
-        {
-            Type = pi.PropertyType;
-            Name = pi.Name;
-            DisplayName = displayName ?? Name.Sentencise();
-            ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
-            else if (pi.GetGetMethod() != null)
-            {
-                Value = pi.GetGetMethod().Invoke(o, null);
-            }
-            GetCustomAttributes = () => pi.GetCustomAttributes(true);
-            IsWritable = pi.GetSetMethod() != null;
-        }
-
-        public Type Type { get; private set; }
-
-        public string Name { get; private set; }
-        public string DisplayName { get; private set; }
-
-        public object Value { get; private set; }
-
-
-        public Func<IEnumerable<object>> GetCustomAttributes { get; set; }
-
-        public bool IsWritable { get; internal set; }
     }
 }
