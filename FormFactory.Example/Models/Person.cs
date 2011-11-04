@@ -18,5 +18,10 @@ namespace FormFactory.Example.Models
 
         //writable property
         public string Name { get; set; }
+
+        //enumerable property
+        public string Roles { get; set; }
+
+
     }
 }

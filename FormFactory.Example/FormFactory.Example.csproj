@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FormFactory, Version=1.0.4319.27059, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FormFactory.1.0.4319.27059\lib\net40\FormFactory.dll</HintPath>
+    </Reference>
     <Reference Include="PrecompiledMvcViewEngine, Version=1.1.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PrecompiledMvcViewEngine.1.1.5\lib\net40\PrecompiledMvcViewEngine.dll</HintPath>
     </Reference>
@@ -159,12 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Form.Actions.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
-      <Project>{79136CF6-B39B-47A4-83A3-37D6C8D82ADF}</Project>
-      <Name>FormFactory</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -103,8 +103,40 @@ namespace FormFactory
                 engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName); ;
             }
             if (engineResult.View == null)
+            {
+                Type enumerableType = GetEnumerableType(vm.Type);
+                if (enumerableType != null)
+                {
+                    viewNameExtension = "Property.IEnumerable";
+                    partialViewName = viewNameExtension + "." + enumerableType;
+                    engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+
+                    while (engineResult.View == null && enumerableType.BaseType != null)
+                    {
+                        check = check.BaseType;
+                        partialViewName = viewNameExtension + "." + enumerableType.FullName;
+                        engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+                    }
+                }
+            } 
+            if (engineResult.View == null)
+            {
                 partialViewName = viewNameExtension + ".System.Object";
+            }
             return html.Partial(partialViewName, vm);
+        }
+
+        static Type GetEnumerableType(Type type)
+        {
+            foreach (Type intType in type.GetInterfaces())
+            {
+                if (intType.IsGenericType
+                    && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                {
+                    return intType.GetGenericArguments()[0];
+                }
+            }
+            return null;
         }
     }
 
@@ -184,13 +216,13 @@ namespace FormFactory
                 {
                     continue; //skip this is it is choice
                 }
-                
+
                 var methodInfo = (displayOnly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
                 var inputVm = new PropertyVm(model, property, helper);
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "Choices");
                 if (choices != null)
                 {
-                    inputVm.Choices = (IEnumerable) choices.GetGetMethod().Invoke(model, null);
+                    inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
                 }
                 if (methodInfo != null && filter(inputVm))
                 {

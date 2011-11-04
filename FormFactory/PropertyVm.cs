@@ -33,6 +33,7 @@ namespace FormFactory
             {
                 Value = pi.GetGetMethod().Invoke(o, null);
             }
+
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
             IsWritable = pi.GetSetMethod() != null;
         }
@@ -50,17 +51,17 @@ namespace FormFactory
             }
         }
 
-        public Type Type { get; private set; }
+        public Type Type { get; set; }
 
-        public string Name { get; private set; }
-        public string DisplayName { get; private set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
 
-        public object Value { get; private set; }
+        public object Value { get; set; }
 
 
         public Func<IEnumerable<object>> GetCustomAttributes { get; set; }
 
-        public bool IsWritable { get; internal set; }
+        public bool IsWritable { get; set; }
 
         public IEnumerable Choices { get; set; }
     }
