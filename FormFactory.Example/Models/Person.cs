@@ -22,6 +22,7 @@ namespace FormFactory.Example.Models
         //enumerable property
         public string Roles { get; set; }
 
+        public bool Enabled { get; set; }
 
     }
 }

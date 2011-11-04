@@ -1,11 +1,10 @@
 using System.Web.Mvc;
 using System.Web.WebPages;
-using FormFactory.App_Start;
 using RazorGenerator.Mvc;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(PrecompiledMvcViewEngineStart), "Start")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof($rootnamespace$.App_Start.PrecompiledMvcViewEngineStart), "Start")]
 
-namespace FormFactory.App_Start {
+namespace $rootnamespace$.App_Start {
     public static class PrecompiledMvcViewEngineStart {
         public static void Start() {
             var engine = new PrecompiledMvcEngine(typeof(PrecompiledMvcViewEngineStart).Assembly);
