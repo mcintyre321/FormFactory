@@ -2,9 +2,9 @@ using System.Text;
 
 namespace FormFactory
 {
-    static class TextExtensions
+    public static class TextExtensions
     {
-        public static string Sentencise(this string str)
+        public static string Sentencise(this string str, bool titlecase = false)
         {
             if (str == null || str.Length == 0)
                 return null;
@@ -21,7 +21,13 @@ namespace FormFactory
                 else
                 {
                     retVal.Append(" ");
-                    retVal.Append(char.ToLower(str[i]));
+                    if (titlecase)
+                    {
+                        retVal.Append(char.ToUpper(str[i]));
+                    }else
+                    {
+                        retVal.Append(char.ToLower(str[i]));
+                    }
                 }
             }
 

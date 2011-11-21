@@ -89,13 +89,15 @@ namespace FormFactory
             return methodExpr.Method;
         }
 
+        static bool IsNullable<T>(T t) { return false; }
+        static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
             var viewNameExtension = "Property";
+            var check = Nullable.GetUnderlyingType(vm.Type) ?? vm.Type;;
             string partialViewName = viewNameExtension + "." + vm.Type;
 
             var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
-            var check = vm.Type;
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
@@ -118,7 +120,7 @@ namespace FormFactory
                         engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
                     }
                 }
-            } 
+            }
             if (engineResult.View == null)
             {
                 partialViewName = viewNameExtension + ".System.Object";
@@ -138,63 +140,6 @@ namespace FormFactory
             }
             return null;
         }
-    }
-
-    public class FormVm : IDisposable
-    {
-        public FormVm(HtmlHelper html, MethodInfo mi, string displayName)
-        {
-            var controllerName = mi.ReflectedType.Name;
-            controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller"));
-            HtmlHelper = html;
-            DisplayName = displayName ?? mi.Name.Sentencise();
-            ActionUrl = html.Url().Action(mi.Name, controllerName);
-            Inputs = mi.GetParameters().Select(pi => new PropertyVm(pi, html));
-        }
-        public string ActionUrl { get; set; }
-        public MvcHtmlString SideMessage { get; set; }
-        public IEnumerable<PropertyVm> Inputs { get; set; }
-
-        public HtmlHelper HtmlHelper { get; set; }
-
-        public string DisplayName { get; set; }
-
-        public FormVm Render()
-        {
-            RenderStart();
-            RenderActionInputs();
-            RenderButtons();
-            return this;
-        }
-
-        public FormVm RenderButtons()
-        {
-            HtmlHelper.RenderPartial("Form.Actions", this);
-            return this;
-        }
-
-        public FormVm RenderActionInputs()
-        {
-            foreach (var input in Inputs)
-            {
-                HtmlHelper.RenderPartial("Form.Property", input);
-            }
-            return this;
-        }
-
-        public FormVm RenderStart()
-        {
-            HtmlHelper.RenderPartial("Form.Start", this);
-            return this;
-        }
-
-
-        public void Dispose()
-        {
-            HtmlHelper.RenderPartial("Form.Close", this);
-        }
-
-
     }
 
     public static class ModelHelper

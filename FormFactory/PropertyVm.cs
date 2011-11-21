@@ -52,7 +52,6 @@ namespace FormFactory
         }
 
         public Type Type { get; set; }
-
         public string Name { get; set; }
         public string DisplayName { get; set; }
 

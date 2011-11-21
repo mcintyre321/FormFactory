@@ -11,6 +11,7 @@ namespace FormFactory.Example.Models
         public Person(DateTime dateOfBirth)
         {
             _dateOfBirth = dateOfBirth;
+            Position = Models.Position.SeniorSubcontractor;
         }
 
         //readonly property
@@ -19,10 +20,17 @@ namespace FormFactory.Example.Models
         //writable property
         public string Name { get; set; }
 
-        //enumerable property
-        public string Roles { get; set; }
+        //nullable enumerable property
+        public Position? Position { get; set; }
 
         public bool Enabled { get; set; }
 
+
+    }
+
+    public enum Position
+    {
+        Contractor,
+        SeniorSubcontractor
     }
 }
