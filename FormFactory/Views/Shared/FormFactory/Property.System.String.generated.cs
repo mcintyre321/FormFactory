@@ -232,7 +232,7 @@ WriteLiteral("/>\r\n");
             #line default
             #line hidden
 WriteLiteral("    <script type=\"text/javascript\">\r\n        $(function () {\r\n            if (jQu" +
-"ery().pluginMethod) {\r\n                $(\"#");
+"ery().autocomplete) {\r\n                $(\"#");
 
 
             

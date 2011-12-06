@@ -152,7 +152,6 @@ namespace FormFactory
         public static void RenderPropertiesFor<T>(this HtmlHelper helper, T model, Func<PropertyVm, bool> filter = null, bool displayOnly = false)
         {
             filter = filter ?? (p => true);
-
             var properties = model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var property in properties)
