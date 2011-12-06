@@ -58,7 +58,7 @@
     <Compile Include="App_Start\PrecompiledMvcViewEngineStart.cs" />
     <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />
-    <Compile Include="Mvc\Implicit.cs" />
+    <Compile Include="Mvc\ImplicitAssignmentBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
@@ -149,10 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Views\Shared\Form.Start.cshtml">
+    <Content Include="Views\Shared\Form.Start.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Form.Start.generated.cs</LastGenOutput>
-    </None>
+    </Content>
     <Content Include="Views\Shared\Property.System.Boolean.cshtml">
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Property.System.Boolean.generated.cs</LastGenOutput>

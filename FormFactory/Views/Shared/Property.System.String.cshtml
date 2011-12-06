@@ -18,4 +18,18 @@ else
 
 
     <input class="xlarge @(Model.IsWritable ? "" : "disabled")" id="@Model.Name" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" @(Model.IsWritable ? "" : "disabled=\"disabled\"")/>
+    
+    if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
+    {
+        var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
+    <script type="text/javascript">
+        $(function () {
+            if (jQuery().pluginMethod) {
+                $("#@Model.Name").autocomplete({ source: ['@Html.Raw(string.Join("', '", escapedSuggestions))'] });
+            } else {
+                console.log("could not load $.autocomplete for @Model.Name suggestions");
+            }
+        });
+    </script>
+    }
 }

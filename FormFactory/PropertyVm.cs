@@ -63,5 +63,7 @@ namespace FormFactory
         public bool IsWritable { get; set; }
 
         public IEnumerable Choices { get; set; }
+        public IEnumerable Suggestions { get; set; }
+
     }
 }

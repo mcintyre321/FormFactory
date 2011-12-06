@@ -1,5 +1,14 @@
-﻿@using FormFactory
+﻿@using System.ComponentModel.DataAnnotations
+@using FormFactory
 @model PropertyVm
+@{
+    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+    if (dataAttributes.Any(da => da.CustomDataType == "Hidden"))
+    {
+<input name="@Model.Name" type="hidden" value="@Model.Value" />
+    }
+    else
+    {
 <div class="clearfix @(Html.HasErrors(Model.Name) ? "error" : "")">
     <label for="@Model.Name">@Model.DisplayName</label>
     <div class="input @(Html.HasErrors(Model.Name) ? "error" : "")">
@@ -7,3 +16,5 @@
         <span class="help-inline">@Html.AllValidationMessages(Model.Name)</span>
     </div>
 </div>
+    }
+}

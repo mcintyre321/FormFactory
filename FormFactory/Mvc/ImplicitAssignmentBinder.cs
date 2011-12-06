@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Web.Mvc;
 
-namespace FormFactory.Mvc
+namespace Qwizzard.Web.Infrastructure.Mvc
 {
     /// <summary>
     /// This model binder uses implicit cast operators to try to bind action parameters.
@@ -47,7 +44,7 @@ namespace FormFactory.Mvc
             }
             catch (TargetInvocationException ex)
             {
-                bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex.InnerException.Message);
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex.InnerException);
                 return null;
             }
 

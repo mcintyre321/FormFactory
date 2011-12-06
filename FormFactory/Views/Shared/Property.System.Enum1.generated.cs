@@ -112,7 +112,7 @@ WriteLiteral("></option>    \r\n");
      foreach (var enumMember in Enum.GetValues(enumType))
     {
 
-        var selected = (Model.Value.ToString() == enumMember.ToString());
+        var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
 
             
             #line default

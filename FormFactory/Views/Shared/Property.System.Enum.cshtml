@@ -12,7 +12,7 @@
     @foreach (var enumMember in Enum.GetValues(enumType))
     {
 
-        var selected = (Model.Value.ToString() == enumMember.ToString());
+        var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
         <option value="@enumMember.ToString()" @(selected ? "selected=selected" : "")>@enumMember.ToString().Sentencise(true)</option>    
     }
 </select>
