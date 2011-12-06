@@ -10,7 +10,7 @@ namespace FormFactory.App_Start {
         public static void Start() {
             var engine = new PrecompiledMvcEngine(typeof(PrecompiledMvcViewEngineStart).Assembly);
 
-            ViewEngines.Engines.Insert(0, engine);
+            ViewEngines.Engines.Add(engine);
 
             // StartPage lookups are done by WebPages. 
             VirtualPathFactoryManager.RegisterVirtualPathFactory(engine);
