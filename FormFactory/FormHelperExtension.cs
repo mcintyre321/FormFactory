@@ -97,12 +97,12 @@ namespace FormFactory
             var check = Nullable.GetUnderlyingType(vm.Type) ?? vm.Type;;
             string partialViewName = viewNameExtension + "." + vm.Type;
 
-            var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+            var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
                 partialViewName = viewNameExtension + "." + check.FullName;
-                engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName); ;
+                engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName); ;
             }
             if (engineResult.View == null)
             {
@@ -111,13 +111,13 @@ namespace FormFactory
                 {
                     viewNameExtension = "Property.IEnumerable";
                     partialViewName = viewNameExtension + "." + enumerableType;
-                    engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+                    engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
 
                     while (engineResult.View == null && enumerableType.BaseType != null)
                     {
                         check = check.BaseType;
                         partialViewName = viewNameExtension + "." + enumerableType.FullName;
-                        engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+                        engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace FormFactory
             {
                 partialViewName = viewNameExtension + ".System.Object";
             }
-            return html.Partial(partialViewName, vm);
+            return html.Partial("FormFactory/" + partialViewName, vm);
         }
 
         static Type GetEnumerableType(Type type)
@@ -173,7 +173,7 @@ namespace FormFactory
                 {
                     if (displayOnly) inputVm.IsWritable = false;
 
-                    helper.RenderPartial("Form.Property", inputVm);
+                    helper.RenderPartial("FormFactory/Form.Property", inputVm);
                     continue;
                 }
             }

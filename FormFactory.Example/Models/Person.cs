@@ -12,6 +12,7 @@ namespace FormFactory.Example.Models
         {
             _dateOfBirth = dateOfBirth;
             Position = Models.Position.SeniorSubcontractor;
+            Enabled = true;
         }
 
         //readonly property

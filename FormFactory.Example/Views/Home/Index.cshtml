@@ -114,7 +114,9 @@ Nuget install-package FormFactory
         <form>
         <div>
             render the readonly properties</div>
-        @{ Html.RenderPropertiesFor(me, property => !property.IsWritable); }
+        @{
+            Html.RenderPropertiesFor(me, property => !property.IsWritable);
+         }
         <div>
             render the writable properties as inputs</div>
         @{ Html.RenderPropertiesFor(me, property => property.IsWritable); }

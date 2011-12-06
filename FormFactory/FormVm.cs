@@ -36,7 +36,7 @@ namespace FormFactory
 
         public FormVm RenderButtons()
         {
-            HtmlHelper.RenderPartial("Form.Actions", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Actions", this);
             return this;
         }
 
@@ -44,21 +44,21 @@ namespace FormFactory
         {
             foreach (var input in Inputs)
             {
-                HtmlHelper.RenderPartial("Form.Property", input);
+                HtmlHelper.RenderPartial("FormFactory/Form.Property", input);
             }
             return this;
         }
 
         public FormVm RenderStart()
         {
-            HtmlHelper.RenderPartial("Form.Start", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Start", this);
             return this;
         }
 
 
         public void Dispose()
         {
-            HtmlHelper.RenderPartial("Form.Close", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Close", this);
         }
 
 

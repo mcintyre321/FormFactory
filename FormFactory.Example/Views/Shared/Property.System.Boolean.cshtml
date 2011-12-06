@@ -1,7 +1,0 @@
-﻿@using FormFactory
-@model PropertyVm
-           
-@{ var posted = Model.Value as bool? ?? bool.Parse((Model.Value as string ?? "false").ToString().Split(',').Last());
-}
-<input type='hidden' value='@posted.ToString().ToLower()' id="@Model.Name" name='@Model.Name'>
-<input class="@(Model.IsWritable ? "" : "disabled")" type="checkbox" value="true" @(posted ? "checked=checked" : "") onchange="javascript: $('#@Model.Name').val(this.checked)" @(Model.IsWritable ? "" : "disabled=\"disabled\"")/>
