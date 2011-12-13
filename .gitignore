@@ -9,7 +9,6 @@ _ReSharper.*
 *.resharper
 *.suo
 *.cache
-*.nupkg
 ~$*
 *.suo
 LPRun.5.1.ReSharper.user
