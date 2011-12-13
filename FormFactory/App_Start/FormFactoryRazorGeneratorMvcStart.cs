@@ -15,8 +15,8 @@ namespace FormFactory.App_Start {
 
             ViewEngines.Engines.Add(engine);
 
-            // StartPage lookups are done by WebPages. 
-            VirtualPathFactoryManager.RegisterVirtualPathFactory(engine);
+            //// StartPage lookups are done by WebPages. 
+            //VirtualPathFactoryManager.RegisterVirtualPathFactory(engine);
         }
     }
 }
