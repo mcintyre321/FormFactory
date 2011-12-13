@@ -137,8 +137,8 @@ WriteLiteral("<form action=\"");
             
             #line default
             #line hidden
-WriteLiteral("\" method=\"post\" enctype=\"mutipart/form-data\" encoding=\"mutipart/form-data\">\r\n    " +
-"<fieldset>\r\n");
+WriteLiteral("\" method=\"post\" enctype=\"multipart/form-data\" encoding=\"multipart/form-data\">\r\n  " +
+"  <fieldset>\r\n");
 
 
         }
