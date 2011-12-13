@@ -56,18 +56,18 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
-    <None Include="Views\Shared\FormFactory\Form.Close.cshtml" />
-    <None Include="Views\Shared\FormFactory\Form.Property.cshtml" />
-    <None Include="Views\Shared\FormFactory\Form.Start.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
-    <None Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Close.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Start.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
