@@ -1,0 +1,18 @@
+﻿@using FormFactory
+@model PropertyVm
+@{
+    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
+    var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
+}
+<select name="@Model.Name" @(Model.IsWritable ? "" : "disabled=disabled")>
+    @if (Nullable.GetUnderlyingType(Model.Type) != null)
+    {
+        <option value="" @(Model.Value == null ? "selected=selected" : "")></option>    
+    }
+    @foreach (var enumMember in Enum.GetValues(enumType))
+    {
+
+        var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
+        <option value="@enumMember.ToString()" @(selected ? "selected=selected" : "")>@enumMember.ToString().Sentencise(true)</option>    
+    }
+</select>
