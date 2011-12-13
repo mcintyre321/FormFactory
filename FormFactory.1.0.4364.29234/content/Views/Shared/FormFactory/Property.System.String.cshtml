@@ -24,7 +24,7 @@ else
         var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
     <script type="text/javascript">
         $(function () {
-            if (jQuery().pluginMethod) {
+            if (jQuery().autocomplete) {
                 $("#@Model.Name").autocomplete({ source: ['@Html.Raw(string.Join("', '", escapedSuggestions))'] });
             } else {
                 console.log("could not load $.autocomplete for @Model.Name suggestions");

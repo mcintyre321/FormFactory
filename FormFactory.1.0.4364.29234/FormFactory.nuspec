@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>FormFactory</id>
+    <version>1.0.4364.29234</version>
+    <title>FormFactory</title>
+    <authors>Harry McIntyre</authors>
+    <owners>Harry McIntyre</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Fluent builder for writing convention based forms</description>
+    <copyright>Harry McIntyre</copyright>
+    <dependencies>
+      <dependency id="Mvc3Futures" version="3.0.20105.0" />
+      <dependency id="RazorGenerator.Mvc" version="1.3" />
+    </dependencies>
+  </metadata>
+</package>

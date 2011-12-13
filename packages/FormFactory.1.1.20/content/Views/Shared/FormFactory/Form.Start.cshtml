@@ -1,0 +1,31 @@
+﻿@using FormFactory
+@model FormVm
+<div class="row">
+
+ @if (Model.SideMessage == null)
+ {
+    <text>
+    <div class="span16">     
+    </text>
+ }
+ else
+ {
+     <text>
+    <div class="span4">
+        <p>
+            @Model.SideMessage
+        </p>
+    </div>
+    <div class="span12">
+    </text>
+}        
+            
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert-message block-message error">
+        Sorry, there were some problems. Please correct them and try again.<br />
+        @Html.ValidationSummary(true)
+    </div>
+}
+<form action="@Model.ActionUrl" method="POST">
+    <fieldset>
