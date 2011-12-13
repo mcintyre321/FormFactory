@@ -1,0 +1,3 @@
+﻿@using FormFactory
+@model PropertyVm
+<input type="text" name="@Model.Name" id="@(Model.Name)" value="@(Model.Value ?? "")" @(Model.IsWritable ? "" : "disabled=\"disabled\"")/>

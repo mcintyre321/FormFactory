@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FormFactory")]
-[assembly: AssemblyDescription("Fluent builder for writing convention based forms")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Harry McIntyre")]
 [assembly: AssemblyProduct("FormFactory")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("69be2be0-0223-483b-8db0-d861649e8c01")]
+[assembly: Guid("5552fb1e-75c5-47ab-94ca-bbaf56d3a8a9")]
 
 // Version information for an assembly consists of the following four values:
 //

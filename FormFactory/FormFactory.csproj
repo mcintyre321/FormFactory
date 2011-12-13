@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{79136CF6-B39B-47A4-83A3-37D6C8D82ADF}</ProjectGuid>
+    <ProjectGuid>{C5DDCC05-9F10-4039-B5D6-CB96325D832C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FormFactory</RootNamespace>
@@ -35,11 +35,9 @@
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,30 +53,22 @@
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Close.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Start.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
     <None Include="packages.config" />
+    <None Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
+    <None Include="Views\Shared\FormFactory\Form.Close.cshtml" />
+    <None Include="Views\Shared\FormFactory\Form.Property.cshtml" />
+    <None Include="Views\Shared\FormFactory\Form.Start.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
+    <None Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
     <None Include="Views\Web.config" />
-    <None Include="Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
