@@ -31,15 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="RazorGenerator.Mvc, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorGenerator.Mvc.1.3\lib\net40\RazorGenerator.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -52,137 +45,37 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebActivator, Version=1.4.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllValidationMessagesHelper.cs" />
-    <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />
     <Compile Include="Mvc\ImplicitAssignmentBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
-    <Compile Include="Views\Shared\FormFactory\Form.Actions.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form.Actions.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Form.Close.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form.Close.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Form.Property.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form.Property.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Form.Start.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Form.Start.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Boolean.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Boolean.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.DateTime.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.DateTime.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Double.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Double.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Enum.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Enum.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Int32.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Int32.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Int64.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Int64.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.Object.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.Object.cshtml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Shared\FormFactory\Property.System.String.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Property.System.String.cshtml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Form.Actions.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.String.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Close.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Form.Close.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\FormFactory\Form.Close.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Form.Property.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Start.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Form.Start.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Boolean.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.DateTime.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Double.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Double.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Enum.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Enum.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Int32.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Int32.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Int64.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Int64.generated.cs</LastGenOutput>
-    </Content>
-    <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Object.generated.cs</LastGenOutput>
-    </Content>
+    <Content Include="Views\Shared\FormFactory\Form.Start.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
     <None Include="Web.config" />
