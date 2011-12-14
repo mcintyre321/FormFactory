@@ -54,9 +54,13 @@ namespace FormFactory.Views.Shared.FormFactory
 
             
             #line 4 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
- if (Model.Choices != null)
+ if (Model.IsWritable && Model.Choices != null)
 {
-    var choices = Model.Choices as IEnumerable<Tuple<string, string>> ?? Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+    var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
+    if (choices == null && Model.Choices is IEnumerable<string>)
+    {
+        choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+    }
 
             
             #line default
@@ -65,7 +69,7 @@ WriteLiteral("    <select name=\"");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
              Write(Model.Name);
 
             
@@ -75,7 +79,7 @@ WriteLiteral("\" id=\"");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
                               Write(Model.Name);
 
             
@@ -85,7 +89,7 @@ WriteLiteral("\" class=\"");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
                                                    Write(Model.IsWritable ? "" : "disabled");
 
             
@@ -95,7 +99,7 @@ WriteLiteral("\" ");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
                                                                                           Write(Model.IsWritable ? "" : "disabled=disabled");
 
             
@@ -105,7 +109,7 @@ WriteLiteral(">\r\n");
 
 
             
-            #line 8 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 12 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
          foreach (var option in choices)
         {
 
@@ -116,7 +120,7 @@ WriteLiteral("            <option value=\"");
 
 
             
-            #line 10 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 14 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
                       Write(option.Item2);
 
             
@@ -126,7 +130,7 @@ WriteLiteral("\">");
 
 
             
-            #line 10 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 14 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
                                      Write(option.Item1);
 
             
@@ -136,7 +140,7 @@ WriteLiteral("</option>    \r\n");
 
 
             
-            #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 15 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
         }
 
             
@@ -146,34 +150,47 @@ WriteLiteral("    </select>\r\n");
 
 
             
-            #line 13 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 17 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
 }
 else
 {
     var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
     var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
 
-
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <input class=\"xlarge ");
-
-
-            
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                     Write(Model.IsWritable ? "" : "disabled");
+    if (!Model.IsWritable)
+    {
 
             
             #line default
             #line hidden
-WriteLiteral("\" id=\"");
+WriteLiteral("        <span class=\"xlarge uneditable-input\" >");
 
 
             
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                               Write(Model.Name);
+            #line 25 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                          Write(Model.Value);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+
+            
+            #line 26 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+    }
+    else
+    {
+
+            
+            #line default
+            #line hidden
+WriteLiteral("        <input class=\"xlarge\" id=\"");
+
+
+            
+            #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                             Write(Model.Name);
 
             
             #line default
@@ -182,8 +199,8 @@ WriteLiteral("\" name=\"");
 
 
             
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                  Write(Model.Name);
+            #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                                Write(Model.Name);
 
             
             #line default
@@ -192,8 +209,8 @@ WriteLiteral("\" size=\"30\" type=\"");
 
 
             
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                                               Write(inputType);
+            #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                                                             Write(inputType);
 
             
             #line default
@@ -202,72 +219,74 @@ WriteLiteral("\" value=\"");
 
 
             
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                                                                  Write(Model.Value);
+            #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                                                                                Write(Model.Value);
 
             
             #line default
             #line hidden
-WriteLiteral("\" ");
-
-
-            
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                                                                                 Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
-
-            
-            #line default
-            #line hidden
-WriteLiteral("/>\r\n");
-
-
-            
-            #line 21 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-    
-    if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
-    {
-        var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("    <script type=\"text/javascript\">\r\n        $(function () {\r\n            if (jQu" +
-"ery().autocomplete) {\r\n                $(\"#");
-
-
-            
-            #line 28 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-               Write(Model.Name);
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\").autocomplete({ source: [\'");
-
-
-            
-            #line 28 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                      Write(Html.Raw(string.Join("', '", escapedSuggestions)));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("\'] });\r\n            } else {\r\n                console.log(\"could not load $.autoc" +
-"omplete for ");
+WriteLiteral("\" />\r\n");
 
 
             
             #line 30 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                          Write(Model.Name);
+
+        if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
+        {
+            var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
 
             
             #line default
             #line hidden
-WriteLiteral(" suggestions\");\r\n            }\r\n        });\r\n    </script>\r\n");
+WriteLiteral(@"            <script type=""text/javascript"">
+                $(function () {
+                    if (jQuery().autocomplete) {
+                        window.setTimeout(function () { //in a timeout so it can be embedded in a popover
+                            $(""#");
 
 
             
-            #line 34 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+            #line 38 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                           Write(Model.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\")\r\n                                .autocomplete({\r\n                            " +
+"        source: [\'");
+
+
+            
+            #line 40 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                         Write(Html.Raw(string.Join("', '", escapedSuggestions)));
+
+            
+            #line default
+            #line hidden
+WriteLiteral(@"'],
+                                    minLength: 0
+                                })
+                                .focus(function () {
+                                    $(this).trigger('keydown.autocomplete');
+                                });
+                        }, 1);
+                    } else {
+                        console.log(""could not load $.autocomplete for ");
+
+
+            
+            #line 48 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+                                                                  Write(Model.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral(" suggestions\");\r\n                    }\r\n                });\r\n    </script>\r\n");
+
+
+            
+            #line 52 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
+        }
     }
 }
             
