@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
@@ -7,14 +9,22 @@ namespace FormFactory.Mvc
 {
     public class ImplicitOperatorBinderProvider : IModelBinderProvider
     {
-        static MethodInfo GetImplicitConversionMethod(Type modelType)
+        static readonly ConcurrentDictionary<Type, MethodInfo> cache = new ConcurrentDictionary<Type, MethodInfo>();
+        public static MethodInfo GetImplicitConversionMethod(Type modelType)
+        {
+
+            return cache.GetOrAdd(modelType, UncachedGetImplicitConversionMethod);
+        }
+
+        private static MethodInfo UncachedGetImplicitConversionMethod(Type modelType)
         {
             return modelType.GetMethods(BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Static)
-                  .Where(x => x.Name == "op_Implicit")
-                  .Where(x => modelType.IsAssignableFrom(x.ReturnType))
-              .Where(x => x.GetParameters().Single().ParameterType == typeof(string))
-                  .FirstOrDefault();
+                .Where(x => x.Name == "op_Implicit")
+                .Where(x => modelType.IsAssignableFrom(x.ReturnType))
+                .Where(x => x.GetParameters().Single().ParameterType == typeof (string))
+                .FirstOrDefault();
         }
+
         #region Implementation of IModelBinderProvider
 
         public IModelBinder GetBinder(Type modelType)
