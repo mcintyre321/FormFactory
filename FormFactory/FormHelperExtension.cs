@@ -93,39 +93,27 @@ namespace FormFactory
         static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            var viewNameExtension = "Property";
-            var check = Nullable.GetUnderlyingType(vm.Type) ?? vm.Type;;
-            string partialViewName = viewNameExtension + "." + vm.Type;
+            var viewname = html.BestViewName(vm.Type, "Property") ?? html.BestViewName(vm.Type, "IEnumerable") ?? "Property.System.Object";
+            return html.Partial(viewname, vm);
+        }
+        public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
+        {
+            var check = Nullable.GetUnderlyingType(type) ?? type; ;
+            string partialViewName = (prefix == null ? "" : (prefix + ".")) + type;
 
             var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
-                partialViewName = viewNameExtension + "." + check.FullName;
+                partialViewName = (prefix == null ? "" : (prefix + ".")) + check.FullName;
                 engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName); ;
             }
+             
             if (engineResult.View == null)
             {
-                Type enumerableType = GetEnumerableType(vm.Type);
-                if (enumerableType != null)
-                {
-                    viewNameExtension = "Property.IEnumerable";
-                    partialViewName = viewNameExtension + "." + enumerableType;
-                    engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
-
-                    while (engineResult.View == null && enumerableType.BaseType != null)
-                    {
-                        check = check.BaseType;
-                        partialViewName = viewNameExtension + "." + enumerableType.FullName;
-                        engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
-                    }
-                }
+                return null;
             }
-            if (engineResult.View == null)
-            {
-                partialViewName = viewNameExtension + ".System.Object";
-            }
-            return html.Partial("FormFactory/" + partialViewName, vm);
+            return "FormFactory/" + partialViewName;
         }
 
         static Type GetEnumerableType(Type type)
@@ -144,12 +132,12 @@ namespace FormFactory
 
     public static class ModelHelper
     {
-        public static FormVm RenderPropertiesFor<T>(this FormVm form, T model, Func<PropertyVm, bool> filter = null, bool displayOnly = false)
+        public static FormVm RenderPropertiesFor<T>(this FormVm form, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
         {
-            form.HtmlHelper.RenderPropertiesFor(model, filter, displayOnly);
+            form.HtmlHelper.RenderPropertiesFor(model, filter, renderAsReadonly);
             return form;
         }
-        public static void RenderPropertiesFor<T>(this HtmlHelper helper, T model, Func<PropertyVm, bool> filter = null, bool displayOnly = false)
+        public static void RenderPropertiesFor<T>(this HtmlHelper helper, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
         {
             filter = filter ?? (p => true);
             var properties = model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
@@ -161,16 +149,18 @@ namespace FormFactory
                     continue; //skip this is it is choice
                 }
 
-                var methodInfo = (displayOnly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
                 var inputVm = new PropertyVm(model, property, helper);
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "Choices");
                 if (choices != null)
                 {
                     inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
                 }
+
+                var methodInfo = (renderAsReadonly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
+                
                 if (methodInfo != null && filter(inputVm))
                 {
-                    if (displayOnly) inputVm.IsWritable = false;
+                    if (renderAsReadonly) inputVm.IsWritable = false;
 
                     helper.RenderPartial("FormFactory/Form.Property", inputVm);
                     continue;

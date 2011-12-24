@@ -102,7 +102,7 @@ Nuget install-package FormFactory
     @@{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
 
     //render the writable properties as readonly
-    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable, displayOnly:true); }
+    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable, renderAsReadonly:true); }
 
     </pre>
     @{
@@ -122,7 +122,7 @@ Nuget install-package FormFactory
         @{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
         <div>
             render the writable properties as readonly</div>
-        @{ Html.RenderPropertiesFor(me, property => property.IsWritable, displayOnly: true);}
+        @{ Html.RenderPropertiesFor(me, property => property.IsWritable, renderAsReadonly: true);}
         </form>
     </p>
 </p>
