@@ -93,27 +93,30 @@ namespace FormFactory
         static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            var viewname = html.BestViewName(vm.Type, "Property") ?? html.BestViewName(vm.Type, "IEnumerable") ?? "Property.System.Object";
+            var viewname = html.BestViewName(vm.Type, "FormFactory/Property")
+                ?? html.BestViewName(GetEnumerableType(vm.Type), "FormFactory/IEnumerable") //must be an interface, maybe it's an enumerable
+                ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
         public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
         {
+            if (type == null) return null;
             var check = Nullable.GetUnderlyingType(type) ?? type; ;
             string partialViewName = (prefix == null ? "" : (prefix + ".")) + type;
 
-            var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName);
+            var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
                 partialViewName = (prefix == null ? "" : (prefix + ".")) + check.FullName;
-                engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, "FormFactory/" + partialViewName); ;
+                engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName); ;
             }
              
             if (engineResult.View == null)
             {
                 return null;
             }
-            return "FormFactory/" + partialViewName;
+            return partialViewName;
         }
 
         static Type GetEnumerableType(Type type)
