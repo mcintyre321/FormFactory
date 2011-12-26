@@ -102,16 +102,17 @@ namespace FormFactory
         {
             if (type == null) return null;
             var check = Nullable.GetUnderlyingType(type) ?? type; ;
-            string partialViewName = (prefix == null ? "" : (prefix + ".")) + type;
+            Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + t;
+            string partialViewName = getPartialViewName(type);
 
             var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
-                partialViewName = (prefix == null ? "" : (prefix + ".")) + check.FullName;
+                partialViewName = getPartialViewName(check);
                 engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName); ;
             }
-             
+
             if (engineResult.View == null)
             {
                 return null;
