@@ -1,3 +1,8 @@
 ﻿@using FormFactory
 @model PropertyVm
-<input class="xlarge @(Model.IsWritable ? "" : "disabled")" id="@Model.Name" name="@Model.Name" size="30" type="text" value="@Model.Value" @(Model.IsWritable ? "" : "disabled=\"disabled\"")/>
+@if (!Model.IsWritable)
+{ <span class="xlarge uneditable-input">@Model.Value</span> }
+else
+{
+    <input class="xlarge" id="@Model.Name" name="@Model.Name" size="30" type="text" value="@Model.Value" />
+}

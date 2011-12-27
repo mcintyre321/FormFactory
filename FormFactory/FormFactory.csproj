@@ -164,7 +164,7 @@
     </Content>
     <Content Include="Views\Shared\FormFactory\Property.System.Int32.cshtml">
       <Generator>RazorGenerator</Generator>
-      <LastGenOutput>Property.System.Int32.generated.cs</LastGenOutput>
+      <LastGenOutput>_Property.System.Int32.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\FormFactory\Property.System.Int64.cshtml">
       <Generator>RazorGenerator</Generator>

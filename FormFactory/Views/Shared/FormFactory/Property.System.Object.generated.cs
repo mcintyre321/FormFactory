@@ -44,22 +44,42 @@ namespace FormFactory.Views.Shared.FormFactory
         {
 
 
-WriteLiteral("<input class=\"xlarge ");
-
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                 Write(Model.IsWritable ? "" : "disabled");
+ if (!Model.IsWritable)
+{
+            
+            #line default
+            #line hidden
+WriteLiteral(" <span class=\"xlarge uneditable-input\">");
+
+
+            
+            #line 4 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+                                   Write(Model.Value);
 
             
             #line default
             #line hidden
-WriteLiteral("\" id=\"");
+WriteLiteral("</span> ");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                                           Write(Model.Name);
+            #line 4 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+                                                            }
+else
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <input class=\"xlarge\" id=\"");
+
+
+            
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+                         Write(Model.Name);
 
             
             #line default
@@ -68,8 +88,8 @@ WriteLiteral("\" name=\"");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                                                              Write(Model.Name);
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+                                            Write(Model.Name);
 
             
             #line default
@@ -78,24 +98,21 @@ WriteLiteral("\" size=\"30\" type=\"text\" value=\"");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                                                                                                        Write(Model.Value);
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+                                                                                      Write(Model.Value);
 
             
             #line default
             #line hidden
-WriteLiteral("\" ");
+WriteLiteral("\" />\r\n");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                                                                                                                       Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
-
+            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
+}
             
             #line default
             #line hidden
-WriteLiteral("/>");
-
 
         }
     }
