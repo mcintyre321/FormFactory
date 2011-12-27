@@ -93,24 +93,24 @@ namespace FormFactory
         static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            var viewname = html.BestViewName(vm.Type, "FormFactory/Property")
-                ?? html.BestViewName(GetEnumerableType(vm.Type), "FormFactory/IEnumerable") //must be an interface, maybe it's an enumerable
+            var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property")
+                ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/IEnumerable") //must be an interface, maybe it's an enumerable
                 ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
-        public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
+        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
         {
             if (type == null) return null;
             var check = Nullable.GetUnderlyingType(type) ?? type; ;
             Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + t;
             string partialViewName = getPartialViewName(type);
 
-            var engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName);
+            var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
             while (engineResult.View == null && check.BaseType != null)
             {
                 check = check.BaseType;
                 partialViewName = getPartialViewName(check);
-                engineResult = ViewEngines.Engines.FindPartialView(html.ViewContext.Controller.ControllerContext, partialViewName); ;
+                engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName); ;
             }
 
             if (engineResult.View == null)
