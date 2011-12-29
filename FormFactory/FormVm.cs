@@ -18,10 +18,17 @@ namespace FormFactory
             HtmlHelper = html;
             DisplayName = displayName ?? mi.Name.Sentencise();
             Inputs = mi.GetParameters().Select(pi => new PropertyVm(pi, html));
+
+            ExcludePropertyErrorsFromValidationSummary = true;
         }
-        public FormVm()
+        public FormVm(HtmlHelper html)
         {
             Inputs = new List<PropertyVm>();
+            this.ActionUrl = "";
+            this.DisplayName = "";
+            this.SideMessage = new MvcHtmlString("");
+            this.HtmlHelper = html;
+            ExcludePropertyErrorsFromValidationSummary = true;
         }
 
         public string ActionUrl { get; set; }
@@ -31,6 +38,8 @@ namespace FormFactory
         public HtmlHelper HtmlHelper { get; set; }
 
         public string DisplayName { get; set; }
+
+        public bool ExcludePropertyErrorsFromValidationSummary { get; set; }
 
         public FormVm Render()
         {
