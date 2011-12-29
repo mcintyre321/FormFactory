@@ -13,11 +13,17 @@ namespace FormFactory
         {
             var controllerName = mi.ReflectedType.Name;
             controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller"));
+            ActionUrl = html.Url().Action(mi.Name, controllerName);
+
             HtmlHelper = html;
             DisplayName = displayName ?? mi.Name.Sentencise();
-            ActionUrl = html.Url().Action(mi.Name, controllerName);
             Inputs = mi.GetParameters().Select(pi => new PropertyVm(pi, html));
         }
+        public FormVm()
+        {
+            Inputs = new List<PropertyVm>();
+        }
+
         public string ActionUrl { get; set; }
         public MvcHtmlString SideMessage { get; set; }
         public IEnumerable<PropertyVm> Inputs { get; set; }
