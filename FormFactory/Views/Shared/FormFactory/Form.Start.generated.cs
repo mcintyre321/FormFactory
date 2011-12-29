@@ -112,7 +112,7 @@ WriteLiteral("    <div class=\"alert-message block-message error\">\r\n        S
 
             
             #line 27 "..\..\Views\Shared\FormFactory\Form.Start.cshtml"
-   Write(Html.ValidationSummary(true));
+   Write(Html.ValidationSummary(Model.ExcludePropertyErrorsFromValidationSummary));
 
             
             #line default
