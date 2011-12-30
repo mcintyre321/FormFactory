@@ -21,7 +21,7 @@ namespace FormFactory
         }
 
         public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
-            this(html, pi.PropertyType, pi.Name, displayName)
+            this(html, pi.PropertyType, pi.Name, null, displayName)
         {
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
@@ -33,15 +33,15 @@ namespace FormFactory
             {
                 Value = pi.GetGetMethod().Invoke(o, null);
             }
-
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
             IsWritable = pi.GetSetMethod() != null;
         }
 
-        public PropertyVm(HtmlHelper html, Type type, string name, string displayName = null)
+        public PropertyVm(HtmlHelper html, Type type, string name, string id = null, string displayName = null)
         {
             Type = type;
             Name = name;
+            Id = id ?? Name;
             DisplayName = displayName ?? Name.Sentencise();
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
@@ -50,6 +50,8 @@ namespace FormFactory
                     Value = modelState.Value.AttemptedValue;
             }
         }
+
+        public string Id { get; set; }
 
         public Type Type { get; set; }
         public string Name { get; set; }

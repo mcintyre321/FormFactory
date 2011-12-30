@@ -20,7 +20,7 @@
     </text>
 }        
             
-@if (!ViewData.ModelState.IsValid)
+@if (!ViewData.ModelState.IsValid && Model.ShowValidationSummary)
 {
     <div class="alert-message block-message error">
         Sorry, there were some problems. Please correct them and try again.<br />

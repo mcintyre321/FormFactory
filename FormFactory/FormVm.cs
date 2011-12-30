@@ -9,7 +9,7 @@ namespace FormFactory
 {
     public class FormVm : IDisposable
     {
-        public FormVm(HtmlHelper html, MethodInfo mi, string displayName)
+        public FormVm(HtmlHelper html, MethodInfo mi, string displayName) : this(html)
         {
             var controllerName = mi.ReflectedType.Name;
             controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller"));
@@ -28,6 +28,7 @@ namespace FormFactory
             this.DisplayName = "";
             this.SideMessage = new MvcHtmlString("");
             this.HtmlHelper = html;
+            ShowValidationSummary = true;
             ExcludePropertyErrorsFromValidationSummary = true;
         }
 
@@ -40,6 +41,8 @@ namespace FormFactory
         public string DisplayName { get; set; }
 
         public bool ExcludePropertyErrorsFromValidationSummary { get; set; }
+
+        public bool ShowValidationSummary { get; set; }
 
         public FormVm Render()
         {

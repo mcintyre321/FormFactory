@@ -100,7 +100,7 @@ WriteLiteral("            \r\n");
 
             
             #line 23 "..\..\Views\Shared\FormFactory\Form.Start.cshtml"
- if (!ViewData.ModelState.IsValid)
+ if (!ViewData.ModelState.IsValid && Model.ShowValidationSummary)
 {
 
             
