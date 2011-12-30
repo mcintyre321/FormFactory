@@ -79,7 +79,7 @@ WriteLiteral("    <input class=\"xlarge\" id=\"");
 
             
             #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                         Write(Model.Name);
+                         Write(Model.Id);
 
             
             #line default
@@ -89,7 +89,7 @@ WriteLiteral("\" name=\"");
 
             
             #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                            Write(Model.Name);
+                                          Write(Model.Name);
 
             
             #line default
@@ -99,7 +99,7 @@ WriteLiteral("\" size=\"30\" type=\"text\" value=\"");
 
             
             #line 7 "..\..\Views\Shared\FormFactory\Property.System.Object.cshtml"
-                                                                                      Write(Model.Value);
+                                                                                    Write(Model.Value);
 
             
             #line default

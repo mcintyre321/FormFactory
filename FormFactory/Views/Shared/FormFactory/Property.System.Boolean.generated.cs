@@ -71,7 +71,7 @@ WriteLiteral("\'  id=\"hidden-");
 
             
             #line 7 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                 Write(Model.Name);
+                                                                 Write(Model.Id);
 
             
             #line default
@@ -81,7 +81,7 @@ WriteLiteral("\" name=\'");
 
             
             #line 7 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                                    Write(Model.Name);
+                                                                                  Write(Model.Name);
 
             
             #line default
@@ -101,7 +101,7 @@ WriteLiteral("\" type=\"checkbox\" id=\"");
 
             
             #line 8 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                    Write(Model.Name);
+                                                                    Write(Model.Id);
 
             
             #line default
@@ -111,7 +111,7 @@ WriteLiteral("\" value=\"true\" ");
 
             
             #line 8 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                                               Write(posted ? "checked=\"\"" : "\"\"");
+                                                                                             Write(posted ? "checked=\"\"" : "\"\"");
 
             
             #line default
@@ -121,7 +121,7 @@ WriteLiteral(" onchange=\"javascript: document.getElementById(\'hidden-");
 
             
             #line 8 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                                                                                                                                        Write(Model.Name);
+                                                                                                                                                                                      Write(Model.Id);
 
             
             #line default
@@ -131,7 +131,7 @@ WriteLiteral("\').value = this.checked;\" ");
 
             
             #line 8 "..\..\Views\Shared\FormFactory\Property.System.Boolean.cshtml"
-                                                                                                                                                                                                                              Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
+                                                                                                                                                                                                                          Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
 
             
             #line default

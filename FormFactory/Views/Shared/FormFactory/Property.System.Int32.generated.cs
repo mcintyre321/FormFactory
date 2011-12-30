@@ -59,7 +59,7 @@ WriteLiteral("\" id=\"");
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Int32.cshtml"
-                                      Write(Model.Name);
+                                      Write(Model.Id);
 
             
             #line default
@@ -69,7 +69,7 @@ WriteLiteral("\" value=\"");
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Int32.cshtml"
-                                                            Write(Model.Value ?? "");
+                                                          Write(Model.Value ?? "");
 
             
             #line default
@@ -79,7 +79,7 @@ WriteLiteral("\" ");
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Int32.cshtml"
-                                                                                  Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
+                                                                                Write(Model.IsWritable ? "" : "disabled=\"disabled\"");
 
             
             #line default

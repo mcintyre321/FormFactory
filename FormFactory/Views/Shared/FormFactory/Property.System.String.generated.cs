@@ -80,7 +80,7 @@ WriteLiteral("\" id=\"");
 
             
             #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                              Write(Model.Name);
+                              Write(Model.Id);
 
             
             #line default
@@ -90,7 +90,7 @@ WriteLiteral("\" class=\"");
 
             
             #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                   Write(Model.IsWritable ? "" : "disabled");
+                                                 Write(Model.IsWritable ? "" : "disabled");
 
             
             #line default
@@ -100,7 +100,7 @@ WriteLiteral("\" ");
 
             
             #line 11 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                          Write(Model.IsWritable ? "" : "disabled=disabled");
+                                                                                        Write(Model.IsWritable ? "" : "disabled=disabled");
 
             
             #line default
@@ -190,7 +190,7 @@ WriteLiteral("        <input class=\"xlarge\" id=\"");
 
             
             #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                             Write(Model.Name);
+                             Write(Model.Id);
 
             
             #line default
@@ -200,7 +200,7 @@ WriteLiteral("\" name=\"");
 
             
             #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                Write(Model.Name);
+                                              Write(Model.Name);
 
             
             #line default
@@ -210,7 +210,7 @@ WriteLiteral("\" size=\"30\" type=\"");
 
             
             #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                             Write(inputType);
+                                                                           Write(inputType);
 
             
             #line default
@@ -220,7 +220,7 @@ WriteLiteral("\" value=\"");
 
             
             #line 29 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                                                Write(Model.Value);
+                                                                                              Write(Model.Value);
 
             
             #line default
@@ -247,7 +247,7 @@ WriteLiteral(@"            <script type=""text/javascript"">
 
             
             #line 38 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                           Write(Model.Name);
+                           Write(Model.Id);
 
             
             #line default
@@ -276,7 +276,7 @@ WriteLiteral(@"'],
 
             
             #line 48 "..\..\Views\Shared\FormFactory\Property.System.String.cshtml"
-                                                                  Write(Model.Name);
+                                                                  Write(Model.Id);
 
             
             #line default

@@ -105,7 +105,7 @@ WriteLiteral("\" id=\"");
 
             
             #line 28 "..\..\Views\Shared\FormFactory\Property.System.DateTime.cshtml"
-                                         Write(Model.Name);
+                                         Write(Model.Id);
 
             
             #line default
@@ -115,7 +115,7 @@ WriteLiteral("\" value=\"");
 
             
             #line 28 "..\..\Views\Shared\FormFactory\Property.System.DateTime.cshtml"
-                                                              Write(Model.Value);
+                                                            Write(Model.Value);
 
             
             #line default
@@ -125,7 +125,7 @@ WriteLiteral("\" ");
 
             
             #line 28 "..\..\Views\Shared\FormFactory\Property.System.DateTime.cshtml"
-                                                                              Write(Model.IsWritable ? "" :"disabled = \"disabled\"");
+                                                                            Write(Model.IsWritable ? "" :"disabled = \"disabled\"");
 
             
             #line default
@@ -146,7 +146,7 @@ WriteLiteral("        <script type=\"text/javascript\">\r\n            $(\"#");
 
             
             #line 32 "..\..\Views\Shared\FormFactory\Property.System.DateTime.cshtml"
-           Write(Model.Name);
+           Write(Model.Id);
 
             
             #line default

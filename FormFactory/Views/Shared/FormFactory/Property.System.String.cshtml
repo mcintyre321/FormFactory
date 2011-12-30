@@ -8,7 +8,7 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    <select name="@Model.Name" id="@Model.Name" class="@(Model.IsWritable ? "" : "disabled")" @(Model.IsWritable ? "" : "disabled=disabled")>
+    <select name="@Model.Name" id="@Model.Id" class="@(Model.IsWritable ? "" : "disabled")" @(Model.IsWritable ? "" : "disabled=disabled")>
         @foreach (var option in choices)
         {
             <option value="@option.Item2">@option.Item1</option>    
@@ -26,7 +26,7 @@ else
     }
     else
     {
-        <input class="xlarge" id="@Model.Name" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+        <input class="xlarge" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
 
         if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
         {
@@ -35,7 +35,7 @@ else
                 $(function () {
                     if (jQuery().autocomplete) {
                         window.setTimeout(function () { //in a timeout so it can be embedded in a popover
-                            $("#@Model.Name")
+                            $("#@Model.Id")
                                 .autocomplete({
                                     source: ['@Html.Raw(string.Join("', '", escapedSuggestions))'],
                                     minLength: 0
@@ -45,7 +45,7 @@ else
                                 });
                         }, 1);
                     } else {
-                        console.log("could not load $.autocomplete for @Model.Name suggestions");
+                        console.log("could not load $.autocomplete for @Model.Id suggestions");
                     }
                 });
     </script>

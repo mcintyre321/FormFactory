@@ -54,22 +54,22 @@ WriteLiteral("<input type=\"text\" name=\"");
             
             #line default
             #line hidden
-WriteLiteral("\" id=\"");
+WriteLiteral("\" ");
 
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                      Write(Model.Name);
+                                 Write(Model.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("\" value=\"");
+WriteLiteral(" value=\"");
 
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                                            Write(Model.Value ?? "");
+                                                   Write(Model.Value ?? "");
 
             
             #line default
@@ -79,7 +79,7 @@ WriteLiteral("\" ");
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                                                                  Write(Model.IsWritable ? "disabled=\"disabled\"" : "");
+                                                                         Write(Model.IsWritable ? "disabled=\"disabled\"" : "");
 
             
             #line default

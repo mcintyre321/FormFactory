@@ -109,7 +109,7 @@ WriteLiteral("\">\r\n    <label for=\"");
 
             
             #line 13 "..\..\Views\Shared\FormFactory\Form.Property.cshtml"
-           Write(Model.Ide);
+           Write(Model.Id);
 
             
             #line default
@@ -119,7 +119,7 @@ WriteLiteral("\">");
 
             
             #line 13 "..\..\Views\Shared\FormFactory\Form.Property.cshtml"
-                       Write(Model.DisplayName);
+                      Write(Model.DisplayName);
 
             
             #line default
