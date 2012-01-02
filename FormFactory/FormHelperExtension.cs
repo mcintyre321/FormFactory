@@ -98,11 +98,12 @@ namespace FormFactory
                 ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
-        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
+        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getName = null)
         {
             if (type == null) return null;
+            getName = getName ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type; ;
-            Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + t;
+            Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
             string partialViewName = getPartialViewName(type);
 
             var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
