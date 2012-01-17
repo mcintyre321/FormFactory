@@ -178,6 +178,7 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Property.System.String.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

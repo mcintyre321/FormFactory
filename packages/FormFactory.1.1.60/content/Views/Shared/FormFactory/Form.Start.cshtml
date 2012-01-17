@@ -20,12 +20,12 @@
     </text>
 }        
             
-@if (!ViewData.ModelState.IsValid)
+@if (!ViewData.ModelState.IsValid && Model.ShowValidationSummary)
 {
     <div class="alert-message block-message error">
         Sorry, there were some problems. Please correct them and try again.<br />
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary(Model.ExcludePropertyErrorsFromValidationSummary)
     </div>
 }
-<form action="@Model.ActionUrl" method="POST">
+<form action="@Model.ActionUrl" method="post" enctype="multipart/form-data" encoding="multipart/form-data">
     <fieldset>

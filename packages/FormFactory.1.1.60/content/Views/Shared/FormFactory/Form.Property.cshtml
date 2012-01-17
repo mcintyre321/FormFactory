@@ -10,7 +10,7 @@
     else
     {
 <div class="clearfix @(Html.HasErrors(Model.Name) ? "error" : "")">
-    <label for="@Model.Name">@Model.DisplayName</label>
+    <label for="@Model.Id">@Model.DisplayName</label>
     <div class="input @(Html.HasErrors(Model.Name) ? "error" : "")">
         @Html.BestProperty(Model)
         <span class="help-inline">@Html.AllValidationMessages(Model.Name)</span>

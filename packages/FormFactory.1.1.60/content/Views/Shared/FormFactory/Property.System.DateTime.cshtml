@@ -25,11 +25,11 @@
         }
     </style>
     <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;
-    <input type="text" name="@Model.Name" id="@Model.Name" value="@(Model.Value)" @(Model.IsWritable ? "" :"disabled = \"disabled\"") />
+    <input type="text" name="@Model.Name" id="@Model.Id" value="@(Model.Value)" @(Model.IsWritable ? "" :"disabled = \"disabled\"") />
     if (Model.IsWritable)
     {
         <script type="text/javascript">
-            $("#@Model.Name").datetimepicker({ dateFormat: 'dd/mm/yy' });
+            $("#@Model.Id").datetimepicker({ dateFormat: 'dd/mm/yy' });
         </script>
     } 
 }
