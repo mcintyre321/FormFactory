@@ -48,6 +48,7 @@ namespace FormFactory.Views.Shared.FormFactory
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
   
+    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
     
 
 
@@ -56,7 +57,7 @@ namespace FormFactory.Views.Shared.FormFactory
             #line hidden
 
             
-            #line 6 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
  if (Model.IsWritable)
 {
 
@@ -67,7 +68,7 @@ WriteLiteral("    <select name=\"");
 
 
             
-            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 9 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
              Write(Model.Name);
 
             
@@ -77,7 +78,7 @@ WriteLiteral("\" ");
 
 
             
-            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 9 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
                            Write(Model.IsWritable ? "" : "disabled=disabled");
 
             
@@ -87,7 +88,7 @@ WriteLiteral(">\r\n");
 
 
             
-            #line 9 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 10 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
          if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
 
@@ -98,7 +99,7 @@ WriteLiteral("            <option value=\"\" ");
 
 
             
-            #line 11 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 12 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
                          Write(Model.Value == null ? "selected=selected" : "");
 
             
@@ -108,7 +109,7 @@ WriteLiteral("></option>\r\n");
 
 
             
-            #line 12 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 13 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
         }
 
             
@@ -116,7 +117,7 @@ WriteLiteral("></option>\r\n");
             #line hidden
 
             
-            #line 13 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 14 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
          foreach (var enumMember in Enum.GetValues(enumType))
         {
 
@@ -129,7 +130,7 @@ WriteLiteral("            <option value=\"");
 
 
             
-            #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 18 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
                       Write(enumMember.ToString());
 
             
@@ -139,7 +140,7 @@ WriteLiteral("\" ");
 
 
             
-            #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 18 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
                                                Write(selected ? "selected=selected" : "");
 
             
@@ -149,7 +150,7 @@ WriteLiteral(">");
 
 
             
-            #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 18 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
                                                                                      Write(enumMember.ToString().Sentencise(true));
 
             
@@ -159,7 +160,7 @@ WriteLiteral("</option>\r\n");
 
 
             
-            #line 18 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 19 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
         }
 
             
@@ -169,11 +170,10 @@ WriteLiteral("    </select>\r\n");
 
 
             
-            #line 20 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+            #line 21 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
 }
 else
 {
-    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
     var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
 
             

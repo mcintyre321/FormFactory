@@ -1,6 +1,7 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
+    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
     
 }
 @if (Model.IsWritable)
@@ -20,7 +21,6 @@
 }
 else
 {
-    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
     var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
     <span class="xlarge uneditable-input">@displayValue.ToString().Sentencise(true)</span>
 }
