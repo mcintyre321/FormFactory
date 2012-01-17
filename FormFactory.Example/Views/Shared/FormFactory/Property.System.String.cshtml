@@ -1,27 +1,29 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using FormFactory
 @model PropertyVm
-@if (Model.Choices != null)
+@if (Model.IsWritable)
 {
-    var choices = Model.Choices as IEnumerable<Tuple<string, string>> ?? Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+    if (Model.Choices != null)
+    {
+        var choices = Model.Choices as IEnumerable<Tuple<string, string>> ?? Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     <select name="@Model.Name" id="@Model.Name" class="@(Model.IsWritable ? "" : "disabled")" @(Model.IsWritable ? "" : "disabled=disabled")>
         @foreach (var option in choices)
         {
-            <option value="@option.Item2">@option.Item1</option>    
+            <option value="@option.Item2">@option.Item1</option>
         }
     </select>
-}
-else
-{
-    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
-    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
+    }
+    else
+    {
+        var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+        var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
 
 
     <input class="xlarge @(Model.IsWritable ? "" : "disabled")" id="@Model.Name" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" @(Model.IsWritable ? "" : "disabled=\"disabled\"")/>
-    
-    if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
-    {
-        var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
+
+        if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
+        {
+            var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
     <script type="text/javascript">
         $(function () {
             if (jQuery().autocomplete) {
@@ -31,5 +33,10 @@ else
             }
         });
     </script>
+        }
     }
+}
+else
+{
+    <span class="xlarge uneditable-input" id="@Model.Name" style="height: auto; min-height: 18px">@Model.Value</span> 
 }

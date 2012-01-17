@@ -33,7 +33,7 @@ namespace FormFactory.Views.Shared.FormFactory
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/FormFactory/Property.System.Object.cshtml")]
     public class Property_System_Object : System.Web.Mvc.WebViewPage<PropertyVm>
     {

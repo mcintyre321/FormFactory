@@ -49,6 +49,7 @@ namespace FormFactory
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
+            GetCustomAttributes = () => new object[]{};
         }
 
         public string Id { get; set; }

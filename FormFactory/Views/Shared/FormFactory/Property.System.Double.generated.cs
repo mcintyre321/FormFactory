@@ -33,7 +33,7 @@ namespace FormFactory.Views.Shared.FormFactory
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/FormFactory/Property.System.Double.cshtml")]
     public class Property_System_Double : System.Web.Mvc.WebViewPage<PropertyVm>
     {
@@ -44,48 +44,76 @@ namespace FormFactory.Views.Shared.FormFactory
         {
 
 
-WriteLiteral("<input type=\"text\" name=\"");
-
 
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                    Write(Model.Name);
+ if (!Model.IsWritable)
+{
+            
+            #line default
+            #line hidden
+WriteLiteral(" <span class=\"xlarge uneditable-input\">");
+
+
+            
+            #line 4 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+                                   Write(Model.Value);
 
             
             #line default
             #line hidden
-WriteLiteral("\" ");
+WriteLiteral("</span> ");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                 Write(Model.Id);
-
-            
-            #line default
-            #line hidden
-WriteLiteral(" value=\"");
-
-
-            
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                                   Write(Model.Value ?? "");
+            #line 4 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+                                                            }
+else
+{
 
             
             #line default
             #line hidden
-WriteLiteral("\" ");
+WriteLiteral("    <input class=\"xlarge\" id=\"");
 
 
             
-            #line 3 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
-                                                                         Write(Model.IsWritable ? "disabled=\"disabled\"" : "");
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+                         Write(Model.Id);
 
             
             #line default
             #line hidden
-WriteLiteral("/>\r\n");
+WriteLiteral("\" name=\"");
 
+
+            
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+                                          Write(Model.Name);
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" size=\"30\" type=\"text\" value=\"");
+
+
+            
+            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+                                                                                     Write(Model.Value ?? "");
+
+            
+            #line default
+            #line hidden
+WriteLiteral("\" />\r\n");
+
+
+            
+            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Double.cshtml"
+}
+
+            
+            #line default
+            #line hidden
 
         }
     }

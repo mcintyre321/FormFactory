@@ -8,9 +8,11 @@ namespace FormFactory.Example.Models
     public class Person
     {
         DateTime _dateOfBirth;
-        public Person(DateTime dateOfBirth)
+
+        public Person(DateTime dateOfBirth, string[] hobbies)
         {
             _dateOfBirth = dateOfBirth;
+            Hobbies = hobbies;
             Position = Models.Position.SeniorSubcontractor;
             Enabled = true;
         }
@@ -26,6 +28,8 @@ namespace FormFactory.Example.Models
 
         public bool Enabled { get; set; }
 
+        //readonly property
+        public IEnumerable<string> Hobbies { get; private set; }
 
     }
 

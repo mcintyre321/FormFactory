@@ -33,7 +33,7 @@ namespace FormFactory.Views.Shared.FormFactory
     #line default
     #line hidden
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.2.0.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("RazorGenerator", "1.3.0.0")]
     [System.Web.WebPages.PageVirtualPathAttribute("~/Views/Shared/FormFactory/Property.System.Enum.cshtml")]
     public class Property_System_Enum : System.Web.Mvc.WebViewPage<PropertyVm>
     {
@@ -48,19 +48,27 @@ namespace FormFactory.Views.Shared.FormFactory
             
             #line 3 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
   
-    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
-    var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
+    
 
 
             
             #line default
             #line hidden
-WriteLiteral("<select name=\"");
+
+            
+            #line 6 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+ if (Model.IsWritable)
+{
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <select name=\"");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-         Write(Model.Name);
+            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+             Write(Model.Name);
 
             
             #line default
@@ -69,8 +77,8 @@ WriteLiteral("\" ");
 
 
             
-            #line 7 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-                       Write(Model.IsWritable ? "" : "disabled=disabled");
+            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+                           Write(Model.IsWritable ? "" : "disabled=disabled");
 
             
             #line default
@@ -79,50 +87,50 @@ WriteLiteral(">\r\n");
 
 
             
-            #line 8 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-     if (Nullable.GetUnderlyingType(Model.Type) != null)
-    {
+            #line 9 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+         if (Nullable.GetUnderlyingType(Model.Type) != null)
+        {
 
             
             #line default
             #line hidden
-WriteLiteral("        <option value=\"\" ");
-
-
-            
-            #line 10 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-                     Write(Model.Value == null ? "selected=selected" : "");
-
-            
-            #line default
-            #line hidden
-WriteLiteral("></option>    \r\n");
+WriteLiteral("            <option value=\"\" ");
 
 
             
             #line 11 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-    }
+                         Write(Model.Value == null ? "selected=selected" : "");
 
             
             #line default
             #line hidden
+WriteLiteral("></option>\r\n");
+
 
             
             #line 12 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-     foreach (var enumMember in Enum.GetValues(enumType))
-    {
-
-        var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
+        }
 
             
             #line default
             #line hidden
-WriteLiteral("        <option value=\"");
+
+            
+            #line 13 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+         foreach (var enumMember in Enum.GetValues(enumType))
+        {
+
+            var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("            <option value=\"");
 
 
             
-            #line 16 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-                  Write(enumMember.ToString());
+            #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+                      Write(enumMember.ToString());
 
             
             #line default
@@ -131,8 +139,8 @@ WriteLiteral("\" ");
 
 
             
-            #line 16 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-                                           Write(selected ? "selected=selected" : "");
+            #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+                                               Write(selected ? "selected=selected" : "");
 
             
             #line default
@@ -141,24 +149,55 @@ WriteLiteral(">");
 
 
             
-            #line 16 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-                                                                                 Write(enumMember.ToString().Sentencise(true));
-
-            
-            #line default
-            #line hidden
-WriteLiteral("</option>    \r\n");
-
-
-            
             #line 17 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
-    }
+                                                                                     Write(enumMember.ToString().Sentencise(true));
 
             
             #line default
             #line hidden
-WriteLiteral("</select>\r\n");
+WriteLiteral("</option>\r\n");
 
+
+            
+            #line 18 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+        }
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    </select>\r\n");
+
+
+            
+            #line 20 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+}
+else
+{
+    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
+    var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
+
+            
+            #line default
+            #line hidden
+WriteLiteral("    <span class=\"xlarge uneditable-input\">");
+
+
+            
+            #line 25 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+                                     Write(displayValue.ToString().Sentencise(true));
+
+            
+            #line default
+            #line hidden
+WriteLiteral("</span>\r\n");
+
+
+            
+            #line 26 "..\..\Views\Shared\FormFactory\Property.System.Enum.cshtml"
+}
+            
+            #line default
+            #line hidden
 
         }
     }
