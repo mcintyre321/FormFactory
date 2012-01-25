@@ -85,6 +85,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Form.Start.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Property.IEnumerable.System.Object.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\FormFactory\Property.System.Boolean.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,7 +183,10 @@
       <Generator>RazorGenerator</Generator>
       <LastGenOutput>Property.System.String.generated.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml">
+      <Generator>RazorGenerator</Generator>
+      <LastGenOutput>Property.IEnumerable.System.Object.generated.cs</LastGenOutput>
+    </Content>
     <None Include="Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,6 +20,7 @@ namespace FormFactory
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
         }
 
+        public object Source { get; set; }
         public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
             this(html, pi.PropertyType, pi.Name, null, displayName)
         {
