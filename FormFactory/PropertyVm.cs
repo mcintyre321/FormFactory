@@ -24,6 +24,7 @@ namespace FormFactory
         public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
             this(html, pi.PropertyType, pi.Name, null, displayName)
         {
+            Source = o;
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
             {
