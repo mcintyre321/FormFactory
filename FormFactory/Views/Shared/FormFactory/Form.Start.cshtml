@@ -1,25 +1,6 @@
 ﻿@using FormFactory
 @model FormVm
-<div class="row">
-
- @if (Model.SideMessage == null)
- {
-    <text>
-    <div class="span12">     
-    </text>
- }
- else
- {
-     <text>
-    <div class="span3">
-        <p>
-            @Model.SideMessage
-        </p>
-    </div>
-    <div class="span9">
-    </text>
-}        
-            
+<form action="@Model.ActionUrl" method="post" enctype="multipart/form-data" encoding="multipart/form-data" class="@ViewBag.FormClass">
 @if (!ViewData.ModelState.IsValid && Model.ShowValidationSummary)
 {
     <div class="alert-message block-message error">
@@ -27,5 +8,4 @@
         @Html.ValidationSummary(Model.ExcludePropertyErrorsFromValidationSummary)
     </div>
 }
-<form action="@Model.ActionUrl" method="post" enctype="multipart/form-data" encoding="multipart/form-data">
-    <fieldset>
+<fieldset>
