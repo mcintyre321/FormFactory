@@ -72,8 +72,8 @@
     <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
-    <None Include="Views\Shared\FormFactory\Form.Property.Block.cshtml" />
-    <None Include="Views\Shared\FormFactory\Form.Property.Inline.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Property.Block.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Property.Inline.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
