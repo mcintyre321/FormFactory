@@ -10,19 +10,19 @@
     else
     {
 
-        if (ViewData[parameter.Name] != null)
+        if (ViewData[Model.Name] != null)
         {
-    <input type="hidden" name="@parameter.Name" value="@ViewData[parameter.Name]"/>
+    <input type="hidden" name="@Model.Name" value="@ViewData[Model.Name]"/>
         }
         else
         {
             if (ViewBag.Inline ?? false)
             {
-                Html.RenderPartial("FormFactory/Form.Property.Inline", vm, ViewData);
+                Html.RenderPartial("FormFactory/Form.Property.Inline", Model, ViewData);
             }
             else
             {
-                Html.RenderPartial("FormFactory/Form.Property.Block", vm, ViewData);
+                Html.RenderPartial("FormFactory/Form.Property.Block", Model, ViewData);
             }
         }
     }
