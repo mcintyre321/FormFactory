@@ -28,7 +28,7 @@ namespace FormFactory
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else
+            else if (html.ViewData.Model != null)
             {
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
