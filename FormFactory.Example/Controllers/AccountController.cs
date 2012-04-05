@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using FormFactory.Example.Models;
 
 namespace FormFactory.Example.Controllers
@@ -19,14 +21,14 @@ namespace FormFactory.Example.Controllers
                     Organisation = "Example.com"
                 };
 
-        [HttpGet, Authorize]
+        [HttpGet]
         public ActionResult Update()
         {
             ViewData.Model = _storedAccountModel;
             return View();
         }
 
-        [HttpPost, Authorize]
+        [HttpPost]
         public ActionResult Update(AccountModel model)
         {
             if (ModelState.IsValid)
@@ -39,5 +41,24 @@ namespace FormFactory.Example.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: display success / log in
+                return RedirectToAction("Index", "Home");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View();
+        }
     }
 }
