@@ -19,6 +19,22 @@ namespace FormFactory
             IsWritable = true;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
         }
+        public PropertyVm(PropertyInfo pi, HtmlHelper html)
+            : this(html, pi.PropertyType, pi.Name)
+        {
+            ModelState modelState;
+            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            {
+                if (modelState.Value != null)
+                    Value = modelState.Value.AttemptedValue;
+            }
+            else
+            {
+                Value = pi.GetValue(html.ViewData.Model, new object[0]);
+            }
+            IsWritable = true;
+            GetCustomAttributes = () => pi.GetCustomAttributes(true);
+        }
 
         public object Source { get; set; }
         public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
