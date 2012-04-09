@@ -17,7 +17,18 @@ namespace FormFactory
 
             HtmlHelper = html;
             DisplayName = displayName ?? mi.Name.Sentencise();
-            Inputs = mi.GetParameters().Select(pi => new PropertyVm(pi, html));
+            
+            // if there's only one parameter, look to see if it's a model with properties
+            if (mi.GetParameters().Length == 1 && 
+                mi.GetParameters()[0].ParameterType.GetProperties().Length > 0)
+            {
+                var type = mi.GetParameters()[0].ParameterType;
+                Inputs = type.GetProperties().Select(pi => new PropertyVm(pi, html));
+            }
+            else
+            {
+                Inputs = mi.GetParameters().Select(pi => new PropertyVm(pi, html));
+            }
 
             ExcludePropertyErrorsFromValidationSummary = true;
         }
