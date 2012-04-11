@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security;
 using System.Web;
@@ -43,17 +44,22 @@ namespace FormFactory.Example.Controllers
 
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Register(RegisterModel model, [DataType("Hidden")] string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 // TODO: display success / log in
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
                 return RedirectToAction("Index", "Home");
             }
 

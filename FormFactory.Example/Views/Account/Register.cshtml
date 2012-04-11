@@ -11,7 +11,7 @@
     Use the form below to create a new account. 
 </p>
 
-@using(var form = Html.FormForAction((AccountController ctlr, RegisterModel model) => ctlr.Register(model)))
+@using(var form = Html.FormForAction((AccountController ctlr, RegisterModel model, string s) => ctlr.Register(model, s)))
 {
     form.Render();
 }
