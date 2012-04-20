@@ -18,9 +18,8 @@ namespace FormFactory.Example.Models
         [Compare("Password", ErrorMessage = "Passwords did not match")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         [Display(Name = "Title")]
-        public string Title { get; set; }
+        public Titles? Title { get; set; }
 
         [Required]
         [Display(Name = "First name")]

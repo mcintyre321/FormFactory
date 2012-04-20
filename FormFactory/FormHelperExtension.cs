@@ -102,9 +102,10 @@ namespace FormFactory
         {
             if (type == null) return null;
             getName = getName ?? (t => t.FullName);
-            var check = Nullable.GetUnderlyingType(type) ?? type; ;
+            var check = Nullable.GetUnderlyingType(type) ?? type;
+            
             Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
-            string partialViewName = getPartialViewName(type);
+            string partialViewName = getPartialViewName(check);
 
             var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
             while (engineResult.View == null && check.BaseType != null)
