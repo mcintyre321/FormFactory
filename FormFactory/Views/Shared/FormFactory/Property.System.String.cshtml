@@ -11,7 +11,7 @@
     <select name="@Model.Name" id="@Model.Id" class="@(Model.IsWritable ? "" : "disabled")" @(Model.IsWritable ? "" : "disabled=disabled")>
         @foreach (var option in choices)
         {
-            <option value="@option.Item2" @(option.Item2 == Model.Value.ToString() ? "selected=selected" : "")>@option.Item1</option>    
+            <option value="@option.Item2" @(Model.Value != null && option.Item2 == Model.Value.ToString() ? "selected=selected" : "")>@option.Item1</option>    
         }
     </select>
 }
