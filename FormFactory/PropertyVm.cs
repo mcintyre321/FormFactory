@@ -37,33 +37,40 @@ namespace FormFactory
         }
 
         public object Source { get; set; }
-        public PropertyVm(object o, PropertyInfo pi, HtmlHelper html) :
-            this(html, pi.PropertyType, pi.Name)
+        public PropertyVm(object model, PropertyInfo property, HtmlHelper html) :
+            this(html, property.PropertyType, property.Name)
         {
-            Source = o;
+            Source = model;
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            var type = property.PropertyType;
+            if (html.ViewData.ModelState.TryGetValue(property.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (pi.GetGetMethod() != null)
+            else if (property.GetGetMethod() != null)
             {
-                Value = pi.GetGetMethod().Invoke(o, null);
+                Value = property.GetGetMethod().Invoke(model, null);
             }
-
-            MethodInfo choices = pi.DeclaringType.GetMethod(pi.Name + "_choices");
-            if (choices != null)
+            if (model != null)
             {
-                Choices = (IEnumerable)choices.Invoke(o, null);
+                MethodInfo choices = model.GetType().GetMethod(property.Name + "_choices");
+                if (choices != null)
+                {
+                    Choices = (IEnumerable) choices.Invoke(model, null);
+                }
+                MethodInfo suggestions = model.GetType().GetMethod(property.Name + "_suggestions");
+                if (suggestions != null)
+                {
+                    Suggestions = (IEnumerable) suggestions.Invoke(model, null);
+                }
+                var setter = property.GetSetMethod();
+                var getter = property.GetGetMethod();
+                IsWritable = setter != null;
+                Value = getter == null ? null : getter.Invoke(model, null);
             }
-            MethodInfo suggestions = pi.DeclaringType.GetMethod(pi.Name + "_suggestions");
-            if (suggestions != null)
-            {
-                Suggestions = (IEnumerable)suggestions.Invoke(o, null);
-            }
-            GetCustomAttributes = () => pi.GetCustomAttributes(true);
-            IsWritable = pi.GetSetMethod() != null;
+            GetCustomAttributes = () => property.GetCustomAttributes(true);
+            IsWritable = property.GetSetMethod() != null;
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)

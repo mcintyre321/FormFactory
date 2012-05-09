@@ -133,32 +133,18 @@ namespace FormFactory
     {
         public static IEnumerable<PropertyVm> PropertiesFor<T>(this HtmlHelper helper, T model)
         {
-            return helper.PropertiesFor(model, typeof (T));
+            return helper.PropertiesFor(model, typeof(T));
         }
-        public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type modelType)
+        public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type fallbackModelType)
         {
-            var type = modelType ?? model.GetType();
-            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var type = model != null ? model.GetType() : fallbackModelType;
+            var properties = type.GetProperties();
 
             foreach (var property in properties)
             {
                 var propertyVm = new PropertyVm(model, property, helper);
-                MethodInfo choices = type.GetMethod(property.Name + "_choices");
-                if (choices != null)
-                {
-                    propertyVm.Choices = (IEnumerable)choices.Invoke(model, null);
-                }
-                MethodInfo suggestions = type.GetMethod(property.Name + "_suggestions");
-                if (suggestions != null)
-                {
-                    propertyVm.Suggestions = (IEnumerable)suggestions.Invoke(model, null);
-                }
-
-                var setter = property.GetSetMethod();
-                var getter = property.GetGetMethod();
-                if (getter == null && setter == null) continue;
-                propertyVm.IsWritable = setter != null;
-                propertyVm.Value = getter == null ? null : getter.Invoke(model, null);
+                
+              
 
                 yield return propertyVm;
             }
