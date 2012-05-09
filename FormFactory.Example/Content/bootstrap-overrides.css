@@ -1,0 +1,34 @@
+﻿body {
+    padding-top: 40px;
+}
+
+.field-validation-error {
+  color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+  border-color: #c87872;
+  -webkit-box-shadow: 0 0 3px rgba(171, 41, 32, 0.25);
+  -moz-box-shadow: 0 0 3px rgba(171, 41, 32, 0.25);
+  box-shadow: 0 0 3px rgba(171, 41, 32, 0.25);
+}
+
+.input-validation-error:focus {
+  border-color: #b9554d;
+  -webkit-box-shadow: 0 0 6px rgba(171, 41, 32, 0.5);
+  -moz-box-shadow: 0 0 6px rgba(171, 41, 32, 0.5);
+  box-shadow: 0 0 6px rgba(171, 41, 32, 0.5);
+}
+
+.navbar form .btn, .navbar form .input-small {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.nomargin {
+    margin: 0 0 0 0;    
+}

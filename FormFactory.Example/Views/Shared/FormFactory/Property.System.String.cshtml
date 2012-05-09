@@ -8,10 +8,10 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    <select name="@Model.Name" id="@Model.Id" class="@(Model.IsWritable ? "" : "disabled")" @(Model.IsWritable ? "" : "disabled=disabled")>
+    <select name="@Model.Name" id="@Model.Id"  @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") >
         @foreach (var option in choices)
         {
-            <option value="@option.Item2">@option.Item1</option>    
+            <option value="@option.Item2" @(Model.Value != null && option.Item2 == Model.Value.ToString() ? "selected=selected" : "")>@option.Item1</option>    
         }
     </select>
 }
@@ -20,22 +20,17 @@ else
     var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
     var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
 
-    if (!Model.IsWritable)
-    {
-        <span class="xlarge uneditable-input" >@Model.Value</span>
-    }
-    else
-    {
-        <input class="xlarge" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+   
+    <input  @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"")  class="input-large" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
 
-        if (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
-        {
-            var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
-            <script type="text/javascript">
-                $(function () {
-                    if (jQuery().autocomplete) {
-                        window.setTimeout(function () { //in a timeout so it can be embedded in a popover
-                            $("#@Model.Id")
+    if (Model.IsWritable && Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
+    {
+        var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
+    <script type="text/javascript">
+        $(function () {
+            if (jQuery().autocomplete) {
+                window.setTimeout(function () { //in a timeout so it can be embedded in a popover
+                    $("#@Model.Id")
                                 .autocomplete({
                                     source: ['@Html.Raw(string.Join("', '", escapedSuggestions))'],
                                     minLength: 0
@@ -43,12 +38,11 @@ else
                                 .focus(function () {
                                     $(this).trigger('keydown.autocomplete');
                                 });
-                        }, 1);
-                    } else {
-                        console.log("could not load $.autocomplete for @Model.Id suggestions");
-                    }
-                });
+                }, 1);
+            } else {
+                console.log("could not load $.autocomplete for @Model.Id suggestions");
+            }
+        });
     </script>
-        }
     }
 }

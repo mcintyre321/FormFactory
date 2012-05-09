@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllValidationMessagesHelper.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />

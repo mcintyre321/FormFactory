@@ -31,6 +31,20 @@ namespace FormFactory.Example.Models
         //readonly property
         public IEnumerable<string> Hobbies { get; private set; }
 
+        public string Gender { get; set; }
+        //choices for geneder rendered as a select list
+        public IEnumerable<string> Gender_choices() 
+        {
+            return "male,female,not specified".Split(',');
+        }
+
+        public string Location { get; set; }
+        //location enhanced with auto complete
+        public IEnumerable<string> Location_suggestions() 
+        {
+            return "USA,UK,Canada".Split(',');
+        } 
+
     }
 
     public enum Position

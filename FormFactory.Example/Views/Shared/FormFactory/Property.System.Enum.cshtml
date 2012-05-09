@@ -6,21 +6,22 @@
 }
 @if (Model.IsWritable)
 {
-    <select name="@Model.Name" @(Model.IsWritable ? "" : "disabled=disabled")>
+    <select name="@Model.Name" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"")>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
-            <option value="" @(Model.Value == null ? "selected=selected" : "")></option>
+            <option value="" @Html.Raw(Model.Value == null ? "selected=\"selected\"" : "")></option>
         }
         @foreach (var enumMember in Enum.GetValues(enumType))
         {
 
             var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
-            <option value="@enumMember.ToString()" @(selected ? "selected=selected" : "")>@enumMember.ToString().Sentencise(true)</option>
+            <option value="@enumMember.ToString()" @Html.Raw(selected ? "selected=\"selected\"" : "")>@enumMember.ToString().Sentencise(true)</option>
         }
     </select>
 }
 else
 {
     var displayValue = Model.Value == null ? null : Enum.Parse(enumType, Model.Value.ToString());
-    <span class="xlarge uneditable-input">@displayValue.ToString().Sentencise(true)</span>
+    
+    <input type="text" class="input-large" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") value="@displayValue.ToString().Sentencise(true)" />
 }

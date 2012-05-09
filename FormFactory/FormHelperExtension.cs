@@ -9,15 +9,6 @@ using System.Web.Mvc.Html;
 
 namespace FormFactory
 {
-    public static class ThenHelper
-    {
-        public static T Then<T>(this T t, Action<T> action)
-        {
-            action(t);
-            return t;
-        }
-
-    }
     public static class FormHelperExtension
     {
         #region generic overrides
@@ -103,7 +94,7 @@ namespace FormFactory
             if (type == null) return null;
             getName = getName ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
-            
+
             Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
             string partialViewName = getPartialViewName(check);
 
@@ -140,39 +131,39 @@ namespace FormFactory
 
     public static class ModelHelper
     {
-        public static FormVm RenderPropertiesFor<T>(this FormVm form, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
+        public static IEnumerable<PropertyVm> PropertiesFor<T>(this HtmlHelper helper, T model)
         {
-            form.HtmlHelper.RenderPropertiesFor(model, filter, renderAsReadonly);
-            return form;
-        }
-        public static void RenderPropertiesFor<T>(this HtmlHelper helper, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
-        {
-            filter = filter ?? (p => true);
-            var properties = model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var type = model.GetType();
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var property in properties)
             {
-                if (properties.Any(p => p.Name + "Choices" == property.Name))
-                {
-                    continue; //skip this is it is choice
-                }
-
-                var inputVm = new PropertyVm(model, property, helper);
-                PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "Choices");
+                var propertyVm = new PropertyVm(model, property, helper);
+                MethodInfo choices = type.GetMethod(property.Name + "_choices");
                 if (choices != null)
                 {
-                    inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
+                    propertyVm.Choices = (IEnumerable)choices.Invoke(model, null);
                 }
-
-                var methodInfo = (renderAsReadonly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
-                
-                if (methodInfo != null && filter(inputVm))
+                MethodInfo suggestions = type.GetMethod(property.Name + "_suggestions");
+                if (suggestions != null)
                 {
-                    if (renderAsReadonly) inputVm.IsWritable = false;
-
-                    helper.RenderPartial("FormFactory/Form.Property", inputVm);
-                    continue;
+                    propertyVm.Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
+
+                var setter = property.GetSetMethod();
+                var getter = property.GetGetMethod();
+                if (getter == null && setter == null) continue;
+                propertyVm.IsWritable = setter != null;
+                propertyVm.Value = getter == null ? null : getter.Invoke(model, null);
+
+                yield return propertyVm;
+            }
+        }
+        public static void Render(this IEnumerable<PropertyVm> properties)
+        {
+            foreach (var propertyVm in properties)
+            {
+                propertyVm.Html.RenderPartial("FormFactory/Form.Property", propertyVm);
             }
         }
     }
