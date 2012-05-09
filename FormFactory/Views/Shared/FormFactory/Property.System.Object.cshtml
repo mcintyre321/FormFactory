@@ -22,7 +22,7 @@
             var isSelected = (i == selectedIndex);
             <li class="ff-choice-area">
                 <input type="radio" class="choice-selector" name="@(Model.Name)_ModelTypeName_radios" @Html.Raw(isSelected ? "checked=\"checked\"" : "") />
-                @{ Html.PropertiesFor(choice)
+                @{ Html.PropertiesFor(choice, choice == null ? Model.Type : choice.GetType())
                        .Each(p => p.Name = Model.Name + "." + p.Name)
                        .Each(p => p.IsWritable = p.IsWritable && Model.IsWritable)
                        .Render(); }
