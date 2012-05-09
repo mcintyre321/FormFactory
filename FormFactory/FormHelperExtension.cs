@@ -133,7 +133,11 @@ namespace FormFactory
     {
         public static IEnumerable<PropertyVm> PropertiesFor<T>(this HtmlHelper helper, T model)
         {
-            var type = model.GetType();
+            return helper.PropertiesFor(model, typeof (T));
+        }
+        public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type modelType)
+        {
+            var type = modelType ?? model.GetType();
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var property in properties)

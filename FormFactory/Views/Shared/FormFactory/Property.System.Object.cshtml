@@ -2,36 +2,55 @@
 @model PropertyVm
 @using System.Collections
 @using FormFactory
+ 
 @if (Model.Choices != null && Model.IsWritable)
 {
-    <ul class="ff-property-choices">
-        @foreach (var choice in Model.Choices)
+    <ul class="ff-property-choices fresh">
+        
+        @{
+            var choices = Model.Choices.Cast<object>().ToArray();
+            
+            var selectedIndex = choices
+                .Select((choice, index) => new {index, choice})
+                .Where(pair => pair.choice.IsSelected()) 
+                .Select(pair => pair.index)
+                .FirstOrDefault();
+            var i = 0;
+        }
+        @foreach (var choice in choices)
         {
-            <li>
-                <input type="radio" class="choice-selector" name="@(Model.Name)_ModelTypeName_radios"/>
-                @{ Html.PropertiesFor(choice).Each(p => p.Name = Model.Name + "." + p.Name).Render(); }
+            var isSelected = (i == selectedIndex);
+            <li class="ff-choice-area">
+                <input type="radio" class="choice-selector" name="@(Model.Name)_ModelTypeName_radios" @Html.Raw(isSelected ? "checked=\"checked\"" : "") />
+                @{ Html.PropertiesFor(choice)
+                       .Each(p => p.Name = Model.Name + "." + p.Name)
+                       .Each(p => p.IsWritable = p.IsWritable && Model.IsWritable)
+                       .Render(); }
             </li>
+            i++;
         }
     </ul>
     <script type="text/javascript">
         window.setTimeout(function () {
             if (window["28e19a48-567f-46c3-abd2-a67c84512c06"] === undefined) {
-                $(".ff-property-choices input.choice-selector:!checked").on("click", function () {
+                $(".ff-property-choices input.choice-selector:!checked").on("change", function () {
                     $(this).closest(".ff-property-choices").find(":input:not(input.choice-selector)")
-                    .each(function () {
-                        if (!$(this).attr("readonly")) { //if this was not already readonly
-                            $(this).attr("choice-toggle", true); //record that it is choice-toggleable
-                            $(this).attr("readonly", "readonly"); //then make it readonlyu
-                        }
-                    });
-                    $(this).closest("li").find(":input[choice-toggle=true]").attr("readonly", "");
+                    .attr("disabled", "disabled"); //then make it readonly
+                    $(this).closest("li").find(":input").attr("disabled", null);
+                });
+                $(".ff-property-choices .ff-choice-area").on("click", function () {
+                    var cb = $(this).find("input.choice-selector");
+                    if (!cb.attr("checked")) cb.attr("checked", "checked").trigger("change");
+
                 });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
             }
+            $(".ff-property-choices.fresh input.choice-selector:checked").trigger("change");
         }, 1)
     </script>
 }
 else
 {
-    Html.PropertiesFor(Model).Render();
+    Html.PropertiesFor(Model.Value, Model.Type).Render();
 }
+ 
