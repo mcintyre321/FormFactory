@@ -49,9 +49,9 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
         #endregion
-        private static FormVm FormFor(HtmlHelper html, MethodInfo mi, string displayName = null)
+        private static FormVm FormFor(HtmlHelper html, MethodInfo mi)
         {
-            return new FormVm(html, mi, displayName);
+            return new FormVm(html, mi);
         }
 
         public static UrlHelper Url(this HtmlHelper helper)

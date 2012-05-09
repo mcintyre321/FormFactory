@@ -43,13 +43,13 @@ namespace FormFactory.Example.Models
         public IEnumerable<string> Location_suggestions() 
         {
             return "USA,UK,Canada".Split(',');
-        } 
+        }
 
-    }
-
-    public enum Position
-    {
-        Contractor,
-        SeniorSubcontractor
+        public ContactMethod ContactMethod { get; set; }
+        public IEnumerable<ContactMethod> ContactMethod_choices()
+        {
+            yield return new PhoneContactMethod() {};
+            yield return new OtherContactMethod() {Name = "Other"};
+        }
     }
 }

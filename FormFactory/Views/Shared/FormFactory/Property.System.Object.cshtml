@@ -2,22 +2,7 @@
 @model PropertyVm
 @using System.Collections
 @using FormFactory
-@helper Render(object target, Type type)
-    {
-        foreach (var propertyInfo in type.GetProperties())
-    {
-        var propertyVm = new PropertyVm(Html, propertyInfo.PropertyType, Model.Name + "." + propertyInfo.Name);
-        propertyVm.IsWritable = propertyInfo.GetSetMethod() != null;
-        propertyVm.DisplayName = propertyInfo.Name.Sentencise(true);
-            propertyVm.Value = target == null ? null : propertyInfo.GetValue(target, null as object[]);
-        var choices = type.GetMethod(propertyInfo.Name + "Choices") ?? type.GetMethod("get_" + propertyInfo.Name + "Choices");
-        if (choices != null)
-        {
-            propertyVm.Choices = choices.Invoke(target, new object[] { }) as IEnumerable;
-        }
-    @Html.Partial("FormFactory/Form.Property", propertyVm)
-    }
-}
+ 
 @if (Model.Choices != null && Model.IsWritable)
 {
     <ul>
@@ -25,12 +10,12 @@
         {
             <li>
                 <input type="radio" class="choice-selector" name="@(Model.Name)_ModelTypeName_radios"/>
-                @Render(choice, choice.GetType())
+                @{ Html.PropertiesFor(choice).Each(p => p.Name = Model.Name + "." + p.Name).Render(); }
             </li>
         }
     </ul>
 }
 else
 {
-    @Render(Model.Value, Model.Type)
+    Html.PropertiesFor(Model).Render();
 }

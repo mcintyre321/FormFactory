@@ -37,8 +37,8 @@ namespace FormFactory
         }
 
         public object Source { get; set; }
-        public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
-            this(html, pi.PropertyType, pi.Name, null, displayName)
+        public PropertyVm(object o, PropertyInfo pi, HtmlHelper html) :
+            this(html, pi.PropertyType, pi.Name)
         {
             Source = o;
             ModelState modelState;
@@ -51,16 +51,27 @@ namespace FormFactory
             {
                 Value = pi.GetGetMethod().Invoke(o, null);
             }
+
+            MethodInfo choices = pi.DeclaringType.GetMethod(pi.Name + "_choices");
+            if (choices != null)
+            {
+                Choices = (IEnumerable)choices.Invoke(o, null);
+            }
+            MethodInfo suggestions = pi.DeclaringType.GetMethod(pi.Name + "_suggestions");
+            if (suggestions != null)
+            {
+                Suggestions = (IEnumerable)suggestions.Invoke(o, null);
+            }
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
             IsWritable = pi.GetSetMethod() != null;
         }
 
-        public PropertyVm(HtmlHelper html, Type type, string name, string id = null, string displayName = null)
+        public PropertyVm(HtmlHelper html, Type type, string name)
         {
             Type = type;
             Name = name;
-            Id = id ?? Name;
-            DisplayName = displayName ?? Name.Sentencise();
+            Id = Name;
+            DisplayName = Name.Sentencise();
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {

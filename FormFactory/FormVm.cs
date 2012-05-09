@@ -9,43 +9,23 @@ namespace FormFactory
 {
     public class FormVm : IDisposable
     {
-        public FormVm(HtmlHelper html, MethodInfo mi, string displayName) : this(html)
+        public FormVm(HtmlHelper html, MethodInfo mi) : this(html)
         {
             var controllerName = mi.ReflectedType.Name;
             controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller"));
             ActionUrl = html.Url().Action(mi.Name, controllerName);
 
             HtmlHelper = html;
-            DisplayName = displayName ?? mi.Name.Sentencise();
+            DisplayName = mi.Name.Sentencise();
 
             var inputs = new List<PropertyVm>();
-            Func<Type, bool> isModel = type =>
-                                           {
-                                               if (type == null)
-                                               {
-                                                   return false;
-                                               }
-                                               return !type.IsPrimitive
-                                                      && type != typeof (string)
-                                                      && type != typeof (decimal)
-                                                      && type != typeof (DateTime)
-                                                      && type != typeof (DateTimeOffset)
-                                                   ;
-                                           };
+
 
             foreach (var pi in mi.GetParameters())
             {
-                if (isModel(pi.ParameterType))
-                {
-                    inputs.AddRange(pi.ParameterType.GetProperties()
-                                        .Select(pi2 => new PropertyVm(pi2, html)));
-                }
-                else
-                {
-                    inputs.Add(new PropertyVm(pi, html));
-                }
+                inputs.Add(new PropertyVm(pi, html));
             }
-            
+
             Inputs = inputs;
 
             ExcludePropertyErrorsFromValidationSummary = true;
