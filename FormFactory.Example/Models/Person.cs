@@ -49,7 +49,7 @@ namespace FormFactory.Example.Models
         public IEnumerable<ContactMethod> ContactMethod_choices()
         {
             yield return new PhoneContactMethod() {};
-            yield return new OtherContactMethod() {Name = "Other"};
+            yield return new OtherContactMethod() {Name = "Other"}.Selected();
         }
     }
 }

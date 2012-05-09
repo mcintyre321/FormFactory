@@ -2,10 +2,9 @@
 @model PropertyVm
 @using System.Collections
 @using FormFactory
- 
 @if (Model.Choices != null && Model.IsWritable)
 {
-    <ul>
+    <ul class="ff-property-choices">
         @foreach (var choice in Model.Choices)
         {
             <li>
@@ -14,6 +13,23 @@
             </li>
         }
     </ul>
+    <script type="text/javascript">
+        window.setTimeout(function () {
+            if (window["28e19a48-567f-46c3-abd2-a67c84512c06"] === undefined) {
+                $(".ff-property-choices input.choice-selector:!checked").on("click", function () {
+                    $(this).closest(".ff-property-choices").find(":input:not(input.choice-selector)")
+                    .each(function () {
+                        if (!$(this).attr("readonly")) { //if this was not already readonly
+                            $(this).attr("choice-toggle", true); //record that it is choice-toggleable
+                            $(this).attr("readonly", "readonly"); //then make it readonlyu
+                        }
+                    });
+                    $(this).closest("li").find(":input[choice-toggle=true]").attr("readonly", "");
+                });
+                window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
+            }
+        }, 1)
+    </script>
 }
 else
 {
