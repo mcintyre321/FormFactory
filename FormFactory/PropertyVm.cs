@@ -48,7 +48,7 @@ namespace FormFactory
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (property.GetGetMethod() != null)
+            else if (property.GetGetMethod() != null && model != null)
             {
                 Value = property.GetGetMethod().Invoke(model, null);
             }

@@ -1,0 +1,29 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using FormFactory
+@model PropertyVm
+@{
+    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+    if (dataAttributes.Any(da => da.CustomDataType == "Hidden"))
+    {
+    <input name="@Model.Name" type="hidden" value="@Model.Value" />
+    }
+    else
+    {
+
+        if (ViewData[Model.Name] != null)
+        {
+    <input type="hidden" name="@Model.Name" value="@ViewData[Model.Name]"/>
+        }
+        else
+        {
+            if (ViewBag.Inline ?? false)
+            {
+                Html.RenderPartial("FormFactory/Form.Property.Inline", Model, ViewData);
+            }
+            else
+            {
+                Html.RenderPartial("FormFactory/Form.Property.Block", Model, ViewData);
+            }
+        }
+    }
+}
