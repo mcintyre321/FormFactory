@@ -32,7 +32,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 3\Assemblies\System.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\FormFactory\FormFactory.css" />
+    <Content Include="Scripts\FormFactory\FormFactory.js" />
     <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
+      <Project>{C5DDCC05-9F10-4039-B5D6-CB96325D832C}</Project>
+      <Name>FormFactory</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,3 +1,0 @@
-﻿@using FormFactory
-@model PropertyVm
-<input class="input-large" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") id="@Model.Id" name="@Model.Name" size="30" type="text" value="@(Model.Value ?? "")" />
