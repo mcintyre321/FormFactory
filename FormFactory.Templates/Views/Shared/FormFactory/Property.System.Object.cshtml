@@ -20,9 +20,9 @@
             var isSelected = (i == selectedIndex);
             var choiceType = choice == null ? Model.Type : choice.GetType();
             
-            <li class="ff-choice-area">
-                <div>
-                    <input type="radio" class="choice-selector" name="@(Model.Name)_ModelTypeName_radios" @Html.Raw(isSelected ? "checked=\"checked\"" : "") />
+            <li class="ff-choice-area ">
+                <div class="@Html.Raw((i < choices.Length -1) ? "bottom-separated" : "")">
+                    <input type="radio" class="choice-selector " name="@(Model.Name)_ModelTypeName_radios" @Html.Raw(isSelected ? "checked=\"checked\"" : "") />
                     <div>
                         <div>@(choice == null ? "None" : choiceType.Name.Sentencise())</div>
                     

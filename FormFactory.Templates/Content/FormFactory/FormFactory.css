@@ -1,5 +1,6 @@
 ﻿ul.ff-property-choices {
     list-style: none;
+    display: inline-block;
 }
 li.ff-choice-area > div > div{
     display: inline-block;
@@ -8,11 +9,14 @@ li.ff-choice-area > div > div{
 li.ff-choice-area > div 
 {
     display: inline-block;
-    border-bottom: 1px solid gainsboro;
+    
     width: 100%;
 }
 
 .choice-selector 
 {
     vertical-align: top;
+}
+.bottom-separated {
+    border-bottom: 1px solid gainsboro;
 }
