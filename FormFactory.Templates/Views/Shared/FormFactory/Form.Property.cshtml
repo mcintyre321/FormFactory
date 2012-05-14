@@ -2,28 +2,19 @@
 @using FormFactory
 @model PropertyVm
 @{
-    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
-    if (dataAttributes.Any(da => da.CustomDataType == "Hidden"))
+    if (Model.IsHidden)
     {
-    <input name="@Model.Name" type="hidden" value="@Model.Value" />
+        <input name="@Model.Name" type="hidden" value="@Model.Value" />
     }
     else
     {
-
-        if (ViewData[Model.Name] != null)
+        if (ViewBag.Inline ?? false)
         {
-    <input type="hidden" name="@Model.Name" value="@ViewData[Model.Name]"/>
+            Html.RenderPartial("FormFactory/Form.Property.Inline", Model, ViewData);
         }
         else
         {
-            if (ViewBag.Inline ?? false)
-            {
-                Html.RenderPartial("FormFactory/Form.Property.Inline", Model, ViewData);
-            }
-            else
-            {
-                Html.RenderPartial("FormFactory/Form.Property.Block", Model, ViewData);
-            }
+            Html.RenderPartial("FormFactory/Form.Property.Block", Model, ViewData);
         }
     }
 }

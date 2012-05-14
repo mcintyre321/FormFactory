@@ -1,14 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using FormFactory.Attributes;
 
 namespace FormFactory
 {
     public class PropertyVm
     {
-        public PropertyVm(ParameterInfo pi, HtmlHelper html) : this(html, pi.ParameterType, pi.Name)
+        public PropertyVm(ParameterInfo pi, HtmlHelper html)
+            : this(html, pi.ParameterType, pi.Name)
         {
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
@@ -17,7 +21,14 @@ namespace FormFactory
                     Value = modelState.Value.AttemptedValue;
             }
             IsWritable = true;
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+                .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
+
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
         public PropertyVm(PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
@@ -33,7 +44,15 @@ namespace FormFactory
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
             IsWritable = true;
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+                .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
+
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
+
         }
 
         public object Source { get; set; }
@@ -70,6 +89,13 @@ namespace FormFactory
             }
             GetCustomAttributes = () => property.GetCustomAttributes(true);
             IsWritable = property.GetSetMethod() != null;
+            IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+                .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+
+            var descriptionAttr = property.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : property.Name.Sentencise();
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
@@ -77,7 +103,7 @@ namespace FormFactory
             Type = type;
             Name = name;
             Id = Name;
-            DisplayName = Name.Sentencise();
+            
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {
@@ -106,5 +132,7 @@ namespace FormFactory
         public IEnumerable Choices { get; set; }
         public IEnumerable Suggestions { get; set; }
 
+        public bool IsHidden { get; set; }
+        public bool ShowLabel { get; set; }
     }
 }

@@ -67,15 +67,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Code\RegisterVirtualPathProvider.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ContactMethod.cs" />
     <Compile Include="Models\OtherContactMethod.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PhoneContactMethod.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\Titles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
