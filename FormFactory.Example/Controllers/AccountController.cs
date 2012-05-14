@@ -51,7 +51,7 @@ namespace FormFactory.Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model, [DataType("Hidden")] string returnUrl)
+        public ActionResult Register([NoLabel] RegisterModel model, [DataType("Hidden")] string returnUrl)
         {
             if (ModelState.IsValid)
             {

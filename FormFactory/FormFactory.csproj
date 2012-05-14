@@ -54,6 +54,7 @@
     <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />
     <Compile Include="Mvc\ImplicitOperatorBinderProvider.cs" />
+    <Compile Include="NoLabelAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
