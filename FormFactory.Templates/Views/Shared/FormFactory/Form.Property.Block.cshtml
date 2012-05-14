@@ -9,7 +9,7 @@
     else
     {
 <div class="control-group @(Html.HasErrors(Model.Name) ? "error" : "")">
-    @if (Model.GetCustomAttributes().Any(x => x is NoLabelAttribute) == false)
+    @if (Model.ShowLabel)
     {
         <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
     }

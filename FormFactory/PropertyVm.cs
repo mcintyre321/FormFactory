@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
+using FormFactory.Attributes;
 
 namespace FormFactory
 {
@@ -21,24 +22,28 @@ namespace FormFactory
             IsWritable = true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
         }
-        //public PropertyVm(PropertyInfo pi, HtmlHelper html)
-        //    : this(html, pi.PropertyType, pi.Name)
-        //{
-        //    ModelState modelState;
-        //    if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-        //    {
-        //        if (modelState.Value != null)
-        //            Value = modelState.Value.AttemptedValue;
-        //    }
-        //    else if (html.ViewData.Model != null)
-        //    {
-        //        Value = pi.GetValue(html.ViewData.Model, new object[0]);
-        //    }
-        //    IsWritable = true;
-        //    GetCustomAttributes = () => pi.GetCustomAttributes(true);
-        //}
+        public PropertyVm(PropertyInfo pi, HtmlHelper html)
+            : this(html, pi.PropertyType, pi.Name)
+        {
+            ModelState modelState;
+            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            {
+                if (modelState.Value != null)
+                    Value = modelState.Value.AttemptedValue;
+            }
+            else if (html.ViewData.Model != null)
+            {
+                Value = pi.GetValue(html.ViewData.Model, new object[0]);
+            }
+            IsWritable = true;
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+                .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            GetCustomAttributes = () => pi.GetCustomAttributes(true);
+        }
 
         public object Source { get; set; }
         public PropertyVm(object model, PropertyInfo property, HtmlHelper html) :
@@ -76,6 +81,7 @@ namespace FormFactory
             IsWritable = property.GetSetMethod() != null;
             IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
+            ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
@@ -113,5 +119,6 @@ namespace FormFactory
         public IEnumerable Suggestions { get; set; }
 
         public bool IsHidden { get; set; }
+        public bool ShowLabel { get; set; }
     }
 }

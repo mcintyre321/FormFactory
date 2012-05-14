@@ -6,6 +6,7 @@ using System.Security;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using FormFactory.Attributes;
 using FormFactory.Example.Models;
 
 namespace FormFactory.Example.Controllers
@@ -51,7 +52,7 @@ namespace FormFactory.Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register([NoLabel] RegisterModel model, [DataType("Hidden")] string returnUrl)
+        public ActionResult Register([FlattenModel] RegisterModel model, [DataType("Hidden")] string returnUrl)
         {
             if (ModelState.IsValid)
             {

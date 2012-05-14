@@ -48,13 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllValidationMessagesHelper.cs" />
+    <Compile Include="Attributes\FlattenModelAttribute.cs" />
     <Compile Include="IsSelectedExtension.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />
     <Compile Include="Mvc\ImplicitOperatorBinderProvider.cs" />
-    <Compile Include="NoLabelAttribute.cs" />
+    <Compile Include="Attributes\NoLabelAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
