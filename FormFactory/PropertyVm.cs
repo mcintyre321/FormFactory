@@ -11,7 +11,8 @@ namespace FormFactory
 {
     public class PropertyVm
     {
-        public PropertyVm(ParameterInfo pi, HtmlHelper html) : this(html, pi.ParameterType, pi.Name)
+        public PropertyVm(ParameterInfo pi, HtmlHelper html)
+            : this(html, pi.ParameterType, pi.Name)
         {
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
@@ -24,6 +25,10 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
+
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
         public PropertyVm(PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
@@ -43,6 +48,11 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
+
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
+
         }
 
         public object Source { get; set; }
@@ -82,6 +92,10 @@ namespace FormFactory
             IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+
+            var descriptionAttr = property.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : property.Name.Sentencise();
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
@@ -89,7 +103,7 @@ namespace FormFactory
             Type = type;
             Name = name;
             Id = Name;
-            DisplayName = Name.Sentencise();
+            
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {
