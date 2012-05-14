@@ -2,8 +2,7 @@
 @using FormFactory
 @model PropertyVm
 @{
-    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
-    if (dataAttributes.Any(da => da.CustomDataType == "Hidden"))
+    if (Model.IsHidden)
     {
         <input name="@Model.Name" type="hidden" value="@Model.Value" />
     }
