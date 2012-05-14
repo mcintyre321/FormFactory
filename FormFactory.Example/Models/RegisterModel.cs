@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
 {
@@ -29,7 +30,8 @@ namespace FormFactory.Example.Models
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Organisation")]
-        public string Organisation { get; set; }
+        [Display(Name = "Tell us about yourself")]
+        [DataType(DataType.MultilineText)]
+        public string AboutYou { get; set; }
     }
 }
