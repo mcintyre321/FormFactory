@@ -1,0 +1,69 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#
+MvcTextTemplateHost mvcHost = (MvcTextTemplateHost)(Host);
+if(!String.IsNullOrEmpty(mvcHost.ViewDataTypeName)) {
+#>
+@model <#= mvcHost.ViewDataTypeName #>
+
+<#
+}
+
+// The following chained if-statement outputs the file header code and markup for a partial view, a content page, or a regular view.
+if(mvcHost.IsPartialView) {
+#>
+<#
+} else if(mvcHost.IsContentPage) {
+#>
+@{
+    ViewBag.Title = "<#= mvcHost.ViewName#>";
+<#
+if (!String.IsNullOrEmpty(mvcHost.MasterPageFile)) {
+#>
+    Layout = "<#= mvcHost.MasterPageFile#>";
+<#
+}
+#>
+}
+
+<div class="page-header">
+	<h2><#= mvcHost.ViewName#></h2>
+</div>
+<#
+} else {
+#>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title><#= mvcHost.ViewName #></title>
+</head>
+<body>
+	<div class="page-header">
+	</div>
+<#
+    PushIndent("    ");
+}
+#>
+<#
+if(!mvcHost.IsPartialView && !mvcHost.IsContentPage) {
+#>
+<div>
+    
+</div>
+<#
+}
+#>
+<#
+if(!mvcHost.IsPartialView && !mvcHost.IsContentPage) {
+    ClearIndent();
+#>
+</body>
+</html>
+<#
+}
+#>

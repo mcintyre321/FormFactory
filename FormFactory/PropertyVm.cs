@@ -37,38 +37,58 @@ namespace FormFactory
         }
 
         public object Source { get; set; }
-        public PropertyVm(object o, PropertyInfo pi, HtmlHelper html, string displayName = null) :
-            this(html, pi.PropertyType, pi.Name, null, displayName)
+        public PropertyVm(object model, PropertyInfo property, HtmlHelper html) :
+            this(html, property.PropertyType, property.Name)
         {
-            Source = o;
+            Source = model;
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            if (html.ViewData.ModelState.TryGetValue(property.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (pi.GetGetMethod() != null)
+            else if (property.GetGetMethod() != null && model != null)
             {
-                Value = pi.GetGetMethod().Invoke(o, null);
+                Value = property.GetGetMethod().Invoke(model, null);
             }
-            GetCustomAttributes = () => pi.GetCustomAttributes(true);
-            IsWritable = pi.GetSetMethod() != null;
+            if (model != null)
+            {
+                MethodInfo choices = model.GetType().GetMethod(property.Name + "_choices");
+                if (choices != null)
+                {
+                    Choices = (IEnumerable) choices.Invoke(model, null);
+                }
+                MethodInfo suggestions = model.GetType().GetMethod(property.Name + "_suggestions");
+                if (suggestions != null)
+                {
+                    Suggestions = (IEnumerable) suggestions.Invoke(model, null);
+                }
+                var setter = property.GetSetMethod();
+                var getter = property.GetGetMethod();
+                IsWritable = setter != null;
+                Value = getter == null ? null : getter.Invoke(model, null);
+            }
+            GetCustomAttributes = () => property.GetCustomAttributes(true);
+            IsWritable = property.GetSetMethod() != null;
         }
 
-        public PropertyVm(HtmlHelper html, Type type, string name, string id = null, string displayName = null)
+        public PropertyVm(HtmlHelper html, Type type, string name)
         {
             Type = type;
             Name = name;
-            Id = id ?? Name;
-            DisplayName = displayName ?? Name.Sentencise();
+            Id = Name;
+            DisplayName = Name.Sentencise();
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
+            Html = html;
             GetCustomAttributes = () => new object[]{};
         }
+
+        protected internal HtmlHelper Html { get; set; }
 
         public string Id { get; set; }
 

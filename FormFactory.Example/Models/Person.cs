@@ -31,11 +31,26 @@ namespace FormFactory.Example.Models
         //readonly property
         public IEnumerable<string> Hobbies { get; private set; }
 
-    }
+        public string Gender { get; set; }
+        //choices for geneder rendered as a select list
+        public IEnumerable<string> Gender_choices() 
+        {
+            return "male,female,not specified".Split(',');
+        }
 
-    public enum Position
-    {
-        Contractor,
-        SeniorSubcontractor
+        public string Location { get; set; }
+        //location enhanced with auto complete
+        public IEnumerable<string> Location_suggestions() 
+        {
+            return "USA,UK,Canada".Split(',');
+        }
+
+        public ContactMethod ContactMethod { get; set; }
+        public IEnumerable<ContactMethod> ContactMethod_choices()
+        {
+            yield return null as ContactMethod;
+            yield return new PhoneContactMethod() {};
+            yield return new OtherContactMethod() {Name = "Other"}.Selected();
+        }
     }
 }

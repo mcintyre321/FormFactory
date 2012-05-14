@@ -1,0 +1,16 @@
+﻿<div class="pull-right">
+    @if (Request.IsAuthenticated)
+    {
+        <text>Welcome <strong>@User.Identity.Name</strong>! [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+    }
+    else
+    {
+        using (Html.BeginForm("LogOn", "Account", FormMethod.Post, new { @class="nomargin" }))
+        {
+        <input class="input-small" type="text" name="UserName" placeholder="Username" />
+        <input class="input-small" type="password" name="Password" placeholder="Password" />
+        <input name="RememberMe" value="true" type="hidden" />
+        <button class="btn" type="submit">Sign in</button>
+        }
+    }
+</div>

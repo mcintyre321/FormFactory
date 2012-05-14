@@ -9,15 +9,6 @@ using System.Web.Mvc.Html;
 
 namespace FormFactory
 {
-    public static class ThenHelper
-    {
-        public static T Then<T>(this T t, Action<T> action)
-        {
-            action(t);
-            return t;
-        }
-
-    }
     public static class FormHelperExtension
     {
         #region generic overrides
@@ -58,9 +49,9 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
         #endregion
-        private static FormVm FormFor(HtmlHelper html, MethodInfo mi, string displayName = null)
+        private static FormVm FormFor(HtmlHelper html, MethodInfo mi)
         {
-            return new FormVm(html, mi, displayName);
+            return new FormVm(html, mi);
         }
 
         public static UrlHelper Url(this HtmlHelper helper)
@@ -103,7 +94,7 @@ namespace FormFactory
             if (type == null) return null;
             getName = getName ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
-            
+
             Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
             string partialViewName = getPartialViewName(check);
 
@@ -140,15 +131,14 @@ namespace FormFactory
 
     public static class ModelHelper
     {
-        public static FormVm RenderPropertiesFor<T>(this FormVm form, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
+        public static IEnumerable<PropertyVm> PropertiesFor<T>(this HtmlHelper helper, T model)
         {
-            form.HtmlHelper.RenderPropertiesFor(model, filter, renderAsReadonly);
-            return form;
+            return helper.PropertiesFor(model, typeof(T));
         }
-        public static void RenderPropertiesFor<T>(this HtmlHelper helper, T model, Func<PropertyVm, bool> filter = null, bool renderAsReadonly = false)
+        public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type fallbackModelType)
         {
-            filter = filter ?? (p => true);
-            var properties = model.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var type = model != null ? model.GetType() : fallbackModelType;
+            var properties = type.GetProperties();
 
             foreach (var property in properties)
             {
@@ -169,15 +159,14 @@ namespace FormFactory
                     inputVm.Suggestions = (IEnumerable)suggestions.GetGetMethod().Invoke(model, null);
                 }
 
-                var methodInfo = (renderAsReadonly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
-                
-                if (methodInfo != null && filter(inputVm))
-                {
-                    if (renderAsReadonly) inputVm.IsWritable = false;
-
-                    helper.RenderPartial("FormFactory/Form.Property", inputVm);
-                    continue;
-                }
+                yield return inputVm;
+            }
+        }
+        public static void Render(this IEnumerable<PropertyVm> properties)
+        {
+            foreach (var propertyVm in properties)
+            {
+                propertyVm.Html.RenderPartial("FormFactory/Form.Property", propertyVm);
             }
         }
     }

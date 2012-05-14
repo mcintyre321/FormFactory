@@ -4,40 +4,28 @@
 @{
     ViewBag.Title = "FormFactory Examples";
 }
-<script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
-<script type="text/javascript">    $.SyntaxHighlighter.init();</script>
 <h1>
     FormFactory
 </h1>
 <p>
     Fluent, conventional, extensible, statically typed form builder. Default templates
-    are for Twitter bootstrap css
-    <pre>
-Nuget install-package FormFactory
+    are for Twitter bootstrap css <pre class="prettyprint">Nuget install-package FormFactory </pre>
+</p>
+<p>
+    In the controller: <pre class="prettyprint">
+    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, bool remember, string returnUrl)
+        { //... } 
 </pre>
 </p>
 <p>
-    In the controller:
-    <pre class="highlight">
-        [HttpPost]
-        public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, bool remember, string returnUrl)
+    and in the view... <pre class="prettyprint"> 
+        using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
         {
-            //...
-        }
-</pre>
-</p>
-<p>
-    and in the view...
-    <pre class="highlight">
-@@{ 
-    using(var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
-    {
-        form.SideMessage = "The password is 'password'"; //Set up some options
-        form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-        form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
-    } //.Dispose() closes the form
-}
-</pre>
+            form.SideMessage = new MvcHtmlString(sideMessage(null).ToHtmlString()); //Set up some options
+            form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
+            form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+        } 
+    </pre>
 </p>
 <div class="page-header">
     <h1>
@@ -47,20 +35,20 @@ Nuget install-package FormFactory
 <p>
     @{
         Func<dynamic, HelperResult> sideMessage = @<text>
-                                                 <p>
-                                                     When FormHelper renders an input, it examines the type of the action parameter or
-                                                     object property and looks for the best view for the object. E.g. if you were rendering
-                                                     a string, it would render the view "Property.System.String". If it can't find a
-                                                     suitable view, it looks at the basetype, and tries that. If it still can't find
-                                                     on, it defaults to the "Property.System.Object" render.
-                                                 </p>
-                                                 <p>
-                                                     You can override these templates by creating your own partials with the same names
-                                                     in your own project, so if you don't want to use Twitter bootstrap, you don't have
-                                                     to.
-                                                 </p>
-                                             </text>;
-        
+        <p>
+            When FormHelper renders an input, it examines the type of the action parameter or
+            object property and looks for the best view for the object. E.g. if you were rendering
+            a string, it would render the view "Property.System.String". If it can't find a
+            suitable view, it looks at the basetype, and tries that. If it still can't find
+            on, it defaults to the "Property.System.Object" render.
+        </p>
+        <p>
+            You can override these templates by creating your own partials with the same names
+            in your own project, so if you don't want to use Twitter bootstrap, you don't have
+            to.
+        </p>
+        </text>;
+
         using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
         {
             form.SideMessage = new MvcHtmlString(sideMessage(null).ToHtmlString()); //Set up some options
@@ -76,35 +64,51 @@ Nuget install-package FormFactory
 </h1>
 <p>
     You can also render objects using this system to create dynamic pages that don't
-    need updating
-    <pre class="highlight">
-    class Person
+    need updating 
+<pre class="prettyprint">
+public class Person
     {
         DateTime _dateOfBirth;
-        public Person(DateTime dateOfBirth)
+
+        public Person(DateTime dateOfBirth, string[] hobbies)
         {
             _dateOfBirth = dateOfBirth;
+            Hobbies = hobbies;
+            Position = Models.Position.SeniorSubcontractor;
+            Enabled = true;
         }
 
         //readonly property
-        public int Age { get { ... } }
-        
+        public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
+
         //writable property
         public string Name { get; set; }
+
+        //nullable enumerable property
+        public Position? Position { get; set; }
+
+        public bool Enabled { get; set; }
+
+        //readonly property
+        public IEnumerable<string> Hobbies { get; private set; }
+
+        public string Gender { get; set; }
+        //choices for geneder rendered as a select list
+        public IEnumerable<string> Gender_choices() 
+        {
+            return "male,female,not specified".Split(',');
+        }
+
+        public string Location { get; set; }
+        //location enhanced with auto complete
+        public IEnumerable<string> Location_suggestions() 
+        {
+            return "USA,UK,Canada".Split(',');
+        } 
+
     }
 
-    var me = new Person(DateTime.Parse("22 Dec 1981")) { Name = "Harry" };
-
-    //render the readonly properties
-    @@{ Html.RenderPropertiesFor(me, property => !property.IsWritable); }
-
-    //render the writable properties as inputs
-    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
-
-    //render the writable properties as readonly
-    @@{ Html.RenderPropertiesFor(me, property => property.IsWritable, renderAsReadonly:true); }
-
-    </pre>
+</pre>
     @{
    
 
@@ -112,17 +116,9 @@ Nuget install-package FormFactory
     }
     <p>
         <form>
-        <div>
-            render the readonly properties</div>
         @{
-            Html.RenderPropertiesFor(me, property => !property.IsWritable);
-         }
-        <div>
-            render the writable properties as inputs</div>
-        @{ Html.RenderPropertiesFor(me, property => property.IsWritable); }
-        <div>
-            render the writable properties as readonly</div>
-        @{ Html.RenderPropertiesFor(me, property => property.IsWritable, renderAsReadonly: true);}
+            Html.PropertiesFor(me).Render();
+        }
         </form>
     </p>
 </p>

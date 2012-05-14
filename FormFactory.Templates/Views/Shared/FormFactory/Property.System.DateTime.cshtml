@@ -1,0 +1,35 @@
+﻿@using FormFactory
+@model PropertyVm
+@{
+    <style type="text/css">
+        /* css for timepicker */
+        .ui-timepicker-div .ui-widget-header
+        {
+            margin-bottom: 8px;
+        }
+        .ui-timepicker-div dl
+        {
+            text-align: left;
+        }
+        .ui-timepicker-div dl dt
+        {
+            height: 25px;
+        }
+        .ui-timepicker-div dl dd
+        {
+            margin: -25px 0 10px 65px;
+        }
+        .ui-timepicker-div td
+        {
+            font-size: 90%;
+        }
+    </style>
+    <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;
+    <input type="text" name="@Model.Name" id="@Model.Id" value="@(Model.Value)" @Html.Raw(Model.IsWritable ? "" :"readonly=\"readonly\"") />
+    if (Model.IsWritable)
+    {
+        <script type="text/javascript">
+            $("#@Model.Id").datetimepicker();
+        </script>
+    } 
+}
