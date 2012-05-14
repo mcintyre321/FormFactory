@@ -24,7 +24,7 @@ namespace FormFactory
 
             foreach (var pi in mi.GetParameters())
             {
-                if (pi.GetCustomAttributes(true).Any(x => x is FlattenModelAttribute))
+                if (pi.GetCustomAttributes(true).Any(x => x is FormModelAttribute))
                 {
                     inputs.AddRange(pi.ParameterType.GetProperties()
                                         .Select(pi2 => new PropertyVm(pi2, html)));

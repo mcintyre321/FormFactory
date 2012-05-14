@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllValidationMessagesHelper.cs" />
-    <Compile Include="Attributes\FlattenModelAttribute.cs" />
+    <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="IsSelectedExtension.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Logger.cs" />
