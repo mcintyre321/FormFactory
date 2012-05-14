@@ -158,10 +158,15 @@ namespace FormFactory
                 }
 
                 var inputVm = new PropertyVm(model, property, helper);
-                PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "Choices");
+                PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
                 if (choices != null)
                 {
                     inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
+                }
+                PropertyInfo suggestions = properties.SingleOrDefault(p => p.Name == property.Name + "_suggestions");
+                if (suggestions != null)
+                {
+                    inputVm.Suggestions = (IEnumerable)suggestions.GetGetMethod().Invoke(model, null);
                 }
 
                 var methodInfo = (renderAsReadonly ? null : property.GetSetMethod()) ?? property.GetGetMethod();
