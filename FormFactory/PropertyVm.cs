@@ -42,7 +42,6 @@ namespace FormFactory
         {
             Source = model;
             ModelState modelState;
-            var type = property.PropertyType;
             if (html.ViewData.ModelState.TryGetValue(property.Name, out modelState))
             {
                 if (modelState.Value != null)

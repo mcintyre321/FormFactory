@@ -142,11 +142,24 @@ namespace FormFactory
 
             foreach (var property in properties)
             {
-                var propertyVm = new PropertyVm(model, property, helper);
-                
-              
+                if (properties.Any(p => p.Name + "Choices" == property.Name))
+                {
+                    continue; //skip this is it is choice
+                }
 
-                yield return propertyVm;
+                var inputVm = new PropertyVm(model, property, helper);
+                PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
+                if (choices != null)
+                {
+                    inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
+                }
+                PropertyInfo suggestions = properties.SingleOrDefault(p => p.Name == property.Name + "_suggestions");
+                if (suggestions != null)
+                {
+                    inputVm.Suggestions = (IEnumerable)suggestions.GetGetMethod().Invoke(model, null);
+                }
+
+                yield return inputVm;
             }
         }
         public static void Render(this IEnumerable<PropertyVm> properties)
