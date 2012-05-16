@@ -1,4 +1,5 @@
-﻿@using FormFactory
+﻿@using System.ComponentModel.DataAnnotations
+@using FormFactory
 @model PropertyVm
 @{
     <style type="text/css">
@@ -24,12 +25,20 @@
             font-size: 90%;
         }
     </style>
-    <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;
+    
     <input type="text" name="@Model.Name" id="@Model.Id" value="@(Model.Value)" @Html.Raw(Model.IsWritable ? "" :"readonly=\"readonly\"") />
     if (Model.IsWritable)
     {
         <script type="text/javascript">
-            $("#@Model.Id").datetimepicker();
+            @if(Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(dt => dt.DataType == DataType.Date))
+            {
+                <text>$("#@Model.Id").datepicker();</text>
+            }
+            else
+            {
+                <text>$("#@Model.Id").datetimepicker();</text>
+                @*include <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;*@
+            }
         </script>
     } 
 }
