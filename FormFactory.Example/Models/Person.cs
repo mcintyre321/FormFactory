@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,18 +8,19 @@ namespace FormFactory.Example.Models
 {
     public class Person
     {
-        DateTime _dateOfBirth;
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
 
         public Person(DateTime dateOfBirth, string[] hobbies)
         {
-            _dateOfBirth = dateOfBirth;
+            DateOfBirth = dateOfBirth;
             Hobbies = hobbies;
             Position = Models.Position.SeniorSubcontractor;
             Enabled = true;
         }
 
         //readonly property
-        public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
+        public int Age { get { return (int) Math.Floor((DateTime.Now - DateOfBirth).Days/365.25); } }
 
         //writable property
         public string Name { get; set; }

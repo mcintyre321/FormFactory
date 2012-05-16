@@ -2,43 +2,23 @@
 @using FormFactory
 @model PropertyVm
 @{
-    <style type="text/css">
-        /* css for timepicker */
-        .ui-timepicker-div .ui-widget-header
-        {
-            margin-bottom: 8px;
-        }
-        .ui-timepicker-div dl
-        {
-            text-align: left;
-        }
-        .ui-timepicker-div dl dt
-        {
-            height: 25px;
-        }
-        .ui-timepicker-div dl dd
-        {
-            margin: -25px 0 10px 65px;
-        }
-        .ui-timepicker-div td
-        {
-            font-size: 90%;
-        }
-    </style>
-    
-    <input type="text" name="@Model.Name" id="@Model.Id" value="@(Model.Value)" @Html.Raw(Model.IsWritable ? "" :"readonly=\"readonly\"") />
+    var isDate = Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(dt => dt.DataType == DataType.Date);
+    var stringFormat = isDate ? "d" : "g";
+    var valueAsString = Model.Value is string ? (Model.Value as string) : Model.Value as DateTime? == null ? "" : ((DateTime?) Model.Value).Value.ToString(stringFormat);
+            <input type="text" name="@Model.Name" id="@Model.Id" value="@valueAsString" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") />
     if (Model.IsWritable)
     {
-        <script type="text/javascript">
-            @if(Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(dt => dt.DataType == DataType.Date))
-            {
+    <script type="text/javascript">
+            
+@if (isDate)
+{
                 <text>$("#@Model.Id").datepicker();</text>
-            }
-            else
-            {
+}
+else
+{
                 <text>$("#@Model.Id").datetimepicker();</text>
                 @*include <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;*@
-            }
-        </script>
+}
+    </script>
     } 
 }

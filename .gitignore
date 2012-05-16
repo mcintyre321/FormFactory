@@ -3,7 +3,7 @@ bin
 deploy
 deploy/*
 _ReSharper.*
-*.csproj.user
+*.user
 *.resharper.user
 *.ReSharper.user
 *.resharper
@@ -15,3 +15,4 @@ LPRun.5.1.ReSharper.user
 LPRun.5.1.ReSharper.user
 LPRun.suo
 LPRun.5.1.ReSharper.user
+*.user
