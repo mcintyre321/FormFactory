@@ -4,21 +4,15 @@
 @{
     var isDate = Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(dt => dt.DataType == DataType.Date);
     var stringFormat = isDate ? "d" : "g";
+    var behaviour = isDate ? "datepicker" : "datetimepicker";
     var valueAsString = Model.Value is string ? (Model.Value as string) : Model.Value as DateTime? == null ? "" : ((DateTime?) Model.Value).Value.ToString(stringFormat);
-            <input type="text" name="@Model.Name" id="@Model.Id" value="@valueAsString" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") />
-    if (Model.IsWritable)
-    {
+    var wrapperId = Guid.NewGuid().ToString();
+    <span id="@wrapperId">
+        <input type="text" class="@behaviour" name="@Model.Name" value="@valueAsString" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") />
+    </span>
     <script type="text/javascript">
-            
-@if (isDate)
-{
-                <text>$("#@Model.Id").datepicker();</text>
-}
-else
-{
-                <text>$("#@Model.Id").datetimepicker();</text>
-                @*include <script type="text/javascript" src="https://raw.github.com/trentrichardson/jQuery-Timepicker-Addon/master/jquery-ui-timepicker-addon.js"></script>;*@
-}
+        window.setTimeout(function () {
+            $("#@wrapperId input.@(behaviour)").@(behaviour)();
+        },0);
     </script>
-    } 
 }
