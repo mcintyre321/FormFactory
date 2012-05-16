@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using FormFactory.Attributes;
 
 namespace FormFactory
 {
@@ -23,7 +24,15 @@ namespace FormFactory
 
             foreach (var pi in mi.GetParameters())
             {
-                inputs.Add(new PropertyVm(pi, html));
+                if (pi.GetCustomAttributes(true).Any(x => x is FormModelAttribute))
+                {
+                    inputs.AddRange(pi.ParameterType.GetProperties()
+                                        .Select(pi2 => new PropertyVm(pi2, html)));
+                }
+                else
+                {
+                    inputs.Add(new PropertyVm(pi, html));
+                }
             }
 
             Inputs = inputs;
