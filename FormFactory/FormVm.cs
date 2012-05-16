@@ -26,8 +26,9 @@ namespace FormFactory
             {
                 if (pi.GetCustomAttributes(true).Any(x => x is FormModelAttribute))
                 {
+                   
                     inputs.AddRange(pi.ParameterType.GetProperties()
-                                        .Select(pi2 => new PropertyVm(pi2, html)));
+                                        .Select(pi2 => new PropertyVm(pi2, html).Then(p => p.Name = pi.Name + "." + p.Name)));
                 }
                 else
                 {
@@ -44,14 +45,12 @@ namespace FormFactory
             Inputs = new List<PropertyVm>();
             this.ActionUrl = "";
             this.DisplayName = "";
-            this.SideMessage = new MvcHtmlString("");
             this.HtmlHelper = html;
             ShowValidationSummary = true;
             ExcludePropertyErrorsFromValidationSummary = true;
         }
 
         public string ActionUrl { get; set; }
-        public MvcHtmlString SideMessage { get; set; }
         public IEnumerable<PropertyVm> Inputs { get; set; }
 
         public HtmlHelper HtmlHelper { get; set; }
