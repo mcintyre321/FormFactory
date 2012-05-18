@@ -11,11 +11,15 @@ namespace FormFactory
     {
         public static HtmlString Disabled(this PropertyVm vm)
         {
-            return new MvcHtmlString(vm.Disabled ? "disabled=\"disabled\"" : "");
+            return vm.Disabled.Att("disabled");
         }
         public static MvcHtmlString Readonly(this PropertyVm vm)
         {
-            return new MvcHtmlString(vm.Readonly ? "readonly=\"readonly\"" : "");
+            return vm.Readonly.Att("readonly");
+        }
+        public static MvcHtmlString Att(this bool value, string att)
+        {
+            return new MvcHtmlString(value ? att + "\"" + att + "\"" : "");
         }
 
     }
