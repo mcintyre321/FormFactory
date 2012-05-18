@@ -6,6 +6,7 @@
 {
     <ul class="ff-property-choices fresh">
         @{
+            System.Diagnostics.Debugger.Break();
     var choices = Model.Choices.Cast<object>().ToArray();
 
     var selectedIndex = choices
@@ -54,7 +55,12 @@
                 });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
             }
-            $(".ff-property-choices.fresh input.choice-selector:checked").trigger("change");
+            $(".ff-property-choices.fresh input.choice-selector:checked").each(function () {
+                var parentOption = $(this).closest(".ff-choice-area").parent().closest(".ff-choice-area").find("> * > .choice-selector");
+                if (!parentOption.length || parentOption.attr("checked"))
+                    $(this).trigger("change");
+            });
+            $(".ff-property-choices.fresh").removeClass("fresh");
         }, 1)
     </script>
 }
@@ -63,3 +69,4 @@ else
     Html.PropertiesFor(Model.Value, Model.Type)
         .Each(p => p.Name = Model.Name == null ? p.Name : Model.Name + "." + p.Name).Render();
 }
+
