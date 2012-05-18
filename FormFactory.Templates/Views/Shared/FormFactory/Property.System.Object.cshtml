@@ -55,11 +55,16 @@
                     childChoices.find(".ff-choice-selector").not(childChoices.find(".ff-choices .ff-choice-selector"))
                         .attr("disabled", null).not("[checked!='checked']").trigger("change");
                 });
-                //                $(".ff-choices .ff-choice").on("click", function (e) {
-                //                    $(e.target).parents(".ff-choice")
-                //                        .find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']").last()
-                //                        .attr("checked", "checked").trigger("change");
-                //                });
+                $(".ff-choices .ff-choice").on("click", function (e) {
+                    if ($(e.target).parents().index($(this)) >= 0) {
+                        var option = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
+                        if (option.length) {
+                            option.attr("checked", "checked").trigger("change");
+                            e.stopPropagation();
+                            $(e.target).click();
+                        }
+                    }
+                });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
             }
         }, 1)
