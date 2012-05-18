@@ -51,17 +51,15 @@
                         .attr("disabled", "disabled");
                     var myInputs = choiceArea.find(":input").not(choiceArea.find(".ff-choice input"));
                     myInputs.attr("disabled", null);
-
                     var childChoices = choiceArea.find(".ff-choice").not(choiceArea.find(".ff-choice .ff-choice"));
                     childChoices.find(".ff-choice-selector").not(childChoices.find(".ff-choices .ff-choice-selector"))
-                        .attr("disabled", null).not("checked='checked'").trigger("change");
+                        .attr("disabled", null).not("[checked!='checked']").trigger("change");
                 });
-                $(".ff-choices .ff-choice").on("click", function (e) {
-                    var parent = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
-                    if (parent.length && $(e.target).parents().index(parent > -1)) {
-                        parent.attr("checked", "checked").trigger("change");
-                    }
-                });
+                //                $(".ff-choices .ff-choice").on("click", function (e) {
+                //                    $(e.target).parents(".ff-choice")
+                //                        .find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']").last()
+                //                        .attr("checked", "checked").trigger("change");
+                //                });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
             }
         }, 1)
