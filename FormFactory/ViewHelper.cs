@@ -19,7 +19,7 @@ namespace FormFactory
         }
         public static MvcHtmlString Att(this bool value, string att)
         {
-            return new MvcHtmlString(value ? att + "\"" + att + "\"" : "");
+            return new MvcHtmlString(value ? att + "=\"" + att + "\"" : "");
         }
 
     }

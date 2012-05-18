@@ -7,12 +7,12 @@
 <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
     @if (Nullable.GetUnderlyingType(Model.Type) != null)
     {
-        <option value="" @Html.Raw(Model.Value == null ? "selected=\"selected\"" : "")></option>
+        <option value="" @((Model.Value == null).Att("selected"))></option>
     }
     @foreach (var enumMember in Enum.GetValues(enumType))
     {
 
         var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
-        <option value="@enumMember.ToString()" @Html.Raw(selected ? "selected=\"selected\"" : "")>@enumMember.ToString().Sentencise(true)</option>
+        <option value="@enumMember.ToString()" @selected.Att("selected")>@enumMember.ToString().Sentencise(true)</option>
     }
 </select>
