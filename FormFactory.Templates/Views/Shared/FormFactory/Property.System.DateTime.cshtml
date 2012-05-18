@@ -8,7 +8,7 @@
     var valueAsString = Model.Value is string ? (Model.Value as string) : Model.Value as DateTime? == null ? "" : ((DateTime?) Model.Value).Value.ToString(stringFormat);
     var wrapperId = Guid.NewGuid().ToString();
     <span id="@wrapperId">
-        <input type="text" class="@behaviour" name="@Model.Name" value="@valueAsString" @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") />
+        <input type="text" class="@behaviour" name="@Model.Name" value="@valueAsString" @Model.Readonly() @Model.Disabled() />
     </span>
     <script type="text/javascript">
         window.setTimeout(function () {

@@ -20,7 +20,7 @@ namespace FormFactory
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            IsWritable = true;
+            Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
@@ -43,7 +43,7 @@ namespace FormFactory
             {
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
-            IsWritable = true;
+            Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
@@ -84,11 +84,11 @@ namespace FormFactory
                 }
                 var setter = property.GetSetMethod();
                 var getter = property.GetGetMethod();
-                IsWritable = setter != null;
+                Readonly = !(setter != null);
                 Value = getter == null ? null : getter.Invoke(model, null);
             }
             GetCustomAttributes = () => property.GetCustomAttributes(true);
-            IsWritable = property.GetSetMethod() != null;
+            Readonly = !(property.GetSetMethod() != null);
             IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
@@ -102,7 +102,7 @@ namespace FormFactory
         {
             Type = type;
             Name = name;
-            Id = Name;
+            Id = () => Name;
             
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
@@ -116,7 +116,7 @@ namespace FormFactory
 
         protected internal HtmlHelper Html { get; set; }
 
-        public string Id { get; set; }
+        public Func<string> Id { get; set; }
 
         public Type Type { get; set; }
         public string Name { get; set; }
@@ -127,7 +127,9 @@ namespace FormFactory
 
         public Func<IEnumerable<object>> GetCustomAttributes { get; set; }
 
-        public bool IsWritable { get; set; }
+        public bool Readonly { get; set; }
+        public bool Disabled { get; set; }
+
 
         public IEnumerable Choices { get; set; }
         public IEnumerable Suggestions { get; set; }

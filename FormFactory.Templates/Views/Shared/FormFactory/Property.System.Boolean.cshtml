@@ -5,4 +5,4 @@
     var posted = ((Model.Value as bool? ?? bool.Parse((Model.Value as string ?? "false"))));
 }
 <input type='hidden' value='@posted.ToString().ToLower()'  id="hidden-@Model.Id" name='@Model.Name'>
-<input @Html.Raw(Model.IsWritable ? "" : "readonly=\"readonly\"") type="checkbox" id="@Model.Id" value="true" @(posted ? "checked=\"\"" : "\"\"") onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
+<input @Model.Readonly() @Model.Disabled() type="checkbox" id="@Model.Id" value="true" @(posted ? "checked=\"\"" : "\"\"") onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />

@@ -2,7 +2,7 @@
 @model PropertyVm
 @using System.Collections
 @using FormFactory
-@if (Model.Choices != null && Model.IsWritable)
+@if (Model.Choices != null && !Model.Readonly)
 {
     <ul class="ff-property-choices fresh">
         @{
@@ -29,7 +29,9 @@
                         @{
                             Html.PropertiesFor(choice, choiceType)
                                 .Each(p => p.Name = Model.Name + "." + p.Name)
-                                .Each(p => p.IsWritable = p.IsWritable)
+                                .Each(p => {
+                                               p.Readonly = !value;
+                                })
                                 .Render(); }
                     </div>
                 </div>
