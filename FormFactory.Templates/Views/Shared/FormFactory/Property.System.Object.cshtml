@@ -56,10 +56,11 @@
                     childChoices.find(".ff-choice-selector").not(childChoices.find(".ff-choices .ff-choice-selector"))
                         .attr("disabled", null).not("checked='checked'").trigger("change");
                 });
-                $(".ff-choices .ff-choice").on("click", function () {
-                    $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']")
-                        .attr("checked", "checked").trigger("change");
-                   
+                $(".ff-choices .ff-choice").on("click", function (e) {
+                    if ($(e.target).index($(this) > -1)) {
+                        $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']")
+                            .attr("checked", "checked").trigger("change");
+                    }
                 });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
             }
