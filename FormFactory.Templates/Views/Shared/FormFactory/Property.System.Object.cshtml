@@ -57,9 +57,9 @@
                         .attr("disabled", null).not("checked='checked'").trigger("change");
                 });
                 $(".ff-choices .ff-choice").on("click", function (e) {
-                    if ($(e.target).index($(this) > -1)) {
-                        $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']")
-                            .attr("checked", "checked").trigger("change");
+                    var parent = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
+                    if (parent.length && $(e.target).parents().index(parent > -1)) {
+                        parent.attr("checked", "checked").trigger("change");
                     }
                 });
                 window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
