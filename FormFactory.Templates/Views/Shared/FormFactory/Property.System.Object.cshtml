@@ -25,7 +25,9 @@
                     <input type="radio" class="ff-choice-selector " name="@(Model.Name)_ModelTypeName_radios" @isSelected.Att("checked") @Model.Disabled()/>
                     <div>
                         <div>@(choice == null ? "None" : choiceType.Name.Sentencise())</div>
+                        <input type="hidden" name = "@(Model.Name).__type" @((!isSelected).Att("disabled"))/>
                         @{
+                            
             Html.PropertiesFor(choice, choiceType)
                 .Each(p => p.Name = Model.Name + "." + p.Name)
                 .Each(p => p.Readonly |= Model.Readonly)
