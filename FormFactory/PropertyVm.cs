@@ -102,7 +102,7 @@ namespace FormFactory
         {
             Type = type;
             Name = name;
-            Id = () => Name;
+            GetId = () => Name;
             
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
@@ -116,8 +116,8 @@ namespace FormFactory
 
         protected internal HtmlHelper Html { get; set; }
 
-        public Func<string> Id { get; set; }
-
+        public Func<string> GetId { private get; set; }
+        public string Id { get { return GetId(); } }
         public Type Type { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
