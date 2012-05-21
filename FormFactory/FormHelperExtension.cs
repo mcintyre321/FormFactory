@@ -89,6 +89,21 @@ namespace FormFactory
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
+        public static string BestViewName(this HtmlHelper helper, Type type, string prefix = null, Func<Type, string> getName = null)
+        {
+            return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName);
+        }
+        public static string BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null, Func<Type, string> getName = null)
+        {
+            if (type == null && type = model.GetType())
+            {
+                return
+                    helper.Partial<object>(
+                                           BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix,
+                                                        getName), model);
+            }
+        }
+
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getName = null)
         {
             if (type == null) return null;
