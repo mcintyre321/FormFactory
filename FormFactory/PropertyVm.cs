@@ -112,6 +112,7 @@ namespace FormFactory
             }
             Html = html;
             GetCustomAttributes = () => new object[]{};
+            ShowLabel = true;
         }
 
         protected internal HtmlHelper Html { get; set; }
