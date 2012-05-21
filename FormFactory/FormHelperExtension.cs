@@ -93,15 +93,10 @@ namespace FormFactory
         {
             return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName);
         }
-        public static string BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null, Func<Type, string> getName = null)
+        public static MvcHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null, Func<Type, string> getName = null)
         {
-            if (type == null && type = model.GetType())
-            {
-                return
-                    helper.Partial<object>(
-                                           BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix,
-                                                        getName), model);
-            }
+            if (type == null) type = model.GetType() ;
+            return helper.Partial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName), model);
         }
 
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getName = null)

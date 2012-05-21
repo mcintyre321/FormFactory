@@ -3,9 +3,9 @@
 @{
     var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
 }
-@if (Model.IsWritable)
+@if (!Model.Readonly)
 {
-    <select name="@Model.Name" @(Model.IsWritable ? "" : "disabled=disabled")>
+    <select name="@Model.Name" @(!Model.Readonly ? "" : "disabled=disabled")>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
             <option value="" @(Model.Value == null ? "selected=selected" : "")></option>
