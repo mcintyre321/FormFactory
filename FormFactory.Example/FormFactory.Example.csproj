@@ -74,11 +74,12 @@
     </Compile>
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ContactMethod.cs" />
-    <Compile Include="Models\OtherContactMethod.cs" />
+    <Compile Include="Models\SocialMedia.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PhoneContactMethod.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\SocialMediaType.cs" />
     <Compile Include="Models\Titles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
