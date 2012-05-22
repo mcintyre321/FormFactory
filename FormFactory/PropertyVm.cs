@@ -30,16 +30,16 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
-        public PropertyVm(PropertyInfo pi, Type modelType, HtmlHelper html)
+        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
         {
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            if (html.ViewData.ModelState.TryGetValue(modelParamInfo.Name + "." + pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelType))
+            else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelParamInfo.ParameterType))
             {
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
