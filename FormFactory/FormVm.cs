@@ -60,6 +60,8 @@ namespace FormFactory
 
         public bool ShowValidationSummary { get; set; }
 
+        public string AdditionalClasses { get; set; }
+
         public FormVm Render()
         {
             RenderStart();

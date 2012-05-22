@@ -4,7 +4,6 @@
 
 @{
     ViewBag.Title = "Register";
-    ViewBag.FormClass = "form-horizontal";
 }
 
 <h2>Create a New Account</h2>
@@ -14,5 +13,6 @@
 
 @using(var form = Html.FormForAction((AccountController ctlr, RegisterModel model, string s) => ctlr.Register(model, s)))
 {
+    form.AdditionalClasses = "form-horizontal";
     form.Render();
 }
