@@ -1,0 +1,14 @@
+﻿@using FormFactory
+@using FormFactory.Example.Controllers
+@using FormFactory.Example.Models
+@model FormFactory.Example.Models.ConflictingModel2
+
+@{
+    ViewBag.Title = "Conflicting Models test";
+}
+
+<h2>Conflicting Models test</h2>
+@using (var form = Html.FormForAction((AccountController ctlr, ConflictingModel1 model, string s) => ctlr.ConflictingModelsTest(model)))
+{
+    form.Render();
+}

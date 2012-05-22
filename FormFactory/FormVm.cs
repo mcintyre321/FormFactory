@@ -26,9 +26,8 @@ namespace FormFactory
             {
                 if (pi.GetCustomAttributes(true).Any(x => x is FormModelAttribute))
                 {
-                   
                     inputs.AddRange(pi.ParameterType.GetProperties()
-                                        .Select(pi2 => new PropertyVm(pi2, html).Then(p => p.Name = pi.Name + "." + p.Name)));
+                                        .Select(pi2 => new PropertyVm(pi2, pi.ParameterType, html).Then(p => p.Name = pi.Name + "." + p.Name)));
                 }
                 else
                 {

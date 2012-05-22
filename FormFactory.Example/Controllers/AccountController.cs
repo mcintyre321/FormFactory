@@ -67,5 +67,19 @@ namespace FormFactory.Example.Controllers
             // If we got this far, something failed, redisplay form
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ConflictingModelsTest()
+        {
+            var viewModel = new ConflictingModel2();
+            return View(viewModel);
+        }
+        [HttpPost]
+        public ActionResult ConflictingModelsTest([FormModel] ConflictingModel1 model)
+        {
+            // for this test, just redisplay form
+            return View();
+        }
+
     }
 }
