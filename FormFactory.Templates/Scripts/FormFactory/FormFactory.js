@@ -1,7 +1,7 @@
 ﻿//** Property.System.Object **//
 var ff = { behaviours: {} };
 $(document).ready(function () {
-    $(".ff-behaviour").on("focus", function () {
+    $(".ff-behaviour").live("focus", function () {
         var behaviour = $(this).data("ff-behaviour");
         if (ff.behaviours[behaviour]) {
             ff.behaviours[behaviour](this);
@@ -10,7 +10,7 @@ $(document).ready(function () {
 });
 $(document).ready(function() {
     
-    $(".ff-choices input.ff-choice-selector:!checked").on("change", function() { //unchecked choice radios
+    $(".ff-choices input.ff-choice-selector:!checked").live("change", function() { //unchecked choice radios
         var choiceArea = $(this).closest(".ff-choice");
         var choices = choiceArea.closest(".ff-choices");
         choices
@@ -26,7 +26,7 @@ $(document).ready(function() {
             .attr("disabled", null).not("[checked!='checked']").trigger("change");
     });
     
-    $(".ff-choices .ff-choice").on("click", function(e) {
+    $(".ff-choices .ff-choice").live("click", function(e) {
         if ($(e.target).parents().index($(this)) >= 0) {
             var option = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
             if (option.length) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
         }
     });
     
-    $(".ff-choice-picker").on("change", function() {
+    $(".ff-choice-picker").live("change", function() {
         var choices = $(this).closest(".ff-choices-area").find("> .ff-choices");
         var radios = choices.find(".ff-choice-selector")
             .not(choices.find(".ff-choices .ff-choice-selector"));
