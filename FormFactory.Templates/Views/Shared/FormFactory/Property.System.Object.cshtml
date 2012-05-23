@@ -1,4 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using System.Globalization
 @using FormFactory
 @model PropertyVm
 @using System.Collections
@@ -45,12 +46,16 @@
                             {
                                 <div class="ff-choice-name">@(choice == null ? "None" : choiceType.Name.Sentencise())</div>
                             }
-                            <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@((choice == null ? Model.Type : choice.GetType()).AssemblyQualifiedName)"/>
+                            @if (PropertyVm.TypeSlug != null)
+                            {
+                                <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@(PropertyVm.TypeSlug((choice == null ? Model.Type : choice.GetType())))"/>                                
+                            }
                             @{
                             
                             Html.PropertiesFor(choice, choiceType)
                                 .Each(p => p.Name = Model.Name + "." + p.Name)
                                 .Each(p => p.Readonly |= Model.Readonly)
+                                .Each(p => p.Id = Guid.NewGuid().ToString())
                                 .Each(p => p.Disabled |= Model.Disabled).Each(p => p.Disabled |= !isSelected)
                                 .Render(); }
                         </div>
@@ -98,7 +103,7 @@
                     window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
                 }
             }, 1)
-            </script>
+        </script>
     </div>
 
 }

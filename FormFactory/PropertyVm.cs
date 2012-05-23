@@ -11,6 +11,15 @@ namespace FormFactory
 {
     public class PropertyVm
     {
+        static PropertyVm()
+        {
+            TypeSlug = t => t.AssemblyQualifiedName;
+        }
+
+
+        //this property is used to render the Type of an object choice
+        public static Func<Type, string> TypeSlug { get; set; }
+
         public PropertyVm(ParameterInfo pi, HtmlHelper html)
             : this(html, pi.ParameterType, pi.Name)
         {
@@ -75,12 +84,12 @@ namespace FormFactory
                 MethodInfo choices = model.GetType().GetMethod(property.Name + "_choices");
                 if (choices != null)
                 {
-                    Choices = (IEnumerable) choices.Invoke(model, null);
+                    Choices = (IEnumerable)choices.Invoke(model, null);
                 }
                 MethodInfo suggestions = model.GetType().GetMethod(property.Name + "_suggestions");
                 if (suggestions != null)
                 {
-                    Suggestions = (IEnumerable) suggestions.Invoke(model, null);
+                    Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
                 var setter = property.GetSetMethod();
                 var getter = property.GetGetMethod();
@@ -102,8 +111,8 @@ namespace FormFactory
         {
             Type = type;
             Name = name;
-            GetId = () => Name;
-            
+            GetId = () => Name.Replace(".", "_");
+
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {
@@ -111,14 +120,18 @@ namespace FormFactory
                     Value = modelState.Value.AttemptedValue;
             }
             Html = html;
-            GetCustomAttributes = () => new object[]{};
+            GetCustomAttributes = () => new object[] { };
             ShowLabel = true;
         }
 
         protected internal HtmlHelper Html { get; set; }
 
         public Func<string> GetId { private get; set; }
-        public string Id { get { return GetId(); } }
+        public string Id
+        {
+            get { return GetId(); }
+            set { GetId = () => value; }
+        }
         public Type Type { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
