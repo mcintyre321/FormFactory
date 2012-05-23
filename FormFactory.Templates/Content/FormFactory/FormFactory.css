@@ -1,22 +1,26 @@
-﻿ul.ff-choices {
+﻿ul.ff-property-choices {
     list-style: none;
     display: inline-block;
 }
-li.ff-choices > div > div{
+li.ff-choice-area > div > div{
     display: inline-block;
 }
 
-li.ff-choices > div 
+li.ff-choice-area > div 
 {
     display: inline-block;
     
     width: 100%;
+    
 }
 
-.choice-selector 
+.ff-choice-selector
 {
     vertical-align: top;
 }
 .bottom-separated {
     border-bottom: 1px solid gainsboro;
+}
+.ff-choice {
+    padding-left: 20px;
 }

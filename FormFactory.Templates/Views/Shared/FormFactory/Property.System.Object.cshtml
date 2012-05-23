@@ -7,103 +7,70 @@
 @if (Model.Choices != null && !Model.Readonly)
 {
 
+
     <div class="ff-choices-area">
         @{
-    var choices = Model.Choices.Cast<object>().ToArray();
+    var choices = (from obj in Model.Choices.Cast<object>().ToArray()
+                   let choiceType = obj == null ? Model.Type : obj.GetType()
+                   let properties = Html.PropertiesFor(obj, choiceType)
+                       .Each(p => p.Name = Model.Name + "." + p.Name)
+                       .Each(p => p.Readonly |= Model.Readonly)
+                       .Each(p => p.Id = Guid.NewGuid().ToString())
+                       .Each(p => p.Disabled |= Model.Disabled)
+                   select new { obj, choiceType, properties }).ToArray();
 
     var selectedIndex = choices
         .Select((choice, index) => new { index, choice })
         .Where(pair => pair.choice.IsSelected())
         .Select(pair => pair.index)
         .FirstOrDefault();
+
     var useRadio = Model.GetCustomAttributes().OfType<DataTypeAttribute>().Where(dt => dt.CustomDataType == "Radio").Any();
 
     if (!useRadio)
     {
+
             <div>
                 <select class="ff-choice-picker">
                     @for (int i = 0; i < choices.Length; i++)
                     {
-                        <option value="@i" @((i == selectedIndex).Att("selected"))>@(choices[i] == null ? "None" : choices[i].GetType().Name.Sentencise())</option>
+
+                        <option value="@i" @((i == selectedIndex).Att("selected"))>@(choices[i] == null ? "None" : choices[i].choiceType.Name.Sentencise())</option>
                     }
                 </select>
             </div>
     }
         }
-        <ul class="ff-choices fresh">
+        <div class="ff-choices">
             @for (int i = 0; i < choices.Length; i++)
             {
                 var choice = choices[i];
+                var obj = choices[i].obj;
                 var isSelected = (i == selectedIndex);
-                var choiceType = choice == null ? Model.Type : choice.GetType();
             
 
-                <li class="ff-choice " @Html.Raw(!useRadio && !isSelected ? "style='display:none'" : "") >
-                    <div class="@Html.Raw((i < choices.Length - 1) ? "bottom-separated" : "")">
+                <div class="ff-choice " @Html.Raw(!useRadio && !isSelected ? "style='display:none'" : "") >
+                    <div class="@Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
                         <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@(Model.Name)_ModelTypeName_radios" @isSelected.Att("checked") @Model.Disabled()/>
                         <div>
                             @if (useRadio)
                             {
-                                <div class="ff-choice-name">@(choice == null ? "None" : choiceType.Name.Sentencise())</div>
+
+                                <div class="ff-choice-name">@(obj == null ? "None" : choice.choiceType.Name.Sentencise())</div>
                             }
                             @if (PropertyVm.TypeSlug != null)
                             {
-                                <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@(PropertyVm.TypeSlug((choice == null ? Model.Type : choice.GetType())))"/>                                
+
+                                <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>                                
                             }
-                            @{
-                            
-                            Html.PropertiesFor(choice, choiceType)
-                                .Each(p => p.Name = Model.Name + "." + p.Name)
-                                .Each(p => p.Readonly |= Model.Readonly)
-                                .Each(p => p.Id = Guid.NewGuid().ToString())
-                                .Each(p => p.Disabled |= Model.Disabled).Each(p => p.Disabled |= !isSelected)
-                                .Render(); }
+                            @{ choice.properties.Each(p => p.Disabled &= (i == selectedIndex)).Render(); }
                         </div>
                     </div>
-                </li>
+                </div>
             
             }
-        </ul>
-        <script type="text/javascript">
-            window.setTimeout(function () {
-                if (window["28e19a48-567f-46c3-abd2-a67c84512c06"] === undefined) {
-                    $(".ff-choices input.ff-choice-selector:!checked").on("change", function () { //unchecked choice radios
-                        var choiceArea = $(this).closest(".ff-choice");
-                        var choices = choiceArea.closest(".ff-choices");
-                        choices
-                                .find("> .ff-choice")
-                                .find(":input")
-                                .not(choices.find(".ff-choice-selector")
-                                        .not(choices.find(".ff-choices .ff-choice-selector")))
-                                .attr("disabled", "disabled");
-                        var myInputs = choiceArea.find(":input").not(choiceArea.find(".ff-choice input"));
-                        myInputs.attr("disabled", null);
-                        var childChoices = choiceArea.find(".ff-choice").not(choiceArea.find(".ff-choice .ff-choice"));
-                        childChoices.find(".ff-choice-selector").not(childChoices.find(".ff-choices .ff-choice-selector"))
-                                .attr("disabled", null).not("[checked!='checked']").trigger("change");
-                    });
-                    $(".ff-choices .ff-choice").on("click", function (e) {
-                        if ($(e.target).parents().index($(this)) >= 0) {
-                            var option = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
-                            if (option.length) {
-                                option.attr("checked", "checked").trigger("change");
-                                e.stopPropagation();
-                                $(e.target).click();
-                            }
-                        }
-                    });
-                    $(".ff-choice-picker").on("change", function () {
-                        var choices = $(this).closest(".ff-choices-area").find("> .ff-choices");
-                        var radios = choices.find(".ff-choice-selector")
-                                .not(choices.find(".ff-choices .ff-choice-selector"));
-                        radios.closest(".ff-choice").hide();
-                        $(radios[$(this).val()]).attr("checked", "checked").trigger("change").closest(".ff-choice").show();
-
-                    });
-                    window["28e19a48-567f-46c3-abd2-a67c84512c06"] = true;
-                }
-            }, 1)
-        </script>
+        </div>
+       
     </div>
 
 }
