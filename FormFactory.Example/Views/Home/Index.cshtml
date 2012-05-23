@@ -43,14 +43,25 @@
 </div>
 <section id="documentation">
     <div class="page-header">
-        <h1>Documentation <small> </small></h1>
+        <h2>About <small> </small></h2>
     </div>
-
-    <h2>Installation</h2>
+    <div class="row">
+        <div class="span12">
+            <p>FormFactory renders complex object forms automatically. By refecting over an object model or method, 
+                it builds an intermediate model representing the form and properties. These models are then rendered
+                using customisable templates.
+            </p>
+            <p>FormFactory can build complex nested forms with rich content pickers. By following a few simple code conventions, 
+                properties with multiple choices and suggested values can be written in a few lines of code.
+            </p>
+        </div>
+    </div>
+    <div class="page-header">
+        <h2>Installation <small> </small></h2>
+    </div>
 
     <div class="row">
         <div class="span6">
-            <p>
                 Install the library
                 <pre class="prettyprint">Nuget install-package FormFactory</pre>
                 Install the content files (.cshtml, .js, .css)
@@ -59,7 +70,6 @@
                 <pre class="prettyprint">
 &lt;link href="/Content/FormFactory/FormFactory.css" rel="stylesheet" type="text/css"/>
 &lt;script src="/Scripts/FormFactory/FormFactory.js" type="text/javascript">&lt;/script></pre>
-            </p>
         </div>
         <div class="span1">&nbsp;</div>
         <div class="span5">Note: To use FormFactory without installing FormFactory.Templates you must <a hef="http://nuget.org/packages/EmbeddedResourceVirtualPathProvider">install</a> and <a href="https://github.com/mcintyre321/FormFactory/blob/master/FormFactory.Example/App_Code/RegisterVirtualPathProvider.cs">configure</a> the <a href="https://github.com/mcintyre321/EmbeddedResourceVirtualPathProvider">EmbeddedResourceVirtualPathProvider </a></div>
@@ -81,11 +91,11 @@
             </p>
             <p> ..writing this in the view...
                 <pre class="prettyprint"> 
-        using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
-        {
-            form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-            form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
-        } //.Dispose() closes the form
+using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
+{
+    form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
+    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+} //.Dispose() closes the form
     </pre>
             </p>
             
@@ -109,17 +119,17 @@
             <p> Given this action...
 
                 <pre class="prettyprint">
-    [HttpPost] public virtual ActionResult SignInWithModel([FormModel] SignInModel model)
-        { //... } 
+[HttpPost] public virtual ActionResult SignInWithModel([FormModel] SignInModel model)
+{ //... } 
 </pre>
             </p>
             <p> ..writing this in the view...
                 <pre class="prettyprint"> 
-        using (var form = Html.FormForAction((HomeController c, SignInModel p0) => c.SignInWithModel(p03)))
-        {
-            form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-            form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
-        } //.Dispose() closes the form
+using (var form = Html.FormForAction((HomeController c, SignInModel p0) => c.SignInWithModel(p03)))
+{
+    form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
+    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+} //.Dispose() closes the form
     </pre>
             </p>
             
@@ -127,7 +137,6 @@
         <div class="span1">&nbsp;</div>
         <div class="span5"><p>...will render this form:</p>
             @{
-
                 using (var form = Html.FormForAction((HomeController c, SignInModel p0) => c.SignInWithModel(p0)))
                 {
 
@@ -137,73 +146,58 @@
             }</div>
   </div><!-- /row -->
 </section>
-<h2>
-    So whats actually going on here?</h2>
-<p>
-    When FormHelper renders an input, it examines the type of the action parameter or
-    object property and looks for the best view for the object. E.g. if you were rendering
-    a string, it would render the view "Property.System.String". If it can't find a
-    suitable view, it looks at the basetype, and tries that. If it still can't find
-    on, it defaults to the "Property.System.Object" render.
-</p>
-<p>
-    You can override these templates by creating your own partials with the same names
-    in your own project, so if you don't want to use Twitter bootstrap, you don't have
-    to.
-</p>
 <h1 class="page-header">
     Rendering objects
 </h1>
 <div class="row">
     <div class="span6">
         <pre class="prettyprint">
-    var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
 
-    Html.PropertiesFor(me).Render();
+Html.PropertiesFor(me).Render();
 </pre>
         <pre class="prettyprint">
 public class Person
+{
+    DateTime _dateOfBirth;
+
+    public Person(DateTime dateOfBirth, string[] hobbies)
     {
-        DateTime _dateOfBirth;
-
-        public Person(DateTime dateOfBirth, string[] hobbies)
-        {
-            _dateOfBirth = dateOfBirth;
-            Hobbies = hobbies;
-            Position = Models.Position.SeniorSubcontractor;
-            Enabled = true;
-        }
-
-        //readonly property
-        public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
-
-        //writable property
-        public string Name { get; set; }
-
-        //nullable enumerable property
-        public Position? Position { get; set; }
-
-        public bool Enabled { get; set; }
-
-        //readonly property
-        public IEnumerable
-&lt;string> Hobbies { get; private set; }
-
-        public string Gender { get; set; }
-        //choices for geneder rendered as a select list
-        public IEnumerable&lt;string> Gender_choices() 
-        {
-            return "male,female,not specified".Split(',');
-        }
-
-        public string Location { get; set; }
-        //location enhanced with auto complete
-        public IEnumerable&lt;string> Location_suggestions() 
-        {
-            return "USA,UK,Canada".Split(',');
-        } 
-
+        _dateOfBirth = dateOfBirth;
+        Hobbies = hobbies;
+        Position = Models.Position.SeniorSubcontractor;
+        Enabled = true;
     }
+
+    //readonly property
+    public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
+
+    //writable property
+    public string Name { get; set; }
+
+    //nullable enumerable property
+    public Position? Position { get; set; }
+
+    public bool Enabled { get; set; }
+
+    //readonly property
+    public IEnumerable &lt;string> Hobbies { get; private set; }
+
+    public string Gender { get; set; }
+    //choices for geneder rendered as a select list
+    public IEnumerable&lt;string> Gender_choices() 
+    {
+        return "male,female,not specified".Split(',');
+    }
+
+    public string Location { get; set; }
+    //location enhanced with auto complete
+    public IEnumerable&lt;string> Location_suggestions() 
+    {
+        return "USA,UK,Canada".Split(',');
+    } 
+
+}
 
 </pre>
     </div>
