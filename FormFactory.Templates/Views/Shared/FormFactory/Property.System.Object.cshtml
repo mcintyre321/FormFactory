@@ -31,7 +31,7 @@
     {
 
             <div>
-                <select class="ff-choice-picker">
+                <select class="ff-choice-picker" @Model.Disabled()>
                     @for (int i = 0; i < choices.Length; i++)
                     {
 
@@ -63,7 +63,7 @@
 
                                 <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>                                
                             }
-                            @{ choice.properties.Each(p => p.Disabled &= (i == selectedIndex)).Render(); }
+                            @{ choice.properties.Each(p => p.Disabled |= (i != selectedIndex)).Render(); }
                         </div>
                     </div>
                 </div>

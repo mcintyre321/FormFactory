@@ -8,9 +8,9 @@ $(document).ready(function () {
         }
     });
 });
-$(document).ready(function() {
-    
-    $(".ff-choices input.ff-choice-selector:!checked").live("change", function() { //unchecked choice radios
+$(document).ready(function () {
+
+    $(".ff-choices input.ff-choice-selector:!checked").live("change", function () { //unchecked choice radios
         var choiceArea = $(this).closest(".ff-choice");
         var choices = choiceArea.closest(".ff-choices");
         choices
@@ -25,19 +25,25 @@ $(document).ready(function() {
         childChoices.find(".ff-choice-selector").not(childChoices.find(".ff-choices .ff-choice-selector"))
             .attr("disabled", null).not("[checked!='checked']").trigger("change");
     });
-    
-    $(".ff-choices .ff-choice").live("click", function(e) {
+
+    $(".ff-choices .ff-choice").live("click", function (e) {
         if ($(e.target).parents().index($(this)) >= 0) {
             var option = $(this).find("> * > .ff-choice-selector[disabled!='disabled'][checked!='checked']");
             if (option.length) {
-                option.attr("checked", "checked").trigger("change");
+                var choicesArea = $(this).closest(".ff-choices-area");
+                var picker = choicesArea.find(".ff-choice-picker").not(choicesArea.find(".ff-choices-area .ff-choice-picker"));
+                if (picker.length) {
+                    picker.find("option:eq(" + $(this).index() + ")").attr("selected", "selected").trigger("change");
+                } else {
+                    option.attr("checked", "checked").trigger("change");
+                }
                 e.stopPropagation();
                 $(e.target).click();
             }
         }
     });
-    
-    $(".ff-choice-picker").live("change", function() {
+
+    $(".ff-choice-picker").live("change", function () {
         var choices = $(this).closest(".ff-choices-area").find("> .ff-choices");
         var radios = choices.find(".ff-choice-selector")
             .not(choices.find(".ff-choices .ff-choice-selector"));
