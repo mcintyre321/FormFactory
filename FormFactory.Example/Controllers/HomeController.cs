@@ -9,7 +9,7 @@ namespace FormFactory.Example.Controllers
     public class HomeController : Controller
     {
         [HttpPost]
-        public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, bool remember, string returnUrl)
+        public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
         {
             if (string.IsNullOrWhiteSpace(email) || password != "password")
             {
@@ -49,8 +49,5 @@ namespace FormFactory.Example.Controllers
         public string Email { get; set; }
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        public bool Remember { get; set; }
-        public string ReturnUrl { get; set; }
     }
 }

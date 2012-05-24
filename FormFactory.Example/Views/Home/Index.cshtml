@@ -47,8 +47,8 @@
     </div>
     <div class="row">
         <div class="span12">
-            <p>FormFactory renders complex object forms automatically. By refecting over an object model or method, 
-                it builds an intermediate model representing the form and properties. These models are then rendered
+            <p>FormFactory renders complex object forms automatically. It refects over an object model or method signature, 
+                and builds an intermediate model representing the form and properties. These models are then rendered
                 using customisable templates.
             </p>
             <p>FormFactory can build complex nested forms with rich content pickers. By following a few simple code conventions, 
@@ -93,8 +93,7 @@
                 <pre class="prettyprint"> 
 using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
 {
-    form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+    form.Render(); //renders the form
 } //.Dispose() closes the form
     </pre>
             </p>
@@ -104,47 +103,13 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
         <div class="span5"><p>...will render this form:</p>
             @{
 
-                using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
+                using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
                 {
-                    form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-                    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
+                    form.Render(); 
                 } //.Dispose() closes the form
             }</div>
     </div><!-- /row -->
-    <h2>Form for MVC action with model</h2>
-
-    <div class="row">
-        <div class="span6">
-         
-            <p> Given this action...
-
-                <pre class="prettyprint">
-[HttpPost] public virtual ActionResult SignInWithModel([FormModel] SignInModel model)
-{ //... } 
-</pre>
-            </p>
-            <p> ..writing this in the view...
-                <pre class="prettyprint"> 
-using (var form = Html.FormForAction((HomeController c, SignInModel p0) => c.SignInWithModel(p03)))
-{
-    form.Inputs = form.Inputs.Where(i => i.Name != "returnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
-} //.Dispose() closes the form
-    </pre>
-            </p>
-            
-        </div>
-        <div class="span1">&nbsp;</div>
-        <div class="span5"><p>...will render this form:</p>
-            @{
-                using (var form = Html.FormForAction((HomeController c, SignInModel p0) => c.SignInWithModel(p0)))
-                {
-
-                    form.Inputs = form.Inputs.Where(i => i.Name != "model.ReturnUrl"); //filter out the returnUrl parameter as it is a querystring parameter
-                    form.Render(); //renders the form - actually .Render() calls .RenderStart(), .RenderActionInputs() and .RenderButtons()
-                } //.Dispose() closes the form
-            }</div>
-  </div><!-- /row -->
+    
 </section>
 <h1 class="page-header">
     Rendering objects
