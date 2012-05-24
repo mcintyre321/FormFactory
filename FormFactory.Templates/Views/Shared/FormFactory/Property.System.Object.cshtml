@@ -24,7 +24,7 @@
         .Select(pair => pair.index)
         .FirstOrDefault();
 
-    var useRadio = Model.GetCustomAttributes().OfType<DataTypeAttribute>().Where(dt => dt.CustomDataType == "Radio").Any();
+    var useRadio =  Model.GetCustomAttributes().OfType<DataTypeAttribute>().Where(dt => dt.CustomDataType == "Radio").Any();
 
     if (!useRadio)
     {
@@ -41,34 +41,37 @@
     }
         }
         <div class="ff-choices">
-            @for (int i = 0; i < choices.Length; i++)
-            {
-                var choice = choices[i];
-                var obj = choices[i].obj;
-                var isSelected = (i == selectedIndex);
-                var isDisabled = Model.Disabled | !isSelected;
-                <div class="ff-choice " @Html.Raw(!useRadio && !isSelected ? "style='display:none'" : "") >
-                    <div class="@Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
-                        <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@(Model.Name)_ModelTypeName_radios" @isSelected.Att("checked") @isDisabled.Att("Disabled")/>
-                        <div>
-                            @if (useRadio)
-                            {
+            @{
+                var radioGroupName = Guid.NewGuid().ToString();
+                for (int i = 0; i < choices.Length; i++)
+                {
 
-                                <div class="ff-choice-name">@(obj == null ? "None" : choice.choiceType.Name.Sentencise())</div>
-                            }
-                            @if (PropertyVm.TypeSlug != null)
-                            {
+                    var choice = choices[i];
+                    var obj = choices[i].obj;
+                    var isSelected = (i == selectedIndex);
+                    var isDisabled = Model.Disabled | !isSelected;
+                    <div class="ff-choice " @Html.Raw(!useRadio && !isSelected ? "style='display:none'" : "") >
+                        <div class="@Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
+                            <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@radioGroupName" @isSelected.Att("checked") @Model.Disabled.Att("Disabled")/>
+                            <div>
+                                @if (useRadio)
+                                {
 
-                                <input type="hidden" name="@(Model.Name).__type" @(isDisabled.Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>                                
-                            }
-                            @{ choice.properties.Each(p => p.Disabled |= isDisabled).Render(); }
+                                    <div class="ff-choice-name">@(obj == null ? "None" : choice.choiceType.Name.Sentencise())</div>
+                                }
+                                @if (PropertyVm.TypeSlug != null)
+                                {
+
+                                    <input type="hidden" name="@(Model.Name).__type" @(isDisabled.Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>
+                                }
+                                @{ choice.properties.Each(p => p.Disabled |= isDisabled).Render(); }
+                            </div>
                         </div>
                     </div>
-                </div>
-            
+
+                }
             }
         </div>
-       
     </div>
 
 }
