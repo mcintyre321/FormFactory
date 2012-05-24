@@ -21,7 +21,7 @@
 
     var selectedIndex = choices
         .Select((choice, index) => new { index, choice })
-        .Where(pair => pair.choice.IsSelected())
+        .Where(pair => pair.choice.obj.IsSelected())
         .Select(pair => pair.index)
         .FirstOrDefault();
 
