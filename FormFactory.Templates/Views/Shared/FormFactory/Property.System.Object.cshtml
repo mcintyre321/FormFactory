@@ -16,7 +16,6 @@
                        .Each(p => p.Name = Model.Name + "." + p.Name)
                        .Each(p => p.Readonly |= Model.Readonly)
                        .Each(p => p.Id = Guid.NewGuid().ToString())
-                       .Each(p => p.Disabled |= Model.Disabled)
                    select new { obj, choiceType, properties }).ToArray();
 
     var selectedIndex = choices
@@ -47,11 +46,10 @@
                 var choice = choices[i];
                 var obj = choices[i].obj;
                 var isSelected = (i == selectedIndex);
-            
-
+                var isDisabled = Model.Disabled | !isSelected;
                 <div class="ff-choice " @Html.Raw(!useRadio && !isSelected ? "style='display:none'" : "") >
                     <div class="@Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
-                        <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@(Model.Name)_ModelTypeName_radios" @isSelected.Att("checked") @Model.Disabled()/>
+                        <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@(Model.Name)_ModelTypeName_radios" @isSelected.Att("checked") @isDisabled.Att("Disabled")/>
                         <div>
                             @if (useRadio)
                             {
@@ -61,9 +59,9 @@
                             @if (PropertyVm.TypeSlug != null)
                             {
 
-                                <input type="hidden" name="@(Model.Name).__type" @((!isSelected).Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>                                
+                                <input type="hidden" name="@(Model.Name).__type" @(isDisabled.Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>                                
                             }
-                            @{ choice.properties.Each(p => p.Disabled |= (i != selectedIndex)).Render(); }
+                            @{ choice.properties.Each(p => p.Disabled |= isDisabled).Render(); }
                         </div>
                     </div>
                 </div>
