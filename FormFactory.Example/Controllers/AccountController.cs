@@ -81,5 +81,31 @@ namespace FormFactory.Example.Controllers
             return View();
         }
 
+
+
+
+        [HttpGet]
+        public ActionResult LogIn(string returnUrl)
+        {
+            ViewData["returnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult LogIn([FormModel] LogInModel model, [DataType("Hidden")] string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                // TODO: display success / log in
+                if (returnUrl != null)
+                {
+                    return Redirect(returnUrl);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View();
+        }
     }
 }

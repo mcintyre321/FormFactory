@@ -75,6 +75,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\ConflictingModels.cs" />
     <Compile Include="Models\ContactMethod.cs" />
+    <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\SocialMedia.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PhoneContactMethod.cs" />
@@ -249,7 +250,9 @@
   <ItemGroup>
     <Content Include="Views\Account\ConflictingModelsTest.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Account\LogIn.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

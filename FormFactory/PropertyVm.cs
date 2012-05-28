@@ -33,6 +33,7 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -56,6 +57,7 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -65,46 +67,47 @@ namespace FormFactory
         }
 
         public object Source { get; set; }
-        public PropertyVm(object model, PropertyInfo property, HtmlHelper html) :
-            this(html, property.PropertyType, property.Name)
+        public PropertyVm(object model, PropertyInfo pi, HtmlHelper html) :
+            this(html, pi.PropertyType, pi.Name)
         {
             Source = model;
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(property.Name, out modelState))
+            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (property.GetGetMethod() != null && model != null)
+            else if (pi.GetGetMethod() != null && model != null)
             {
-                Value = property.GetGetMethod().Invoke(model, null);
+                Value = pi.GetGetMethod().Invoke(model, null);
             }
             if (model != null)
             {
-                MethodInfo choices = model.GetType().GetMethod(property.Name + "_choices");
+                MethodInfo choices = model.GetType().GetMethod(pi.Name + "_choices");
                 if (choices != null)
                 {
                     Choices = (IEnumerable)choices.Invoke(model, null);
                 }
-                MethodInfo suggestions = model.GetType().GetMethod(property.Name + "_suggestions");
+                MethodInfo suggestions = model.GetType().GetMethod(pi.Name + "_suggestions");
                 if (suggestions != null)
                 {
                     Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
-                var setter = property.GetSetMethod();
-                var getter = property.GetGetMethod();
+                var setter = pi.GetSetMethod();
+                var getter = pi.GetGetMethod();
                 Readonly = !(setter != null);
                 Value = getter == null ? null : getter.Invoke(model, null);
             }
-            GetCustomAttributes = () => property.GetCustomAttributes(true);
-            Readonly = !(property.GetSetMethod() != null);
-            IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+            GetCustomAttributes = () => pi.GetCustomAttributes(true);
+            Readonly = !(pi.GetSetMethod() != null);
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
-            ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
 
-            var descriptionAttr = property.GetCustomAttributes(true).OfType<DisplayAttribute>()
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
-            DisplayName = descriptionAttr != null ? descriptionAttr.Name : property.Name.Sentencise();
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
@@ -122,6 +125,7 @@ namespace FormFactory
             Html = html;
             GetCustomAttributes = () => new object[] { };
             ShowLabel = true;
+            LabelOnRight = false;
         }
 
         protected internal HtmlHelper Html { get; set; }
@@ -150,5 +154,6 @@ namespace FormFactory
 
         public bool IsHidden { get; set; }
         public bool ShowLabel { get; set; }
+        public bool LabelOnRight { get; set; }
     }
 }

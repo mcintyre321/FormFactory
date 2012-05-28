@@ -1,0 +1,14 @@
+﻿@using FormFactory
+@using FormFactory.Example.Controllers
+@using FormFactory.Example.Models
+@{
+    ViewBag.Title = "Log in";
+}
+
+<h2>Log in</h2>
+
+@using(var form = Html.FormForAction((AccountController ctlr, LogInModel model, string s) => ctlr.LogIn(model, s)))
+{
+    form.AdditionalClasses = "form-inline";
+    form.Render();
+}

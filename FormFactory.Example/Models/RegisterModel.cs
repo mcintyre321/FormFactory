@@ -33,5 +33,11 @@ namespace FormFactory.Example.Models
         [Display(Name = "Tell us about yourself")]
         [DataType(DataType.MultilineText)]
         public string AboutYou { get; set; }
+
+        public bool RegularCheckBox { get; set; }
+
+        [LabelOnRight]
+        [Display(Name = "I accept the <a href='/terms'>Terms and Conditions</a>")]
+        public bool TermsAndConditions { get; set; }
     }
 }

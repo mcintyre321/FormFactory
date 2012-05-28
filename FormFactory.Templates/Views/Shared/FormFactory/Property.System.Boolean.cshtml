@@ -1,8 +1,21 @@
 ﻿@using FormFactory
 @model PropertyVm
-           
 @{
     var posted = ((Model.Value as bool? ?? bool.Parse((Model.Value as string ?? "false"))));
 }
-<input type='hidden' @Model.Disabled() value='@posted.ToString().ToLower()'  id="hidden-@Model.Id" name='@Model.Name'>
-<input @Model.Readonly() @Model.Disabled() type="checkbox" id="@Model.Id" value="true" @(posted.Att("checked")) onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
+<input type='hidden' @Model.Disabled() value='@posted.ToString().ToLower()' id="hidden-@Model.Id" name='@Model.Name'>
+@helper RenderCheckbox(bool posted)
+    {
+    <input @Model.Readonly() @Model.Disabled() type="checkbox" id="@Model.Id" value="true" @(posted.Att("checked")) onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
+ }
+@if (Model.LabelOnRight)
+{
+    <label class="checkbox">
+        @RenderCheckbox(posted)
+        @Html.Raw(Model.DisplayName)
+    </label>
+}
+else
+{
+    @RenderCheckbox(posted)
+}
