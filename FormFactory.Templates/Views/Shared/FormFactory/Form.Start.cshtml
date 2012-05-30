@@ -1,6 +1,10 @@
 ﻿@using FormFactory
 @model FormVm
 <form action="@Model.ActionUrl" method="post" enctype="multipart/form-data" encoding="multipart/form-data" class="@ViewBag.FormClass @Model.AdditionalClasses">
+@if (Model.RenderAntiForgeryToken)
+{
+    @Html.AntiForgeryToken()
+}
 @if (!ViewData.ModelState.IsValid && Model.ShowValidationSummary)
 {
     <div class="alert alert-error">

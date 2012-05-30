@@ -9,6 +9,7 @@
 
 @using(var form = Html.FormForAction((AccountController ctlr, LogInModel model, string s) => ctlr.LogIn(model, s)))
 {
+    form.RenderAntiForgeryToken = true;
     form.AdditionalClasses = "form-inline";
     form.Render();
 }

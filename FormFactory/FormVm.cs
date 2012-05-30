@@ -47,6 +47,7 @@ namespace FormFactory
             this.HtmlHelper = html;
             ShowValidationSummary = true;
             ExcludePropertyErrorsFromValidationSummary = true;
+            RenderAntiForgeryToken = Defaults.RenderAntiForgeryToken;
         }
 
         public string ActionUrl { get; set; }
@@ -59,6 +60,7 @@ namespace FormFactory
         public bool ExcludePropertyErrorsFromValidationSummary { get; set; }
 
         public bool ShowValidationSummary { get; set; }
+        public bool RenderAntiForgeryToken { get; set; }
 
         public string AdditionalClasses { get; set; }
 

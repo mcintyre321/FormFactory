@@ -51,6 +51,7 @@
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
     <Compile Include="Attributes\LabelOnRightAttribute.cs" />
+    <Compile Include="Defaults.cs" />
     <Compile Include="IsSelectedExtension.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Logger.cs" />
