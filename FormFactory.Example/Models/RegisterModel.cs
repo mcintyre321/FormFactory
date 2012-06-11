@@ -22,6 +22,8 @@ namespace FormFactory.Example.Models
         [Display(Name = "Title")]
         public Titles? Title { get; set; }
 
+        public string AgeRange { get; set; }
+
         [Required]
         [Display(Name = "First name")]
         public string FirstName { get; set; }

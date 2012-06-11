@@ -5,7 +5,7 @@
 }
 @if (!Model.Readonly)
 {
-    <select name="@Model.Name" @(!Model.Readonly ? "" : "disabled=disabled")>
+    <select id="@Model.Id" name="@Model.Name" @(!Model.Readonly ? "" : "disabled=disabled")>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
             <option value="" @(Model.Value == null ? "selected=selected" : "")></option>

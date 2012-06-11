@@ -14,7 +14,7 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    <select name="@Model.Name"  @Model.Readonly() @Model.Disabled()>
+    <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled()>
         @foreach (var option in choices)
         {
             <option value="@option.Item2" @((Model.Value != null && option.Item2 == Model.Value.ToString()).Att("selected"))>@option.Item1</option>    

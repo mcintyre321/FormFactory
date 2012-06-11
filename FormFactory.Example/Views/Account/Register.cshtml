@@ -14,5 +14,6 @@
 @using(var form = Html.FormForAction((AccountController ctlr, RegisterModel model, string s) => ctlr.Register(model, s)))
 {
     form.AdditionalClasses = "form-horizontal";
+    form.Inputs.Single(x => x.Name == "model.AgeRange").Choices = new[] {"< 18 years", "18 - 30", "30+"};
     form.Render();
 }
