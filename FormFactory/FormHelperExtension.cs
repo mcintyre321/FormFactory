@@ -89,20 +89,29 @@ namespace FormFactory
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
-        public static string BestViewName(this HtmlHelper helper, Type type, string prefix = null, Func<Type, string> getName = null)
+        public static string BestViewName(this HtmlHelper helper, Type type, string prefix = null)
         {
-            return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName);
+            return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix);
         }
-        public static MvcHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null, Func<Type, string> getName = null)
+        public static MvcHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
         {
-            if (type == null) type = model.GetType() ;
-            return helper.Partial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName), model);
+            if (type == null) type = model.GetType();
+            return helper.Partial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix), model);
+        }
+        public static void RenderBestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
+        {
+            if (type == null) type = model.GetType();
+            helper.RenderPartial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix), model);
+        }
+        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
+        {
+            return BestViewName(cc, type, prefix, (t => t.FullName));
         }
 
-        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getName = null)
+        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getNameIn = null)
         {
             if (type == null) return null;
-            getName = getName ?? (t => t.FullName);
+            var getName = getNameIn ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
             Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
@@ -118,7 +127,13 @@ namespace FormFactory
 
             if (engineResult.View == null)
             {
-                return null;
+                if (getNameIn == null)
+                {
+                    return BestViewName(cc, type, prefix, t => t.Name);
+                }else
+                {
+                    return null;
+                }
             }
             return partialViewName;
         }
