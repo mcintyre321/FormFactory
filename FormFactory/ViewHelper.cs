@@ -9,6 +9,11 @@ namespace FormFactory
 {
     public static class ViewHelper
     {
+        public static MvcHtmlString Raw(this bool value, string output)
+        {
+            return new MvcHtmlString(value ? output : "");
+        }
+
         public static HtmlString Disabled(this PropertyVm vm)
         {
             return vm.Disabled.Att("disabled");
@@ -17,9 +22,9 @@ namespace FormFactory
         {
             return vm.Readonly.Att("readonly");
         }
-        public static MvcHtmlString Att(this bool value, string att)
+        public static MvcHtmlString Att(this bool value, string att, string attValue = null)
         {
-            return new MvcHtmlString(value ? att + "=\"" + att + "\"" : "");
+            return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
         }
 
     }

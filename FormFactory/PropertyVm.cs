@@ -11,6 +11,15 @@ namespace FormFactory
 {
     public class PropertyVm
     {
+        static PropertyVm()
+        {
+            TypeSlug = t => t.AssemblyQualifiedName;
+        }
+
+
+        //this property is used to render the Type of an object choice
+        public static Func<Type, string> TypeSlug { get; set; }
+
         public PropertyVm(ParameterInfo pi, HtmlHelper html)
             : this(html, pi.ParameterType, pi.Name)
         {
@@ -24,22 +33,24 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
+            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
-        public PropertyVm(PropertyInfo pi, HtmlHelper html)
+        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
         {
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            if (html.ViewData.ModelState.TryGetValue(modelParamInfo.Name + "." + pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (html.ViewData.Model != null)
+            else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelParamInfo.ParameterType))
             {
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
@@ -47,6 +58,8 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
+            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -56,54 +69,56 @@ namespace FormFactory
         }
 
         public object Source { get; set; }
-        public PropertyVm(object model, PropertyInfo property, HtmlHelper html) :
-            this(html, property.PropertyType, property.Name)
+        public PropertyVm(object model, PropertyInfo pi, HtmlHelper html) :
+            this(html, pi.PropertyType, pi.Name)
         {
             Source = model;
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(property.Name, out modelState))
+            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (property.GetGetMethod() != null && model != null)
+            else if (pi.GetGetMethod() != null && model != null)
             {
-                Value = property.GetGetMethod().Invoke(model, null);
+                Value = pi.GetGetMethod().Invoke(model, null);
             }
             if (model != null)
             {
-                MethodInfo choices = model.GetType().GetMethod(property.Name + "_choices");
+                MethodInfo choices = model.GetType().GetMethod(pi.Name + "_choices");
                 if (choices != null)
                 {
-                    Choices = (IEnumerable) choices.Invoke(model, null);
+                    Choices = (IEnumerable)choices.Invoke(model, null);
                 }
-                MethodInfo suggestions = model.GetType().GetMethod(property.Name + "_suggestions");
+                MethodInfo suggestions = model.GetType().GetMethod(pi.Name + "_suggestions");
                 if (suggestions != null)
                 {
-                    Suggestions = (IEnumerable) suggestions.Invoke(model, null);
+                    Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
-                var setter = property.GetSetMethod();
-                var getter = property.GetGetMethod();
+                var setter = pi.GetSetMethod();
+                var getter = pi.GetGetMethod();
                 Readonly = !(setter != null);
                 Value = getter == null ? null : getter.Invoke(model, null);
             }
-            GetCustomAttributes = () => property.GetCustomAttributes(true);
-            Readonly = !(property.GetSetMethod() != null);
-            IsHidden = property.GetCustomAttributes(true).OfType<DataTypeAttribute>()
+            GetCustomAttributes = () => pi.GetCustomAttributes(true);
+            Readonly = !(pi.GetSetMethod() != null);
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
-            ShowLabel = property.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
+            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
+            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
 
-            var descriptionAttr = property.GetCustomAttributes(true).OfType<DisplayAttribute>()
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
-            DisplayName = descriptionAttr != null ? descriptionAttr.Name : property.Name.Sentencise();
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
         {
             Type = type;
             Name = name;
-            GetId = () => Name;
-            
+            GetId = () => Name.Replace(".", "_");
+
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             {
@@ -111,14 +126,19 @@ namespace FormFactory
                     Value = modelState.Value.AttemptedValue;
             }
             Html = html;
-            GetCustomAttributes = () => new object[]{};
+            GetCustomAttributes = () => new object[] { };
             ShowLabel = true;
+            LabelOnRight = false;
         }
 
         protected internal HtmlHelper Html { get; set; }
 
         public Func<string> GetId { private get; set; }
-        public string Id { get { return GetId(); } }
+        public string Id
+        {
+            get { return GetId(); }
+            set { GetId = () => value; }
+        }
         public Type Type { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
@@ -137,5 +157,17 @@ namespace FormFactory
 
         public bool IsHidden { get; set; }
         public bool ShowLabel { get; set; }
+        public bool LabelOnRight { get; set; }
+        public string PlaceholderText { get; set; }
+    }
+
+
+
+    static class Extensions
+    {
+        public static U Maybe<T, U>(this T t, Func<T, U> f) where T : class
+        {
+            return (t == null) ? default(U) : f(t);
+        }
     }
 }
