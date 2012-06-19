@@ -105,7 +105,7 @@ namespace FormFactory
         }
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
         {
-            return BestViewName(cc, type, prefix, (t => t.FullName));
+            return BestViewName(cc, type, prefix, null);
         }
 
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getNameIn = null)
