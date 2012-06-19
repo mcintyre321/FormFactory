@@ -1,20 +1,29 @@
-﻿@using FormFactory
+﻿@using System.Web.Mvc.Html
+@using FormFactory
 @model PropertyVm
-<ul>
-    @{
-        var i = 0;
 
-        foreach (var obj in (IEnumerable<object>)Model.Value)
-        {
-        <li>
-            @{
-            var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
+@if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof(ICollection<>))
+{
+    @Html.Partial("FormFactory/Property.ICollection.System.Object", Model)
+}
+else
+{
+    <ul>
+        @{
+            var i = 0;
+
+            foreach (var obj in (IEnumerable<object>) Model.Value)
             {
-                Value = obj
-            };
-                @Html.BestProperty(prop)
+                <li>
+                    @{
+                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
+                        {
+                            Value = obj
+                        };
+                        @Html.BestProperty(prop)
+                    }
+                </li>
             }
-        </li>
         }
-    }
-</ul>
+    </ul>
+}

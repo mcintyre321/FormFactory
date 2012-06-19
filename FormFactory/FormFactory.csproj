@@ -115,6 +115,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.String.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.String.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml">
+      <Link>Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml</Link>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>

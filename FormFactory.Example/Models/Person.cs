@@ -17,6 +17,12 @@ namespace FormFactory.Example.Models
             Hobbies = hobbies;
             Position = Models.Position.SeniorSubcontractor;
             Enabled = true;
+            TopMovies = new List<Movie>()
+            {
+                new Movie() {Title = "Fight Club"},
+                new Movie() {Title = "Bambi"},
+
+            };
         }
 
         //readonly property
@@ -55,5 +61,7 @@ namespace FormFactory.Example.Models
             yield return new PhoneContactMethod();
 
         }
+
+        public ICollection<Movie> TopMovies { get; set; } 
     }
 }

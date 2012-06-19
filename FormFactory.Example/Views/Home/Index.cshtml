@@ -117,7 +117,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 <div class="row">
     <div class="span6">
         <pre class="prettyprint">
-var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+var me = new Person() { ... set properties ... };
 
 Html.PropertiesFor(me).Render();
 </pre>
@@ -161,6 +161,9 @@ public class Person
     {
         return "USA,UK,Canada".Split(',');
     } 
+    
+    //rendered as a list with add, remove, re-order options
+    public ICollection&lt;Movie> TopMovies { get; set; } 
 
 }
 

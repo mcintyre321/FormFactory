@@ -99,6 +99,7 @@
     <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
