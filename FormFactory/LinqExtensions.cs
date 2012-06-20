@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FormFactory
 {
@@ -7,10 +8,12 @@ namespace FormFactory
     {
         public static IEnumerable<T> Each<T>(this IEnumerable<T> ts, Action<T> action)
         {
-            foreach (var t in ts)
-            {
-                yield return t.Then(action);
-            }
+            return ts.Select(t => t.Then(action));
+        }
+
+        public static IEnumerable<T> Eval<T>(this IEnumerable<T> ts)
+        {
+            return ts.ToArray();
         }
 
         public static T Then<T>(this T t, Action<T> action)

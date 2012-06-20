@@ -105,7 +105,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 
                 using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
                 {
-                    form.Render(); 
+                    form.Render();
                 } //.Dispose() closes the form
             }</div>
     </div><!-- /row -->
@@ -178,6 +178,7 @@ public class Person
 
             Html.PropertiesFor(me).Render();
         }
+        <input type="submit" value="submit" />
         </form>
     </div>
 </div>

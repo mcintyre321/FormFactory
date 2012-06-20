@@ -28,7 +28,8 @@ namespace FormFactory.Example.Models
         //readonly property
         public int Age { get { return (int) Math.Floor((DateTime.Now - DateOfBirth).Days/365.25); } }
 
-        //writable property
+        //writable property [
+        [Required()][StringLength(32, MinimumLength = 8)]
         public string Name { get; set; }
 
         //nullable enumerable property
@@ -46,9 +47,9 @@ namespace FormFactory.Example.Models
             return "male,female,not specified".Split(',');
         }
 
+        [Required]
         public string Location { get; set; }
-        //location enhanced with auto complete
-        public IEnumerable<string> Location_suggestions() 
+        public IEnumerable<string> Location_suggestions()
         {
             return "USA,UK,Canada".Split(',');
         }
