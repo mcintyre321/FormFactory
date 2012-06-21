@@ -121,7 +121,11 @@
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\FormFactory.Templates\Scripts\FormFactory\jquery.validate.unobtrusive.dynamic.js">
+      <Link>Scripts\FormFactory\jquery.validate.unobtrusive.dynamic.js</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\FormFactory.Templates\Scripts\FormFactory\FormFactory.js">
       <Link>Scripts\FormFactory\FormFactory.js</Link>

@@ -19,10 +19,7 @@
                                        };
                     }
                     @Html.BestProperty(prop)
-                    <a class="btn btn-mini ff-move-up" href="#moveup"><i class="icon-arrow-up"></i>Move
-                        Up</a> <a class="btn btn-mini ff-move-down" href="#moveup"><i class="icon-arrow-down">
-                        </i>Move Down</a> <a class="btn btn-mini ff-remove-parent btn-danger" href="#remove">
-                            <i class="icon-remove"></i>Remove</a> </li>
+                    @links()</li>
                         i++;
                     }
                 }
@@ -34,7 +31,7 @@
                             var template =
                                 "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\">" +
                                 Html.PropertiesFor(Activator.CreateInstance(templateType))
-                                    .ToMvcHtmlString() + "</div>";
+                                    .ToMvcHtmlString() + links() + "</div>";
                                     @template
                         }
                 </script>
@@ -42,4 +39,10 @@
         </ul>
     </div>
     
+}
+@helper links(){
+    <a class="btn btn-mini ff-move-up" href="#moveup"><i class="icon-arrow-up"></i>Move
+                        Up</a> <a class="btn btn-mini ff-move-down" href="#moveup"><i class="icon-arrow-down">
+                        </i>Move Down</a> <a class="btn btn-mini ff-remove-parent btn-danger" href="#remove">
+                            <i class="icon-remove"></i>Remove</a> 
 }

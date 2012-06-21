@@ -75,42 +75,43 @@ $.extend(ff.behaviours, {},
 );
 
 
-$(document).ready(function () {
-    $(".ff-add-item").live("click", function (e) {
-        var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()).text());
-        var modelName = $(this).data("modelname");
-        var renumber = function (index, attr) {
-            if (!attr) return attr;
-            return modelName + "[" + newIndex + "]." + attr;
-        };
+    $(document).ready(function () {
+        $(".ff-add-item").live("click", function (e) {
+            var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()).text());
+            var modelName = $(this).data("modelname");
+            var renumber = function (index, attr) {
+                if (!attr) return attr;
+                return modelName + "[" + newIndex + "]." + attr;
+            };
 
-        var newObject = $('<li>').append($form.children().clone());
-        newObject.append($('<a class="btn btn-mini ff-move-up" href="#moveup"><i class="icon-arrow-up"></i>Move Up</a> '));
-        newObject.append($('<a class="btn btn-mini ff-move-down" href="#moveup"><i class="icon-arrow-down"></i>Move Down</a> '));
-        newObject.append($('<a class="btn btn-mini btn-danger ff-remove-parent" href="#remove"><i class="icon-remove"></i>Remove</a> '));
+            var newObject = $('<li>').append($form.children().clone());
+        
 
-        var newIndex = $(this).closest("ul").children().length - 1;
-        newObject.find(".ff-collection .ff-add-item").not(newObject.find(".ff-collection .ff-collection .ff-add-item"))
-                        .each(function () {
-                            $(this).attr("data-modelname", renumber(null, $(this).data("modelname")));
-                        });
+            var newIndex = $(this).closest("ul").children().length - 1;
 
-        $(newObject).insertBefore($(this).closest(".ff-collection").find("> ul").children().last());
 
-        $(":input", newObject).attr("name", renumber).attr("id", renumber);
-        $form.find(":input").val(null);
-        return false;
-    }); // end on click
-    $(".ff-remove-parent").live("click", function () {
-        $(this).closest("li").remove();
-        return false;
-    }); // live click
-    $(".ff-move-up").live("click", function () {
-        $(this).closest("li").prev().before($(this).closest("li"));
-        return false;
-    }); // live click
-    $(".ff-move-down").live("click", function () {
-        $(this).closest("li").next(":not(.ff-not-collection-item)").after($(this).closest("li"));
-        return false;
-    }); // live click
-})
+            $(newObject).insertBefore($(this).closest(".ff-collection").find("> ul").children().last());
+
+            $(":input", newObject).attr("name", renumber).attr("id", renumber);
+            $(newObject).find("[data-valmsg-for]").attr("data-valmsg-for", renumber);
+
+            $form.find(":input").val(null);
+            if ($.validator.unobtrusive.parseDynamicContent) {
+                $.validator.unobtrusive.parseDynamicContent(newObject);
+            }
+
+            return false;
+        }); // end on click
+        $(".ff-remove-parent").live("click", function () {
+            $(this).closest("li").remove();
+            return false;
+        }); // live click
+        $(".ff-move-up").live("click", function () {
+            $(this).closest("li").prev().before($(this).closest("li"));
+            return false;
+        }); // live click
+        $(".ff-move-down").live("click", function () {
+            $(this).closest("li").next(":not(.ff-not-collection-item)").after($(this).closest("li"));
+            return false;
+        }); // live click
+    })

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Content Include="Content\FormFactory\FormFactory.css" />
     <Content Include="Scripts\FormFactory\FormFactory.js" />
+    <Content Include="Scripts\FormFactory\jquery.validate.unobtrusive.dynamic.js" />
     <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
