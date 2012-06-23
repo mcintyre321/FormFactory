@@ -108,24 +108,23 @@ namespace FormFactory
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
         {
             t => t.FullName,
-            t => t.FullName.Substring(t.Assembly.FullName.Split(',')[0].Length + 1),
             t => t.Name
         };
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
         {
             return SearchPathRules
-                .Select(r => BestViewNameInternal(cc, type, prefix, r))
+                .Select(r => BestViewName(cc, type, prefix, r))
                     .FirstOrDefault(v => v != null);
         }
 
-        static string BestViewNameInternal(ControllerContext cc, Type type, string prefix, Func<Type, string> getNameIn)
+        public static string BestViewName(ControllerContext cc, Type type, string prefix, Func<Type, string> getNameIn)
         {
             if (type == null) return null;
             var getName = getNameIn ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
             Func<Type, string> getPartialViewName =
-                t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
+                t => prefix + getName(t);
             string partialViewName = getPartialViewName(check);
 
             var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
