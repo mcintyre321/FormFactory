@@ -103,18 +103,28 @@ namespace FormFactory
             if (type == null) type = model.GetType();
             helper.RenderPartial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix), model);
         }
+        
+        public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
+        {
+            t => t.FullName,
+            t => t.FullName.Substring(0, t.Assembly.FullName.Length),
+            t => t.Name
+        };
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
         {
-            return BestViewName(cc, type, prefix, null);
+            return SearchPathRules
+                .Select(r => BestViewNameInternal(cc, type, prefix, r))
+                    .FirstOrDefault(v => v != null);
         }
 
-        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getNameIn = null)
+        static string BestViewNameInternal(ControllerContext cc, Type type, string prefix, Func<Type, string> getNameIn)
         {
             if (type == null) return null;
             var getName = getNameIn ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
-            Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
+            Func<Type, string> getPartialViewName =
+                t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
             string partialViewName = getPartialViewName(check);
 
             var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
@@ -122,18 +132,13 @@ namespace FormFactory
             {
                 check = check.BaseType;
                 partialViewName = getPartialViewName(check);
-                engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName); ;
+                engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
+                ;
             }
 
             if (engineResult.View == null)
             {
-                if (getNameIn == null)
-                {
-                    return BestViewName(cc, type, prefix, t => t.Name);
-                }else
-                {
-                    return null;
-                }
+                return null;
             }
             return partialViewName;
         }
