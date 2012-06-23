@@ -108,7 +108,7 @@ namespace FormFactory
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
         {
             t => t.FullName,
-            t => t.FullName.Substring(0, t.Assembly.FullName.Length),
+            t => t.FullName.Substring(0, t.Assembly.FullName.Split(',')[0].Length),
             t => t.Name
         };
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
