@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllValidationMessagesHelper.cs" />
+    <Compile Include="ValidationHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
     <Compile Include="Attributes\LabelOnRightAttribute.cs" />
@@ -115,10 +115,17 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.String.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.String.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml">
+      <Link>Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml</Link>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\FormFactory.Templates\Scripts\FormFactory\jquery.validate.unobtrusive.dynamic.js">
+      <Link>Scripts\FormFactory\jquery.validate.unobtrusive.dynamic.js</Link>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\FormFactory.Templates\Scripts\FormFactory\FormFactory.js">
       <Link>Scripts\FormFactory\FormFactory.js</Link>

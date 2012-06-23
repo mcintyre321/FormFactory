@@ -6,6 +6,6 @@
     var stringFormat = isDate ? "d" : "g";
     var behaviour = isDate ? "datepicker" : "datetimepicker";
     var valueAsString = Model.Value is string ? (Model.Value as string) : Model.Value as DateTime? == null ? "" : ((DateTime?)Model.Value).Value.ToString(stringFormat);
-    <input type="text" class="ff-behaviour" data-ff-behaviour="@behaviour" name="@Model.Name" value="@valueAsString" @Model.Readonly() @Model.Disabled() />
+    <input type="text" class="ff-behaviour" data-ff-behaviour="@behaviour" name="@Model.Name" @Model.UnobtrustiveValidation() value="@valueAsString" @Model.Readonly() @Model.Disabled() />
    
 }

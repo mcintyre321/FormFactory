@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -198,6 +199,17 @@ namespace FormFactory
             {
                 propertyVm.Html.RenderPartial("FormFactory/Form.Property", propertyVm);
             }
+        }
+        public static MvcHtmlString ToMvcHtmlString(this IEnumerable<PropertyVm> properties)
+        {
+            var sb = new StringBuilder();
+            foreach (var propertyVm in properties)
+            {
+                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToHtmlString());
+            }
+            var mvcHtmlString = new MvcHtmlString(sb.ToString());
+            return mvcHtmlString;
+
         }
     }
 }
