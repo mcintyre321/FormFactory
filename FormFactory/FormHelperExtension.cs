@@ -85,8 +85,8 @@ namespace FormFactory
         static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property");
-            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable");
+            var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property.");
+            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable.");
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
