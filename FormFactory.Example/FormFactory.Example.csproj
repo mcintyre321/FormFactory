@@ -230,9 +230,6 @@
     <Content Include="Views\Shared\FormFactory\Property.FormFactory.Example.Models.Titles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
