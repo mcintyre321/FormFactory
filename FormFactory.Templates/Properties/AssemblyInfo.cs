@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FormFactory.Templates")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Install this project if you want to edit the FormFactory templates, or if you don't want to use the EmbeddedResourceVirutalPathProvider")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FormFactory.Templates")]
