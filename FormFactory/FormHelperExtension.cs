@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
@@ -84,28 +85,46 @@ namespace FormFactory
         static bool IsNullable<T>(T? t) where T : struct { return true; }
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property");
-            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable");
+            var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property.");
+            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable.");
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
-        public static string BestViewName(this HtmlHelper helper, Type type, string prefix = null, Func<Type, string> getName = null)
+        public static string BestViewName(this HtmlHelper helper, Type type, string prefix = null)
         {
-            return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName);
+            return BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix);
         }
-        public static MvcHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null, Func<Type, string> getName = null)
+        public static MvcHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
         {
-            if (type == null) type = model.GetType() ;
-            return helper.Partial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix, getName), model);
+            if (type == null) type = model.GetType();
+            return helper.Partial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix), model);
+        }
+        public static void RenderBestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
+        {
+            if (type == null) type = model.GetType();
+            helper.RenderPartial(BestViewName(helper.ViewContext.Controller.ControllerContext, type, prefix), model);
+        }
+        
+        public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
+        {
+            t => t.FullName,
+            t => t.Name
+        };
+        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
+        {
+            return SearchPathRules
+                .Select(r => BestViewName(cc, type, prefix, r))
+                    .FirstOrDefault(v => v != null);
         }
 
-        public static string BestViewName(this ControllerContext cc, Type type, string prefix = null, Func<Type, string> getName = null)
+        public static string BestViewName(ControllerContext cc, Type type, string prefix, Func<Type, string> getNameIn)
         {
             if (type == null) return null;
-            getName = getName ?? (t => t.FullName);
+            var getName = getNameIn ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
-            Func<Type, string> getPartialViewName = t => (string.IsNullOrWhiteSpace(prefix) ? "" : (prefix + ".")) + getName(t);
+            Func<Type, string> getPartialViewName =
+                t => prefix + getName(t);
             string partialViewName = getPartialViewName(check);
 
             var engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
@@ -113,7 +132,8 @@ namespace FormFactory
             {
                 check = check.BaseType;
                 partialViewName = getPartialViewName(check);
-                engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName); ;
+                engineResult = ViewEngines.Engines.FindPartialView(cc, partialViewName);
+                ;
             }
 
             if (engineResult.View == null)
@@ -178,6 +198,17 @@ namespace FormFactory
             {
                 propertyVm.Html.RenderPartial("FormFactory/Form.Property", propertyVm);
             }
+        }
+        public static MvcHtmlString ToMvcHtmlString(this IEnumerable<PropertyVm> properties)
+        {
+            var sb = new StringBuilder();
+            foreach (var propertyVm in properties)
+            {
+                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToHtmlString());
+            }
+            var mvcHtmlString = new MvcHtmlString(sb.ToString());
+            return mvcHtmlString;
+
         }
     }
 }

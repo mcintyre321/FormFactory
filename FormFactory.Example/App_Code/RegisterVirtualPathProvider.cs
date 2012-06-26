@@ -8,7 +8,7 @@ namespace FormFactory.Example.App_Code
         {
 			System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(new EmbeddedResourceVirtualPathProvider.Vpp()
             {
-				{typeof(FormFactory.Logger).Assembly}
+				{typeof(FormFactory.Logger).Assembly, @"..\..\FormFactory.Templates"}
             });
         }
     }
