@@ -7,40 +7,39 @@
             @{
                 if (Model.Value != null)
                 {
-                    var i = 0;
-
+                    var id = Guid.NewGuid().ToString();
+                    <input type="hidden" name="@(Model.Name).Index" value="@id"/>
                     foreach (var obj in (IEnumerable<object>)Model.Value)
                     {
                 <li>
                     @{
-                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + "[" + i + "]")
+                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + "[" + id + "]")
                                        {
                                            Value = obj
                                        };
                     }
                     @Html.BestProperty(prop)
-                    @links()</li>
-                        i++;
+                    @Links()</li>
                     }
                 }
             }
-            <li class="ff-not-collection-item"><a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name">
-                <i class="icon-plus"></i>Add</a>
+            <li class="ff-not-collection-item">
+                <a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name"><i class="icon-plus"></i>Add</a>
                 <script type="text/html">
-                        @{
-                            var template =
-                                "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\">" +
-                                Html.PropertiesFor(Activator.CreateInstance(templateType))
-                                    .ToMvcHtmlString() + links() + "</div>";
-                                    @template
-                        }
+                    @{
+                        var template =
+                            "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\">" +
+                            Html.PropertiesFor(Activator.CreateInstance(templateType))
+                                .ToMvcHtmlString() + Links() + "</div>";
+                        @template
+                    }
                 </script>
             </li>
         </ul>
     </div>
     
 }
-@helper links(){
+@helper Links(){
     <a class="btn btn-mini ff-move-up" href="#moveup"><i class="icon-arrow-up"></i>Move
                         Up</a> <a class="btn btn-mini ff-move-down" href="#moveup"><i class="icon-arrow-down">
                         </i>Move Down</a> <a class="btn btn-mini ff-remove-parent btn-danger" href="#remove">
