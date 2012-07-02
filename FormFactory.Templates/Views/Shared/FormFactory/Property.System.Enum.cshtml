@@ -2,16 +2,15 @@
 @model PropertyVm
 @{
     var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
-    
+    var choices = Model.Choices ?? Enum.GetValues(enumType);
 }
 <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
     @if (Nullable.GetUnderlyingType(Model.Type) != null)
     {
         <option value="" @((Model.Value == null).Att("selected"))></option>
     }
-    @foreach (var enumMember in Enum.GetValues(enumType))
+    @foreach (var enumMember in choices)
     {
-
         var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
         <option value="@enumMember.ToString()" @selected.Att("selected")>@enumMember.ToString().Sentencise(true)</option>
     }
