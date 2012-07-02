@@ -10,11 +10,14 @@ namespace FormFactory
 {
     public class FormVm : IDisposable
     {
+        private readonly string _actionName;
+        private readonly string _controllerName;
+
         public FormVm(HtmlHelper html, MethodInfo mi) : this(html)
         {
-            var controllerName = mi.ReflectedType.Name;
-            controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller"));
-            ActionUrl = html.Url().Action(mi.Name, controllerName);
+            this._actionName = mi.Name;
+            var controllerTypeName = mi.ReflectedType.Name;
+            this._controllerName = controllerTypeName.Substring(0, controllerTypeName.LastIndexOf("Controller"));
 
             HtmlHelper = html;
             DisplayName = mi.Name.Sentencise();
@@ -42,7 +45,6 @@ namespace FormFactory
         public FormVm(HtmlHelper html)
         {
             Inputs = new List<PropertyVm>();
-            this.ActionUrl = "";
             this.DisplayName = "";
             this.HtmlHelper = html;
             ShowValidationSummary = true;
@@ -50,7 +52,22 @@ namespace FormFactory
             RenderAntiForgeryToken = Defaults.RenderAntiForgeryToken;
         }
 
-        public string ActionUrl { get; set; }
+        private string _actionUrlOverride;
+        public string ActionUrl
+        {
+            get
+            {
+                return _actionUrlOverride ??
+                       (
+                           UseHttps.HasValue
+                               ? HtmlHelper.Url().Action(_actionName, _controllerName, null,
+                                                         UseHttps.Value ? "https" : "http")
+                               : HtmlHelper.Url().Action(_actionName, _controllerName)
+                       );
+            }
+            set { _actionUrlOverride = value; }
+        }
+
         public IEnumerable<PropertyVm> Inputs { get; set; }
 
         public HtmlHelper HtmlHelper { get; set; }
@@ -63,6 +80,13 @@ namespace FormFactory
         public bool RenderAntiForgeryToken { get; set; }
 
         public string AdditionalClasses { get; set; }
+
+        /// <summary>
+        /// Leave null to remain on current scheme.
+        /// True to force https from http; False to force http from https.
+        /// NOTE: Does not apply if ActionUrl has been explicitly set.
+        /// </summary>
+        public bool? UseHttps { get; set; }
 
         public FormVm Render()
         {

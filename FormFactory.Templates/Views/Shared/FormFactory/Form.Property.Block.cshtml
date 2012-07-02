@@ -4,19 +4,20 @@
 @{
     if (Model.IsHidden)
     {
-<input name="@Model.Name" type="hidden" value="@Model.Value" />
+    <input name="@Model.Name" type="hidden" value="@Model.Value" />
     }
     else
     {
-<div class="control-group @(Html.HasErrors(Model.Name) ? "error" : "")">
-    @if (Model.ShowLabel && !Model.LabelOnRight)
-    {
-        <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
-    }
-    <div class="controls @(Html.HasErrors(Model.Name) ? "error" : "")">
-        @Html.BestProperty(Model)
-        <span class="field-validation-valid" data-valmsg-for="@Model.Name" data-valmsg-replace="true">@Html.AllValidationMessages(Model.Name)</span>
+        var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
+    <div class="control-group @validClass">
+        @if (Model.ShowLabel && !Model.LabelOnRight)
+        {
+            <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
+        }
+        <div class="controls">
+            @Html.BestProperty(Model)
+            <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">@Html.AllValidationMessages(Model.Name)</span>
+        </div>
     </div>
-</div>
     }
 }
