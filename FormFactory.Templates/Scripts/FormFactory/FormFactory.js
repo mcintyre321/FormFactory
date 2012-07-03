@@ -23,13 +23,16 @@ $(document).ready(function () {
                     .not(choices.find(".ff-choices .ff-choice-selector")))
             .attr("disabled", "disabled").each(function () {
                 $("span.[data-valmsg-for='" + $(this).attr("name") + "']").css("display", "none");
-                $.validator.defaults.unhighlight(this);
-
+                if ($.validator) {
+                    $.validator.defaults.unhighlight(this);
+                }
             });
         var myInputs = choiceArea.find(":input").not(choiceArea.find(".ff-choice input"));
         myInputs.attr("disabled", null).each(function () {
             if ($("span[data-valmsg-for='" + $(this).attr("name") + "']").css("display", "").hasClass("field-validation-error")) {
-                $.validator.defaults.highlight(this);
+                if ($.validator) {
+                    $.validator.defaults.highlight(this);
+                }
             }
 
         });
@@ -97,7 +100,7 @@ $.extend(ff.transforms,
     { remove: function ($el) { $el.remove(); } },
     { swap: function ($el1, $el2) {
         $el1.before($el2);
-    } 
+    }
     });
 
 $(document).ready(function () {
@@ -127,10 +130,11 @@ $(document).ready(function () {
         $(newObject).find("[data-valmsg-for]").attr("data-valmsg-for", renumber);
 
         $form.find(":input").val(null);
-        if ($.validator.unobtrusive.parseDynamicContent) {
-            $.validator.unobtrusive.parseDynamicContent(newObject);
+        if ($.validator) {
+            if ($.validator.unobtrusive.parseDynamicContent) {
+                $.validator.unobtrusive.parseDynamicContent(newObject);
+            }
         }
-
         return false;
     }); // end on click
     $(".ff-remove-parent").live("click", function () {
@@ -147,14 +151,14 @@ $(document).ready(function () {
         return false;
     }); // live click
 });
-
-$.validator.setDefaults({
-    highlight: function (element) {
-        $(element).closest(".control-group").addClass("error");
-    },
-    unhighlight: function (element) {
-        $(element).closest(".control-group").removeClass("error");
-    }
-});
-
+if ($.validator) {
+    $.validator.setDefaults({
+        highlight: function (element) {
+            $(element).closest(".control-group").addClass("error");
+        },
+        unhighlight: function (element) {
+            $(element).closest(".control-group").removeClass("error");
+        }
+    });
+}
  
