@@ -66,6 +66,32 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
+            var enumerableType = TypeHelper.GetEnumerableType(this.Type);
+            if (enumerableType != null)
+            {
+                enumerableType = Nullable.GetUnderlyingType(enumerableType) ?? enumerableType;
+                if (enumerableType.IsEnum)
+                {
+                    SetChoicesForEnumType(enumerableType);
+                }
+            }
+        }
+
+        private void SetChoicesForEnumType(Type enumType)
+        {
+            Func<FieldInfo, string> getName = fieldInfo => Enum.GetName(enumType, (int) fieldInfo.GetValue(null));
+            Func<FieldInfo, string> getDisplayName = fieldInfo =>
+                                                         {
+                                                             var attr =
+                                                                 fieldInfo.GetCustomAttributes(
+                                                                     typeof (DisplayAttribute), true).Cast
+                                                                     <DisplayAttribute>().FirstOrDefault();
+                                                             return attr != null ? attr.Name : null;
+                                                         };
+            Func<FieldInfo, string> getLabel = fieldInfo => getDisplayName(fieldInfo) ?? getName(fieldInfo).Sentencise();
+
+            this.Choices = enumType.GetFields(BindingFlags.Static | BindingFlags.GetField |
+                                              BindingFlags.Public).Select(x => new Tuple<string, string>(getName(x), getLabel(x)));
         }
 
         public object Source { get; set; }

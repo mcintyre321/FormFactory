@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TypeHelper.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
@@ -117,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml">
+      <Link>Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml</Link>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />

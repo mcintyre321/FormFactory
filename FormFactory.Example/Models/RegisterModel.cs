@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using FormFactory.Attributes;
@@ -35,6 +36,19 @@ namespace FormFactory.Example.Models
         [Display(Name = "Tell us about yourself")]
         [DataType(DataType.MultilineText)]
         public string AboutYou { get; set; }
+
+        [Required]
+        public IEnumerable<ArtStyles> FavouriteArtStyle { get; set; }
+        public enum ArtStyles
+        {
+            Abstract,
+            ModernArt,
+            [Display(Name = "Flora/fauna")]
+            FloraFauna,
+            [Display(Name = "Urban & Street Art")]
+            UrbanAndStreetArt
+        }
+
 
         public bool RegularCheckBox { get; set; }
 

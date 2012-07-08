@@ -86,7 +86,7 @@ namespace FormFactory
         public static MvcHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
             var viewname = html.ViewContext.Controller.ControllerContext.BestViewName(vm.Type, "FormFactory/Property.");
-            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable.");
+            viewname = viewname ?? html.ViewContext.Controller.ControllerContext.BestViewName(TypeHelper.GetEnumerableType(vm.Type), "FormFactory/Property.IEnumerable.");
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
@@ -143,20 +143,7 @@ namespace FormFactory
             return partialViewName;
         }
 
-        static Type GetEnumerableType(Type type)
-        {
-            var interfaceTypes = type.GetInterfaces().ToList();
-            interfaceTypes.Insert(0, type);
-            foreach (Type intType in interfaceTypes)
-            {
-                if (intType.IsGenericType
-                    && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
-                {
-                    return intType.GetGenericArguments()[0];
-                }
-            }
-            return null;
-        }
+        
     }
 
     public static class ModelHelper
