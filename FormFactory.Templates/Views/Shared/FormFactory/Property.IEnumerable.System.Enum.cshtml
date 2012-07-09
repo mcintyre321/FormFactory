@@ -1,13 +1,13 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
-    var values = (Model.Value != null) ? ((string) Model.Value).Split(',') : new string[0];
+    var values = (Model.Value != null) ? ((string)Model.Value).Split(',') : new string[0];
     var choices = (IEnumerable<Tuple<string, string>>)Model.Choices;
-    
+
     foreach (var choice in choices)
     {
-        <label class="checkbox">
-            <input type="checkbox" value="@choice.Item1" name="@Model.Name" @((values.Contains(choice.Item1)).Att("checked")) />
-            @choice.Item2</label>
+    <label class="checkbox">
+        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @((values.Contains(choice.Item1)).Att("checked")) @Model.Readonly() @Model.Disabled() />
+        @choice.Item2</label>
     }
 }
