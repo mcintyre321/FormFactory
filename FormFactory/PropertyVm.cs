@@ -66,14 +66,12 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
-            var enumerableType = TypeHelper.GetEnumerableType(this.Type);
-            if (enumerableType != null)
+            // check to see if we're dealing with an enum or enumerable of enum
+            var checkType = TypeHelper.GetEnumerableType(this.Type) ?? this.Type;
+            checkType = Nullable.GetUnderlyingType(checkType) ?? checkType;
+            if (checkType.IsEnum)
             {
-                enumerableType = Nullable.GetUnderlyingType(enumerableType) ?? enumerableType;
-                if (enumerableType.IsEnum)
-                {
-                    SetChoicesForEnumType(enumerableType);
-                }
+                SetChoicesForEnumType(checkType);
             }
         }
 
