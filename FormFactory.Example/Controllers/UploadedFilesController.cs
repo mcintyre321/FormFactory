@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Caching;
 using System.Web;
 using System.Web.Mvc;
 using FormFactory.Attributes;
@@ -11,28 +12,29 @@ namespace FormFactory.Example.Controllers
 {
     public class UploadedFilesController : Controller
     {
-        private static string GetAppDataPath(string filePath)
-        {
-            return Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(),
-                                "UploadedFiles\\", filePath);
-        }
+        static readonly MemoryCache Store = new MemoryCache("UploadedFilesStore");
         internal static string UploadFile(HttpPostedFileBase file)
         {
             var filepath = Guid.NewGuid().ToString().Replace("-", "") +
                            "\\" + Path.GetFileName(file.FileName);
-            var storePath = GetAppDataPath(filepath);
-            Directory.CreateDirectory(Path.GetDirectoryName(storePath));
-            file.SaveAs(storePath);
+            //var storePath = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(),
+            //                    "UploadedFiles\\", filepath);
+            //Directory.CreateDirectory(Path.GetDirectoryName(storePath));
+            //file.SaveAs(storePath);
+            Store.Add(filepath, file, DateTimeOffset.Now.AddSeconds(10));
             return "/UploadedFiles?path=" + filepath;
         }
 
         [HttpGet]
-        public FileResult Index(string path)
+        public ActionResult Index(string path)
         {
-            var appDataPath = GetAppDataPath(path);
-            var fileInfo = new FileInfo(appDataPath);
-            // NOTE: this contentType could be wrong; demo purposes only
-            return File(appDataPath, "image/" + fileInfo.Extension.Replace(".", ""));
+            if (Store.Contains(path) && Store[path] is HttpPostedFileBase)
+            {
+                var file = (HttpPostedFileBase) Store[path];
+                // NOTE: this ContentType could be wrong; demo purposes only.
+                return File(file.InputStream, "image/" + file.FileName.Split('.').Last(), file.FileName);
+            }
+            return Content("File has expired from cache");
         }
 
 
