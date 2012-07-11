@@ -7,9 +7,9 @@ namespace FormFactory.Mvc
 {
     internal class UploadedFileModelBinder : IModelBinder
     {
-        private readonly Func<HttpPostedFileBase, string> _doUpload;
+        private readonly Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> _doUpload;
 
-        internal UploadedFileModelBinder(Func<HttpPostedFileBase, string> doUpload)
+        internal UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> doUpload)
         {
             if (doUpload == null)
             {
@@ -24,7 +24,7 @@ namespace FormFactory.Mvc
             var file = request.Files[bindingContext.ModelName];
             if (file != null && file.ContentLength != 0)
             {
-                var url = _doUpload(file);
+                var url = _doUpload(file, controllerContext, bindingContext);
                 return new UploadedFile { Url = url };
             }
             return null;

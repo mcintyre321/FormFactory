@@ -13,14 +13,11 @@ namespace FormFactory.Example.Controllers
     public class UploadedFilesController : Controller
     {
         static readonly MemoryCache Store = new MemoryCache("UploadedFilesStore");
-        internal static string UploadFile(HttpPostedFileBase file)
+        internal static string UploadFile(HttpPostedFileBase file, ControllerContext controllerContext, ModelBindingContext modelBindingContext)
         {
-            var filepath = Guid.NewGuid().ToString().Replace("-", "") +
+            var type = modelBindingContext.ModelMetadata.DataTypeName ?? "Default";
+            var filepath = type + "\\" + Guid.NewGuid().ToString().Replace("-", "") +
                            "\\" + Path.GetFileName(file.FileName);
-            //var storePath = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(),
-            //                    "UploadedFiles\\", filepath);
-            //Directory.CreateDirectory(Path.GetDirectoryName(storePath));
-            //file.SaveAs(storePath);
             Store.Add(filepath, file, DateTimeOffset.Now.AddSeconds(10));
             return "/UploadedFiles?path=" + filepath;
         }

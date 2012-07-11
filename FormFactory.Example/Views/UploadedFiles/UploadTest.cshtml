@@ -20,7 +20,7 @@ public class MvcApplication : System.Web.HttpApplication
     {
         //...
 
-        ModelBinders.Binders.RegisterUploadedFileModelBinder(file => MyFileStore.StoreFile(file));
+        ModelBinders.Binders.RegisterUploadedFileModelBinder((file, controllerContext, modelBindingContext) => MyFileStore.StoreFile(file));
     }
     //...
 }

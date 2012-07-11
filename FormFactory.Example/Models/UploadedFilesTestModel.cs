@@ -11,6 +11,7 @@ namespace FormFactory.Example.Models
     {
         [Required]
         public UploadedFile Image1 { get; set; }
+        [DataType("Artwork")]
         public UploadedFile Image2 { get; set; }
     }
 }
