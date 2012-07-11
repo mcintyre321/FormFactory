@@ -48,8 +48,8 @@ namespace FormFactory.Example.Controllers
             {
                 var results = new UploadedFilesResultModel
                                   {
-                                      Image1Url = model.Image1 != null ? model.Image1.Uri : null,
-                                      Image2Url = model.Image2 != null ? model.Image2.Uri : null
+                                      Image1Url = model.Image1 != null ? model.Image1.Url : null,
+                                      Image2Url = model.Image2 != null ? model.Image2.Url : null
                                   };
                 return View(results);
             }

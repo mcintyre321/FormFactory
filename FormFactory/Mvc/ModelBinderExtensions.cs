@@ -14,7 +14,7 @@ namespace FormFactory.Mvc
         /// 
         /// </summary>
         /// <param name="modelBinders"></param>
-        /// <param name="doUpload">Function or method to take an HttpPostedFileBase, store it somewhere, and return the stored location's uri</param>
+        /// <param name="doUpload">Function or method to take an HttpPostedFileBase, store it somewhere, and return the stored location's url</param>
         public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders, Func<HttpPostedFileBase, string> doUpload)
         {
             modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder(doUpload));

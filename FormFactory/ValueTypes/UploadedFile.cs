@@ -2,6 +2,6 @@ namespace FormFactory.ValueTypes
 {
     public class UploadedFile
     {
-        public string Uri { get; set; }
+        public string Url { get; set; }
     }
 }

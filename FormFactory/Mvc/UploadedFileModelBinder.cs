@@ -24,8 +24,8 @@ namespace FormFactory.Mvc
             var file = request.Files[bindingContext.ModelName];
             if (file != null && file.ContentLength != 0)
             {
-                var uri = _doUpload(file);
-                return new UploadedFile { Uri = uri };
+                var url = _doUpload(file);
+                return new UploadedFile { Url = url };
             }
             return null;
         }
