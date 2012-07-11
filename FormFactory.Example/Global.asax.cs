@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using FormFactory.Example.Controllers;
+using FormFactory.Mvc;
 
 namespace FormFactory.Example
 {
@@ -31,6 +33,8 @@ namespace FormFactory.Example
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+
+            ModelBinders.Binders.RegisterUploadedFileModelBinder(UploadedFilesController.UploadFile);
         }
     }
 }

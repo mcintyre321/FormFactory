@@ -102,6 +102,7 @@
   <ItemGroup>
     <Content Include="Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
