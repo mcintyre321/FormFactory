@@ -170,6 +170,14 @@ namespace FormFactory
                 {
                     inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
                 }
+                else
+                {
+                    var checkType = property.PropertyType.GetUnderlyingFlattenedType();
+                    if (checkType.IsEnum)
+                    {
+                        inputVm.Choices = checkType.GetChoicesForEnumType();
+                    }
+                }
                 PropertyInfo suggestions = properties.SingleOrDefault(p => p.Name == property.Name + "_suggestions");
                 if (suggestions != null)
                 {
