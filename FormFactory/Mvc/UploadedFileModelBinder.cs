@@ -11,11 +11,7 @@ namespace FormFactory.Mvc
 
         internal UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> doUpload)
         {
-            if (doUpload == null)
-            {
-                throw new ArgumentNullException("doUpload");
-            }
-            _doUpload = doUpload;
+            _doUpload = doUpload ?? ((f, c, m) => AppDataFileUploader.Upload(f));
         }
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)

@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mvc\AppDataFileUploader.cs" />
     <Compile Include="Mvc\ModelBinderExtensions.cs" />
     <Compile Include="Mvc\UploadedFileModelBinder.cs" />
     <Compile Include="TypeHelper.cs" />
