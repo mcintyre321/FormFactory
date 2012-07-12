@@ -6,8 +6,12 @@ namespace FormFactory.Mvc
 {
     internal class AppDataFileUploader
     {
-        public static string Upload(HttpPostedFileBase file)
+        public static string Upload(bool modelStateIsValid, HttpPostedFileBase file)
         {
+            if (!modelStateIsValid)
+            {
+                return null;
+            }
             var folder = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(),
                                       "UploadedFiles");
             Directory.CreateDirectory(folder);
