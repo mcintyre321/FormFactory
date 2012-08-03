@@ -24,7 +24,7 @@ namespace FormFactory
             return null;
         }
 
-        internal static IEnumerable<Tuple<string, string>> GetChoicesForEnumType(this Type enumType)
+        internal static IEnumerable<Tuple<object, string>> GetChoicesForEnumType(this Type enumType)
         {
             Func<FieldInfo, string> getName = fieldInfo => Enum.GetName(enumType, (int) fieldInfo.GetValue(null));
             Func<FieldInfo, string> getDisplayName = fieldInfo =>
@@ -38,7 +38,8 @@ namespace FormFactory
             Func<FieldInfo, string> getLabel = fieldInfo => getDisplayName(fieldInfo) ?? getName(fieldInfo).Sentencise();
 
             return enumType.GetFields(BindingFlags.Static | BindingFlags.GetField |
-                                              BindingFlags.Public).Select(x => new Tuple<string, string>(getName(x), getLabel(x)));
+                                              BindingFlags.Public).Select(x => new Tuple<object, string>(x.GetValue(null), getLabel(x)))
+                                              .ToList();
         }
 
         internal static Type GetUnderlyingFlattenedType(this Type type)

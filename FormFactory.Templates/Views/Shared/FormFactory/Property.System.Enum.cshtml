@@ -1,7 +1,7 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
-    var choices = (IEnumerable<Tuple<string, string>>)Model.Choices;
+    var choices = (IEnumerable<Tuple<object, string>>)Model.Choices;
 }
 <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
     @if (Nullable.GetUnderlyingType(Model.Type) != null)
@@ -10,7 +10,7 @@
     }
     @foreach (var choice in choices)
     {
-        var selected = (Model.Value != null && Model.Value.ToString() == choice.Item1);
+        var selected = (Model.Value != null && Model.Value.ToString() == choice.Item1.ToString());
         <option value="@choice.Item1" @selected.Att("selected")>@choice.Item2</option>
     }
 </select>
