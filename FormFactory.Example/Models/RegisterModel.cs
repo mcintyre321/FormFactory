@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
@@ -49,6 +50,11 @@ namespace FormFactory.Example.Models
             UrbanAndStreetArt
         }
 
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+        public DateTime BritishDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime DefaultDate { get; set; }
 
         public bool RegularCheckBox { get; set; }
 
