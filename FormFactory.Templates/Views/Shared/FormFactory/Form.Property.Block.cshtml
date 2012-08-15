@@ -12,7 +12,7 @@
     <div class="control-group @validClass">
         @if (Model.ShowLabel && !Model.LabelOnRight)
         {
-            <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
+            <label class="control-label" for="@Model.Id">@Model.DisplayName()</label>
         }
         <div class="controls">
             @Html.BestProperty(Model)

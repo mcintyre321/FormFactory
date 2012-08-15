@@ -4,18 +4,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web.Mvc;
+using System.Web.Security;
 using FormFactory.Attributes;
 
 namespace FormFactory
 {
-    public class PropertyVm
+    public class PropertyVm : IHasDisplayName
     {
         static PropertyVm()
         {
-            TypeSlug = t => t.AssemblyQualifiedName;
+            TypeSlug = t => MachineKey.Encode(Encoding.UTF7.GetBytes(t.AssemblyQualifiedName), MachineKeyProtection.All);
         }
-
+         
 
         //this property is used to render the Type of an object choice
         public static Func<Type, string> TypeSlug { get; set; }

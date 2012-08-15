@@ -12,6 +12,6 @@
     @foreach (var enumMember in choices)
     {
         var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
-        <option value="@enumMember.ToString()" @selected.Att("selected")>@enumMember.ToString().Sentencise(true)</option>
+        <option value="@enumMember.ToString()" @selected.Att("selected")>@enumMember.DisplayName(true)</option>
     }
 </select>

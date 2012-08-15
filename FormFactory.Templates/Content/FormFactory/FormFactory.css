@@ -65,3 +65,7 @@ li.ff-choice-area > div
 {
     padding-left: 20px;
 }
+
+div.radio-block {
+    display: inline-block;
+}

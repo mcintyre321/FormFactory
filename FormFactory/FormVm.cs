@@ -8,7 +8,7 @@ using FormFactory.Attributes;
 
 namespace FormFactory
 {
-    public class FormVm : IDisposable
+    public class FormVm : IDisposable, IHasDisplayName
     {
         private readonly string _actionName;
         private readonly string _controllerName;
@@ -20,7 +20,6 @@ namespace FormFactory
             this._controllerName = controllerTypeName.Substring(0, controllerTypeName.LastIndexOf("Controller"));
 
             HtmlHelper = html;
-            DisplayName = mi.Name.Sentencise();
 
             var inputs = new List<PropertyVm>();
 
