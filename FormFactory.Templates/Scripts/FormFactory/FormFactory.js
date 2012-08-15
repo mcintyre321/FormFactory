@@ -77,7 +77,17 @@ $.extend(ff.behaviours, {},
     {
         datepicker: function (t) {
             if (!$(t).hasClass("hasDatepicker") && $.datepicker) {
-                $(t).datepicker({ showOn: "focus" }).focus();
+                // TODO: a more comprehensive switch of .NET to jQuery formats. REF: http://docs.jquery.com/UI/Datepicker/formatDate
+                var format = $(t).data("ff-format");
+                switch (format) {
+                    case "dd MMM yyyy":
+                        format = "dd M yy";
+                        break;
+                    case "dd/MM/yyyy":
+                        format = "dd/mm/yy";
+                        break;
+                }
+                $(t).datepicker({ showOn: "focus", dateFormat: format }).focus();
                 return true;
             }
             return false;

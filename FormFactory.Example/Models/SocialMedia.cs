@@ -13,7 +13,7 @@ namespace FormFactory.Example.Models
         public SocialMediaType SocialMediaType { get; set; }   
         public IEnumerable<SocialMediaType> SocialMediaType_choices()
         {
-            yield return SocialMediaType is Twitter ? SocialMediaType.Selected() : new Twitter();
+            yield return (SocialMediaType is Twitter ? SocialMediaType.Selected() : new Twitter()).DisplayName("Twitter for me");
             yield return SocialMediaType is Facebook ? SocialMediaType.Selected() : new Facebook();
 
         }

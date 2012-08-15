@@ -48,7 +48,12 @@ namespace FormFactory.Example.Controllers
         public ActionResult Register(string returnUrl)
         {
             ViewData["returnUrl"] = returnUrl;
-            return View();
+            var model = new RegisterModel
+                            {
+                                BritishDate = DateTime.Today, 
+                                DefaultDate = DateTime.Today
+                            };
+            return View(model);
         }
 
         [HttpPost]

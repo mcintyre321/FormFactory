@@ -1,17 +1,16 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
-    var enumType = Nullable.GetUnderlyingType(Model.Type) ?? Model.Type;
-    var choices = Model.Choices ?? Enum.GetValues(enumType);
+    var choices = (IEnumerable<Tuple<object, string>>)Model.Choices;
 }
 <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
     @if (Nullable.GetUnderlyingType(Model.Type) != null)
     {
         <option value="" @((Model.Value == null).Att("selected"))></option>
     }
-    @foreach (var enumMember in choices)
+    @foreach (var choice in choices)
     {
-        var selected = (Model.Value != null && Model.Value.ToString() == enumMember.ToString());
-        <option value="@enumMember.ToString()" @selected.Att("selected")>@enumMember.DisplayName(true)</option>
+        var selected = (Model.Value != null && Model.Value.ToString() == choice.Item1.ToString());
+        <option value="@choice.Item1" @selected.Att("selected")>@choice.Item2</option>
     }
 </select>

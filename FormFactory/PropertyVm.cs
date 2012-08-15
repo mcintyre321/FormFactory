@@ -42,6 +42,13 @@ namespace FormFactory
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
+
+            // check to see if we're dealing with an enum or enumerable of enum
+            var checkType = this.Type.GetUnderlyingFlattenedType();
+            if (checkType.IsEnum)
+            {
+                this.Choices = checkType.GetChoicesForEnumType();
+            }
         }
         public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
@@ -68,6 +75,12 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
+            // check to see if we're dealing with an enum or enumerable of enum
+            var checkType = this.Type.GetUnderlyingFlattenedType();
+            if (checkType.IsEnum)
+            {
+                this.Choices = checkType.GetChoicesForEnumType();
+            }
         }
 
         public object Source { get; set; }

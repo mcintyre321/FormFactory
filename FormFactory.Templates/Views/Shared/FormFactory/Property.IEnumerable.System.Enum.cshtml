@@ -1,0 +1,25 @@
+﻿@using System.Collections
+@using System.Collections.Generic;
+@using System.Reflection
+@using FormFactory
+@model PropertyVm
+@{
+    IList objectList = new object[0];
+    if (Model.Value as IEnumerable != null)
+    {
+        objectList = (IList) Activator.CreateInstance(typeof (List<>).MakeGenericType(Model.Type.GetGenericArguments()[0]));
+        foreach (var v in ((IEnumerable) Model.Value))
+        {
+            objectList.Add(v);
+        }
+    }
+
+    var choices = (IEnumerable<Tuple<object, string>>)Model.Choices;
+
+    foreach (var choice in choices)
+    {
+    <label class="checkbox">
+        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @((objectList.Contains(choice.Item1)).Att("checked")) @Model.Readonly() @Model.Disabled() />
+        @choice.Item2</label>
+    }
+}
