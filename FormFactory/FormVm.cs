@@ -38,7 +38,7 @@ namespace FormFactory
             }
 
             Inputs = inputs;
-
+            this.DisplayName = mi.Name.Sentencise(true);
             ExcludePropertyErrorsFromValidationSummary = true;
         }
         public FormVm(HtmlHelper html)
