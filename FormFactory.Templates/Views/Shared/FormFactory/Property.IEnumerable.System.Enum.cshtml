@@ -7,7 +7,7 @@
     IList objectList = new object[0];
     if (Model.Value as IEnumerable != null)
     {
-        objectList = (IList) Activator.CreateInstance(typeof (List<>).MakeGenericType(Model.Type.GetGenericArguments()[0]));
+        objectList = new ArrayList();
         foreach (var v in ((IEnumerable) Model.Value))
         {
             objectList.Add(v);
