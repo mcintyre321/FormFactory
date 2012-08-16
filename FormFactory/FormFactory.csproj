@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="DisplayNameExtension.cs" />
     <Compile Include="Mvc\PolymorphicModelBinder.cs" />
-    <Compile Include="Mvc\AppDataFileUploader.cs" />
+    <Compile Include="Mvc\SimpleAppDataFileUploader.cs" />
     <Compile Include="Mvc\ModelBinderExtensions.cs" />
     <Compile Include="Mvc\UploadedFileModelBinder.cs" />
     <Compile Include="TypeHelper.cs" />

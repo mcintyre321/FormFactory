@@ -4,16 +4,15 @@ using System.Web;
 
 namespace FormFactory.Mvc
 {
-    internal class AppDataFileUploader
+    internal class SimpleAppDataFileUploader
     {
-        public static string Upload(bool modelStateIsValid, HttpPostedFileBase file)
+        public static string DoSave(bool modelStateIsValid, HttpPostedFileBase file)
         {
             if (!modelStateIsValid)
             {
                 return null;
             }
-            var folder = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(),
-                                      "UploadedFiles");
+            var folder = Path.Combine(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "UploadedFiles");
             Directory.CreateDirectory(folder);
 
             int offset = 0;

@@ -2,6 +2,9 @@ namespace FormFactory.ValueTypes
 {
     public class UploadedFile
     {
-        public string Url { get; set; }
+        public string ContentType { get; set; }
+        public string Id { get; set; }
+        public int ContentLength { get; set; }
+        public string FileName { get; set; }
     }
 }

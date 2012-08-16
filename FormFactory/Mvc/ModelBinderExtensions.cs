@@ -18,7 +18,7 @@ namespace FormFactory.Mvc
         /// Optional: leave blank to store in default DataDirectory.</param>
         public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders, Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> doUpload = null)
         {
-            modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder(doUpload));
+            modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder<UploadedFile>(doUpload));
         }
     }
 }
