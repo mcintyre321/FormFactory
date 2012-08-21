@@ -22,19 +22,10 @@ namespace FormFactory.Mvc
             {
                 return _doSave(file, controllerContext, bindingContext);
             }
-            if (request.Params[bindingContext.ModelName + ".Id"] != null)
+            var model = ModelBinders.Binders.DefaultBinder.BindModel(controllerContext, bindingContext) as TUploadedFile;
+            if (model != null)
             {
-                // TODO: better model binding? bindingContext.ValueProvider.GetValue(bindingContext.ModelName) returns null..
-                int contentLength;
-                int.TryParse(request.Params[bindingContext.ModelName + ".ContentLength"], out contentLength);
-                return new TUploadedFile
-                           {
-                               Id = request.Params[bindingContext.ModelName + ".Id"],
-                               ContentLength = contentLength,
-                               ContentType = request.Params[bindingContext.ModelName + ".ContentType"],
-                               FileName = request.Params[bindingContext.ModelName + ".FileName"],
-                               Uri = request.Params[bindingContext.ModelName + ".Uri"],
-                           };
+                return model;
             }
             return null;
         }

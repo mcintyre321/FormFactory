@@ -25,7 +25,7 @@ namespace FormFactory.Example.Controllers
                            ContentLength = file.ContentLength,
                            ContentType = file.ContentType,
                            FileName = file.FileName,
-                           Uri = "/UploadedFiles?path=" + filepath
+                           Id = "/UploadedFiles?path=" + filepath
                        };
         }
 
@@ -54,8 +54,8 @@ namespace FormFactory.Example.Controllers
             {
                 var results = new UploadedFilesResultModel
                                   {
-                                      Image1Url = model.Image1 != null ? model.Image1.Uri : null,
-                                      Image2Url = model.Image2 != null ? model.Image2.Uri : null
+                                      Image1Url = model.Image1 != null ? model.Image1.Id : null,
+                                      Image2Url = model.Image2 != null ? model.Image2.Id : null
                                   };
                 return View(results);
             }
