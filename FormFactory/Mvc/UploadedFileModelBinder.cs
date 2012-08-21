@@ -26,13 +26,14 @@ namespace FormFactory.Mvc
             {
                 // TODO: better model binding? bindingContext.ValueProvider.GetValue(bindingContext.ModelName) returns null..
                 int contentLength;
-                int.TryParse(request.Params[bindingContext.ModelName + ".Id"], out contentLength);
+                int.TryParse(request.Params[bindingContext.ModelName + ".ContentLength"], out contentLength);
                 return new TUploadedFile
                            {
                                Id = request.Params[bindingContext.ModelName + ".Id"],
                                ContentLength = contentLength,
                                ContentType = request.Params[bindingContext.ModelName + ".ContentType"],
                                FileName = request.Params[bindingContext.ModelName + ".FileName"],
+                               Uri = request.Params[bindingContext.ModelName + ".Uri"],
                            };
             }
             return null;
