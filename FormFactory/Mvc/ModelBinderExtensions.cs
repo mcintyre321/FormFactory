@@ -16,9 +16,21 @@ namespace FormFactory.Mvc
         /// <param name="modelBinders"></param>
         /// <param name="doUpload">Function or method to take an HttpPostedFileBase, store it somewhere, and return the stored location's url.
         /// Optional: leave blank to store in default DataDirectory.</param>
-        public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders, Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> doUpload = null)
+        public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders, Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, UploadedFile> doUpload = null)
         {
-            modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder<UploadedFile>(doUpload));
+            RegisterUploadedFileModelBinder<UploadedFile>(modelBinders, doUpload);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBinders"></param>
+        /// <param name="doUpload">Function or method to take an HttpPostedFileBase, store it somewhere, and return the stored location's url.
+        /// Optional: leave blank to store in default DataDirectory.</param>
+        public static void RegisterUploadedFileModelBinder<TUploadedFile>(this ModelBinderDictionary modelBinders, Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> doUpload = null)
+                where TUploadedFile : UploadedFile, new()
+        {
+            modelBinders.Add(typeof(TUploadedFile), new UploadedFileModelBinder<TUploadedFile>(doUpload));
         }
     }
 }

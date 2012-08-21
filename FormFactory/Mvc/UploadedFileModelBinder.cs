@@ -7,11 +7,11 @@ namespace FormFactory.Mvc
 {
     internal class UploadedFileModelBinder<TUploadedFile> : IModelBinder where TUploadedFile : UploadedFile, new()
     {
-        private readonly Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> _doSave;
+        private readonly Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> _doSave;
 
-        internal UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, string> doSave)
+        internal UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> doSave)
         {
-            _doSave = doSave ?? ((f, c, m) => SimpleAppDataFileUploader.DoSave(m.ModelState.IsValid, f));
+            _doSave = doSave ?? ((f, c, m) => SimpleAppDataFileUploader.DoSave<TUploadedFile>(m.ModelState.IsValid, f));
         }
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
@@ -20,14 +20,7 @@ namespace FormFactory.Mvc
             var file = request.Files[bindingContext.ModelName];
             if (file != null && file.ContentLength != 0)
             {
-                var idFromSaveFunction = _doSave(file, controllerContext, bindingContext);
-                return new TUploadedFile
-                {
-                    Id = idFromSaveFunction,
-                    ContentLength = file.ContentLength,
-                    ContentType = file.ContentType,
-                    FileName = file.FileName,
-                };
+                return _doSave(file, controllerContext, bindingContext);
             }
             if (request.Params[bindingContext.ModelName + ".Id"] != null)
             {
