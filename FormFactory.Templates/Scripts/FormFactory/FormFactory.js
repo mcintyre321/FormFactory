@@ -118,21 +118,24 @@ $(document).ready(function () {
     }
     $(".ff-add-item").live("click", function (e) {
         var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()).text());
+
         var modelName = $(this).data("modelname");
+        var newObject = $('<li>').append($form.children().clone());
+
+
+        var newIndex = newId(); // $(this).closest("ul").children().length - 1;
         var renumber = function (index, attr) {
             if (!attr) return attr;
             return modelName + "[" + newIndex + "]." + attr;
         };
 
-        var newObject = $('<li>').append($form.children().clone());
-
-
-        var newIndex = newId(); // $(this).closest("ul").children().length - 1;
 
 
         $(newObject).insertBefore($(this).closest(".ff-collection").find("> ul").children().last());
 
         $(":input", newObject).attr("name", renumber).attr("id", renumber);
+        $("input[type='hidden']", newObject).first().attr("name", modelName + ".Index").val(newIndex);
+
         $(newObject).find("[data-valmsg-for]").attr("data-valmsg-for", renumber);
 
         $form.find(":input").val(null);

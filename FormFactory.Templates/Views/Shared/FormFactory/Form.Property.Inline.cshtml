@@ -4,7 +4,7 @@
 @{
     if (Model.IsHidden)
     {
-<input name="@Model.Name" type="hidden" value="@Model.Value" />
+        <div style="display: none">@Html.BestProperty(Model)</div>
     }
     else
     {
