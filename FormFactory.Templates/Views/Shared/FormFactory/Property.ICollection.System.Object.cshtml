@@ -32,7 +32,7 @@
                 <script type="text/html">
                     @{
                         var template =
-                            "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\">" +
+                            "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\"><input type='hidden' name='' value='' />" +
                             Html.PropertiesFor(Activator.CreateInstance(templateType))
                                 .ToMvcHtmlString() + Links() + "</div>";
                         @template
