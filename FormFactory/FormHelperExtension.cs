@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -155,6 +156,12 @@ namespace FormFactory
         public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type fallbackModelType)
         {
             var type = model != null ? model.GetType() : fallbackModelType;
+
+            var typeVm = new PropertyVm(helper, typeof(string), "__type");
+            typeVm.IsHidden = true;
+
+            typeVm.Value = PropertyVm.TypeSlug(type);
+            yield return typeVm;
             var properties = type.GetProperties();
 
             foreach (var property in properties)

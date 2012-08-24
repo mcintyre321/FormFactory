@@ -59,11 +59,6 @@
 
                                     <div class="ff-choice-name">@(obj == null ? "None" : choice.name)</div>
                                 }
-                                @if (PropertyVm.TypeSlug != null)
-                                {
-
-                                    <input type="hidden" name="@(Model.Name).__type" @(isDisabled.Att("disabled")) value="@(PropertyVm.TypeSlug((obj == null ? Model.Type : obj.GetType())))"/>
-                                }
                                 @{ choice.properties.Each(p => p.Disabled |= isDisabled).Render(); }
                             </div>
                         </div>
