@@ -43,12 +43,12 @@ namespace FormFactory.Mvc
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             var typeSlug = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + ".__type");
-            if (typeSlug != null && !string.IsNullOrWhiteSpace(typeSlug.AttemptedValue as string))
+            if (typeSlug != null)
             {
-                var concreteModelTypeName = Encoding.UTF7.GetString(MachineKey.Decode((string)typeSlug.AttemptedValue, MachineKeyProtection.All));
-                var type = Type.GetType(concreteModelTypeName);
-                if (type != null && bindingContext.ModelType.IsAssignableFrom(type))
+                var value = typeSlug.AttemptedValue as string;
+                if (!string.IsNullOrWhiteSpace(value))
                 {
+                    var type = ReadTypeFromString(value);
                     var instance = Activator.CreateInstance(type);
                     bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => instance, type);
                     base.BindModel(controllerContext, bindingContext);
