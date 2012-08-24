@@ -2,25 +2,28 @@
 @model PropertyVm
 @{
     var templateType = Model.Type.GetGenericArguments()[0];
-    var id = Guid.NewGuid().ToString();
     
     <div class="ff-collection">
-        <input type="hidden" name="@(Model.Name).Index" value="@id"/>
+        
         <ul>
             @{
                 if (Model.Value != null)
                 {
                     foreach (var obj in (IEnumerable<object>)Model.Value)
                     {
-                <li>
-                    @{
-                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + "[" + id + "]")
-                        {
-                            Value = obj
-                        };
-                    }
-                    @Html.BestProperty(prop)
-                    @Links()</li>
+                        var id = Guid.NewGuid().ToString();
+                        
+                        <li>
+                            <input type="hidden" name="@(Model.Name).Index" value="@id" />
+                            @{
+                                var prop = new PropertyVm(Html, obj.GetType(), Model.Name + "[" + id + "]")
+                                {
+                                    Value = obj
+                                };
+                            }
+                            @Html.BestProperty(prop)
+                            @Links()
+                        </li>
                     }
                 }
             }
