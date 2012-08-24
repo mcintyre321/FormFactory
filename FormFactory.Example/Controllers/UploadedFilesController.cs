@@ -7,19 +7,26 @@ using System.Web;
 using System.Web.Mvc;
 using FormFactory.Attributes;
 using FormFactory.Example.Models;
+using FormFactory.ValueTypes;
 
 namespace FormFactory.Example.Controllers
 {
     public class UploadedFilesController : Controller
     {
         static readonly MemoryCache Store = new MemoryCache("UploadedFilesStore");
-        internal static string UploadFile(HttpPostedFileBase file, ControllerContext controllerContext, ModelBindingContext modelBindingContext)
+        internal static UploadedFile UploadFile(HttpPostedFileBase file, ControllerContext controllerContext, ModelBindingContext modelBindingContext)
         {
             var type = modelBindingContext.ModelMetadata.DataTypeName ?? "Default";
             var filepath = type + "\\" + Guid.NewGuid().ToString().Replace("-", "") +
                            "\\" + Path.GetFileName(file.FileName);
             Store.Add(filepath, file, DateTimeOffset.Now.AddSeconds(10));
-            return "/UploadedFiles?path=" + filepath;
+            return new UploadedFile
+                       {
+                           ContentLength = file.ContentLength,
+                           ContentType = file.ContentType,
+                           FileName = file.FileName,
+                           Id = "/UploadedFiles?path=" + filepath
+                       };
         }
 
         [HttpGet]

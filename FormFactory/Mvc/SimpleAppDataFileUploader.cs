@@ -1,12 +1,14 @@
 using System;
 using System.IO;
 using System.Web;
+using FormFactory.ValueTypes;
 
 namespace FormFactory.Mvc
 {
     internal class SimpleAppDataFileUploader
     {
-        public static string DoSave(bool modelStateIsValid, HttpPostedFileBase file)
+        public static TUploadedFile DoSave<TUploadedFile>(bool modelStateIsValid, HttpPostedFileBase file)
+            where TUploadedFile : UploadedFile, new()
         {
             if (!modelStateIsValid)
             {
@@ -24,7 +26,13 @@ namespace FormFactory.Mvc
             } while (File.Exists(filePath));
             
             file.SaveAs(filePath);
-            return filePath;
+            return new TUploadedFile
+                       {
+                           Id = filePath,
+                           ContentLength = file.ContentLength,
+                           ContentType = file.ContentType,
+                           FileName = file.FileName
+                       };
         }
         static string GetOffsetFileName(string fileName, int offset)
         {
