@@ -8,6 +8,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 using FormFactory.Attributes;
+using FormFactory.Mvc;
 
 namespace FormFactory
 {
@@ -15,12 +16,9 @@ namespace FormFactory
     {
         static PropertyVm()
         {
-            TypeSlug = t => MachineKey.Encode(Encoding.UTF7.GetBytes(t.AssemblyQualifiedName), MachineKeyProtection.All);
         }
          
 
-        //this property is used to render the Type of an object choice
-        public static Func<Type, string> TypeSlug { get; set; }
 
         public PropertyVm(ParameterInfo pi, HtmlHelper html)
             : this(html, pi.ParameterType, pi.Name)

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using FormFactory.Mvc;
 
 namespace FormFactory
 {
@@ -160,7 +161,7 @@ namespace FormFactory
             var typeVm = new PropertyVm(helper, typeof(string), "__type");
             typeVm.IsHidden = true;
 
-            typeVm.Value = PropertyVm.TypeSlug(type);
+            typeVm.Value = PolymorphicModelBinder.WriteTypeToString(type);
             yield return typeVm;
             var properties = type.GetProperties();
 

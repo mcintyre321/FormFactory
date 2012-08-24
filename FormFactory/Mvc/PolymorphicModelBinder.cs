@@ -9,18 +9,28 @@ namespace FormFactory.Mvc
 {
     public class PolymorphicModelBinder : DefaultModelBinder
     {
+        public static Func<Type, string> WriteTypeToString =
+            t => MachineKey.Encode(Encoding.UTF7.GetBytes(t.AssemblyQualifiedName), MachineKeyProtection.All);
+        public static Func<string, Type> ReadTypeFromString = 
+            s => Type.GetType(Encoding.UTF7.GetString(MachineKey.Decode(s, MachineKeyProtection.All)));
+
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
             var typeSlug = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + ".__type");
-            if (typeSlug != null && !string.IsNullOrWhiteSpace(typeSlug.AttemptedValue as string))
+            if (typeSlug != null)
             {
-                var concreteModelTypeName = Encoding.UTF7.GetString(MachineKey.Decode((string) typeSlug.AttemptedValue, MachineKeyProtection.All));
-                var type = Type.GetType(concreteModelTypeName);
-                if (type != null && modelType.IsAssignableFrom(type))
+                var value = typeSlug.AttemptedValue as string;
+                if (!string.IsNullOrWhiteSpace(value))
                 {
-                    var instance = base.CreateModel(controllerContext, bindingContext, type);
-                    bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => instance, type);
-                    return instance;
+                    var type = ReadTypeFromString(value);
+                    if (type != null && modelType.IsAssignableFrom(type))
+                    {
+                        var instance = base.CreateModel(controllerContext, bindingContext, type);
+                        bindingContext.ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                                                                                                         () => instance,
+                                                                                                         type);
+                        return instance;
+                    }
                 }
             }
             return base.CreateModel(controllerContext, bindingContext, modelType);
