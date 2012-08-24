@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
 
-    $(".ff-choices input.ff-choice-selector:!checked").live("change", function () { //unchecked choice radios
+    $(".ff-choices input.ff-choice-selector:not(:checked)").live("change", function () { //unchecked choice radios
         var choiceArea = $(this).closest(".ff-choice");
         var choices = choiceArea.closest(".ff-choices");
         choices
