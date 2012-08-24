@@ -57,8 +57,8 @@ namespace FormFactory.Example.Models
         public ContactMethod ContactMethod { get; set; }
         public IEnumerable<ContactMethod> ContactMethod_choices()
         {
-            yield return null as ContactMethod;
-            yield return new SocialMedia() .Selected();
+            yield return new NoContactMethod();
+            yield return new SocialMedia().Selected();
             yield return new PhoneContactMethod();
 
         }

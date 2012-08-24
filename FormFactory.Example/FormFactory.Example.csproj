@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UploadedFilesController.cs" />
+    <Compile Include="Models\NoContactMethod.cs" />
     <Compile Include="Models\UploadedFilesResultModel.cs" />
     <Compile Include="Models\UploadedFilesTestModel.cs" />
     <Content Include="App_Code\RegisterVirtualPathProvider.cs" />
