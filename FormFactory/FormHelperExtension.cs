@@ -110,6 +110,7 @@ namespace FormFactory
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
         {
             t => t.FullName,
+            t => t.FullName.StartsWith(t.Assembly.GetName().Name + ".") ? t.FullName.Substring(t.Assembly.GetName().Name.Length + 1) : t.FullName,
             t => t.Name
         };
         public static string BestViewName(this ControllerContext cc, Type type, string prefix = null)
