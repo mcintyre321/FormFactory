@@ -131,9 +131,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml</Link>
     </EmbeddedResource>
-    <None Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml">
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml</Link>
-    </None>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
