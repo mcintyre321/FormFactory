@@ -24,11 +24,18 @@ namespace FormFactory
             (type, o, tc) => lookup.GetValue(o, t => null),
             (type, o, tc) => o is IHasDisplayName ? ((IHasDisplayName) o).DisplayName : null,
             (type, o, tc) => o is IHasName ? ((IHasName) o).Name.Sentencise(tc): null,
+            (type, o, tc) => o is Enum ? GetNameFromDisplayAttribute(o): null,
             (type, o, tc) => o is Enum ? (o.ToString()).Sentencise(tc): null,
             (type, o, tc) => o is Type ? (((Type)o).Name).Sentencise(tc): null,
             (type, o, tc) => o.GetType().Name.Sentencise(tc)
         };
-        
+
+        private static string GetNameFromDisplayAttribute(object enumValue)
+        {
+            if (enumValue == null) return "";
+            return enumValue.GetType().GetChoicesForEnumType().Single(t => t.Item2 == enumValue).Item1;
+        }
+
         public static string DisplayName<T>(this T o, bool titleCase = false)
         {
             return Rules.Select(r => r(typeof(T), o, titleCase)).FirstOrDefault(displayName => displayName != null);
