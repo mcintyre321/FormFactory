@@ -17,8 +17,6 @@ namespace FormFactory
         static PropertyVm()
         {
         }
-         
-
 
         public PropertyVm(ParameterInfo pi, HtmlHelper html)
             : this(html, pi.ParameterType, pi.Name)
@@ -62,8 +60,7 @@ namespace FormFactory
                 Value = pi.GetValue(html.ViewData.Model, new object[0]);
             }
             Readonly = !true;
-            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
-                .Any(x => x.CustomDataType == "Hidden");
+            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
             PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
@@ -81,6 +78,7 @@ namespace FormFactory
             }
         }
 
+        public IDictionary<string, string> DataAttributes { get; private set; }
         public object Source { get; set; }
         public PropertyVm(object model, PropertyInfo pi, HtmlHelper html) :
             this(html, pi.PropertyType, pi.Name)
@@ -124,13 +122,14 @@ namespace FormFactory
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
+            DataAttributes = new Dictionary<string, string>();
         }
 
         public PropertyVm(HtmlHelper html, Type type, string name)
         {
             Type = type;
             Name = name;
-            GetId = () => Name.Replace(".", "_");
+            Id = Guid.NewGuid().ToString();
 
             ModelState modelState;
             if (html.ViewData.ModelState.TryGetValue(name, out modelState))
@@ -146,12 +145,7 @@ namespace FormFactory
 
         protected internal HtmlHelper Html { get; set; }
 
-        public Func<string> GetId { private get; set; }
-        public string Id
-        {
-            get { return GetId(); }
-            set { GetId = () => value; }
-        }
+        public string Id { get; private set; }
         public Type Type { get; set; }
         public string Name { get; set; }
         public string DisplayName { get; set; }
@@ -173,9 +167,7 @@ namespace FormFactory
         public bool LabelOnRight { get; set; }
         public string PlaceholderText { get; set; }
     }
-
-
-
+    
     static class Extensions
     {
         public static U Maybe<T, U>(this T t, Func<T, U> f) where T : class

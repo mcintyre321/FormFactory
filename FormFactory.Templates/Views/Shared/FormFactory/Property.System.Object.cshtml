@@ -72,6 +72,5 @@
 }
 else
 {
-    Html.PropertiesFor(Model.Value, Model.Type)
-        .Each(p => p.Name = Model.Name == null ? p.Name : Model.Name + "." + p.Name).Render();
+    Html.PropertiesFor(Model.Value, Model.Type).Each(p => p.Name = Model.Name == null ? p.Name : Model.Name + "." + p.Name).Render();
 }

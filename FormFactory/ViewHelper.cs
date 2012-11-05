@@ -13,19 +13,31 @@ namespace FormFactory
         {
             return new MvcHtmlString(value ? output : "");
         }
-
-        public static HtmlString Disabled(this PropertyVm vm)
+        public static IHtmlString InputAtts(this PropertyVm vm)
+        {
+            return new HtmlString(string.Join(" ", new string[]{vm.Disabled().ToHtmlString(), vm.Readonly().ToHtmlString(), vm.DataAtts().ToHtmlString()}));
+        }
+        public static IHtmlString Disabled(this PropertyVm vm)
         {
             return vm.Disabled.Att("disabled");
         }
-        public static MvcHtmlString Readonly(this PropertyVm vm)
+        public static IHtmlString Readonly(this PropertyVm vm)
         {
             return vm.Readonly.Att("readonly");
         }
+        public static IHtmlString DataAtts(this PropertyVm vm)
+        {
+            var sb = new StringBuilder();
+            foreach (var att in vm.DataAttributes)
+            {
+                sb.Append("data-" + att.Key + "='" + att.Value + "' ");
+            }
+            return new MvcHtmlString(sb.ToString());
+        }
+
         public static MvcHtmlString Att(this bool value, string att, string attValue = null)
         {
             return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
         }
-
     }
 }
