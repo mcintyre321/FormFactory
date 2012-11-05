@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,22 +25,32 @@ namespace FormFactory
             return null;
         }
 
-        public static IEnumerable<Tuple<object, string>> GetChoicesForEnumType(this Type enumType)
+        static ConcurrentDictionary<Type, IEnumerable<Tuple<string, object>>> enumChoices = new ConcurrentDictionary<Type, IEnumerable<Tuple<string, object>>>();
+        public static IEnumerable<Tuple<string, object>> GetChoicesForEnumType(this Type inType)
         {
-            Func<FieldInfo, string> getName = fieldInfo => Enum.GetName(enumType, (int) fieldInfo.GetValue(null));
-            Func<FieldInfo, string> getDisplayName = fieldInfo =>
-                                                         {
-                                                             var attr =
-                                                                 fieldInfo.GetCustomAttributes(
-                                                                     typeof (DisplayAttribute), true).Cast
-                                                                     <DisplayAttribute>().FirstOrDefault();
-                                                             return attr != null ? attr.Name : null;
-                                                         };
-            Func<FieldInfo, string> getLabel = fieldInfo => getDisplayName(fieldInfo) ?? getName(fieldInfo).Sentencise();
-
-            return enumType.GetFields(BindingFlags.Static | BindingFlags.GetField |
-                                              BindingFlags.Public).Select(x => new Tuple<object, string>(x.GetValue(null), getLabel(x)))
-                                              .ToList();
+            var underlyingType = Nullable.GetUnderlyingType(inType);
+            if (underlyingType == null) yield return Tuple.Create("", "" as object);
+            var enumType = underlyingType ?? inType;
+            var choices = enumChoices.GetOrAdd(enumType, t =>
+            {
+                Func<FieldInfo, string> getName = fieldInfo => Enum.GetName(enumType, (int) fieldInfo.GetValue(null));
+                Func<FieldInfo, string> getDisplayName = fieldInfo =>
+                {
+                    var attr =
+                        fieldInfo.GetCustomAttributes(typeof (DisplayAttribute), true).Cast<DisplayAttribute>().
+                            FirstOrDefault();
+                    return attr != null ? attr.Name : null;
+                };
+                Func<FieldInfo, string> getLabel =
+                    fieldInfo => getDisplayName(fieldInfo) ?? getName(fieldInfo).Sentencise();
+                return enumType.GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                    .Select(x => Tuple.Create(getLabel(x), x.GetValue(null))).ToList().Select(f => f);
+            });
+            foreach (var field in choices)
+            {
+                yield return field;
+            }
+            
         }
 
         public static Type GetUnderlyingFlattenedType(this Type type)

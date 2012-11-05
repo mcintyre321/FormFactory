@@ -1,8 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace FormFactory.Example.Models
 {
     public enum Position
     {
         Contractor,
-        SeniorSubcontractor
+        [Display(Name = "Senior Subcontractor")]SeniorSubcontractor
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
-    var choices = (IEnumerable<Tuple<object, string>>)Model.Choices;
+    var choices = (IEnumerable<Tuple<object, string>>) Model.Choices ?? Model.Type.GetChoicesForEnumType();
 }
 <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
     @if (Nullable.GetUnderlyingType(Model.Type) != null)
@@ -14,3 +14,4 @@
         <option value="@choice.Item1" @selected.Att("selected")>@choice.Item2</option>
     }
 </select>
+

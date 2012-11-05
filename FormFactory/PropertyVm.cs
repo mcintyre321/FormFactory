@@ -39,12 +39,7 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
-            // check to see if we're dealing with an enum or enumerable of enum
-            var checkType = this.Type.GetUnderlyingFlattenedType();
-            if (checkType.IsEnum)
-            {
-                this.Choices = checkType.GetChoicesForEnumType();
-            }
+             
         }
         public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, HtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
@@ -70,12 +65,7 @@ namespace FormFactory
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
-            // check to see if we're dealing with an enum or enumerable of enum
-            var checkType = this.Type.GetUnderlyingFlattenedType();
-            if (checkType.IsEnum)
-            {
-                this.Choices = checkType.GetChoicesForEnumType();
-            }
+             
         }
 
         public IDictionary<string, string> DataAttributes { get; private set; }
@@ -142,12 +132,6 @@ namespace FormFactory
             ShowLabel = true;
             LabelOnRight = false;
 
-            // check to see if we're dealing with an enum or enumerable of enum
-            var checkType = type.GetUnderlyingFlattenedType();
-            if (checkType.IsEnum)
-            {
-                this.Choices = checkType.GetChoicesForEnumType();
-            }
         }
 
         protected internal HtmlHelper Html { get; set; }
