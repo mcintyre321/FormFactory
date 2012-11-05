@@ -7,9 +7,9 @@ using System.Text;
 
 namespace FormFactory
 {
-    static class TypeHelper
+    public static class TypeHelper
     {
-        internal static Type GetEnumerableType(this Type type)
+        public static Type GetEnumerableType(this Type type)
         {
             var interfaceTypes = type.GetInterfaces().ToList();
             interfaceTypes.Insert(0, type);
@@ -24,7 +24,7 @@ namespace FormFactory
             return null;
         }
 
-        internal static IEnumerable<Tuple<object, string>> GetChoicesForEnumType(this Type enumType)
+        public static IEnumerable<Tuple<object, string>> GetChoicesForEnumType(this Type enumType)
         {
             Func<FieldInfo, string> getName = fieldInfo => Enum.GetName(enumType, (int) fieldInfo.GetValue(null));
             Func<FieldInfo, string> getDisplayName = fieldInfo =>
@@ -42,7 +42,7 @@ namespace FormFactory
                                               .ToList();
         }
 
-        internal static Type GetUnderlyingFlattenedType(this Type type)
+        public static Type GetUnderlyingFlattenedType(this Type type)
         {
             var checkType = type.GetEnumerableType() ?? type;
             return Nullable.GetUnderlyingType(checkType) ?? checkType;

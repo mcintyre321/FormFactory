@@ -141,6 +141,13 @@ namespace FormFactory
             GetCustomAttributes = () => new object[] { };
             ShowLabel = true;
             LabelOnRight = false;
+
+            // check to see if we're dealing with an enum or enumerable of enum
+            var checkType = type.GetUnderlyingFlattenedType();
+            if (checkType.IsEnum)
+            {
+                this.Choices = checkType.GetChoicesForEnumType();
+            }
         }
 
         protected internal HtmlHelper Html { get; set; }
