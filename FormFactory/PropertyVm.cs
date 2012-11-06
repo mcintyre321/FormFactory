@@ -75,14 +75,15 @@ namespace FormFactory
         {
             Source = model;
             ModelState modelState;
+            var getMethod = pi.GetGetMethod();
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (pi.GetGetMethod() != null && model != null)
+            else if (getMethod != null && model != null && getMethod.GetParameters().Length == 0)
             {
-                Value = pi.GetGetMethod().Invoke(model, null);
+                Value = getMethod.Invoke(model, null);
             }
             if (model != null)
             {
@@ -97,7 +98,7 @@ namespace FormFactory
                     Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
                 var setter = pi.GetSetMethod();
-                var getter = pi.GetGetMethod();
+                var getter = getMethod;
                 Readonly = !(setter != null);
                 Value = getter == null ? null : getter.Invoke(model, null);
             }

@@ -26,6 +26,7 @@ namespace FormFactory
         }
 
         static ConcurrentDictionary<Type, IEnumerable<Tuple<string, object>>> enumChoices = new ConcurrentDictionary<Type, IEnumerable<Tuple<string, object>>>();
+
         public static IEnumerable<Tuple<string, object>> GetChoicesForEnumType(this Type inType)
         {
             var underlyingType = Nullable.GetUnderlyingType(inType);

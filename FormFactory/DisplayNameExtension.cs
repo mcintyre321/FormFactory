@@ -21,11 +21,11 @@ namespace FormFactory
 
         public static List<Func<Type, object, bool, string>> Rules = new List<Func<Type, object, bool, string>>()
         {
+            (type, o, tc) => o == null ? "" : null,
             (type, o, tc) => lookup.GetValue(o, t => null),
             (type, o, tc) => o is IHasDisplayName ? ((IHasDisplayName) o).DisplayName : null,
             (type, o, tc) => o is IHasName ? ((IHasName) o).Name.Sentencise(tc): null,
             (type, o, tc) => o is Enum ? GetNameFromDisplayAttribute(o): null,
-            (type, o, tc) => o is Enum ? (o.ToString()).Sentencise(tc): null,
             (type, o, tc) => o is Type ? (((Type)o).Name).Sentencise(tc): null,
             (type, o, tc) => o.GetType().Name.Sentencise(tc)
         };
@@ -33,7 +33,8 @@ namespace FormFactory
         private static string GetNameFromDisplayAttribute(object enumValue)
         {
             if (enumValue == null) return "";
-            return enumValue.GetType().GetChoicesForEnumType().Single(t => t.Item2 == enumValue).Item1;
+            
+            return enumValue.GetType().GetChoicesForEnumType().Single(t => enumValue.ToString() == t.Item2.ToString()).Item1;
         }
 
         public static string DisplayName<T>(this T o, bool titleCase = false)
