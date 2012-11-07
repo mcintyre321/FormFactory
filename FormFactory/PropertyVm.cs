@@ -76,12 +76,15 @@ namespace FormFactory
             Source = model;
             ModelState modelState;
             var getMethod = pi.GetGetMethod();
+            
+            if (pi.GetIndexParameters().Any()) getMethod = null; //dont want to get indexed properties
+
             if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
             {
                 if (modelState.Value != null)
                     Value = modelState.Value.AttemptedValue;
             }
-            else if (getMethod != null && model != null && getMethod.GetParameters().Length == 0)
+            else if (getMethod != null && model != null)
             {
                 Value = getMethod.Invoke(model, null);
             }
