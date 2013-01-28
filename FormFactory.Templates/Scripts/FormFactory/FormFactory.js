@@ -116,7 +116,7 @@ $(document).ready(function () {
             return v.toString(16);
         });
     }
-    $(".ff-add-item").live("click", function (e) {
+    $(document).on("click", ".ff-add-item", function (e) {
         var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()).text());
 
         var modelName = $(this).data("modelname");
@@ -146,16 +146,16 @@ $(document).ready(function () {
         }
         return false;
     }); // end on click
-    $(".ff-remove-parent").live("click", function () {
+    $(document).on("click", ".ff-remove-parent", function () {
         ff.transforms.remove($(this).closest("li"));
         return false;
     }); // live click
-    $(".ff-move-up").live("click", function () {
+    $(document).on("click", ".ff-move-up", function () {
         ff.transforms.swap($(this).closest("li").prev(), $(this).closest("li"));
 
         return false;
     }); // live click
-    $(".ff-move-down").live("click", function () {
+    $(document).on("click", ".ff-move-down", function () {
         ff.transforms.swap($(this).closest("li"), $(this).closest("li").next(":not(.ff-not-collection-item)"));
         return false;
     }); // live click

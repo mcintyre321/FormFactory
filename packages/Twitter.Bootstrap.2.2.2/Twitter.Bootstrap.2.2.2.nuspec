@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Twitter.Bootstrap</id>
+    <version>2.2.2</version>
+    <title>Bootstrap</title>
+    <authors>Jacob Thornton, Mark Otto</authors>
+    <owners>Jacob Thornton, Mark Otto</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://twitter.github.com/bootstrap/</projectUrl>
+    <iconUrl>https://raw.github.com/twitter/bootstrap/master/docs/assets/ico/apple-touch-icon-72-precomposed.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Bootstrap is a front-end toolkit from Twitter designed to kickstart development of webapps and sites, featuring simple and flexible HTML, CSS, and Javascript for popular user interface components and interactions. issues? Please post them here https://github.com/sirkirby/twitter-bootstrap-nuget/issues</description>
+    <summary>Copyright 2012 Twitter, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.</summary>
+    <releaseNotes>https://github.com/twitter/bootstrap/wiki/Changelog
+
+http://blog.getbootstrap.com/2012/12/08/bootstrap-2-2-2-released/</releaseNotes>
+    <language>en-US</language>
+    <tags>twitter, css, css3, html, html5, less, ui, jquery, ender, bootstrap</tags>
+  </metadata>
+</package>

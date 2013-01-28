@@ -1,0 +1,10 @@
+<configuration>
+    <system.webServer>
+        <handlers>
+	    <add verb="GET" path="*.js" name="Static for js" type="System.Web.StaticFileHandler" />
+            <add verb="GET" path="*.css" name="Static for css" type="System.Web.StaticFileHandler" />
+            <add verb="GET" path="*.png" name="Static for png" type="System.Web.StaticFileHandler" />
+            <add verb="GET" path="*.jpg" name="Static for jpg" type="System.Web.StaticFileHandler" />
+        </handlers>
+    </system.webServer>
+</configuration>
