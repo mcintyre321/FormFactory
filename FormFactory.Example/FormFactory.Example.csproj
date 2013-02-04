@@ -106,7 +106,6 @@
     <Compile Include="Models\NoContactMethod.cs" />
     <Compile Include="Models\UploadedFilesResultModel.cs" />
     <Compile Include="Models\UploadedFilesTestModel.cs" />
-    <Compile Include="Views\Home\Site.cs" />
     <Content Include="App_Code\RegisterVirtualPathProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
