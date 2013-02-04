@@ -1,6 +1,7 @@
 ﻿@using FormFactory
 @using FormFactory.Example.Controllers
 @using FormFactory.Example.Models
+@using FormFactory.Example.Views.Home
 @{
     ViewBag.Title = "FormFactory Examples";
 }
@@ -14,7 +15,10 @@
             <a href="https://github.com/mcintyre321/FormFactory" class="btn btn-primary btn-large">View project on GitHub</a>
         </p>
     </div>
-
+    @{
+        var site = new Site();
+        Html.PropertiesFor(site).Render();
+    }
    
 </header>
 <div class="marketing">
