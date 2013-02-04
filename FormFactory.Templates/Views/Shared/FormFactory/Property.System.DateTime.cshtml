@@ -8,7 +8,7 @@
     var isDate = dateAttr.DataType == DataType.Date;
     var displayFormatAttribute = Model.GetCustomAttributes().OfType<DisplayFormatAttribute>().SingleOrDefault();
     var stringFormat = (displayFormatAttribute != null ? displayFormatAttribute.DataFormatString : null) ?? (isDate ? "dd MMM yyyy" : "g");
-    var behaviour = isDate ? "datepicker" : "datetimepicker";
+    var behaviour = Model.Readonly ? "" : isDate ? "datepicker" : "datetimepicker";
     var valueAsString = Model.Value is string ? (Model.Value as string) : Model.Value as DateTime? == null ? "" : ((DateTime?) Model.Value).Value.ToString(stringFormat);
     <input type="text" class="ff-behaviour" data-ff-behaviour="@behaviour" data-ff-format="@stringFormat" name="@Model.Name" @Model.UnobtrustiveValidation() value="@valueAsString" @Model.Readonly() @Model.Disabled() />
 }

@@ -1,17 +1,23 @@
 ﻿@using FormFactory
 @model PropertyVm
 @{
-    var choices = (IEnumerable<Tuple<string, object>>) Model.Choices ?? Model.Type.GetChoicesForEnumType();
+    var choices = (IEnumerable<Tuple<string, object>>)Model.Choices ?? Model.Type.GetChoicesForEnumType();
 }
-<select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
-    @if (Nullable.GetUnderlyingType(Model.Type) != null)
-    {
-        <option value="" @((Model.Value == null).Att("selected"))></option>
-    }
-    @foreach (var choice in choices)
-    {
-        var selected = (Model.Value != null && Model.Value.ToString() == choice.Item2.ToString());
-        <option value="@choice.Item2" @selected.Att("selected")>@choice.Item1</option>
-    }
-</select>
-
+@if (Model.Readonly)
+{
+    <input type="text" name="@Model.Name" @Model.Readonly() @Model.Disabled() value="@Model.Value" />
+}
+else
+{
+    <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
+        @if (Nullable.GetUnderlyingType(Model.Type) != null)
+        {
+            <option value="" @((Model.Value == null).Att("selected"))></option>
+        }
+        @foreach (var choice in choices)
+        {
+            var selected = (Model.Value != null && Model.Value.ToString() == choice.Item2.ToString());
+            <option value="@choice.Item2" @selected.Att("selected")>@choice.Item1</option>
+        }
+    </select>
+}
