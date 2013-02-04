@@ -171,7 +171,7 @@ if ($.validator) {
     });
 }
 ;
-$(document).on("click,keydown", "input[type='checkbox']", function () {
+$(document).on("click keydown", "input[type='checkbox']", function () {
     return !($(this).attr("readonly"));
 });
  
