@@ -72,7 +72,7 @@ $(document).on("change", ".ff-choice-picker", function () {
 $.extend(ff.behaviours, {},
     {
         datepicker: function (t) {
-            if (!$(t).hasClass("hasDatepicker") && $.datepicker) {
+            if (!$(t).hasClass("hasDatepicker") && $.datepicker && !$(t).attr("readonly")) {
                 // TODO: a more comprehensive switch of .NET to jQuery formats. REF: http://docs.jquery.com/UI/Datepicker/formatDate
                 var format = $(t).data("ff-format");
                 switch (format) {
@@ -89,7 +89,7 @@ $.extend(ff.behaviours, {},
             return false;
         },
         datetimepicker: function (t) {
-            if (!$(t).hasClass("hasDatepicker") && $.datetimepicker) {
+            if (!$(t).hasClass("hasDatepicker") && $.datetimepicker && !$(t).attr("readonly")) {
                 $(t).datetimepicker({ showOn: "focus" }).focus();
                 return true;
             }
