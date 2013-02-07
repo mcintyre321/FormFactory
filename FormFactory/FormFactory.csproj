@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisplayNameExtension.cs" />
+    <Compile Include="VmHelper.cs" />
     <Compile Include="Mvc\PolymorphicModelBinder.cs" />
     <Compile Include="Mvc\SimpleAppDataFileUploader.cs" />
     <Compile Include="Mvc\ModelBinderExtensions.cs" />
