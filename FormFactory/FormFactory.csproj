@@ -160,6 +160,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Object.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.Object.cshtml</Link>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>

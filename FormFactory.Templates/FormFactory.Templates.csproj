@@ -132,6 +132,7 @@
     <Content Include="Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
