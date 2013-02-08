@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -10,6 +11,27 @@ namespace FormFactory.Mvc
 {
     public static class ModelBinderExtensions
     {
+
+        public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders)
+        {
+            RegisterUploadedFileModelBinder<UploadedFile>(modelBinders, SaveFileToAppDataSlashUploadedFiles);
+        }
+        private static UploadedFile SaveFileToAppDataSlashUploadedFiles(HttpPostedFileBase httpPostedFileBase, ControllerContext controllerContext, ModelBindingContext modelBindingContext)
+        {
+            var dir = controllerContext.HttpContext.Server.MapPath("~/App_Data/UploadedFiles");
+            Directory.CreateDirectory(dir);
+            var filename = Guid.NewGuid().ToString();
+            var fullPath = Path.Combine(dir, filename);
+            httpPostedFileBase.SaveAs(fullPath);
+            return new UploadedFile()
+            {
+                ContentLength = httpPostedFileBase.ContentLength,
+                ContentType = httpPostedFileBase.ContentType,
+                FileName = filename,
+                Id = filename
+            };
+        }
+
         /// <summary>
         /// 
         /// </summary>
