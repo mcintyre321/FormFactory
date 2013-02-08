@@ -3,9 +3,9 @@ using System.IO;
 using System.Web;
 using FormFactory.ValueTypes;
 
-namespace FormFactory.Mvc
+namespace FormFactory.Mvc.UploadedFiles
 {
-    internal class SimpleAppDataFileUploader
+    public class SimpleAppDataFileUploader
     {
         public static TUploadedFile DoSave<TUploadedFile>(bool modelStateIsValid, HttpPostedFileBase file)
             where TUploadedFile : UploadedFile, new()

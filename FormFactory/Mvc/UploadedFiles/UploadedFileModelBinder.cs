@@ -3,13 +3,13 @@ using System.Web;
 using System.Web.Mvc;
 using FormFactory.ValueTypes;
 
-namespace FormFactory.Mvc
+namespace FormFactory.Mvc.UploadedFiles
 {
-    internal class UploadedFileModelBinder<TUploadedFile> : IModelBinder where TUploadedFile : UploadedFile, new()
+    public class UploadedFileModelBinder<TUploadedFile> : IModelBinder where TUploadedFile : UploadedFile, new()
     {
         private readonly Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> _doSave;
 
-        internal UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> doSave)
+        public UploadedFileModelBinder(Func<HttpPostedFileBase, ControllerContext, ModelBindingContext, TUploadedFile> doSave)
         {
             _doSave = doSave ?? ((f, c, m) => SimpleAppDataFileUploader.DoSave<TUploadedFile>(m.ModelState.IsValid, f));
         }
@@ -22,7 +22,7 @@ namespace FormFactory.Mvc
             {
                 return _doSave(file, controllerContext, bindingContext);
             }
-            var model = ModelBinders.Binders.DefaultBinder.BindModel(controllerContext, bindingContext) as TUploadedFile;
+            var model = System.Web.Mvc.ModelBinders.Binders.DefaultBinder.BindModel(controllerContext, bindingContext) as TUploadedFile;
             if (model != null)
             {
                 return model;
@@ -31,3 +31,4 @@ namespace FormFactory.Mvc
         }
     }
 }
+ 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace FormFactory.Mvc
+namespace FormFactory.Mvc.ModelBinders
 {
     public class PolymorphicModelBinder : DefaultModelBinder
     {
