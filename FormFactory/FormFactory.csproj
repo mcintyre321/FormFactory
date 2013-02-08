@@ -164,9 +164,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Object.cshtml</Link>
     </EmbeddedResource>
-    <None Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.UploadedFile.cshtml">
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.UploadedFile.cshtml">
       <Link>Views\Shared\FormFactory\Property.UploadedFile.cshtml</Link>
-    </None>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
