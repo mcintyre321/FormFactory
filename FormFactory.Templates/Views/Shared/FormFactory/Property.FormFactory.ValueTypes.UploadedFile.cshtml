@@ -1,3 +1,4 @@
 ﻿@using FormFactory
 @model PropertyVm
+<input type="hidden" name="@Model.Name" id="MyFileSubmitPlaceHolder" />@*here to trick model binding into working :( *@
 <input type="file" name="@Model.Name" @Model.Readonly() @Model.Disabled() />
