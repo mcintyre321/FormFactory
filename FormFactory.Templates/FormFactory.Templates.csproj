@@ -133,6 +133,7 @@
     <Content Include="Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
