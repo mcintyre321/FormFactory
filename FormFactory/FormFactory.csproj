@@ -167,9 +167,27 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml</Link>
     </EmbeddedResource>
-    <None Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml">
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.TimeSpan.cshtml</Link>
-    </None>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Double.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.Double.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Enum.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.Enum.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Int32.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.Int32.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Int64.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.Int64.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.String.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.String.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml</Link>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>

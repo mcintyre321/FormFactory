@@ -134,6 +134,12 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.String.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.Int32.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.Int64.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.Double.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.Enum.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
