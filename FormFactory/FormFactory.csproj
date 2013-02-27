@@ -188,6 +188,12 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.DateTime.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.DateTime.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
+      <Link>Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml</Link>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>

@@ -140,6 +140,8 @@
     <Content Include="Views\Shared\FormFactory\Cell.System.Double.cshtml" />
     <Content Include="Views\Shared\FormFactory\Cell.System.Enum.cshtml" />
     <Content Include="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Cell.System.DateTime.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
