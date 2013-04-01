@@ -39,5 +39,10 @@ namespace FormFactory
         {
             return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
         }
+        public static MvcHtmlString Att(this string attValue, string att)
+        {
+            return (string.IsNullOrWhiteSpace(att)).Att(att, attValue);
+        }
+
     }
 }

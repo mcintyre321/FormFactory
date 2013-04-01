@@ -1,10 +1,13 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using System.Web.Mvc
+@using Attributes
 @using FormFactory
 @model PropertyVm
 @functions {
-    private MvcHtmlString Placeholder()
+    private MvcHtmlString Placeholder(PropertyVm pi)
     {
-        return (!string.IsNullOrWhiteSpace(Model.PlaceholderText)).Att("placeholder", Model.PlaceholderText);
+        var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+        return placeHolderText.Att("placeholder");
     }
 }
 @if (!Model.Readonly && Model.Choices != null)

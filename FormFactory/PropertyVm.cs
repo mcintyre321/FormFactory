@@ -32,7 +32,6 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
-            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -58,7 +57,6 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
-            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -111,7 +109,6 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
-            PlaceholderText = pi.GetCustomAttributes(true).OfType<PlaceholderAttribute>().FirstOrDefault().Maybe(x => x.Text);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
@@ -160,7 +157,7 @@ namespace FormFactory
         public bool IsHidden { get; set; }
         public bool ShowLabel { get; set; }
         public bool LabelOnRight { get; set; }
-        public string PlaceholderText { get; set; }
+        
     }
     
     static class Extensions
