@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
 {
@@ -9,7 +10,7 @@ namespace FormFactory.Example.Models
 
     public class Twitter : SocialMediaType
     {
-        [Required]
+        [Required][Placeholder("@yourhandle")]
         public string TwitterHandle { get; set; }
     }
     public class Facebook : SocialMediaType

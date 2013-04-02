@@ -1,6 +1,6 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using System.Web.Mvc
-@using Attributes
+@using FormFactory.Attributes
 @using FormFactory
 @model PropertyVm
 @functions {
@@ -31,11 +31,11 @@ else
 
     if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
     {
-    <textarea id="@Model.Id" @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation()  @Placeholder() name="@Model.Name" rows="5">@Model.Value</textarea>
+    <textarea id="@Model.Id" @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation()  @Placeholder(Model) name="@Model.Name" rows="5">@Model.Value</textarea>
     }
     else
     {
-    <input @Model.Readonly() @Model.Disabled() @Placeholder() @Model.UnobtrustiveValidation() class="input-large" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+    <input @Model.Readonly() @Model.Disabled() @Placeholder(Model) @Model.UnobtrustiveValidation() class="input-large" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
     }
 
     if (!Model.Readonly && Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
