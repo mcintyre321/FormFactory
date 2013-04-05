@@ -41,7 +41,7 @@ namespace FormFactory
         }
         public static MvcHtmlString Att(this string attValue, string att)
         {
-            return (!string.IsNullOrWhiteSpace(att)).Att(att, attValue);
+            return (!string.IsNullOrWhiteSpace(attValue)).Att(att, attValue);
         }
 
     }
