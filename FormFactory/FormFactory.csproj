@@ -31,41 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Mvc">
-      <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,16 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisplayNameExtension.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedDelegateModelBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedModelBinderProvider.cs" />
-    <Compile Include="Mvc\UploadedFiles\FileStores.cs" />
-    <Compile Include="VmHelper.cs" />
-    <Compile Include="Mvc\ModelBinders\PolymorphicModelBinder.cs" />
-    <Compile Include="Mvc\UploadedFiles\SimpleAppDataFileUploader.cs" />
-    <Compile Include="Mvc\UploadedFiles\ModelBinderExtensions.cs" />
-    <Compile Include="Mvc\UploadedFiles\UploadedFileModelBinder.cs" />
+    <Compile Include="FfHtmlHelper.cs" />
+    <Compile Include="ModelBinding\IStringEncoder.cs" />
+    <Compile Include="ModelBinding\IModelBinderContext.cs" />
+    <Compile Include="ModelBinding\IModelBindingContext.cs" />
+    <Compile Include="ModelBinding\IValueProviderResult.cs" />
+    <Compile Include="ModelBinding\IValueProvider.cs" />
+    <Compile Include="ModelBinding\PolymorphicModelBinder.cs" />
     <Compile Include="TypeHelper.cs" />
-    <Compile Include="ValidationHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
     <Compile Include="Attributes\LabelOnRightAttribute.cs" />
@@ -91,15 +57,15 @@
     <Compile Include="IsSelectedExtension.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="FormHelperExtension.cs" />
     <Compile Include="FormVm.cs" />
-    <Compile Include="Mvc\ModelBinders\ImplicitOperatorBinderProvider.cs" />
     <Compile Include="Attributes\NoLabelAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
     <Compile Include="ValueTypes\UploadedFile.cs" />
+    <Compile Include="ViewFinderExtensions.cs" />
     <Compile Include="ViewHelper.cs" />
+    <Compile Include="VmHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\FormFactory.Templates\Content\FormFactory\FormFactory.css">
@@ -194,7 +160,6 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml</Link>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>

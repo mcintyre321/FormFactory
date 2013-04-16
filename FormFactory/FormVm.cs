@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
 using FormFactory.Attributes;
 
 namespace FormFactory
@@ -13,7 +11,7 @@ namespace FormFactory
         private readonly string _actionName;
         private readonly string _controllerName;
 
-        public FormVm(HtmlHelper html, MethodInfo mi) : this(html)
+        public FormVm(FfHtmlHelper html, MethodInfo mi) : this(html)
         {
             this._actionName = mi.Name;
             var controllerTypeName = mi.ReflectedType.Name;
@@ -41,7 +39,7 @@ namespace FormFactory
             this.DisplayName = mi.Name.Sentencise(true);
             ExcludePropertyErrorsFromValidationSummary = true;
         }
-        public FormVm(HtmlHelper html)
+        public FormVm(FfHtmlHelper html)
         {
             Inputs = new List<PropertyVm>();
             this.DisplayName = "";
@@ -59,8 +57,7 @@ namespace FormFactory
                 return _actionUrlOverride ??
                        (
                            UseHttps.HasValue
-                               ? HtmlHelper.Url().Action(_actionName, _controllerName, null,
-                                                         UseHttps.Value ? "https" : "http")
+                               ? HtmlHelper.Url().Action(_actionName, _controllerName, null, UseHttps.Value ? "https" : "http")
                                : HtmlHelper.Url().Action(_actionName, _controllerName)
                        );
             }
@@ -69,7 +66,7 @@ namespace FormFactory
 
         public IEnumerable<PropertyVm> Inputs { get; set; }
 
-        public HtmlHelper HtmlHelper { get; set; }
+        public FfHtmlHelper HtmlHelper { get; set; }
 
         public string DisplayName { get; set; }
 

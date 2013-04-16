@@ -1,10 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using FormFactory.ValueTypes;
 
-namespace FormFactory.Mvc.UploadedFiles
+namespace FormFactory.AspMvc.Mvc.UploadedFiles
 {
     public static class ModelBinderExtensions
     {

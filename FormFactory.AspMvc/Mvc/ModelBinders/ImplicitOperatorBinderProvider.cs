@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace FormFactory.Mvc.ModelBinders
+namespace FormFactory.AspMvc.Mvc.ModelBinders
 {
     public class ImplicitOperatorBinderProvider : IModelBinderProvider
     {

@@ -6,13 +6,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
+using FormFactory.AspMvc.Wrappers;
 
-namespace FormFactory
+namespace FormFactory.AspMvc
 {
     public static class ValidationHelper
     {
 
-        public static MvcHtmlString AllValidationMessages(this HtmlHelper helper, string modelName)
+        public static MvcHtmlString AllValidationMessages(this System.Web.Mvc.HtmlHelper helper, string modelName)
         {
             if (HasErrors(helper, modelName))
             {
@@ -22,7 +23,7 @@ namespace FormFactory
             return new MvcHtmlString("");
         }
 
-        public static bool HasErrors(this HtmlHelper helper, string modelName)
+        public static bool HasErrors(this System.Web.Mvc.HtmlHelper helper, string modelName)
         {
             return helper.ViewData.ModelState.ContainsKey(modelName) &&
                    helper.ViewData.ModelState[modelName].Errors.Count > 0;
@@ -81,26 +82,11 @@ namespace FormFactory
 
 
 
-        public static MvcHtmlString UnobtrustiveValidation(this PropertyVm property)
+        public static FormFactory.IHtmlString UnobtrustiveValidation(this HtmlHelper helper, PropertyVm property)
         {
-            var sb = new StringBuilder();
+            var unobtrusiveValidation = new FormFactoryHtmlHelper(helper).UnobtrusiveValidation(property);
 
-            var rules = UnobtrusiveValidationRules.SelectMany(r => r(property));
-
-            if (rules.Any() == false) return new MvcHtmlString("");
-
-            sb.Append("data-val=\"true\" ");
-            foreach (var rule in rules)
-            {
-                var prefix = string.Format(" data-val-{0}", rule.ValidationType);
-                sb.AppendFormat(prefix + "=\"{0}\" ", rule.ErrorMessage);
-                foreach (var parameter in rule.ValidationParameters)
-                {
-                    sb.AppendFormat(prefix + "-{0}=\"{1}\" ", parameter.Key, parameter.Value);
-                }
-            }
-
-            return new MvcHtmlString(sb.ToString());
+            return new HtmlString(unobtrusiveValidation.ToHtmlString());
         }
     }
 

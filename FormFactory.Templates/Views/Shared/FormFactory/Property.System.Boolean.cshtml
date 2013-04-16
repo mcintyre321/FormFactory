@@ -1,4 +1,5 @@
 ﻿@using FormFactory
+@using FormFactory.AspMvc
 @model PropertyVm
 @{
     var posted = ((Model.Value as bool? ?? bool.Parse((Model.Value as string ?? "false"))));
@@ -6,7 +7,7 @@
 <input type='hidden' @Model.Disabled() value='@posted.ToString().ToLower()' id="hidden-@Model.Id" name='@Model.Name'>
 @helper RenderCheckbox(bool posted)
     {
-    <input @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation() type="checkbox" id="@Model.Id" value="true" @(posted.Att("checked")) onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
+    <input @Model.Readonly() @Model.Disabled() @Html.UnobtrustiveValidation(Model) type="checkbox" id="@Model.Id" value="true" @(posted.Att("checked")) onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
  }
 @if (Model.LabelOnRight)
 {

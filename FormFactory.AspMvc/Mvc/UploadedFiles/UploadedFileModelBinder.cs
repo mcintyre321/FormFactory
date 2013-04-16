@@ -3,7 +3,7 @@ using System.Web;
 using System.Web.Mvc;
 using FormFactory.ValueTypes;
 
-namespace FormFactory.Mvc.UploadedFiles
+namespace FormFactory.AspMvc.Mvc.UploadedFiles
 {
     public class UploadedFileModelBinder<TUploadedFile> : IModelBinder where TUploadedFile : UploadedFile, new()
     {

@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using System.Web.Mvc;
 
 namespace FormFactory
 {
     public static class ViewHelper
     {
-        public static MvcHtmlString Raw(this bool value, string output)
+        public static IHtmlString Raw(this bool value, string output)
         {
-            return new MvcHtmlString(value ? output : "");
+            return new HtmlString(value ? output : "");
         }
         public static IHtmlString InputAtts(this PropertyVm vm)
         {
@@ -32,17 +31,46 @@ namespace FormFactory
             {
                 sb.Append("data-" + att.Key + "='" + att.Value + "' ");
             }
-            return new MvcHtmlString(sb.ToString());
+            return new HtmlString(sb.ToString());
         }
 
-        public static MvcHtmlString Att(this bool value, string att, string attValue = null)
+        public static IHtmlString Att(this bool value, string att, string attValue = null)
         {
             return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
         }
-        public static MvcHtmlString Att(this string attValue, string att)
+        public static IHtmlString Att(this string attValue, string att)
         {
             return (!string.IsNullOrWhiteSpace(attValue)).Att(att, attValue);
         }
 
+    }
+
+    
+    public interface IHtmlString
+    {
+        string ToHtmlString();
+    }
+
+    public class HtmlString : IHtmlString
+    {
+        public HtmlString(string value)
+        {
+            _value = value;
+        }
+
+        public static implicit operator HtmlString(string value)
+        {
+            return new HtmlString(value);
+        }
+
+        private string _value;
+        public string ToHtmlString()
+        {
+            return _value;
+        }
+        public override string ToString()
+        {
+            return _value;
+        }
     }
 }

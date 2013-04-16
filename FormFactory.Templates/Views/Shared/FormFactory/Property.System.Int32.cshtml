@@ -1,3 +1,4 @@
 ﻿@using FormFactory
 @model PropertyVm
-<input class="input-large" id="@Model.Id" @Model.UnobtrustiveValidation() name="@Model.Name" @Model.Readonly() @Model.Disabled() size="30" type="text" value="@(Model.Value ?? "")" />
+@using FormFactory.AspMvc
+<input class="input-large" id="@Model.Id" @Html.UnobtrustiveValidation(Model) name="@Model.Name" @Model.Readonly() @Model.Disabled() size="30" type="text" value="@(Model.Value ?? "")" />

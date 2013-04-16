@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Web.Mvc;
 
-namespace FormFactory.Mvc.ModelBinders
+namespace FormFactory.AspMvc.Mvc.ModelBinders
 {
     public class NestedModelBinderProvider : IModelBinderProvider
     {

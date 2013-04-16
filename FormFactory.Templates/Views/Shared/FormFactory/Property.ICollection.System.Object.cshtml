@@ -1,4 +1,8 @@
-﻿@using FormFactory
+﻿@using System
+@using System.Collections.Generic
+@using FormFactory
+@using FormFactory.AspMvc
+
 @model PropertyVm
 @{
     var templateType = Model.Type.GetGenericArguments()[0];
@@ -16,10 +20,7 @@
                         <li>
                             <input type="hidden" name="@(Model.Name).Index" value="@id" />
                             @{
-                                var prop = new PropertyVm(Html, obj.GetType(), Model.Name + "[" + id + "]")
-                                {
-                                    Value = obj
-                                };
+                                var prop = Html.PropertyVm(obj.GetType(), Model.Name + "[" + id + "]", obj);
                             }
                             @Html.BestProperty(prop)
                             @Links()
@@ -34,7 +35,7 @@
                         var template =
                             "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\"><input type='hidden' name='' value='' />" +
                             Html.PropertiesFor(Activator.CreateInstance(templateType))
-                                .ToMvcHtmlString() + Links() + "</div>";
+                                .ToHtmlString() + Links() + "</div>";
                         @template
                     }
                 </script>

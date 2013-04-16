@@ -4,11 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Web.Mvc;
-using System.Web.Security;
 using FormFactory.Attributes;
-using FormFactory.Mvc;
 
 namespace FormFactory
 {
@@ -18,7 +14,7 @@ namespace FormFactory
         {
         }
 
-        public PropertyVm(ParameterInfo pi, HtmlHelper html)
+        public PropertyVm(ParameterInfo pi, FfHtmlHelper html)
             : this(html, pi.ParameterType, pi.Name)
         {
             ModelState modelState;
@@ -40,7 +36,7 @@ namespace FormFactory
 
              
         }
-        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, HtmlHelper html)
+        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, FfHtmlHelper html)
             : this(html, pi.PropertyType, pi.Name)
         {
             ModelState modelState;
@@ -68,7 +64,7 @@ namespace FormFactory
 
         public IDictionary<string, string> DataAttributes { get; private set; }
         public object Source { get; set; }
-        public PropertyVm(object model, PropertyInfo pi, HtmlHelper html) :
+        public PropertyVm(object model, PropertyInfo pi, FfHtmlHelper html) :
             this(html, pi.PropertyType, pi.Name)
         {
             Source = model;
@@ -116,7 +112,7 @@ namespace FormFactory
             DataAttributes = new Dictionary<string, string>();
         }
 
-        public PropertyVm(HtmlHelper html, Type type, string name)
+        public PropertyVm(FfHtmlHelper html, Type type, string name)
         {
             Type = type;
             Name = name;
@@ -135,7 +131,7 @@ namespace FormFactory
 
         }
 
-        protected internal HtmlHelper Html { get; set; }
+        protected internal FfHtmlHelper Html { get; set; }
 
         public string Id { get; set; }
         public Type Type { get; set; }

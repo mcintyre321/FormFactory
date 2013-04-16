@@ -1,5 +1,7 @@
-﻿@using System.Web.Mvc.Html
+﻿@using System.Collections.Generic
+@using System.Web.Mvc.Html
 @using FormFactory
+@using FormFactory.AspMvc
 @model PropertyVm
 
 @if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof(ICollection<>))
@@ -16,10 +18,7 @@ else
             {
                 <li>
                     @{
-                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
-                        {
-                            Value = obj
-                        };
+                        var prop = Html.PropertyVm(obj.GetType(), Model.Name + i, obj);
                         @Html.BestProperty(prop)
                     }
                 </li>

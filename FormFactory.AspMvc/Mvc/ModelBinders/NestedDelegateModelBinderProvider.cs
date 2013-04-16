@@ -3,9 +3,8 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace FormFactory.Mvc.ModelBinders
+namespace FormFactory.AspMvc.Mvc.ModelBinders
 {
-    public delegate object ModelBinderDelegate(ControllerContext cc, ModelBindingContext mbc);
     public class NestedDelegateModelBinderProvider : IModelBinderProvider
     {
         private ConcurrentDictionary<Type, IModelBinder> binders = new ConcurrentDictionary<Type, IModelBinder>();

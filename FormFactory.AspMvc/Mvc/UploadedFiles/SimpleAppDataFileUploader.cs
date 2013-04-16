@@ -3,7 +3,7 @@ using System.IO;
 using System.Web;
 using FormFactory.ValueTypes;
 
-namespace FormFactory.Mvc.UploadedFiles
+namespace FormFactory.AspMvc.Mvc.UploadedFiles
 {
     public class SimpleAppDataFileUploader
     {
