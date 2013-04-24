@@ -142,6 +142,10 @@ namespace FormFactory
 
 
         public Func<IEnumerable<object>> GetCustomAttributes { get; set; }
+        public T GetAttribute<T>()
+        {
+            return GetCustomAttributes().OfType<T>().SingleOrDefault();
+        }
 
         public bool Readonly { get; set; }
         public bool Disabled { get; set; }

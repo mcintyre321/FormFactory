@@ -3,5 +3,5 @@
 @if(!Model.Readonly)
 {
     <input type="hidden" name="@Model.Name"  /> @*here to trick model binding into working :( *@
-    <input type="file" name="@Model.Name" @Model.Readonly() @Model.Disabled() />
+    <input type="file" name="@Model.Name" @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) />
 }

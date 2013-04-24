@@ -12,12 +12,6 @@ namespace FormFactory.AspMvc
 {
     public static class VmHelper
     {
-        public static Func<FfHtmlHelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
-        
-        static VmHelper()
-        {
-            GetPropertyVms = FormFactory.VmHelper.GetPropertyVmsUsingReflection;
-        }
         
         public static IEnumerable<PropertyVm> PropertiesFor<T>(this System.Web.Mvc.HtmlHelper helper, T model)
         {
@@ -26,15 +20,16 @@ namespace FormFactory.AspMvc
        
         public static IEnumerable<PropertyVm> PropertiesFor(this System.Web.Mvc.HtmlHelper helper, object model, Type fallbackModelType)
         {
-            return GetPropertyVms(new FormFactoryHtmlHelper(helper), model, fallbackModelType);
+            return new FormFactoryHtmlHelper(helper).PropertiesFor(model, fallbackModelType);
         }
         public static PropertyVm PropertyVm(this HtmlHelper html, Type type, string name, object value)
         {
             return new PropertyVm(new FormFactoryHtmlHelper(html), type, name ){ Value = value};
         }
-        public static System.Web.IHtmlString UnobtrusiveValidation(this HtmlHelper html, PropertyVm model)
+
+        public static System.Web.IHtmlString UnobtrusiveValidation(HtmlHelper html, PropertyVm model)
         {
-            return new System.Web.HtmlString(new FormFactoryHtmlHelper(html).UnobtrusiveValidation(model).ToHtmlString());
+            return new System.Web.HtmlString(new FormFactoryHtmlHelper(html).UnobtrusiveValidation(model).ToEncodedString());
         }
         //private static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(HtmlHelper helper, object model, Type fallbackModelType)
         //{

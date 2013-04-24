@@ -1,23 +1,24 @@
 ﻿@using FormFactory
+@using IHtmlString = FormFactory.IHtmlString
 @model PropertyVm
 @{
-    var choices = (IEnumerable<Tuple<string, object>>)Model.Choices ?? Model.Type.GetChoicesForEnumType();
+    var choices = (IEnumerable<Tuple<string, object>>)Model.Choices ?? FormFactory.TypeHelper.GetChoicesForEnumType(Model.Type);
 }
 @if (Model.Readonly)
 {
-    <input type="text" name="@Model.Name" @Model.Readonly() @Model.Disabled() value="@Model.Value" />
+    <input type="text" name="@Model.Name" @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) value="@Model.Value" />
 }
 else
 {
-    <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
+    <select name="@Model.Name" @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model)>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
-            <option value="" @((Model.Value == null).Att("selected"))></option>
+            <option value="" @ViewHelper.Attr((Model.Value == null), "selected", null)></option>
         }
         @foreach (var choice in choices)
         {
             var selected = (Model.Value != null && Model.Value.ToString() == choice.Item2.ToString());
-            <option value="@choice.Item2" @selected.Att("selected")>@choice.Item1</option>
+            <option value="@choice.Item2" @ViewHelper.Attr(selected, "selected", null)>@choice.Item1</option>
         }
     </select>
 }

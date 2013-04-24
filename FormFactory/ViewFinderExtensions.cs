@@ -23,12 +23,7 @@ namespace FormFactory
             if (type == null) type = model.GetType();
             return helper.Partial(BestViewName(helper.FfContext, type, prefix), model);
         }
-        public static void RenderBestPartial(this FfHtmlHelper helper, object model, Type type = null, string prefix = null)
-        {
-            if (type == null) type = model.GetType();
-            helper.RenderPartial(BestViewName(helper.FfContext, type, prefix), model);
-        }
-
+        
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
         {
             t => t.FullName,

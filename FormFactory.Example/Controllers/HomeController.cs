@@ -42,6 +42,10 @@ namespace FormFactory.Example.Controllers
         {
             return View();
         }
+        public ActionResult RazorEngine()
+        {
+            return View();
+        }
     }
 
     public class SignInModel

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using FormFactory.Attributes;
+using RazorEngine.Text;
 
 namespace FormFactory
 {
@@ -14,15 +16,15 @@ namespace FormFactory
         }
         public static IHtmlString InputAtts(this PropertyVm vm)
         {
-            return new HtmlString(string.Join(" ", new string[]{vm.Disabled().ToHtmlString(), vm.Readonly().ToHtmlString(), vm.DataAtts().ToHtmlString()}));
+            return new HtmlString(string.Join(" ", new string[] { vm.Disabled().ToEncodedString(), vm.Readonly().ToEncodedString(), vm.DataAtts().ToEncodedString() }));
         }
         public static IHtmlString Disabled(this PropertyVm vm)
         {
-            return vm.Disabled.Att("disabled");
+            return Attr(vm.Disabled, "disabled", null);
         }
         public static IHtmlString Readonly(this PropertyVm vm)
         {
-            return vm.Readonly.Att("readonly");
+            return Attr(vm.Readonly, "readonly", null);
         }
         public static IHtmlString DataAtts(this PropertyVm vm)
         {
@@ -34,21 +36,21 @@ namespace FormFactory
             return new HtmlString(sb.ToString());
         }
 
-        public static IHtmlString Att(this bool value, string att, string attValue = null)
+        public static IHtmlString Attr(bool value, string att, string attValue = null)
         {
             return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
         }
-        public static IHtmlString Att(this string attValue, string att)
-        {
-            return (!string.IsNullOrWhiteSpace(attValue)).Att(att, attValue);
-        }
 
+        public static IHtmlString Placeholder(PropertyVm pi)
+        {
+            var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+            return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
+        }
     }
 
     
-    public interface IHtmlString
+    public interface IHtmlString : IEncodedString
     {
-        string ToHtmlString();
     }
 
     public class HtmlString : IHtmlString
@@ -64,13 +66,16 @@ namespace FormFactory
         }
 
         private string _value;
-        public string ToHtmlString()
-        {
-            return _value;
-        }
+       
         public override string ToString()
         {
             return _value;
+        }
+
+        public string ToEncodedString()
+        {
+            return _value;
+            
         }
     }
 }

@@ -9,6 +9,13 @@ namespace FormFactory
 {
     public static class VmHelper
     {
+        public static Func<FfHtmlHelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
+
+        static VmHelper()
+        {
+            GetPropertyVms = FormFactory.VmHelper.GetPropertyVmsUsingReflection;
+        }
+        
         //public static Func<HtmlHelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
         
         //static VmHelper()
@@ -26,14 +33,24 @@ namespace FormFactory
         //    return GetPropertyVms(helper, model, fallbackModelType);
         //}
 
+        public static IEnumerable<PropertyVm> PropertiesFor(this FfHtmlHelper helper, object model, Type fallbackModelType)
+        {
+            return GetPropertyVms(helper, model, fallbackModelType);
+        }
+
+
         public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(FfHtmlHelper helper, object model, Type fallbackModelType)
         {
             var type = model != null ? model.GetType() : fallbackModelType;
 
-            var typeVm = new PropertyVm(helper, typeof(string), "__type");
-            typeVm.IsHidden = true;
+            var typeVm = new PropertyVm(helper, typeof(string), "__type")
+                {
+                    ShowLabel = false,
+                    DisplayName = "",
+                    IsHidden = true,
+                    Value = helper.WriteTypeToString(type)
+                };
 
-            typeVm.Value = helper.WriteTypeToString(type);
             yield return typeVm;
             var properties = type.GetProperties();
 
@@ -60,19 +77,27 @@ namespace FormFactory
             }
         }
 
-        public static void Render(this IEnumerable<PropertyVm> properties)
+        public static IHtmlString Render(this IEnumerable<PropertyVm> properties)
         {
+            var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                propertyVm.Html.RenderPartial("FormFactory/Form.Property", propertyVm);
+                sb.Append(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToEncodedString());
             }
+            return new HtmlString(sb.ToString());
         }
+
+        public static IHtmlString Render(this PropertyVm propertyVm)
+        {
+            return propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm);
+        }
+
         public static HtmlString ToHtmlString(this IEnumerable<PropertyVm> properties)
         {
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToHtmlString());
+                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToEncodedString());
             }
             var htmlString = new HtmlString(sb.ToString());
             return htmlString;

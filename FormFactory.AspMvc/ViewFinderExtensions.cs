@@ -21,9 +21,5 @@ namespace FormFactory.AspMvc
         {
             return helper.Raw(new FormFactoryHtmlHelper(helper).BestPartial(model, type, prefix));
         }
-        public static void RenderBestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
-        {
-            new FormFactoryHtmlHelper(helper).RenderBestPartial(model, type, prefix);
-        }
     }
 }

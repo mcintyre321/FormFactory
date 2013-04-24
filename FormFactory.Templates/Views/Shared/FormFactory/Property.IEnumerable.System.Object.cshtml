@@ -1,4 +1,5 @@
-﻿@using System.Collections.Generic
+﻿@using System
+@using System.Collections.Generic
 @using System.Web.Mvc.Html
 @using FormFactory
 @using FormFactory.AspMvc
@@ -18,8 +19,15 @@ else
             {
                 <li>
                     @{
-                        var prop = Html.PropertyVm(obj.GetType(), Model.Name + i, obj);
-                        @Html.BestProperty(prop)
+                        try
+                        {
+                            var prop = Html.PropertyVm(obj.GetType(), Model.Name + i, obj);
+                            @Html.BestProperty(prop)
+                        }
+                        catch (Exception ex)
+                        {
+                            @ex.Message
+                        }
                     }
                 </li>
             }

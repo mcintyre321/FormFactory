@@ -1,16 +1,20 @@
 using System;
+using System.Collections.Generic;
 
 namespace FormFactory
 {
     public interface FfHtmlHelper
     {
-        void RenderPartial(string partialName, object model);
         UrlHelper Url();
         string WriteTypeToString(Type type);
         ViewData ViewData { get; }
         FfContext FfContext { get; }
         IHtmlString Partial(string partialName, object vm);
         IHtmlString UnobtrusiveValidation(PropertyVm model);
+    }
+    public interface FfHtmlHelper<TViewData> : FfHtmlHelper
+    {
+        IHtmlString Partial(string partialName, object vm, TViewData viewData);
     }
     public interface FfContext
     {

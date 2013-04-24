@@ -13,9 +13,9 @@
         <span class="control-group @validClass" >
             @if (Model.ShowLabel && !Model.LabelOnRight)
             {
-                <label class="control-label" for="@Model.Id">@Model.DisplayName()</label>
+                <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
             }
-            <span class="control">
+            <span class="controls">
                 @Html.BestProperty(Model)
                 <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">@Html.AllValidationMessages(Model.Name)</span>
             </span>

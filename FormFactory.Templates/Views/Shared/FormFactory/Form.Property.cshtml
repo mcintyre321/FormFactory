@@ -10,12 +10,12 @@
     else
     {
         if (ViewBag.Inline ?? false)
-        {
-            Html.RenderPartial("FormFactory/Form.Property.Inline", Model, ViewData);
+        {   
+            @Html.Partial("FormFactory/Form.Property.Inline", Model, ViewData);
         }
         else
         {
-            Html.RenderPartial("FormFactory/Form.Property.Block", Model, ViewData);
+           @Html.Partial("FormFactory/Form.Property.Block", Model, ViewData);
         }
     }
 }
