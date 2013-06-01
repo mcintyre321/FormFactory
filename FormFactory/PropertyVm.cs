@@ -31,7 +31,6 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
-            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -56,7 +55,6 @@ namespace FormFactory
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
-            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -108,7 +106,6 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
             ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
-            LabelOnRight = pi.GetCustomAttributes(true).OfType<LabelOnRightAttribute>().Any();
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
@@ -131,8 +128,6 @@ namespace FormFactory
             Html = html;
             GetCustomAttributes = () => new object[] { };
             ShowLabel = true;
-            LabelOnRight = false;
-
         }
 
         protected internal HtmlHelper Html { get; set; }
@@ -156,8 +151,6 @@ namespace FormFactory
 
         public bool IsHidden { get; set; }
         public bool ShowLabel { get; set; }
-        public bool LabelOnRight { get; set; }
-        
     }
     
     static class Extensions

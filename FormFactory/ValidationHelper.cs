@@ -60,7 +60,7 @@ namespace FormFactory
 
         private static ModelClientValidationRule RequiredAttributeRule(PropertyVm propertyVm, object attribute)
         {
-            var a = attribute as RequiredAttribute;
+            var a = attribute as RequiredAttribute ;
             return (a == null) ? null : new ModelClientValidationRequiredRule(a.FormatErrorMessage(propertyVm.DisplayName));
         }
 
