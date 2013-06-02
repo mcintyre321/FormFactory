@@ -10,7 +10,7 @@ namespace FormFactory.Mvc.UploadedFiles
     {
         public static void RegisterUploadedFileModelBinder(this ModelBinderDictionary modelBinders)
         {
-            modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder<UploadedFile>( FileStores.AppData));
+            modelBinders.Add(typeof(UploadedFile), new UploadedFileModelBinder<UploadedFile>( FileStores.AppDataFileStore.Store));
         }
     }
 }
