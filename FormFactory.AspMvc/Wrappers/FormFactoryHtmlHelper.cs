@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using FormFactory.ViewHelpers;
 using Encoder = FormFactory.AspMvc.Mvc.ModelBinders.Encoder;
 
 namespace FormFactory.AspMvc.Wrappers
@@ -55,6 +56,18 @@ namespace FormFactory.AspMvc.Wrappers
         {
             return new PropertyVm(this, objectType, name);
         }
-         
+
+        public ObjectChoices[] Choices(PropertyVm model) //why is this needed? HM
+        {
+            var html = this;
+            var choices = (from obj in model.Choices.Cast<object>().ToArray()
+                           let choiceType = obj == null ? model.Type : obj.GetType()
+                           let properties = html.PropertiesFor(obj, choiceType)
+                               .Each(p => p.Name = model.Name + "." + p.Name)
+                               .Each(p => p.Readonly |= model.Readonly)
+                               .Each(p => p.Id = Guid.NewGuid().ToString())
+                           select new ObjectChoices { obj = obj, choiceType = choiceType, properties = properties, name = (obj != null ? obj.DisplayName() : choiceType.DisplayName()) }).ToArray();
+            return choices;
+        }
     }
 }

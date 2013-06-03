@@ -39,17 +39,7 @@ namespace FormFactory.ViewHelpers
     public static class Object
     
     {
-        public static ObjectChoices[] Choices(this FfHtmlHelper html, PropertyVm model) //why is this needed? HM
-        {
-            var choices = (from obj in model.Choices.Cast<object>().ToArray()
-                           let choiceType = obj == null ? model.Type : obj.GetType()
-                           let properties = html.PropertiesFor(obj, choiceType)
-                               .Each(p => p.Name = model.Name + "." + p.Name)
-                               .Each(p => p.Readonly |= model.Readonly)
-                               .Each(p => p.Id = Guid.NewGuid().ToString())
-                           select new ObjectChoices { obj = obj, choiceType = choiceType, properties = properties, name = (obj != null ? obj.DisplayName() : choiceType.DisplayName()) }).ToArray();
-            return choices;
-        }
+        
 
         public static int GetSelectedIndex(ObjectChoices[] choices)
         {
