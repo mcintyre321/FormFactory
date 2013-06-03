@@ -9,12 +9,12 @@
     {
     if (Model.GetCustomAttributes().OfType<RequiredAttribute>().Any())
     {
-        <input @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation() type="checkbox" id="@Model.Id" name="@Model.Name" value="true" @posted.Att("checked") />
+        <input @Model.Readonly() @Model.Disabled() @Html.UnobtrusiveValidation(Model) type="checkbox" id="@Model.Id" name="@Model.Name" value="true" @posted.Attr("checked") />
     }
     else //if not required, then it is possible to post a false value, which means we need a hidden field as unchecked checkboxes aren't posted. sigh.
     {
         <input type='hidden' @Model.Disabled() value='@posted.ToString().ToLower()' id="hidden-@Model.Id" name='@Model.Name' />
-        <input @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation() type="checkbox" id="@Model.Id" value="true" @posted.Att("checked") onchange=" javascript: document.getElementById('hidden-@Model.Id').value = this.checked; " />
+        <input @Model.Readonly() @Model.Disabled() @Html.UnobtrusiveValidation(Model) type="checkbox" id="@Model.Id" value="true" @posted.Attr("checked") onchange=" javascript: document.getElementById('hidden-@Model.Id').value = this.checked; " />
     }
 }
 @if (Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())

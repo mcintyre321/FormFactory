@@ -14,6 +14,11 @@ namespace FormFactory
         {
             return new HtmlString(value ? output : "");
         }
+        public static IHtmlString Raw(this string value)
+        {
+            return new HtmlString(value);
+        }
+
         public static IHtmlString InputAtts(this PropertyVm vm)
         {
             return new HtmlString(string.Join(" ", new string[] { vm.Disabled().ToEncodedString(), vm.Readonly().ToEncodedString(), vm.DataAtts().ToEncodedString() }));
@@ -36,9 +41,13 @@ namespace FormFactory
             return new HtmlString(sb.ToString());
         }
 
-        public static IHtmlString Attr(bool value, string att, string attValue = null)
+        public static IHtmlString Attr(this bool value, string att, string attValue = null)
         {
             return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
+        }
+        public static IHtmlString Attr(this string value, string att)
+        {
+            return Raw(att + "=\"" + (value ?? att) + "\"");
         }
 
         public static IHtmlString Placeholder(PropertyVm pi)
@@ -46,6 +55,10 @@ namespace FormFactory
             var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
             return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
         }
+
+
+
+       
     }
 
     

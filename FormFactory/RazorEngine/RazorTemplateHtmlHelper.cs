@@ -22,11 +22,16 @@ namespace FormFactory.RazorEngine
                             var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath);
                             using (var reader = new StreamReader(stream))
                             {
+                                var inherits = "";
                                 var sb = new StringBuilder();
                                 while (reader.Peek()> 0)
                                 {
                                     var readLine = reader.ReadLine();
-                                    if (readLine.StartsWith("@model ")) continue;
+                                    if (readLine.StartsWith("@model "))
+                                    {
+                                        inherits = ("@inherits FormFactory.RazorEngine.RazorTemplateFormFactoryTemplate<" + readLine.Substring(7) + ">\r\n");
+                                        continue;
+                                    }
                                     if (readLine == "@using FormFactory.AspMvc")
                                     {
                                         sb.AppendLine("@using FormFactory.RazorEngine");
@@ -34,7 +39,7 @@ namespace FormFactory.RazorEngine
                                     }
                                     sb.AppendLine(readLine);
                                 }
-                                return sb.ToString();
+                                return inherits + sb.ToString();
                             }
                         })
                 };
@@ -102,10 +107,10 @@ namespace FormFactory.RazorEngine
         }
         public IHtmlString Partial(string partialName, object model, IDictionary<string, object> viewData)
         {
-            var template = Razor.Resolve(partialName, viewData);
+            var template = Razor.Resolve(partialName, model);
             var dyn = (dynamic) template;
             dyn.Html = this;
-            dyn.Model = model;
+            dyn.Model = (dynamic) model;
             if (viewData != null) dyn.ViewData = viewData;
             try
             {
@@ -131,5 +136,5 @@ namespace FormFactory.RazorEngine
         }
     }
 
- 
+    
 }

@@ -1,9 +1,7 @@
-﻿@using System
-@using System.Collections
+﻿@using System.Collections
 @using System.Collections.Generic;
 @using System.Reflection
 @using FormFactory
-@using IHtmlString = FormFactory.IHtmlString
 @model PropertyVm
 @{
     IList objectList = new object[0];
@@ -16,12 +14,12 @@
         }
     }
 
-    var choices = (IEnumerable<Tuple<string, object>>) Model.Choices ?? FormFactory.TypeHelper.GetChoicesForEnumType(Model);;
+    var choices = (IEnumerable<Tuple<string, object>>) Model.Choices ?? Model.Type.GetChoicesForEnumType();;
 
     foreach (var choice in choices)
     {
     <label class="checkbox">
-        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @ViewHelper.Attr((objectList.Contains(choice.Item1)), "checked", null) @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) />
+        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @((objectList.Contains(choice.Item1)).Attr("checked")) @Model.Readonly() @Model.Disabled() />
         @choice.Item2</label>
     }
 }

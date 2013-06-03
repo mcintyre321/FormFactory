@@ -1,7 +1,6 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using FormFactory.Attributes
 @using FormFactory
-@using FormFactory.AspMvc
 @model PropertyVm
 @{
     if (Model.IsHidden)
@@ -14,9 +13,9 @@
         <span class="control-group @validClass" >
             @if (Model.ShowLabel && !Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())
             {
-                <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
+                <label class="control-label" for="@Model.Id">@Model.DisplayName()</label>
             }
-            <span class="controls">
+            <span class="control">
                 @Html.BestProperty(Model)
                 <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">@Html.AllValidationMessages(Model.Name)</span>
             </span>

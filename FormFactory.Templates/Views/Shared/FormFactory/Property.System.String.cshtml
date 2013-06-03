@@ -2,44 +2,63 @@
 @using System.Collections.Generic
 @using System.ComponentModel.DataAnnotations
 @using System.Linq
+@using System.Web.Mvc
 @using FormFactory.Attributes
 @using FormFactory
-@using FormFactory.AspMvc
 @model PropertyVm
-@{
-    var model = (PropertyVm)Model;
-
-    if (!Model.Readonly && Model.Choices != null)
+ 
+@if (!Model.Readonly && Model.Choices != null)
+{
+    var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
+    if (choices == null && Model.Choices is IEnumerable<string>)
     {
-        var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
-        if (choices == null && Model.Choices is IEnumerable<string>)
-        {
-            var newChoices = new List<Tuple<String, string>>();
-            foreach (string choice in Model.Choices)
-            {
-                newChoices.Add(System.Tuple.Create(choice, choice));
-            }
-            choices = newChoices.ToArray();
-        }
-    <select name="@Model.Name"  @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model)>
+        choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+    }
+    <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled()>
         @foreach (var option in choices)
         {
-            <option value="@option.Item2" @ViewHelper.Attr((Model.Value != null && option.Item2 == Model.Value.ToString()), "selected", null)>@option.Item1</option>
+            <option value="@option.Item2" @((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>    
         }
     </select>
+}
+else
+{
+    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
+    var placeHolderText = Model.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+    
+    
+    if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
+    {
+    <textarea id="@Model.Id" @Model.Readonly() @Model.Disabled() @Html.UnobtrusiveValidation(Model)  @placeHolderText.Attr("placeholder") name="@Model.Name" rows="5">@Model.Value</textarea>
     }
     else
     {
+    <input id="@Model.Id" @Model.Readonly() @Model.Disabled() @placeHolderText.Attr("placeholder") @Html.UnobtrusiveValidation(Model) class="input-large" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+    }
 
-        var inputType = FormFactory.ViewHelpers.String.GetInputTypeFromDataTypeAttribute(Model);
-        var typeAhread = FormFactory.ViewHelpers.String.GetTypeAheadAttribute(Model);
-        if (inputType == "textarea")
-        {
-    <textarea @typeAhread @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) @Html.UnobtrusiveValidation(Model)  @FormFactory.ViewHelper.Placeholder(Model) name="@Model.Name" rows="5">@Model.Value</textarea>
-        }
-        else
-        {
-    <input @FormFactory.ViewHelper.Readonly(Model) @typeAhread @FormFactory.ViewHelper.Disabled(Model) @FormFactory.ViewHelper.Placeholder(Model) @Html.UnobtrusiveValidation(Model) class="input-large" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
-        }
+    if (!Model.Readonly && Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())
+    {
+        var escapedSuggestions = Model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''"));
+    <script type="text/javascript">
+
+        window.setTimeout(function () { //in a timeout so it can be embedded in a popover
+            $(function () {
+                if (jQuery().autocomplete) {
+                    $("#@Model.Id")
+                                .autocomplete({
+                                    source: ['@Html.Raw(string.Join("', '", escapedSuggestions))'],
+                                    minLength: 0
+                                })
+                                .focus(function () {
+                                    $(this).trigger('keydown.autocomplete');
+                                });
+                } else {
+                    console.log("could not load $.autocomplete for @Model.Id suggestions");
+                }
+            }, 1);
+
+        });
+    </script>
     }
 }

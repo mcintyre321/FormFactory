@@ -27,10 +27,10 @@ namespace FormFactory.AspMvc
             return new PropertyVm(new FormFactoryHtmlHelper(html), type, name ){ Value = value};
         }
 
-        public static System.Web.IHtmlString UnobtrusiveValidation(HtmlHelper html, PropertyVm model)
-        {
-            return new System.Web.HtmlString(new FormFactoryHtmlHelper(html).UnobtrusiveValidation(model).ToEncodedString());
-        }
+        //public static System.Web.IHtmlString UnobtrusiveValidation(HtmlHelper html, PropertyVm model)
+        //{
+        //    return new System.Web.HtmlString(new FormFactoryHtmlHelper(html).UnobtrusiveValidation(model).ToEncodedString());
+        //}
         //private static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(HtmlHelper helper, object model, Type fallbackModelType)
         //{
         //    var type = model != null ? model.GetType() : fallbackModelType;
