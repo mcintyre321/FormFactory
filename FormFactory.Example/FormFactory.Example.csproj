@@ -255,6 +255,7 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Home\OldRazorEngine.cshtml" />
     <Content Include="Views\Home\RazorEngine.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -326,7 +327,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50564</DevelopmentServerPort>
+          <DevelopmentServerPort>28704</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

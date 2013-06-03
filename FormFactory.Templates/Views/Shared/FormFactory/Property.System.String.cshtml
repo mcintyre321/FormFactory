@@ -2,7 +2,6 @@
 @using System.Collections.Generic
 @using System.ComponentModel.DataAnnotations
 @using System.Linq
-@using System.Web.Mvc
 @using FormFactory.Attributes
 @using FormFactory
 @using FormFactory.AspMvc
@@ -22,7 +21,7 @@
             }
             choices = newChoices.ToArray();
         }
-    <select id="@Model.Id" name="@Model.Name"  @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model)>
+    <select name="@Model.Name"  @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model)>
         @foreach (var option in choices)
         {
             <option value="@option.Item2" @ViewHelper.Attr((Model.Value != null && option.Item2 == Model.Value.ToString()), "selected", null)>@option.Item1</option>
@@ -36,11 +35,11 @@
         var typeAhread = FormFactory.ViewHelpers.String.GetTypeAheadAttribute(Model);
         if (inputType == "textarea")
         {
-    <textarea id="@Model.Id" @typeAhread @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) @Html.UnobtrusiveValidation(Model)  @FormFactory.ViewHelper.Placeholder(Model) name="@Model.Name" rows="5">@Model.Value</textarea>
+    <textarea @typeAhread @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) @Html.UnobtrusiveValidation(Model)  @FormFactory.ViewHelper.Placeholder(Model) name="@Model.Name" rows="5">@Model.Value</textarea>
         }
         else
         {
-    <input @FormFactory.ViewHelper.Readonly(Model) @typeAhread @FormFactory.ViewHelper.Disabled(Model) @FormFactory.ViewHelper.Placeholder(Model) @Html.UnobtrusiveValidation(Model) class="input-large" id="@Model.Id" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+    <input @FormFactory.ViewHelper.Readonly(Model) @typeAhread @FormFactory.ViewHelper.Disabled(Model) @FormFactory.ViewHelper.Placeholder(Model) @Html.UnobtrusiveValidation(Model) class="input-large" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
         }
     }
 }
