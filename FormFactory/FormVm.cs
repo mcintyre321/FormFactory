@@ -119,6 +119,9 @@ namespace FormFactory
             HtmlHelper.RenderPartial("FormFactory/Form.Close", this);
         }
 
-
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

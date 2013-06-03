@@ -46,5 +46,10 @@ namespace FormFactory.AspMvc.Wrappers
         {
             this._helper.RenderPartial(partialName, model);
         }
+
+        public PropertyVm CreatePropertyVm(Type objectType, string name)
+        {
+            return new PropertyVm(this, objectType, name);
+        }
     }
 }

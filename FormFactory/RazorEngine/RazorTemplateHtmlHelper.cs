@@ -128,6 +128,11 @@ namespace FormFactory.RazorEngine
             throw new NotImplementedException("RenderPartial is not implemented as there is no context to write to in RazorEngine");
         }
 
+        public PropertyVm CreatePropertyVm(Type objectType, string name)
+        {
+            return new PropertyVm(this, objectType, name);
+        }
+
         public IHtmlString Raw(string s)
         {
             return new HtmlString(s);;

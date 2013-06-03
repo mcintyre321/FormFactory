@@ -109,7 +109,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 
                 using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
                 {
-                    @form.Render();
+                    form.Render();
                 } //.Dispose() closes the form
             }
         </div>
@@ -183,7 +183,7 @@ public class Person
             <form>
                 @{
                     var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
-                    @Html.Raw(FormFactory.RazorEngine.Properties.For(me).Render());
+                    @Html.Raw(Html.PropertiesFor(me).Render());
                 }
                 <input type="submit" value="submit" />
             </form>

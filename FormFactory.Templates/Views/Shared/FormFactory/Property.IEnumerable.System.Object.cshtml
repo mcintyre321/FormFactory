@@ -16,10 +16,8 @@ else
             {
                 <li>
                     @{
-                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
-                        {
-                            Value = obj
-                        };
+                        var prop = Html.CreatePropertyVm(obj.GetType(), Model.Name + i);
+                        prop.Value = obj;
                         @Html.BestProperty(prop)
                     }
                 </li>

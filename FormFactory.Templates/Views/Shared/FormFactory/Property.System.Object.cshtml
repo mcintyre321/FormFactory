@@ -13,7 +13,7 @@
 
     <div class="ff-choices-area">
         @{
-    var choices = FormFactory.ViewHelpers.Object.Choices(Model, Html);
+    var choices = Html.Choices(Model);
     var selectedIndex = FormFactory.ViewHelpers.Object.GetSelectedIndex(choices);
 
 

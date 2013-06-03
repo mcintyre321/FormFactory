@@ -9,8 +9,9 @@ using System.Web.Mvc.Html;
 using System.Web.Security;
 using FormFactory.AspMvc.Mvc.ModelBinders;
 using FormFactory.AspMvc.Wrappers;
+using FormFactory.ViewHelpers;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
     public static class FormHelperExtension
     {
@@ -57,8 +58,14 @@ namespace FormFactory.AspMvc
             return new FormVm(new FormFactoryHtmlHelper(html), mi);
         }
 
-        
-
+        public static PropertyVm CreatePropertyVm(this HtmlHelper helper, Type objectType, string name)
+        {
+            return new FormFactoryHtmlHelper(helper).CreatePropertyVm(objectType, name);
+        }
+        public static ObjectChoices[] Choices(this HtmlHelper html, PropertyVm model) 
+        {
+            return new FormFactoryHtmlHelper(html).Choices(model);
+        }
 
        
         public static MethodInfo MethodInfo(this Expression method)

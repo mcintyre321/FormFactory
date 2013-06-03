@@ -12,6 +12,7 @@ namespace FormFactory
         FfContext FfContext { get; }
         IHtmlString Partial(string partialName, object vm); 
         void RenderPartial(string partialName, object model);
+        PropertyVm CreatePropertyVm(Type objectType, string name);
     }
     public interface FfHtmlHelper<TViewData> : FfHtmlHelper
     {
