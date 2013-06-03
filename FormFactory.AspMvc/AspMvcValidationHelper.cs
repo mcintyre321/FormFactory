@@ -82,11 +82,11 @@ namespace FormFactory
 
 
 
-        public static FormFactory.IHtmlString UnobtrusiveValidation(this HtmlHelper helper, PropertyVm property)
+        public static MvcHtmlString UnobtrusiveValidation(this HtmlHelper helper, PropertyVm property)
         {
             var unobtrusiveValidation = new FormFactoryHtmlHelper(helper).UnobtrusiveValidation(property);
 
-            return new HtmlString(unobtrusiveValidation.ToEncodedString());
+            return new MvcHtmlString(unobtrusiveValidation.ToEncodedString());
         }
     }
 

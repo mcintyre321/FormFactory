@@ -40,6 +40,10 @@ namespace FormFactory.AspMvc.Wrappers
             return Partial(partialName, vm, null);
         }
 
+        public IHtmlString Raw(string s)
+        {
+            return new HtmlString(_helper.Raw(s).ToHtmlString());
+        }
  
 
         public void RenderPartial(string partialName, object model)
@@ -51,5 +55,6 @@ namespace FormFactory.AspMvc.Wrappers
         {
             return new PropertyVm(this, objectType, name);
         }
+         
     }
 }

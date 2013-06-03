@@ -5,19 +5,19 @@
 }
 @if (Model.Readonly)
 {
-    <input type="text" name="@Model.Name" @Model.Readonly() @Model.Disabled() value="@Model.Value" />
+    <input type="text" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) value="@Model.Value" />
 }
 else
 {
-    <select name="@Model.Name" @Model.Readonly() @Model.Disabled()>
+    <select name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
-            <option value="" @((Model.Value == null).Attr("selected"))></option>
+            <option value="" @Html.Raw((Model.Value == null).Attr("selected"))></option>
         }
         @foreach (var choice in choices)
         {
             var selected = (Model.Value != null && Model.Value.ToString() == choice.Item2.ToString());
-            <option value="@choice.Item2" @selected.Attr("selected")>@choice.Item1</option>
+            <option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</option>
         }
     </select>
 }

@@ -19,7 +19,7 @@
     foreach (var choice in choices)
     {
     <label class="checkbox">
-        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @((objectList.Contains(choice.Item1)).Attr("checked")) @Model.Readonly() @Model.Disabled() />
+        <input type="checkbox" value="@choice.Item1" name="@Model.Name" @Html.Raw((objectList.Contains(choice.Item1)).Attr("checked")) @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) />
         @choice.Item2</label>
     }
 }
