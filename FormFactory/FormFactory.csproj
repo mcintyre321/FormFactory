@@ -48,6 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UnobtrusiveValidation\ClientValidationRules.cs" />
+    <Compile Include="ValidationHelper.cs" />
     <Compile Include="DisplayNameExtension.cs" />
     <Compile Include="FfHtmlHelper.cs" />
     <Compile Include="ModelBinding\IStringEncoder.cs" />
@@ -190,6 +192,7 @@
       <Link>Scripts\jquery.validate.unobtrusive.dynamic.js</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

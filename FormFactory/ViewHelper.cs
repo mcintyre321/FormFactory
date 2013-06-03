@@ -47,6 +47,7 @@ namespace FormFactory
         }
         public static IHtmlString Attr(this string value, string att)
         {
+            if (value == null) return new HtmlString("");
             return Raw(att + "=\"" + (value ?? att) + "\"");
         }
 

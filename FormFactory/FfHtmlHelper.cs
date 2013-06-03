@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace FormFactory
@@ -9,8 +10,8 @@ namespace FormFactory
         string WriteTypeToString(Type type);
         ViewData ViewData { get; }
         FfContext FfContext { get; }
-        IHtmlString Partial(string partialName, object vm);
-        IHtmlString UnobtrusiveValidation(PropertyVm model);
+        IHtmlString Partial(string partialName, object vm); 
+        void RenderPartial(string partialName, object model);
     }
     public interface FfHtmlHelper<TViewData> : FfHtmlHelper
     {
@@ -40,14 +41,42 @@ namespace FormFactory
     public interface IModelStateDictionary
     {
         bool TryGetValue(string key, out ModelState modelState);
+        ModelState this[string key] { get; }
+        bool ContainsKey(string key);
     }
 
     public interface ModelState
     {
-        ModelStateValue Value { get; }
+        FormFactoryModelStateValue Value { get; }
+        FormFactoryModelStateErrors Errors { get; } 
     }
 
-    public interface ModelStateValue
+    public class FormFactoryModelStateErrors : IEnumerable<FormFactoryModelStateError>
+    {
+        private IEnumerable<FormFactoryModelStateError> _items;
+
+        public FormFactoryModelStateErrors(IEnumerable<FormFactoryModelStateError> items)
+        {
+            _items = items;
+        }
+
+        public IEnumerator<FormFactoryModelStateError> GetEnumerator()
+        {
+            return _items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
+
+    public class FormFactoryModelStateError
+    {
+        public string ErrorMessage { get; set; }
+    }
+
+    public interface FormFactoryModelStateValue
     {
         object AttemptedValue { get;  }
     }

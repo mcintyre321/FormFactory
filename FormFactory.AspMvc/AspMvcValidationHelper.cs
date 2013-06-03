@@ -8,9 +8,9 @@ using System.Text;
 using System.Web.Mvc;
 using FormFactory.AspMvc.Wrappers;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
-    public static class ValidationHelper
+    public static class AspMvcValidationHelper
     {
 
         public static MvcHtmlString AllValidationMessages(this System.Web.Mvc.HtmlHelper helper, string modelName)

@@ -122,14 +122,12 @@ namespace FormFactory.RazorEngine
                 return new HtmlString(ex.Message);
             }
         }
-        public IHtmlString UnobtrusiveValidation(object model)
+         
+        public void RenderPartial(string partialName, object model)
         {
-            return new HtmlString("");
+            throw new NotImplementedException("RenderPartial is not implemented as there is no context to write to in RazorEngine");
         }
-        public IHtmlString UnobtrusiveValidation(PropertyVm model)
-        {
-            return new HtmlString(""); //not implemented
-        }
+
         public IHtmlString Raw(string s)
         {
             return new HtmlString(s);;

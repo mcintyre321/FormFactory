@@ -5,9 +5,9 @@ using System.Text;
 using System.Web.Mvc;
 using FormFactory.AspMvc.Wrappers;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
-    public static class ViewFinderExtensions
+    public static class AspMvcViewFinderExtensions
     {
         public static System.Web.IHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {

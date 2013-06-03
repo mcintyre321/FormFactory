@@ -15,6 +15,7 @@ namespace FormFactory.AspMvc.Mvc.ModelBinders
         public string AttemptedValue
         {
             get { return _getValue.AttemptedValue; }
+        
         }
     }
 }

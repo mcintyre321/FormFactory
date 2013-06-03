@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
 {
@@ -47,7 +48,7 @@ namespace FormFactory.Example.Models
             return "male,female,not specified".Split(',');
         }
 
-        [Required]
+        [Required][Placeholder("Type to find your location")]
         public string Location { get; set; }
         public IEnumerable<string> Location_suggestions()
         {

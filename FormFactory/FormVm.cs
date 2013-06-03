@@ -94,7 +94,7 @@ namespace FormFactory
 
         public FormVm RenderButtons()
         {
-            HtmlHelper.Partial("FormFactory/Form.Actions", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Actions", this);
             return this;
         }
 
@@ -102,21 +102,21 @@ namespace FormFactory
         {
             foreach (var input in Inputs)
             {
-                HtmlHelper.Partial("FormFactory/Form.Property", input);
+                HtmlHelper.RenderPartial("FormFactory/Form.Property", input);
             }
             return this;
         }
 
         public FormVm RenderStart()
         {
-            HtmlHelper.Partial("FormFactory/Form.Start", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Start", this);
             return this;
         }
 
 
         public void Dispose()
         {
-            HtmlHelper.Partial("FormFactory/Form.Close", this);
+            HtmlHelper.RenderPartial("FormFactory/Form.Close", this);
         }
 
 
