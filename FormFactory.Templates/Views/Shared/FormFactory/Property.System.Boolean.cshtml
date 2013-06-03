@@ -1,16 +1,23 @@
-﻿@using FormFactory
-@using FormFactory.AspMvc
-@using IHtmlString = FormFactory.IHtmlString
+﻿@using System.ComponentModel.DataAnnotations
+@using FormFactory.Attributes
+@using FormFactory
 @model PropertyVm
 @{
     var posted = ((Model.Value as bool? ?? bool.Parse((Model.Value as string ?? "false"))));
 }
-<input type='hidden' @FormFactory.ViewHelper.Disabled(Model) value='@posted.ToString().ToLower()' id="hidden-@Model.Id" name='@Model.Name'>
 @helper RenderCheckbox(bool posted)
     {
-    <input @FormFactory.ViewHelper.Readonly(Model) @FormFactory.ViewHelper.Disabled(Model) @Html.UnobtrusiveValidation(Model) type="checkbox" id="@Model.Id" value="true" @ViewHelper.Attr(posted, "checked", null) onchange="javascript: document.getElementById('hidden-@Model.Id').value = this.checked;" />
- }
-@if (Model.LabelOnRight)
+    if (Model.GetCustomAttributes().OfType<RequiredAttribute>().Any())
+    {
+        <input @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation() type="checkbox" id="@Model.Id" name="@Model.Name" value="true" @posted.Att("checked") />
+    }
+    else //if not required, then it is possible to post a false value, which means we need a hidden field as unchecked checkboxes aren't posted. sigh.
+    {
+        <input type='hidden' @Model.Disabled() value='@posted.ToString().ToLower()' id="hidden-@Model.Id" name='@Model.Name' />
+        <input @Model.Readonly() @Model.Disabled() @Model.UnobtrustiveValidation() type="checkbox" id="@Model.Id" value="true" @posted.Att("checked") onchange=" javascript: document.getElementById('hidden-@Model.Id').value = this.checked; " />
+    }
+}
+@if (Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())
 {
     <label class="checkbox">
         @RenderCheckbox(posted)

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Web;
 using System.Web.Mvc;
-using FormFactory.ValueTypes;
 
-namespace FormFactory.AspMvc.Mvc.UploadedFiles
+namespace FormFactory.AspMvc.UploadedFiles
 {
     public class UploadedFileModelBinder<TUploadedFile> : IModelBinder where TUploadedFile : UploadedFile, new()
     {

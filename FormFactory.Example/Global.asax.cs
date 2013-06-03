@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using FormFactory.AspMvc.Mvc.UploadedFiles;
+using FormFactory.AspMvc.UploadedFiles;
 
 namespace FormFactory.Example
 {

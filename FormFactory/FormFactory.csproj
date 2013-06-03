@@ -78,7 +78,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyVm.cs" />
     <Compile Include="TextExtensions.cs" />
-    <Compile Include="ValueTypes\UploadedFile.cs" />
     <Compile Include="ViewFinderExtensions.cs" />
     <Compile Include="ViewHelper.cs" />
     <Compile Include="ViewHelpers\DateTimeOffsetVm.cs" />

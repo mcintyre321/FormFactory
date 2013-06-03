@@ -1,9 +1,8 @@
 using System;
 using System.IO;
 using System.Web;
-using FormFactory.ValueTypes;
 
-namespace FormFactory.AspMvc.Mvc.UploadedFiles
+namespace FormFactory.AspMvc.UploadedFiles
 {
     public class SimpleAppDataFileUploader
     {

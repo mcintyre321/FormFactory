@@ -1,4 +1,5 @@
 ﻿@using System.ComponentModel.DataAnnotations
+@using FormFactory.Attributes
 @using FormFactory
 @using FormFactory.AspMvc
 @model PropertyVm
@@ -11,7 +12,7 @@
     {
         var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
         <span class="control-group @validClass" >
-            @if (Model.ShowLabel && !Model.LabelOnRight)
+            @if (Model.ShowLabel && !Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())
             {
                 <label class="control-label" for="@Model.Id">@Model.DisplayName</label>
             }

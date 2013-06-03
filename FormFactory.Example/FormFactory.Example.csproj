@@ -293,7 +293,7 @@
     <Content Include="Views\Account\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\UploadedFiles\UploadTest.cshtml" />
+    <Content Include="Views\UploadedFiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj">
