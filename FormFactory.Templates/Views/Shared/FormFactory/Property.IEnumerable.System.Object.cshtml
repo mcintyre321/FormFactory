@@ -2,28 +2,46 @@
 @using FormFactory
 @model PropertyVm
 
-@if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof(ICollection<>))
+@if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof (ICollection<>))
 {
     @Html.Partial("FormFactory/Property.ICollection.System.Object", Model)
 }
 else
 {
-    <ul>
-        @{
-            var i = 0;
-
-            foreach (var obj in (IEnumerable<object>) Model.Value)
-            {
-                <li>
-                    @{
-                        var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
-                        {
-                            Value = obj
-                        };
-                        @Html.BestProperty(prop)
-                    }
-                </li>
-            }
+    if (!Model.Readonly && Model.Choices != null)
+    {
+        var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
+        if (choices == null && Model.Choices is IEnumerable<string>)
+        {
+            choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
         }
-    </ul>
+        <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled() multiple="multiple">
+            @foreach (var choice in choices)
+            {
+                var selected = (((IEnumerable<string>)Model.Value).Contains(choice.Item2));
+                <option value="@choice.Item2" @selected.Att("selected")>@choice.Item1</option>
+            }
+        </select>
+    }
+    else
+    {
+        <ul>
+            @{
+                var i = 0;
+
+                foreach (var obj in (IEnumerable<object>) Model.Value)
+                {
+                    <li>
+                        @{
+                            var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
+                            {
+                                Value = obj
+                            };
+                            @Html.BestProperty(prop)
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    }
 }

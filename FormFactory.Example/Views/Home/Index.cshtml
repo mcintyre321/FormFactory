@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "FormFactory Examples";
 }
+@model Person
 <header class="jumbotron masthead">
     <div class="inner">
         <h1>FormFactory</h1>
@@ -170,11 +171,10 @@ public class Person
     <div class="span1">
         &nbsp;</div>
     <div class="span5">
-        <form>
+        <form action="/home/save" method="POST">
         @{
-            var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
-
-            Html.PropertiesFor(me).Render();
+            
+            Html.PropertiesFor(Model).Render();
         }
         <input type="submit" value="submit" />
         </form>

@@ -23,6 +23,7 @@ namespace FormFactory.Example.Models
                 new Movie() {Title = "Bambi"},
 
             };
+            RestrictedMaterials = new[] {"Guns", "Explosives"};
         }
 
         //readonly property
@@ -63,6 +64,12 @@ namespace FormFactory.Example.Models
 
         }
 
-        public ICollection<Movie> TopMovies { get; set; } 
+        public ICollection<Movie> TopMovies { get; set; }
+
+        public IEnumerable<string> RestrictedMaterials { get; set; }
+        public IEnumerable<string> RestrictedMaterials_choices()
+        {
+            return new[] {"Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses"};
+        } 
     }
 }

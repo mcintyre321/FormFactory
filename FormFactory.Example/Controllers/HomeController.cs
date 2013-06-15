@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using FormFactory.Attributes;
+using FormFactory.Example.Models;
 
 namespace FormFactory.Example.Controllers
 {
@@ -40,8 +42,17 @@ namespace FormFactory.Example.Controllers
 
         public ActionResult Index()
         {
-            return View();
+             var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+
+            return View(me);
         }
+
+        [HttpPost]
+        public ActionResult Save(Person person)
+        {
+            return View("Index", person);
+        }
+
     }
 
     public class SignInModel
