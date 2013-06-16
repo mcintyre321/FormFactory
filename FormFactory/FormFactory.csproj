@@ -116,14 +116,8 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Close.cshtml">
       <Link>Views\Shared\FormFactory\Form.Close.cshtml</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.Block.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Property.Block.cshtml</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.cshtml">
       <Link>Views\Shared\FormFactory\Form.Property.cshtml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.Inline.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Property.Inline.cshtml</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Start.cshtml">
       <Link>Views\Shared\FormFactory\Form.Start.cshtml</Link>

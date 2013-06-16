@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
 {
@@ -35,12 +37,12 @@ namespace FormFactory.Example.Models
         [Required()][StringLength(32, MinimumLength = 8)]
         public string Name { get; set; }
 
-        //nullable enumerable property
+        [Description("Enums are rendered as dropdowns - nullable ones have an empty option")]
         public Position? Position { get; set; }
+
 
         public bool Enabled { get; set; }
 
-        //readonly property
         public IEnumerable<string> Hobbies { get; private set; }
 
         public string Gender { get; set; }
