@@ -17,7 +17,7 @@
         {
             var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
     <div class="control-group @validClass">
-        @if (Model.ShowLabel && !Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())
+        @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
         {
             <label class="control-label" for="@Model.Id">@Model.DisplayName()</label>
         }

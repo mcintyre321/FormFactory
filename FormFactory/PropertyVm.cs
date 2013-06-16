@@ -30,7 +30,6 @@ namespace FormFactory
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
-            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -54,7 +53,6 @@ namespace FormFactory
             }
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
-            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -105,7 +103,6 @@ namespace FormFactory
             Readonly = !(pi.GetSetMethod() != null);
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
-            ShowLabel = pi.GetCustomAttributes(true).OfType<NoLabelAttribute>().Any() == false;
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault(x => !string.IsNullOrEmpty(x.Name));
@@ -127,7 +124,6 @@ namespace FormFactory
             }
             Html = html;
             GetCustomAttributes = () => new object[] { };
-            ShowLabel = true;
         }
 
         protected internal HtmlHelper Html { get; set; }
@@ -150,14 +146,17 @@ namespace FormFactory
         public IEnumerable Suggestions { get; set; }
 
         public bool IsHidden { get; set; }
-        public bool ShowLabel { get; set; }
     }
     
-    static class Extensions
+    public static class Extensions
     {
         public static U Maybe<T, U>(this T t, Func<T, U> f) where T : class
         {
             return (t == null) ? default(U) : f(t);
+        }
+        public static bool HasAttribute<TAtt>(this PropertyVm propertyVm)
+        {
+            return propertyVm.GetCustomAttributes().OfType<TAtt>().Any();
         }
     }
 }
