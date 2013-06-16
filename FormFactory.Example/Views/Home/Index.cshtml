@@ -19,53 +19,54 @@
 <div class="marketing">
     <div class="row">
         <div class="span4">
-            <h2>
-                Reflection form generation</h2>
+            <h2>Reflection form generation</h2>
             <p>
-                Because you shouldn't have to update your html when you update your object model</p>
+                Because you shouldn't have to update your html when you update your object model
+            </p>
         </div>
         <div class="span4">
-            <h2>
-                Convention based rendering</h2>
+            <h2>Convention based rendering</h2>
             <p>
                 Specify custom templates for rendering different object types.
             </p>
         </div>
         <div class="span4">
-            <h2>
-                Twitter bootstrap support</h2>
+            <h2>Twitter bootstrap support</h2>
             <p>
-                Styled for bootstrap (by default)</p>
+                Styled for bootstrap (by default)
+            </p>
         </div>
     </div>
     <!--/row-->
 </div>
 <section id="documentation">
     <div class="page-header">
-        <h2>About <small> </small></h2>
+        <h2>About <small></small></h2>
     </div>
     <div class="row">
         <div class="span12">
-            <p>FormFactory renders complex object forms automatically. It refects over an object model or method signature, 
+            <p>
+                FormFactory renders complex object forms automatically. It refects over an object model or method signature, 
                 and builds an intermediate model representing the form and properties. These models are then rendered
                 using customisable templates.
             </p>
-            <p>FormFactory can build complex nested forms with rich content pickers. By following a few simple code conventions, 
+            <p>
+                FormFactory can build complex nested forms with rich content pickers. By following a few simple code conventions, 
                 properties with multiple choices and suggested values can be written in a few lines of code.
             </p>
         </div>
     </div>
     <div class="page-header">
-        <h2>Installation <small> </small></h2>
+        <h2>Installation <small></small></h2>
     </div>
 
     <div class="row">
         <div class="span6">
-                Install the library
+            Install the library
                 <pre class="prettyprint">Nuget install-package FormFactory</pre>
-                Install the content files (.cshtml, .js, .css)
+            Install the content files (.cshtml, .js, .css)
                 <pre class="prettyprint">Nuget install-package FormFactory.Templates</pre>
-                Update your layouts to include
+            Update your layouts to include
                 <pre class="prettyprint">
 &lt;link href="/Content/FormFactory/FormFactory.css" rel="stylesheet" type="text/css"/>
 &lt;script src="/Scripts/FormFactory/FormFactory.js" type="text/javascript">&lt;/script></pre>
@@ -73,22 +74,25 @@
         <div class="span1">&nbsp;</div>
         <div class="span5">Note: To use FormFactory without installing FormFactory.Templates you must <a hef="http://nuget.org/packages/EmbeddedResourceVirtualPathProvider">install</a> and <a href="https://github.com/mcintyre321/FormFactory/blob/master/FormFactory.Example/App_Code/RegisterVirtualPathProvider.cs">configure</a> the <a href="https://github.com/mcintyre321/EmbeddedResourceVirtualPathProvider">EmbeddedResourceVirtualPathProvider </a></div>
 
-    </div><!-- /row -->
-    
+    </div>
+    <!-- /row -->
+
 
     <h2>Form for MVC action:</h2>
 
     <div class="row">
         <div class="span6">
-         
-            <p> Given this action...
+
+            <p>
+                Given this action...
 
                 <pre class="prettyprint">
     [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, string returnUrl)
         { //... } 
 </pre>
             </p>
-            <p> ..writing this in the view...
+            <p>
+                ..writing this in the view...
                 <pre class="prettyprint"> 
 using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
 {
@@ -96,22 +100,24 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 } //.Dispose() closes the form
     </pre>
             </p>
-            
+
         </div>
         <div class="span1">&nbsp;</div>
-        <div class="span5"><p>...will render this form:</p>
+        <div class="span5">
+            <p>...will render this form:</p>
             @{
 
                 using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
                 {
                     form.Render();
                 } //.Dispose() closes the form
-            }</div>
-    </div><!-- /row -->
-    
+            }
+        </div>
+    </div>
+    <!-- /row -->
+
 </section>
-<h1 class="page-header">
-    Rendering objects
+<h1 class="page-header">Rendering objects
 </h1>
 <div class="row">
     <div class="span6">
@@ -120,63 +126,20 @@ var me = new Person() { ... set properties ... };
 
 Html.PropertiesFor(me).Render();
 </pre>
-        <pre class="prettyprint">
-public class Person
-{
-    DateTime _dateOfBirth;
-
-    public Person(DateTime dateOfBirth, string[] hobbies)
-    {
-        _dateOfBirth = dateOfBirth;
-        Hobbies = hobbies;
-        Position = Models.Position.SeniorSubcontractor;
-        Enabled = true;
-    }
-
-    //readonly property
-    public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
-
-    //writable property
-    public string Name { get; set; }
-
-    //nullable enumerable property
-    public Position? Position { get; set; }
-
-    public bool Enabled { get; set; }
-
-    //readonly property
-    public IEnumerable &lt;string> Hobbies { get; private set; }
-
-    public string Gender { get; set; }
-    //choices for geneder rendered as a select list
-    public IEnumerable&lt;string> Gender_choices() 
-    {
-        return "male,female,not specified".Split(',');
-    }
-
-    public string Location { get; set; }
-    //location enhanced with auto complete
-    public IEnumerable&lt;string> Location_suggestions() 
-    {
-        return "USA,UK,Canada".Split(',');
-    } 
-    
-    //rendered as a list with add, remove, re-order options
-    public ICollection&lt;Movie> TopMovies { get; set; } 
-
-}
-
+<pre class="prettyprint">
+@File.ReadAllText(Path.Combine(Server.MapPath("~/bin"), "Models//Person.cs"))
 </pre>
     </div>
     <div class="span1">
-        &nbsp;</div>
+        &nbsp;
+    </div>
     <div class="span5">
         <form action="/home/save" method="POST">
-        @{
+            @{
             
-            Html.PropertiesFor(Model).Render();
-        }
-        <input type="submit" value="submit" />
+                Html.PropertiesFor(Model).Render();
+            }
+            <input type="submit" value="submit" />
         </form>
     </div>
 </div>

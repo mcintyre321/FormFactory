@@ -42,15 +42,22 @@ namespace FormFactory.Example.Controllers
 
         public ActionResult Index()
         {
-             var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+             var me = FetchPersonObject();
 
             return View(me);
         }
 
-        [HttpPost]
-        public ActionResult Save(Person person)
+        private static Person FetchPersonObject()
         {
-            return View("Index", person);
+            return new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+        }
+
+        [HttpPost]
+        public ActionResult Save(Person posted)
+        {
+            var me = FetchPersonObject();
+            this.UpdateModel(me);
+            return View("Index", me);
         }
 
     }

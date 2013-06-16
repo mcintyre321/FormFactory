@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DisplayNameExtension.cs" />
+    <Compile Include="Mvc\ModelBinders\InterfaceModelBinderProvider.cs" />
     <Compile Include="Mvc\ModelBinders\NestedDelegateModelBinderProvider.cs" />
     <Compile Include="Mvc\ModelBinders\NestedModelBinderProvider.cs" />
     <Compile Include="Mvc\UploadedFiles\AppDataFileStore.cs" />
