@@ -126,8 +126,16 @@ var me = new Person() { ... set properties ... };
 
 Html.PropertiesFor(me).Render();
 </pre>
-<pre class="prettyprint">
-@File.ReadAllText(Path.Combine(Server.MapPath("~/Models/Person.cs")))
+        <pre class="prettyprint">
+@{
+    var html = Cache["Person.cs"] as string;
+    if (html == null)
+    {
+        html = new WebClient().DownloadString("https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Person.cs");
+        Cache["Person.cs"] = html;
+    }
+    @html
+}
 </pre>
     </div>
     <div class="span1">
