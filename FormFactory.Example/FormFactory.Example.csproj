@@ -255,8 +255,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
-    <Content Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
