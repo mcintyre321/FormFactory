@@ -293,6 +293,11 @@
   <ItemGroup>
     <Content Include="Views\UploadedFiles\Index.cshtml" />
   </ItemGroup>
+  <Target Name="BeforeBuild">
+    <ItemGroup>
+      <Content Include="Models\*.cs" />
+    </ItemGroup>
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{c5ddcc05-9f10-4039-b5d6-cb96325d832c}</Project>
