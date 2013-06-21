@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="ModelBinders\InterfaceModelBinderProvider.cs" />
     <Compile Include="PropertyRenderExtension.cs" />
+    <Compile Include="AspMvcViewHelper.cs" />
     <Compile Include="UploadedFiles\AppDataFileStore.cs" />
     <Compile Include="UploadedFiles\UploadedFile.cs" />
     <Compile Include="AspMvcViewFinderExtensions.cs" />

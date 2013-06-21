@@ -1,6 +1,7 @@
 ﻿@using System.Collections
 @using System.Collections.Generic;
 @using System.Reflection
+@using FormFactory.AspMvc
 @using FormFactory
 @model PropertyVm
 @{
@@ -8,13 +9,13 @@
     if (Model.Value as IEnumerable != null)
     {
         objectList = new ArrayList();
-        foreach (var v in ((IEnumerable) Model.Value))
+        foreach (var v in ((IEnumerable)Model.Value))
         {
             objectList.Add(v);
         }
     }
 
-    var choices = (IEnumerable<Tuple<string, object>>) Model.Choices ?? Model.Type.GetChoicesForEnumType();;
+    var choices = (IEnumerable<Tuple<string, object>>)Model.Choices ?? Model.Type.GetChoicesForEnumType(); ;
 
     foreach (var choice in choices)
     {

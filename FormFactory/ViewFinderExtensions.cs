@@ -7,21 +7,21 @@ namespace FormFactory
 {
     public static class ViewFinderExtensions
     {
-        public static string BestProperty(this FfHtmlHelper html, PropertyVm vm)
+        public static string BestProperty<THelper>(this THelper html, PropertyVm vm) where THelper : FfHtmlHelper
         {
             var viewname = html.FfContext.BestViewName(vm.Type, "FormFactory/Property.");
             viewname = viewname ?? html.FfContext.BestViewName(vm.Type.GetEnumerableType(), "FormFactory/Property.IEnumerable.");
             viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
             return html.Partial(viewname, vm);
         }
-        public static string BestViewName(this FfHtmlHelper helper, Type type, string prefix = null)
-        {
-            return BestViewName(helper.FfContext, type, prefix);
-        }
-        public static string BestPartial(FfHtmlHelper helper, object model, Type type = null, string prefix = null)
+        public static string BestPartial<THelper>(THelper helper, object model, Type type = null, string prefix = null)where THelper : FfHtmlHelper
         {
             if (type == null) type = model.GetType();
             return helper.Partial(BestViewName(helper.FfContext, type, prefix), model);
+        }
+        public static string BestViewName<THelper>(this THelper helper, Type type, string prefix = null)where THelper : FfHtmlHelper
+        {
+            return BestViewName(helper.FfContext, type, prefix);
         }
         
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()

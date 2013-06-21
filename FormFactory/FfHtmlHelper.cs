@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FormFactory
 {
-    public interface FfHtmlHelper
+    public interface FfHtmlHelper 
     {
         UrlHelper Url();
         string WriteTypeToString(Type type);
@@ -14,6 +14,7 @@ namespace FormFactory
         void RenderPartial(string partialName, object model);
         PropertyVm CreatePropertyVm(Type objectType, string name);
     }
+
     public interface FfHtmlHelper<TViewData> : FfHtmlHelper
     {
         string Partial(string partialName, object vm, TViewData viewData);

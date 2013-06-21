@@ -19,7 +19,7 @@ namespace FormFactory
     {
          
 
-        public static IEnumerable<PropertyVm<THelper>> PropertiesFor<THelper>(THelper helper, object model, Type fallbackModelType = null)
+        public static IEnumerable<PropertyVm<THelper>> PropertiesFor<THelper>( THelper helper, object model, Type fallbackModelType = null)
             where THelper : FfHtmlHelper
         {
             fallbackModelType = fallbackModelType ?? model.GetType();
