@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using FormFactory.AspMvc.ModelBinders;
+using FormFactory.AspMvc.UploadedFiles;
 using FormFactory.Example.Controllers;
-using FormFactory.Mvc;
-using FormFactory.Mvc.ModelBinders;
-using FormFactory.Mvc.UploadedFiles;
 
 namespace FormFactory.Example
 {

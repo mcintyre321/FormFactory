@@ -67,16 +67,6 @@
     <Compile Include="RazorEngine\RazorTemplateView.cs" />
     <Compile Include="RazorEngine\RazorTemplateViewData.cs" />
     <Compile Include="RazorEngine\RazorTemplateViewResult.cs" />
-    <Compile Include="Mvc\ModelBinders\InterfaceModelBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedDelegateModelBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedModelBinderProvider.cs" />
-    <Compile Include="Mvc\UploadedFiles\AppDataFileStore.cs" />
-    <Compile Include="Mvc\UploadedFiles\FileStores.cs" />
-    <Compile Include="VmHelper.cs" />
-    <Compile Include="Mvc\ModelBinders\PolymorphicModelBinder.cs" />
-    <Compile Include="Mvc\UploadedFiles\SimpleAppDataFileUploader.cs" />
-    <Compile Include="Mvc\UploadedFiles\ModelBinderExtensions.cs" />
-    <Compile Include="Mvc\UploadedFiles\UploadedFileModelBinder.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
@@ -196,7 +186,9 @@
       <Link>Scripts\jquery.validate.unobtrusive.dynamic.js</Link>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Mvc\ModelBinders\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

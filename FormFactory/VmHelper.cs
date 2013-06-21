@@ -45,7 +45,6 @@ namespace FormFactory
 
             var typeVm = new PropertyVm(helper, typeof(string), "__type")
                 {
-                    ShowLabel = false,
                     DisplayName = "",
                     IsHidden = true,
                     Value = helper.WriteTypeToString(type)

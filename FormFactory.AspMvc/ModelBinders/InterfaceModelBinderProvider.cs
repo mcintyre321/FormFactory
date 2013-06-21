@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
-namespace FormFactory.Mvc.ModelBinders
+namespace FormFactory.AspMvc.ModelBinders
 {
     public class InterfaceModelBinderProvider : IModelBinderProvider
     {

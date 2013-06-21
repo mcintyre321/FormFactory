@@ -1,10 +1,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using System.Web.Mvc;
 
-namespace FormFactory.AspMvc.Mvc.ModelBinders
+namespace FormFactory.AspMvc.ModelBinders
 {
     public class PolymorphicModelBinder : DefaultModelBinder
     {

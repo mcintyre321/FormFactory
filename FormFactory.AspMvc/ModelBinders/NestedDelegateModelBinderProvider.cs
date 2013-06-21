@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using System.Web.Mvc;
 
-namespace FormFactory.AspMvc.Mvc.ModelBinders
+namespace FormFactory.AspMvc.ModelBinders
 {
     public class NestedDelegateModelBinderProvider : IModelBinderProvider
     {

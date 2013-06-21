@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelBinders\InterfaceModelBinderProvider.cs" />
     <Compile Include="UploadedFiles\AppDataFileStore.cs" />
     <Compile Include="UploadedFiles\UploadedFile.cs" />
     <Compile Include="AspMvcViewFinderExtensions.cs" />
@@ -98,15 +99,15 @@
     <Compile Include="Wrappers\FormFactoryViewData.cs" />
     <Compile Include="Wrappers\FormFactoryViewResult.cs" />
     <Compile Include="FormHelperExtension.cs" />
-    <Compile Include="Mvc\ModelBinders\Encoder.cs" />
-    <Compile Include="Mvc\ModelBinders\FormFactoryModelBindingContext.cs" />
-    <Compile Include="Mvc\ModelBinders\FormFactoryValueProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\FormFactoryValueProviderResult.cs" />
-    <Compile Include="Mvc\ModelBinders\ImplicitOperatorBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\ModelBinderDelegate.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedDelegateModelBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\NestedModelBinderProvider.cs" />
-    <Compile Include="Mvc\ModelBinders\PolymorphicModelBinder.cs" />
+    <Compile Include="ModelBinders\Encoder.cs" />
+    <Compile Include="ModelBinders\FormFactoryModelBindingContext.cs" />
+    <Compile Include="ModelBinders\FormFactoryValueProvider.cs" />
+    <Compile Include="ModelBinders\FormFactoryValueProviderResult.cs" />
+    <Compile Include="ModelBinders\ImplicitOperatorBinderProvider.cs" />
+    <Compile Include="ModelBinders\ModelBinderDelegate.cs" />
+    <Compile Include="ModelBinders\NestedDelegateModelBinderProvider.cs" />
+    <Compile Include="ModelBinders\NestedModelBinderProvider.cs" />
+    <Compile Include="ModelBinders\PolymorphicModelBinder.cs" />
     <Compile Include="UploadedFiles\FileStores.cs" />
     <Compile Include="UploadedFiles\ModelBinderExtensions.cs" />
     <Compile Include="UploadedFiles\SimpleAppDataFileUploader.cs" />
@@ -127,7 +128,9 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Mvc\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using FormFactory.ViewHelpers;
-using Encoder = FormFactory.AspMvc.Mvc.ModelBinders.Encoder;
+using Encoder = FormFactory.AspMvc.ModelBinders.Encoder;
 
 namespace FormFactory.AspMvc.Wrappers
 {

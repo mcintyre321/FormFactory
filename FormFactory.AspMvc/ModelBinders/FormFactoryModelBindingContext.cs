@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using FormFactory.ModelBinding;
 using IValueProvider = FormFactory.ModelBinding.IValueProvider;
 
-namespace FormFactory.AspMvc.Mvc.ModelBinders
+namespace FormFactory.AspMvc.ModelBinders
 {
     public class FormFactoryModelBindingContext : IModelBindingContext
     {

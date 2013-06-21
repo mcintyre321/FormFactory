@@ -1,7 +1,7 @@
 using System.Web.Mvc;
 using FormFactory.ModelBinding;
 
-namespace FormFactory.AspMvc.Mvc.ModelBinders
+namespace FormFactory.AspMvc.ModelBinders
 {
     public class FormFactoryValueProviderResult : IValueProviderResult
     {
