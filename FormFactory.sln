@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.AspMvc", "FormF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.Tests", "FormFactory.Tests\FormFactory.Tests.csproj", "{05082AEF-45DC-42DE-81CE-86090F15FB03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.RazorEngine", "FormFactory.RazorEngine\FormFactory.RazorEngine.csproj", "{2F4E3429-D62F-4382-9342-4734F9830CDC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

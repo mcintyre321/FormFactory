@@ -19,7 +19,7 @@ namespace FormFactory.Tests
             var properties = Properties.For(someObject);
             var annotation = new System.ComponentModel.DataAnnotations.DisplayAttribute();
 
-            var html = properties.Render().ToString().Trim();
+            var html = VmHelper.Render(properties).ToString().Trim();
             Assert.That(string.IsNullOrWhiteSpace(html) == false);
         }
 

@@ -6,7 +6,6 @@
 @model PropertyVm
 @using System.Collections
 @using FormFactory
-@using IHtmlString = FormFactory.IHtmlString
 @if (Model.Choices != null && !Model.Readonly)
 {
     <div class="ff-choices-area">
@@ -65,7 +64,7 @@
 }
 else
 {
-    var properties = Html.PropertiesFor(Model.Value, Model.Type);
+    var properties = Html.PropertiesFor(Model.Value);
     foreach (var p in properties)
     {
         p.Name = Model.Name == null ? p.Name : Model.Name + "." + p.Name;

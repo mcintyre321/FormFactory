@@ -22,7 +22,7 @@ namespace FormFactory.ViewHelpers
             return model.Suggestions.Cast<string>().Select(s => s.Replace("'", "''")).ToArray();
         }
 
-        public static HtmlString GetTypeAheadAttribute(PropertyVm model)
+        public static string GetTypeAheadAttribute(PropertyVm model)
         {
             if (model.Suggestions != null)
             {
@@ -30,10 +30,10 @@ namespace FormFactory.ViewHelpers
                 if (suggestions.Any())
                 {
                     var escapedSuggestions = suggestions.Select(s => "\"" + s.Replace("\"", "\"\"") + "\"");
-                    return new HtmlString(" data-provide=\"typeahead\" data-source='[" + string.Join(",", escapedSuggestions) + "]' autocomplete=\"off\"");
+                    return (" data-provide=\"typeahead\" data-source='[" + string.Join(",", escapedSuggestions) + "]' autocomplete=\"off\"");
                 }
             }
-            return new HtmlString("");
+            return ("");
         }
     }
     public static class Object

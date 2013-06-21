@@ -7,43 +7,32 @@ using System.Text;
 
 namespace FormFactory
 {
-    public static class VmHelper
+    public static class VmHelper<THelper> where THelper : FfHtmlHelper
     {
-        public static Func<FfHtmlHelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
-
         static VmHelper()
         {
             GetPropertyVms = FormFactory.VmHelper.GetPropertyVmsUsingReflection;
         }
-        
-        //public static Func<HtmlHelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
-        
-        //static VmHelper()
-        //{
-        //    GetPropertyVms = GetPropertyVmsUsingReflection;
-        //}
-        
-        //public static IEnumerable<PropertyVm> PropertiesFor<T>(this HtmlHelper helper, T model)
-        //{
-        //    return helper.PropertiesFor(model, typeof(T));
-        //}
-       
-        //public static IEnumerable<PropertyVm> PropertiesFor(this HtmlHelper helper, object model, Type fallbackModelType)
-        //{
-        //    return GetPropertyVms(helper, model, fallbackModelType);
-        //}
+        public static Func<THelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
+    }
+    public static class VmHelper
+    {
+         
 
-        public static IEnumerable<PropertyVm> PropertiesFor(this FfHtmlHelper helper, object model, Type fallbackModelType)
+        public static IEnumerable<PropertyVm<THelper>> PropertiesFor<THelper>(THelper helper, object model, Type fallbackModelType = null)
+            where THelper : FfHtmlHelper
         {
-            return GetPropertyVms(helper, model, fallbackModelType);
+            fallbackModelType = fallbackModelType ?? model.GetType();
+            return VmHelper<THelper>.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm<THelper>>();
         }
 
 
-        public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(FfHtmlHelper helper, object model, Type fallbackModelType)
+        public static IEnumerable<PropertyVm<THelper>> GetPropertyVmsUsingReflection<THelper>(THelper helper, object model, Type fallbackModelType)
+            where THelper : FfHtmlHelper
         {
             var type = model != null ? model.GetType() : fallbackModelType;
 
-            var typeVm = new PropertyVm(helper, typeof(string), "__type")
+            var typeVm = new PropertyVm<THelper>(helper, typeof(string), "__type")
                 {
                     DisplayName = "",
                     IsHidden = true,
@@ -60,7 +49,7 @@ namespace FormFactory
                     continue; //skip this is it is choice
                 }
 
-                var inputVm = new PropertyVm(model, property, helper);
+                var inputVm = new PropertyVm<THelper>(model, property, helper);
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
                 if (choices != null)
                 {
@@ -76,29 +65,29 @@ namespace FormFactory
             }
         }
 
-        public static IHtmlString Render(this IEnumerable<PropertyVm> properties)
+        public static string Render(IEnumerable<PropertyVm> properties)
         {
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.Append(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToEncodedString());
+                sb.Append(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm));
             }
-            return new HtmlString(sb.ToString());
+            return (sb.ToString());
         }
 
-        public static IHtmlString Render(this PropertyVm propertyVm)
+        public static string Render(PropertyVm propertyVm)
         {
             return propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm);
         }
 
-        public static HtmlString ToHtmlString(this IEnumerable<PropertyVm> properties)
+        public static string ToHtmlString(IEnumerable<PropertyVm> properties)
         {
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToEncodedString());
+                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm));
             }
-            var htmlString = new HtmlString(sb.ToString());
+            var htmlString = (sb.ToString());
             return htmlString;
         }
     }

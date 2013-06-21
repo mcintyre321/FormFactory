@@ -44,11 +44,6 @@
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\FormFactory.Example\bin\RazorEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -86,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelBinders\InterfaceModelBinderProvider.cs" />
+    <Compile Include="PropertyRenderExtension.cs" />
     <Compile Include="UploadedFiles\AppDataFileStore.cs" />
     <Compile Include="UploadedFiles\UploadedFile.cs" />
     <Compile Include="AspMvcViewFinderExtensions.cs" />
@@ -128,9 +124,7 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mvc\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

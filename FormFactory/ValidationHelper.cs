@@ -11,14 +11,14 @@ namespace FormFactory
     public static class ValidationHelper
     {
 
-        public static IHtmlString AllValidationMessages(this FfHtmlHelper helper, string modelName)
+        public static string AllValidationMessages(this FfHtmlHelper helper, string modelName)
         {
             if (HasErrors(helper, modelName))
             {
                 var message = string.Join(", ", helper.ViewData.ModelState[modelName].Errors.Select(e => e.ErrorMessage));
-                return new HtmlString(message);
+                return (message);
             }
-            return new HtmlString("");
+            return ("");
         }
 
         public static bool HasErrors(this FfHtmlHelper helper, string modelName)
@@ -89,13 +89,13 @@ namespace FormFactory
 
         public delegate ModelClientValidationRule UnobtrusiveValidationAttributeRule(PropertyVm property, object attribute);
 
-        public static FormFactory.IHtmlString UnobtrusiveValidation(this FfHtmlHelper helper, PropertyVm property)
+        public static string UnobtrusiveValidation(this FfHtmlHelper helper, PropertyVm property)
         {
             var sb = new StringBuilder();
 
             var rules = UnobtrusiveValidationRules.SelectMany(r => r(property));
 
-            if (rules.Any() == false) return new HtmlString("");
+            if (rules.Any() == false) return ("");
 
             sb.Append("data-val=\"true\" ");
             foreach (var rule in rules)
@@ -108,16 +108,16 @@ namespace FormFactory
                 }
             }
 
-            return new HtmlString(sb.ToString());
+            return (sb.ToString());
         }
 
-        public static FormFactory.IHtmlString UnobtrusiveValidation(this PropertyVm property)
+        public static string UnobtrusiveValidation(this PropertyVm property)
         {
             var sb = new StringBuilder();
 
             var rules = UnobtrusiveValidationRules.SelectMany(r => r(property));
 
-            if (rules.Any() == false) return new HtmlString("");
+            if (rules.Any() == false) return ("");
 
             sb.Append("data-val=\"true\" ");
             foreach (var rule in rules)
@@ -130,7 +130,7 @@ namespace FormFactory
                 }
             }
 
-            return new HtmlString(sb.ToString());
+            return (sb.ToString());
         }
     }
 }

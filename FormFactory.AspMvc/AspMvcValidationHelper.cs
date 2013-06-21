@@ -86,7 +86,7 @@ namespace FormFactory
         {
             var unobtrusiveValidation = new FormFactoryHtmlHelper(helper).UnobtrusiveValidation(property);
 
-            return new MvcHtmlString(unobtrusiveValidation.ToEncodedString());
+            return new MvcHtmlString(unobtrusiveValidation);
         }
     }
 

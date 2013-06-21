@@ -31,16 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RazorEngine">
-      <HintPath>..\packages\RazorEngine.3.2.0\lib\net40\RazorEngine.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbeddedResourceRegistry.cs" />
     <Compile Include="UnobtrusiveValidation\ClientValidationRules.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="DisplayNameExtension.cs" />
@@ -58,15 +52,6 @@
     <Compile Include="ModelBinding\IValueProviderResult.cs" />
     <Compile Include="ModelBinding\IValueProvider.cs" />
     <Compile Include="ModelBinding\PolymorphicModelBinder.cs" />
-    <Compile Include="RazorEngine\EmbeddedResourceRegistry.cs" />
-    <Compile Include="RazorEngine\Properties.cs" />
-    <Compile Include="RazorEngine\RazorEngineContext.cs" />
-    <Compile Include="RazorEngine\RazorTemplateFormFactoryTemplate.cs" />
-    <Compile Include="RazorEngine\RazorTemplateHtmlHelper.cs" />
-    <Compile Include="RazorEngine\RazorTemplateModelStateDictionary.cs" />
-    <Compile Include="RazorEngine\RazorTemplateView.cs" />
-    <Compile Include="RazorEngine\RazorTemplateViewData.cs" />
-    <Compile Include="RazorEngine\RazorTemplateViewResult.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
@@ -173,7 +158,6 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml</Link>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +170,7 @@
       <Link>Scripts\jquery.validate.unobtrusive.dynamic.js</Link>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mvc\ModelBinders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

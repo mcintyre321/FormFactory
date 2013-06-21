@@ -10,13 +10,13 @@ namespace FormFactory
         string WriteTypeToString(Type type);
         ViewData ViewData { get; }
         FfContext FfContext { get; }
-        IHtmlString Partial(string partialName, object vm); 
+        string Partial(string partialName, object vm); 
         void RenderPartial(string partialName, object model);
         PropertyVm CreatePropertyVm(Type objectType, string name);
     }
     public interface FfHtmlHelper<TViewData> : FfHtmlHelper
     {
-        IHtmlString Partial(string partialName, object vm, TViewData viewData);
+        string Partial(string partialName, object vm, TViewData viewData);
     }
     public interface FfContext
     {

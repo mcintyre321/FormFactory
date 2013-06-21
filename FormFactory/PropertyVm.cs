@@ -8,6 +8,29 @@ using FormFactory.Attributes;
 
 namespace FormFactory
 {
+    public class PropertyVm<THelper> : PropertyVm where THelper : FfHtmlHelper
+    {
+        public PropertyVm(ParameterInfo pi, THelper html)
+            : base(pi, html)
+        {
+        }
+
+        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, THelper html)
+            : base(modelParamInfo, pi, html)
+        {
+        }
+
+        public PropertyVm(object model, PropertyInfo pi, THelper html)
+            : base(model, pi, html)
+        {
+        }
+
+        public PropertyVm(THelper html, Type type, string name)
+            : base(html, type, name)
+        {
+        }
+    }
+
     public class PropertyVm : IHasDisplayName
     {
         static PropertyVm()

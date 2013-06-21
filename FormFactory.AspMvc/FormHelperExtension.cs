@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -15,43 +14,65 @@ namespace FormFactory
     public static class FormHelperExtension
     {
         #region generic overrides
-        public static FormVm FormForAction<TController, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TActionResult>(this System.Web.Mvc.HtmlHelper html,
+                                                                       Expression<Func<TController, TActionResult>>
+                                                                           action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
-        public static FormVm FormForAction<TController, TArg1, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TArg1, TActionResult>(this System.Web.Mvc.HtmlHelper html,
+                                                                              Expression
+                                                                                  <
+                                                                                  Func
+                                                                                  <TController, TArg1, TActionResult>>
+                                                                                  action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
-        public static FormVm FormForAction<TController, TArg1, TArg2, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TArg1, TArg2, TActionResult>(
+            this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TActionResult>> action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TArg3, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TActionResult>(
+            this System.Web.Mvc.HtmlHelper html,
+            Expression<Func<TController, TArg1, TArg2, TArg3, TActionResult>> action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>(
+            this System.Web.Mvc.HtmlHelper html,
+            Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>> action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>(this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>> action)
+
+        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>(
+            this System.Web.Mvc.HtmlHelper html,
+            Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>> action)
             where TController : IController
             where TActionResult : ActionResult
         {
             return FormFor(html, action.MethodInfo());
         }
+
         #endregion
+
         private static FormVm FormFor(System.Web.Mvc.HtmlHelper html, MethodInfo mi)
         {
             return new FormVm(new FormFactoryHtmlHelper(html), mi);
@@ -61,12 +82,13 @@ namespace FormFactory
         {
             return new FormFactoryHtmlHelper(helper).CreatePropertyVm(objectType, name);
         }
-        public static ObjectChoices[] Choices(this HtmlHelper html, PropertyVm model) 
+
+        public static ObjectChoices[] Choices(this HtmlHelper html, PropertyVm model)
         {
             return new FormFactoryHtmlHelper(html).Choices(model);
         }
 
-       
+
         public static MethodInfo MethodInfo(this Expression method)
         {
             var lambda = method as LambdaExpression;
@@ -79,10 +101,14 @@ namespace FormFactory
             return methodExpr.Method;
         }
 
-        static bool IsNullable<T>(T t) { return false; }
-        static bool IsNullable<T>(T? t) where T : struct { return true; }
-        
+        private static bool IsNullable<T>(T t)
+        {
+            return false;
+        }
 
-        
+        private static bool IsNullable<T>(T? t) where T : struct
+        {
+            return true;
+        }
     }
 }

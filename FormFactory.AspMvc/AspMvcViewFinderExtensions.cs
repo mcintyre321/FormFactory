@@ -19,7 +19,7 @@ namespace FormFactory
         }
         public static System.Web.IHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
         {
-            return helper.Raw(new FormFactoryHtmlHelper(helper).BestPartial(model, type, prefix));
+            return helper.Raw(ViewFinderExtensions.BestPartial(new FormFactoryHtmlHelper(helper), model, type, prefix));
         }
     }
 }

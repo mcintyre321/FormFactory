@@ -257,7 +257,6 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Home\OldRazorEngine.cshtml" />
     <Content Include="Views\Home\RazorEngine.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +300,10 @@
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj">
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj">
+      <Project>{2f4e3429-d62f-4382-9342-4734f9830cdc}</Project>
+      <Name>FormFactory.RazorEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{c5ddcc05-9f10-4039-b5d6-cb96325d832c}</Project>

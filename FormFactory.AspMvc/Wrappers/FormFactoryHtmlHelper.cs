@@ -32,18 +32,18 @@ namespace FormFactory.AspMvc.Wrappers
         public ViewData ViewData { get { return new FormFactoryViewData(_helper.ViewData); } }
         public FfContext FfContext { get{return new FormFactoryContext(_helper.ViewContext.Controller.ControllerContext);} }
 
-        public IHtmlString Partial(string partialName, object vm, ViewDataDictionary viewData)
+        public string Partial(string partialName, object vm, ViewDataDictionary viewData)
         {
-            return (FormFactory.HtmlString)_helper.Partial(partialName, vm, viewData).ToHtmlString();
+            return _helper.Partial(partialName, vm, viewData).ToHtmlString();
         }
-        public IHtmlString Partial(string partialName, object vm)
+        public string Partial(string partialName, object vm)
         {
             return Partial(partialName, vm, null);
         }
 
-        public IHtmlString Raw(string s)
+        public string Raw(string s)
         {
-            return new HtmlString(_helper.Raw(s).ToHtmlString());
+            return (_helper.Raw(s).ToHtmlString());
         }
  
 
@@ -62,12 +62,14 @@ namespace FormFactory.AspMvc.Wrappers
             var html = this;
             var choices = (from obj in model.Choices.Cast<object>().ToArray()
                            let choiceType = obj == null ? model.Type : obj.GetType()
-                           let properties = html.PropertiesFor(obj, choiceType)
+                           let properties = VmHelper.PropertiesFor(html, obj, choiceType)
                                .Each(p => p.Name = model.Name + "." + p.Name)
                                .Each(p => p.Readonly |= model.Readonly)
                                .Each(p => p.Id = Guid.NewGuid().ToString())
                            select new ObjectChoices { obj = obj, choiceType = choiceType, properties = properties, name = (obj != null ? obj.DisplayName() : choiceType.DisplayName()) }).ToArray();
             return choices;
         }
+
+      
     }
 }

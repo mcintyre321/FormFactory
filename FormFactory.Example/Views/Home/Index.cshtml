@@ -2,6 +2,7 @@
 @using FormFactory.AspMvc
 @using FormFactory.Example.Controllers
 @using FormFactory.Example.Models
+@using FormFactory.RazorEngine
 @{
     ViewBag.Title = "FormFactory Examples";
 }
@@ -147,7 +148,16 @@ Html.PropertiesFor(me).Render();
         <div class="span5">
             <form action="/home/save" method="POST">
                 @{
-                    @Html.Raw(Html.PropertiesFor(Model).Render());
+                    if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
+                    {
+                        @(Html.PropertiesFor(Model).Render())
+                    }
+                    else
+                    {
+                        var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
+                        var propertiesFor = helper.PropertiesFor(Model);
+                        @Html.Raw(propertiesFor.Render()) //needs to be made raw as we are in MVC
+                    }
                 }
                 <input type="submit" value="submit" />
             </form>
