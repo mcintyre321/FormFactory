@@ -11,12 +11,16 @@
     else
     {
         if (Model.IsHidden)
-        {   
-            @Html.Partial("FormFactory/Form.Property.Inline", Model, ViewData);
+        {
+    <div style="display: none">@Html.BestProperty(Model)</div>
         }
         else
         {
-           @Html.Partial("FormFactory/Form.Property.Block", Model, ViewData);
+            var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
+    <div class="control-group @validClass">
+        @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
+        {
+            <label class="control-label" for="@Model.Id">@Model.DisplayName()</label>
         }
         <div class="controls">
             @Html.BestProperty(Model)

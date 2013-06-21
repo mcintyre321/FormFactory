@@ -13,8 +13,9 @@ namespace FormFactory.AspMvc.ModelBinders
 
         public IValueProviderResult GetValue(string key)
         {
-            return new FormFactoryValueProviderResult(_valueProvider.GetValue(key));
-
+            var valueProviderResult = _valueProvider.GetValue(key);
+            if (valueProviderResult == null) return null;
+            return new FormFactoryValueProviderResult(valueProviderResult);
         }
     }
 }

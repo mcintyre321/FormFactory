@@ -8,6 +8,7 @@
 }
 else
 {
+    
     if (!Model.Readonly && Model.Choices != null)
     {
         var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
@@ -18,13 +19,8 @@ else
         <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled() multiple="multiple">
             @foreach (var choice in choices)
             {
-                <li>
-                    @{
-                        var prop = Html.CreatePropertyVm(obj.GetType(), Model.Name + i);
-                        prop.Value = obj;
-                        @Html.BestProperty(prop)
-                    }
-                </li>
+                var selected = (((IEnumerable<string>)Model.Value).Contains(choice.Item2));
+                <option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</option>
             }
         </select>
     }
@@ -38,10 +34,8 @@ else
                 {
                     <li>
                         @{
-                            var prop = new PropertyVm(Html, obj.GetType(), Model.Name + i)
-                            {
-                                Value = obj
-                            };
+                            var prop = Html.CreatePropertyVm(obj.GetType(), Model.Name + i++);
+                            prop.Value = obj;
                             @Html.BestProperty(prop)
                         }
                     </li>

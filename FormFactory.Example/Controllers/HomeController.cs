@@ -10,6 +10,13 @@ namespace FormFactory.Example.Controllers
 {
     public class HomeController : Controller
     {
+        private Person Person { get { return Session["person"] as Person; } set { Session["person"] = value; } }
+        protected override void OnActionExecuting(ActionExecutingContext context)
+        {
+            Person = Person ?? new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+            base.OnActionExecuting(context);
+        }
+
         [HttpPost]
         public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
         {
@@ -42,22 +49,16 @@ namespace FormFactory.Example.Controllers
 
         public ActionResult Index()
         {
-             var me = FetchPersonObject();
-
-            return View(me);
+            return View("Index", Person);
         }
 
-        private static Person FetchPersonObject()
-        {
-            return new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
-        }
+        
 
         [HttpPost]
-        public ActionResult Save(Person posted)
+        public ActionResult Save()
         {
-            var me = FetchPersonObject();
-            this.UpdateModel(me);
-            return View("Index", me);
+            this.UpdateModel(Person);
+            return RedirectToAction("Index");
         }
 
     }

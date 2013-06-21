@@ -145,10 +145,9 @@ Html.PropertiesFor(me).Render();
 
     <div class="row">
         <div class="span5">
-            <form>
+            <form action="/home/save" method="POST">
                 @{
-                    var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
-                    @Html.Raw(Html.PropertiesFor(me).Render());
+                    @Html.Raw(Html.PropertiesFor(Model).Render());
                 }
                 <input type="submit" value="submit" />
             </form>
