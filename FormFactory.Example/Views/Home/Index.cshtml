@@ -5,6 +5,7 @@
 @{
     ViewBag.Title = "FormFactory Examples";
 }
+@model Person
 <header class="jumbotron masthead">
     <div class="inner">
         <h1>FormFactory</h1>
@@ -127,51 +128,15 @@ var me = new Person() { ... set properties ... };
 Html.PropertiesFor(me).Render();
 </pre>
         <pre class="prettyprint">
-public class Person
-{
-    DateTime _dateOfBirth;
-
-    public Person(DateTime dateOfBirth, string[] hobbies)
+@{
+    var html = Cache["Person.cs"] as string;
+    if (html == null)
     {
-        _dateOfBirth = dateOfBirth;
-        Hobbies = hobbies;
-        Position = Models.Position.SeniorSubcontractor;
-        Enabled = true;
+        html = new WebClient().DownloadString("https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Person.cs");
+        Cache["Person.cs"] = html;
     }
-
-    //readonly property
-    public int Age { get { return (int) Math.Floor((DateTime.Now - _dateOfBirth).Days/365.25); } }
-
-    //writable property
-    public string Name { get; set; }
-
-    //nullable enumerable property
-    public Position? Position { get; set; }
-
-    public bool Enabled { get; set; }
-
-    //readonly property
-    public IEnumerable &lt;string> Hobbies { get; private set; }
-
-    public string Gender { get; set; }
-    //choices for geneder rendered as a select list
-    public IEnumerable&lt;string> Gender_choices() 
-    {
-        return "male,female,not specified".Split(',');
-    }
-
-    public string Location { get; set; }
-    //location enhanced with auto complete
-    public IEnumerable&lt;string> Location_suggestions() 
-    {
-        return "USA,UK,Canada".Split(',');
-    } 
-    
-    //rendered as a list with add, remove, re-order options
-    public ICollection&lt;Movie> TopMovies { get; set; } 
-
+    @html
 }
-
 </pre>
     </div>
     <div class="span1">

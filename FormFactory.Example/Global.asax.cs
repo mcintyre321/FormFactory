@@ -1,6 +1,9 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using FormFactory.AspMvc.UploadedFiles;
+using FormFactory.Example.Controllers;
+using FormFactory.Mvc;
+using FormFactory.Mvc.ModelBinders;
+using FormFactory.Mvc.UploadedFiles;
 
 namespace FormFactory.Example
 {
@@ -32,8 +35,9 @@ namespace FormFactory.Example
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
-
+            ModelBinderProviders.BinderProviders.Add(new InterfaceModelBinderProvider());
             ModelBinders.Binders.RegisterUploadedFileModelBinder();
+            ModelBinders.Binders.DefaultBinder = new PolymorphicModelBinder();
         }
     }
 }

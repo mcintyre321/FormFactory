@@ -122,7 +122,9 @@
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\SocialMedia.cs" />
-    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Person.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Models\PhoneContactMethod.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\RegisterModel.cs" />

@@ -67,6 +67,16 @@
     <Compile Include="RazorEngine\RazorTemplateView.cs" />
     <Compile Include="RazorEngine\RazorTemplateViewData.cs" />
     <Compile Include="RazorEngine\RazorTemplateViewResult.cs" />
+    <Compile Include="Mvc\ModelBinders\InterfaceModelBinderProvider.cs" />
+    <Compile Include="Mvc\ModelBinders\NestedDelegateModelBinderProvider.cs" />
+    <Compile Include="Mvc\ModelBinders\NestedModelBinderProvider.cs" />
+    <Compile Include="Mvc\UploadedFiles\AppDataFileStore.cs" />
+    <Compile Include="Mvc\UploadedFiles\FileStores.cs" />
+    <Compile Include="VmHelper.cs" />
+    <Compile Include="Mvc\ModelBinders\PolymorphicModelBinder.cs" />
+    <Compile Include="Mvc\UploadedFiles\SimpleAppDataFileUploader.cs" />
+    <Compile Include="Mvc\UploadedFiles\ModelBinderExtensions.cs" />
+    <Compile Include="Mvc\UploadedFiles\UploadedFileModelBinder.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="Attributes\FormModelAttribute.cs" />
     <Compile Include="Attributes\PlaceholderAttribute.cs" />
@@ -98,14 +108,8 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Close.cshtml">
       <Link>Views\Shared\FormFactory\Form.Close.cshtml</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.Block.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Property.Block.cshtml</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.cshtml">
       <Link>Views\Shared\FormFactory\Form.Property.cshtml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.Inline.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Property.Inline.cshtml</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Start.cshtml">
       <Link>Views\Shared\FormFactory\Form.Start.cshtml</Link>

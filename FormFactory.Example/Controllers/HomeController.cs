@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using FormFactory.Attributes;
+using FormFactory.Example.Models;
 
 namespace FormFactory.Example.Controllers
 {
@@ -40,12 +42,24 @@ namespace FormFactory.Example.Controllers
 
         public ActionResult Index()
         {
-            return View();
+             var me = FetchPersonObject();
+
+            return View(me);
         }
-        public ActionResult RazorEngine()
+
+        private static Person FetchPersonObject()
         {
-            return View();
+            return new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
         }
+
+        [HttpPost]
+        public ActionResult Save(Person posted)
+        {
+            var me = FetchPersonObject();
+            this.UpdateModel(me);
+            return View("Index", me);
+        }
+
     }
 
     public class SignInModel

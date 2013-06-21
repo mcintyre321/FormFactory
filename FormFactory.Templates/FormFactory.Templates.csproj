@@ -92,13 +92,7 @@
     <Content Include="Views\Shared\FormFactory\Form.Close.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Property.Block.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Property.Inline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\FormFactory\Form.Start.cshtml" />

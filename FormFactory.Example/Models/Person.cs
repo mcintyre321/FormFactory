@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace FormFactory.Example.Models
     {
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
+        public Person()
+        {
+        }
         public Person(DateTime dateOfBirth, string[] hobbies)
         {
             DateOfBirth = dateOfBirth;
@@ -24,6 +27,7 @@ namespace FormFactory.Example.Models
                 new Movie() {Title = "Bambi"},
 
             };
+            RestrictedMaterials = new[] {"Guns", "Explosives"};
         }
 
         //readonly property
@@ -33,12 +37,12 @@ namespace FormFactory.Example.Models
         [Required()][StringLength(32, MinimumLength = 8)]
         public string Name { get; set; }
 
-        //nullable enumerable property
+        [Description("Enums are rendered as dropdowns - nullable ones have an empty option")]
         public Position? Position { get; set; }
+
 
         public bool Enabled { get; set; }
 
-        //readonly property
         public IEnumerable<string> Hobbies { get; private set; }
 
         public string Gender { get; set; }
@@ -56,14 +60,23 @@ namespace FormFactory.Example.Models
         }
 
         public ContactMethod ContactMethod { get; set; }
-        public IEnumerable<ContactMethod> ContactMethod_choices()
+        //you can use objects as choices to create complex nested menus
+        public IEnumerable<ContactMethod> ContactMethod_choices() 
         {
-            yield return new NoContactMethod();
-            yield return new SocialMedia().Selected();
-            yield return new PhoneContactMethod();
-
+            yield return ContactMethod is NoContactMethod ? ContactMethod.Selected() : new NoContactMethod();
+            yield return ContactMethod is SocialMedia ? ContactMethod.Selected() : new SocialMedia();
+            yield return ContactMethod is PhoneContactMethod ? ContactMethod.Selected() : new PhoneContactMethod();
         }
 
-        public ICollection<Movie> TopMovies { get; set; } 
+        //ICollections get rendered as re-orderable lists
+        public ICollection<Movie> TopMovies { get; set; }
+
+        //the interface model binder will bind IEnumerable<T> to T[]
+        public IEnumerable<string> RestrictedMaterials { get; set; }
+        //settable IEnumerable<strings> with choices get rendered as multi-selects.
+        public IEnumerable<string> RestrictedMaterials_choices()
+        {
+            return new[] {"Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses"};
+        } 
     }
 }

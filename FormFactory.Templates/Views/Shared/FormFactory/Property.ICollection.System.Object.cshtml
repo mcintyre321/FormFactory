@@ -28,8 +28,8 @@
                     }
                 }
             }
-            <li class="ff-not-collection-item"><a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name">
-                <i class="icon-plus"></i>Add</a>
+            <li class="ff-not-collection-item"><a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name" title="Add">
+                <i class="icon-plus icon-white"></i></a>
                 <script type="text/html">
                     @{
                         var template =
@@ -45,9 +45,8 @@
     
 }
 @helper Links()
-    {
-    <a class="btn btn-mini ff-move-up" href="#moveup"><i class="icon-arrow-up"></i>Move
-        Up</a> <a class="btn btn-mini ff-move-down" href="#moveup"><i class="icon-arrow-down">
-        </i>Move Down</a> <a class="btn btn-mini ff-remove-parent btn-danger" href="#remove">
-            <i class="icon-remove"></i>Remove</a> 
+{
+    <a class="btn btn-mini ff-move-up" href="#moveup" title="Move Up"><i class="icon-arrow-up"></i></a> <a class="btn btn-mini ff-move-down" href="#moveup" title="Move Down"><i class="icon-arrow-down">
+    </i></a> <a class="btn btn-mini ff-remove-parent btn-danger" href="#remove" title="Remove">
+        <i class="icon-remove icon-white"></i></a> 
 }
