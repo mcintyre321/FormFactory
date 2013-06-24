@@ -11,7 +11,7 @@ namespace FormFactory
     {
         public static System.Web.IHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            return html.Raw(new FormFactoryHtmlHelper(html).BestProperty(vm));
+            return html.Raw(ViewFinderExtensions.BestProperty(new FormFactoryHtmlHelper(html), vm));
         }
         public static System.Web.IHtmlString BestViewName(this HtmlHelper helper, Type type, string prefix = null)
         {

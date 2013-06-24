@@ -7,7 +7,7 @@ namespace FormFactory
 {
     public static class ViewFinderExtensions
     {
-        public static string BestProperty<THelper>(this THelper html, PropertyVm vm) where THelper : FfHtmlHelper
+        public static string BestProperty<THelper>(THelper html, PropertyVm vm) where THelper : FfHtmlHelper
         {
             var viewname = html.FfContext.BestViewName(vm.Type, "FormFactory/Property.");
             viewname = viewname ?? html.FfContext.BestViewName(vm.Type.GetEnumerableType(), "FormFactory/Property.IEnumerable.");

@@ -1,0 +1,51 @@
+﻿using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
+using FormFactory.AspMvc.Wrappers;
+using FormFactory.Attributes;
+
+namespace FormFactory.AspMvc
+{
+    public static class AspMvcViewHelper
+    {
+        public static IHtmlString Raw(this bool value, string output)
+        {
+            return new HtmlString(value ? output : "");
+        }
+        public static IHtmlString Raw(this string value)
+        {
+            return new HtmlString(value);
+        }
+
+        public static IHtmlString InputAtts(this PropertyVm vm)
+        {
+            return new HtmlString(string.Join("", string.Join(" ", new string[] { vm.Disabled().ToString(), vm.Readonly().ToString(), vm.DataAtts().ToString() })));
+        }
+        public static IHtmlString Disabled(this PropertyVm vm)
+        {
+            return Attr(vm.Disabled, "disabled", null);
+        }
+        public static IHtmlString Readonly(this PropertyVm vm)
+        {
+            return Attr(vm.Readonly, "readonly", null);
+        }
+
+
+        public static IHtmlString Attr(this bool value, string att, string attValue = null)
+        {
+            return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
+        }
+        public static IHtmlString Attr(this string value, string att)
+        {
+            if (value == null) return new HtmlString("");
+            return Raw(att + "=\"" + (value ?? att) + "\"");
+        }
+
+        public static IHtmlString Placeholder(PropertyVm pi)
+        {
+            var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+            return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
+        }
+    }
+}
