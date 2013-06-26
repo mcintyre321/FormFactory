@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FormFactory.RazorEngine")]
 [assembly: AssemblyDescription("Object to html form transformer. FormFactory.RazorEngine can be embedded in WebApi, Nancy and Console apps. See http://formfactory.apphb.com/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Harry McIntyre")]
 [assembly: AssemblyProduct("FormFactory.RazorEngine")]
 [assembly: AssemblyCopyright("Harry McIntyre Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

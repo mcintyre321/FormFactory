@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FormFactory.AspMvc")]
 [assembly: AssemblyDescription("Advanced object to html form transformer. FormFactory.AspMvc should be used with ASP MVC. See http://formfactory.apphb.com/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Harry McIntyre")]
 [assembly: AssemblyProduct("FormFactory.AspMvc")]
 [assembly: AssemblyCopyright("Harry McIntyre Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
