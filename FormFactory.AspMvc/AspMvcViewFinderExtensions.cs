@@ -10,8 +10,10 @@ namespace FormFactory
     {
         public static System.Web.IHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            return html.Partial(ViewFinderExtensions.BestPropertyName(new FormFactoryHtmlHelper(html), vm));
+            string viewName = ViewFinderExtensions.BestPropertyName(new FormFactoryHtmlHelper(html), vm);
+            return html.Partial(viewName, vm);
         }
+
         public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
         {
             return new FormFactoryHtmlHelper(html).BestViewName(type, prefix);
