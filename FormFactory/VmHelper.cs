@@ -65,30 +65,6 @@ namespace FormFactory
             }
         }
 
-        public static string Render(IEnumerable<PropertyVm> properties)
-        {
-            var sb = new StringBuilder();
-            foreach (var propertyVm in properties)
-            {
-                sb.Append(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm));
-            }
-            return (sb.ToString());
-        }
-
-        public static string Render(PropertyVm propertyVm)
-        {
-            return propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm);
-        }
-
-        public static string ToHtmlString(IEnumerable<PropertyVm> properties)
-        {
-            var sb = new StringBuilder();
-            foreach (var propertyVm in properties)
-            {
-                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm));
-            }
-            var htmlString = (sb.ToString());
-            return htmlString;
-        }
+        
     }
 }

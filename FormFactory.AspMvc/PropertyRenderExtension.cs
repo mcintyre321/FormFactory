@@ -1,20 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using FormFactory.AspMvc.Wrappers;
 
-namespace FormFactory
+namespace FormFactory.AspMvc
 {
     public static class PropertyRenderExtension
     {
-        public static IHtmlString Render<THelper>(this IEnumerable<PropertyVm<THelper>> properties) where THelper: FfHtmlHelper
+        public static IHtmlString Render(this IEnumerable<PropertyVm<FormFactoryHtmlHelper>> properties)
         {
-            return new MvcHtmlString(FormFactory.VmHelper.Render(properties));
+            var sb = new StringBuilder();
+            foreach (var propertyVm in properties)
+            {
+                sb.AppendLine(propertyVm.Render().ToString());
+            }
+            return new MvcHtmlString(sb.ToString());
         }
 
-        public static IHtmlString Render<THelper>(this PropertyVm<THelper> propertyVm) where THelper: FfHtmlHelper
+        public static IHtmlString Render(this PropertyVm<FormFactoryHtmlHelper> propertyVm)
         {
-            return new MvcHtmlString(FormFactory.VmHelper.Render(propertyVm));
+            return (propertyVm.Html.InnerHtmlHelper.Partial("FormFactory/Form.Property", propertyVm));
         }
     }
+     
 }

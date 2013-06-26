@@ -32,6 +32,11 @@ namespace FormFactory.AspMvc.Wrappers
         public ViewData ViewData { get { return new FormFactoryViewData(_helper.ViewData); } }
         public FfContext FfContext { get{return new FormFactoryContext(_helper.ViewContext.Controller.ControllerContext);} }
 
+        public HtmlHelper InnerHtmlHelper
+        {
+            get { return _helper; }
+        }
+
         public string Partial(string partialName, object vm, ViewDataDictionary viewData)
         {
             return _helper.Partial(partialName, vm, viewData).ToHtmlString();

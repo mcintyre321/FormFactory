@@ -29,6 +29,11 @@ namespace FormFactory
             : base(html, type, name)
         {
         }
+
+        public new THelper Html
+        {
+            get { return (THelper) base.Html; }
+        }
     }
 
     public class PropertyVm : IHasDisplayName

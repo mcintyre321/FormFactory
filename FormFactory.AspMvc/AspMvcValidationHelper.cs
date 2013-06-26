@@ -84,7 +84,7 @@ namespace FormFactory
 
         public static MvcHtmlString UnobtrusiveValidation(this HtmlHelper helper, PropertyVm property)
         {
-            var unobtrusiveValidation = new FormFactoryHtmlHelper(helper).UnobtrusiveValidation(property);
+            var unobtrusiveValidation = ValidationHelper.UnobtrusiveValidation(new FormFactoryHtmlHelper(helper), property);
 
             return new MvcHtmlString(unobtrusiveValidation);
         }

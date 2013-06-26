@@ -56,8 +56,12 @@ namespace FormFactory.RazorEngine
             type = type ?? model.GetType();
             return VmHelper.GetPropertyVmsUsingReflection(this, model, type);
         }
-       
-      
+
+        public RawString UnobtrusiveValidation(PropertyVm property)
+        {
+            return new RawString(ValidationHelper.UnobtrusiveValidation(this, property));
+        }
+
         public UrlHelper Url()
         {
             throw new NotImplementedException("Url not implemented in FormFactory.RazorTemplate");
@@ -76,7 +80,7 @@ namespace FormFactory.RazorEngine
 
         public object Model { get; set; }
 
-        public string BestProperty(PropertyVm vm)
+        public RawString BestProperty(PropertyVm vm)
         {
             try
             {
@@ -89,7 +93,7 @@ namespace FormFactory.RazorEngine
             }
             catch(Exception ex)
             {
-                return (ex.Message);
+                return new RawString(ex.Message);
             }
         }
         public bool HasErrors(string modelName)
@@ -105,11 +109,11 @@ namespace FormFactory.RazorEngine
             return new PropertyVm(this, type, name) { Value = value };
         }
 
-        public string Partial(string partialName, object model)
+        public RawString Partial(string partialName, object model)
         {
             return Partial(partialName, model, null);
         }
-        public string Partial(string partialName, object model, IDictionary<string, object> viewData)
+        public RawString Partial(string partialName, object model, IDictionary<string, object> viewData)
         {
             var template = Razor.Resolve(partialName, model);
             var dyn = (dynamic) template;
@@ -119,11 +123,11 @@ namespace FormFactory.RazorEngine
             try
             {
                 string result = template.Run(new ExecuteContext());
-                return (result);
+                return new RawString(result);
             }
             catch (Exception ex)
             {
-                return (ex.Message);
+                return new RawString(ex.Message);
             }
         }
          
@@ -161,9 +165,38 @@ namespace FormFactory.RazorEngine
 
         public RawString BestPartial(object model, Type type = null, string prefix = null)
         {
-            return new RawString(ViewFinderExtensions.BestPartial(this, model, type, prefix));
+            return Partial(ViewFinderExtensions.BestPartialName(this, model, type, prefix), model);
+        }
+
+
+        //public static RawString Render<THelper>(IEnumerable<PropertyVm<THelper>> properties) where THelper : FfHtmlHelper
+        //{
+        //    return (Render(properties));
+        //}
+
+        //public static RawString Render<THelper>(PropertyVm<THelper> propertyVm) where THelper : FfHtmlHelper
+        //{
+        //    return (Render(propertyVm));
+        //}
+        
+        //string Partial(string partialName, object vm); 
+        //string Partial(string partialName, object vm, TViewData viewData);
+
+        public static RawString Render(PropertyVm<RazorTemplateHtmlHelper> propertyVm)
+        {
+            return propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm);
+        }
+
+        public static string ToHtmlString(IEnumerable<PropertyVm<RazorTemplateHtmlHelper>> properties)
+        {
+            var sb = new StringBuilder();
+            foreach (var propertyVm in properties)
+            {
+                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToString());
+            }
+            var htmlString = (sb.ToString());
+            return htmlString;
         }
     }
-
     
 }

@@ -89,7 +89,7 @@ namespace FormFactory
 
         public delegate ModelClientValidationRule UnobtrusiveValidationAttributeRule(PropertyVm property, object attribute);
 
-        public static string UnobtrusiveValidation(this FfHtmlHelper helper, PropertyVm property)
+        public static string UnobtrusiveValidation(FfHtmlHelper helper, PropertyVm property)
         {
             var sb = new StringBuilder();
 

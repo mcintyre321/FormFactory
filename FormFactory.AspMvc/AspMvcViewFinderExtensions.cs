@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using FormFactory.AspMvc.Wrappers;
 
 namespace FormFactory
@@ -11,15 +10,16 @@ namespace FormFactory
     {
         public static System.Web.IHtmlString BestProperty(this HtmlHelper html, PropertyVm vm)
         {
-            return html.Raw(ViewFinderExtensions.BestProperty(new FormFactoryHtmlHelper(html), vm));
+            return html.Partial(ViewFinderExtensions.BestPropertyName(new FormFactoryHtmlHelper(html), vm));
         }
-        public static System.Web.IHtmlString BestViewName(this HtmlHelper helper, Type type, string prefix = null)
+        public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
         {
-            return helper.Raw(new FormFactoryHtmlHelper(helper).BestViewName(type, prefix));
+            return new FormFactoryHtmlHelper(html).BestViewName(type, prefix);
         }
-        public static System.Web.IHtmlString BestPartial(this HtmlHelper helper, object model, Type type = null, string prefix = null)
+        public static System.Web.IHtmlString BestPartial(this HtmlHelper html, object model, Type type = null, string prefix = null)
         {
-            return helper.Raw(ViewFinderExtensions.BestPartial(new FormFactoryHtmlHelper(helper), model, type, prefix));
+            return html.Partial(ViewFinderExtensions.BestPartialName(new FormFactoryHtmlHelper(html), model));
+            
         }
     }
 }

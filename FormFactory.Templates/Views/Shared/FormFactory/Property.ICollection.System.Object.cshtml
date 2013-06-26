@@ -31,13 +31,10 @@
             <li class="ff-not-collection-item"><a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name" title="Add">
                 <i class="icon-plus icon-white"></i></a>
                 <script type="text/html">
-                    @{
-                        var template =
-                            "<div class=\"ff-collection-new-item ff-form\" style=\"display: none\"><input type='hidden' name='' value='' />" +
-                            VmHelper.Render(Html.PropertiesFor(Activator.CreateInstance(templateType), templateType))
-                                .ToString() + Links() + "</div>";
-                        @template
-                    }
+                    <div class="ff-collection-new-item ff-form" style="display: none"><input type='hidden' name='' value='' />
+                        @Html.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render().ToString()
+                        @Links()
+                    </div>
                 </script>
             </li>
         </ul>
