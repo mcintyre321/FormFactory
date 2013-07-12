@@ -9,7 +9,7 @@ namespace FormFactory
         UrlHelper Url();
         string WriteTypeToString(Type type);
         ViewData ViewData { get; }
-        FfContext FfContext { get; }
+        IViewFinder ViewFinder { get; }
         //string Partial(string partialName, object vm); 
         void RenderPartial(string partialName, object model);
         PropertyVm CreatePropertyVm(Type objectType, string name);
@@ -19,12 +19,12 @@ namespace FormFactory
     {
         //string Partial(string partialName, object vm, TViewData viewData);
     }
-    public interface FfContext
+    public interface IViewFinder
     {
-        ViewResult FindPartialView(string partialViewName);
+        IViewFinderResult FindPartialView(string partialViewName);
     }
 
-    public interface ViewResult
+    public interface IViewFinderResult
     {
         View View { get; }
     }

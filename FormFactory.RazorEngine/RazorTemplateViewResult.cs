@@ -1,6 +1,6 @@
 ﻿namespace FormFactory.RazorEngine
 {
-    public class RazorTemplateViewResult : ViewResult
+    public class RazorTemplateViewFinderResult : IViewFinderResult
     {
         public View View { get; set; }
     }

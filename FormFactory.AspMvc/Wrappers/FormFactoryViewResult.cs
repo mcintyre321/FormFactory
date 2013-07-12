@@ -2,11 +2,11 @@
 
 namespace FormFactory.AspMvc.Wrappers
 {
-    public class FormFactoryViewResult : ViewResult
+    public class FormFactoryViewFinderResult : IViewFinderResult
     {
         private readonly ViewEngineResult _findPartialView;
 
-        public FormFactoryViewResult(ViewEngineResult findPartialView)
+        public FormFactoryViewFinderResult(ViewEngineResult findPartialView)
         {
             _findPartialView = findPartialView;
         }

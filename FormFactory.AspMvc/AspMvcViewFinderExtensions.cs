@@ -16,12 +16,12 @@ namespace FormFactory
 
         public static string BestViewName(this HtmlHelper html, Type type, string prefix = null)
         {
-            return new FormFactoryHtmlHelper(html).BestViewName(type, prefix);
+            return FormFactory.ViewFinderExtensions.BestViewName(new FormFactoryHtmlHelper(html), type, prefix);
         }
         public static System.Web.IHtmlString BestPartial(this HtmlHelper html, object model, Type type = null, string prefix = null)
         {
-            return html.Partial(ViewFinderExtensions.BestPartialName(new FormFactoryHtmlHelper(html), model));
-            
+            var partialViewName = BestViewName(html, type ?? model.GetType(), prefix);
+            return html.Partial(partialViewName, model);
         }
     }
 }

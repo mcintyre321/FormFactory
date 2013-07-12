@@ -2,7 +2,7 @@
 
 namespace FormFactory.AspMvc.Wrappers
 {
-    public class FormFactoryContext : FfContext
+    public class FormFactoryContext : IViewFinder
     {
         private readonly ControllerContext _cc;
 
@@ -11,11 +11,11 @@ namespace FormFactory.AspMvc.Wrappers
             _cc = cc;
         }
 
-        public ViewResult FindPartialView(string partialViewName)
+        public IViewFinderResult FindPartialView(string partialViewName)
         {
             var viewEngineResult = ViewEngines.Engines.FindPartialView(_cc, partialViewName);
             if (viewEngineResult == null) return null;
-            return new FormFactoryViewResult(viewEngineResult);
+            return new FormFactoryViewFinderResult(viewEngineResult);
         }
     }
 }

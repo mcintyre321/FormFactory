@@ -20,24 +20,31 @@
 </header>
 <div class="marketing">
     <div class="row">
-        <div class="span4">
+        <div class="span3">
             <h2>Reflection form generation</h2>
             <p>
                 Because you shouldn't have to update your html when you update your object model
             </p>
         </div>
-        <div class="span4">
+        <div class="span3">
             <h2>Convention based rendering</h2>
             <p>
                 Specify custom templates for rendering different object types.
             </p>
         </div>
-        <div class="span4">
+        <div class="span3">
             <h2>Twitter bootstrap support</h2>
             <p>
                 Styled for bootstrap (by default)
             </p>
         </div>
+        <div class="span3">
+            <h2>Portable, embeddable</h2>
+            <p>
+                FormFactory.RazorEngine can be used in non ASP projects like console apps, services or WebAPI projects.  
+            </p>
+        </div>
+
     </div>
     <!--/row-->
 </div>
@@ -65,9 +72,10 @@
     <div class="row">
         <div class="span6">
             Install the library
-                <pre class="prettyprint">Nuget install-package FormFactory.AspMvc</pre> 
-                <div>or for non ASP MVC projects</div>
-                <pre class="prettyprint">Nuget install-package FormFactory.RazorEngine</pre> OR
+                <pre class="prettyprint">Nuget install-package FormFactory.AspMvc</pre>
+            <div>or for non ASP MVC projects</div>
+            <pre class="prettyprint">Nuget install-package FormFactory.RazorEngine</pre>
+            OR
             Install the content files (.cshtml, .js, .css)
                 <pre class="prettyprint">Nuget install-package FormFactory.Templates</pre>
             Update your layouts to include
@@ -152,13 +160,13 @@ Html.PropertiesFor(me).Render();
                 @{
                     if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
                     {
-                        @(Html.PropertiesFor(Model).Render())
+                    @(Html.PropertiesFor(Model).Render())
                     }
                     else
                     {
                         var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
                         var propertiesFor = helper.PropertiesFor(Model);
-                        @Html.Raw(propertiesFor.Render()) //needs to be made raw as we are in MVC
+                    @Html.Raw(propertiesFor.Render()) //needs to be made raw as we are in MVC
                     }
                 }
                 <input type="submit" value="submit" />

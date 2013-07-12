@@ -30,7 +30,7 @@ namespace FormFactory.AspMvc.Wrappers
        
 
         public ViewData ViewData { get { return new FormFactoryViewData(_helper.ViewData); } }
-        public FfContext FfContext { get{return new FormFactoryContext(_helper.ViewContext.Controller.ControllerContext);} }
+        public IViewFinder ViewFinder { get{return new FormFactoryContext(_helper.ViewContext.Controller.ControllerContext);} }
 
         public HtmlHelper InnerHtmlHelper
         {

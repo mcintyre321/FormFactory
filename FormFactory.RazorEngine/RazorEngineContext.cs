@@ -1,6 +1,6 @@
 ﻿namespace FormFactory.RazorEngine
 {
-    public class RazorEngineContext : FfContext
+    public class RazorEngineContext : IViewFinder
     {
         private readonly RazorTemplateHtmlHelper _razorTemplateHtmlHelper;
 
@@ -9,11 +9,11 @@
             _razorTemplateHtmlHelper = razorTemplateHtmlHelper;
         }
 
-        public ViewResult FindPartialView(string partialViewName)
+        public IViewFinderResult FindPartialView(string partialViewName)
         {
             var viewName = EmbeddedResourceRegistry.ResolveResourcePath(partialViewName);
-            if (viewName == null) return new RazorTemplateViewResult();
-            return new RazorTemplateViewResult()
+            if (viewName == null) return new RazorTemplateViewFinderResult();
+            return new RazorTemplateViewFinderResult()
                 {
                     View = new RazorTemplateView()
                 };

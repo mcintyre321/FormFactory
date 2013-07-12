@@ -73,7 +73,7 @@ namespace FormFactory.RazorEngine
         }
 
         public ViewData ViewData { get { return new RazorTemplateViewData(this); } }
-        public FfContext FfContext
+        public IViewFinder ViewFinder
         {
             get { return new RazorEngineContext(this); }
         }
@@ -84,9 +84,9 @@ namespace FormFactory.RazorEngine
         {
             try
             {
-                var viewname = this.FfContext.BestViewName(vm.Type, "FormFactory/Property.");
+                var viewname = ViewFinderExtensions.BestViewName(this.ViewFinder, vm.Type, "FormFactory/Property.");
                 viewname = viewname ??
-                           FfContext.BestViewName(vm.Type.GetEnumerableType(), "FormFactory/Property.IEnumerable.");
+                           ViewFinderExtensions.BestViewName(ViewFinder, vm.Type.GetEnumerableType(), "FormFactory/Property.IEnumerable.");
                 viewname = viewname ?? "FormFactory/Property.System.Object";
                 //must be some unknown object exposed as an interface
                 return Partial(viewname, vm);
