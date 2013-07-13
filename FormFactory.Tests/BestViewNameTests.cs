@@ -8,8 +8,10 @@ namespace FormFactory.Tests
     {
         [TestCase("asdf", false)]
         [TestCase("SomeType", true)]
+        [TestCase("FormFactory.Tests.SomeType", true)]
         [TestCase("SomeBaseType", true)]
         [TestCase("Object", true)]
+        [TestCase("System.Object", true)]
         public void DivideTest(string viewname, bool viewShouldBeFound)
         {
             var bestViewName = ViewFinderExtensions.BestViewName(
@@ -17,6 +19,17 @@ namespace FormFactory.Tests
                 typeof (SomeType),
                 "FormFactory/Property.");
             Assert.AreEqual(viewShouldBeFound, (bestViewName != null));
+        }
+
+        [Test]
+        public void FindsFullyQualifiedNameFirrst()
+        {
+            var fullyQualifiedViewName = "FormFactory/Property." + typeof (SomeType).FullName;
+            var bestViewName = ViewFinderExtensions.BestViewName(
+                (IViewFinder)new DummyViewFinder("FormFactory/Property.Object.cshtml", fullyQualifiedViewName + ".cshtml"),
+                typeof(SomeType),
+                "FormFactory/Property.");
+            Assert.AreEqual(fullyQualifiedViewName, bestViewName);
         }
     }
 
