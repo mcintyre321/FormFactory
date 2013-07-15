@@ -19,20 +19,20 @@ namespace FormFactory
     {
          
 
-        public static IEnumerable<PropertyVm<THelper>> PropertiesFor<THelper>( THelper helper, object model, Type fallbackModelType = null)
+        public static IEnumerable<PropertyVm> PropertiesFor<THelper>( THelper helper, object model, Type fallbackModelType = null)
             where THelper : FfHtmlHelper
         {
             fallbackModelType = fallbackModelType ?? model.GetType();
-            return VmHelper<THelper>.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm<THelper>>();
+            return VmHelper<THelper>.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm>();
         }
 
 
-        public static IEnumerable<PropertyVm<THelper>> GetPropertyVmsUsingReflection<THelper>(THelper helper, object model, Type fallbackModelType)
+        public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection<THelper>(THelper helper, object model, Type fallbackModelType)
             where THelper : FfHtmlHelper
         {
             var type = model != null ? model.GetType() : fallbackModelType;
 
-            var typeVm = new PropertyVm<THelper>(helper, typeof(string), "__type")
+            var typeVm = new PropertyVm(typeof(string), "__type")
                 {
                     DisplayName = "",
                     IsHidden = true,
@@ -49,7 +49,7 @@ namespace FormFactory
                     continue; //skip this is it is choice
                 }
 
-                var inputVm = new PropertyVm<THelper>(model, property, helper);
+                var inputVm = new PropertyVm(model, property);
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
                 if (choices != null)
                 {

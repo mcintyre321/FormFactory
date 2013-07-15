@@ -6,7 +6,7 @@ namespace FormFactory.RazorEngine
 {
     public class Properties
     {
-        public static IEnumerable<PropertyVm<RazorTemplateHtmlHelper>> For(object target)
+        public static IEnumerable<PropertyVm> For(object target)
         {
             return new RazorTemplateHtmlHelper().PropertiesFor(target, target.GetType());
         }

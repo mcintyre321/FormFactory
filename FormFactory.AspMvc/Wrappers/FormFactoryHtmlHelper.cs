@@ -59,7 +59,7 @@ namespace FormFactory.AspMvc.Wrappers
 
         public PropertyVm CreatePropertyVm(Type objectType, string name)
         {
-            return new PropertyVm(this, objectType, name);
+            return new PropertyVm(objectType, name);
         }
 
         public ObjectChoices[] Choices(PropertyVm model) //why is this needed? HM

@@ -32,7 +32,7 @@
                 <i class="icon-plus icon-white"></i></a>
                 <script type="text/html">
                     <div class="ff-collection-new-item ff-form" style="display: none"><input type='hidden' name='' value='' />
-                        @Html.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render()
+                        @Html.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render(Html)
                         @Links()
                     </div>
                 </script>

@@ -8,33 +8,7 @@ using FormFactory.Attributes;
 
 namespace FormFactory
 {
-    public class PropertyVm<THelper> : PropertyVm where THelper : FfHtmlHelper
-    {
-        public PropertyVm(ParameterInfo pi, THelper html)
-            : base(pi, html)
-        {
-        }
 
-        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, THelper html)
-            : base(modelParamInfo, pi, html)
-        {
-        }
-
-        public PropertyVm(object model, PropertyInfo pi, THelper html)
-            : base(model, pi, html)
-        {
-        }
-
-        public PropertyVm(THelper html, Type type, string name)
-            : base(html, type, name)
-        {
-        }
-
-        public new THelper Html
-        {
-            get { return (THelper) base.Html; }
-        }
-    }
 
     public class PropertyVm : IHasDisplayName
     {
@@ -42,15 +16,15 @@ namespace FormFactory
         {
         }
 
-        public PropertyVm(ParameterInfo pi, FfHtmlHelper html)
-            : this(html, pi.ParameterType, pi.Name)
+        public PropertyVm(ParameterInfo pi)
+            : this(pi.ParameterType, pi.Name)
         {
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
+            //if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            //{
+            //    if (modelState.Value != null)
+            //        Value = modelState.Value.AttemptedValue;
+            //}
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
@@ -62,19 +36,19 @@ namespace FormFactory
 
              
         }
-        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi, FfHtmlHelper html)
-            : this(html, pi.PropertyType, pi.Name)
+        public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi)
+            : this(pi.PropertyType, pi.Name)
         {
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(modelParamInfo.Name + "." + pi.Name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
-            else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelParamInfo.ParameterType))
-            {
-                Value = pi.GetValue(html.ViewData.Model, new object[0]);
-            }
+            //if (html.ViewData.ModelState.TryGetValue(modelParamInfo.Name + "." + pi.Name, out modelState))
+            //{
+            //    if (modelState.Value != null)
+            //        Value = modelState.Value.AttemptedValue;
+            //}
+            //else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelParamInfo.ParameterType))
+            //{
+            //    Value = pi.GetValue(html.ViewData.Model, new object[0]);
+            //}
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
@@ -88,8 +62,8 @@ namespace FormFactory
 
         public IDictionary<string, string> DataAttributes { get; private set; }
         public object Source { get; set; }
-        public PropertyVm(object model, PropertyInfo pi, FfHtmlHelper html) :
-            this(html, pi.PropertyType, pi.Name)
+        public PropertyVm(object model, PropertyInfo pi) :
+            this(pi.PropertyType, pi.Name)
         {
             Source = model;
             ModelState modelState;
@@ -97,12 +71,13 @@ namespace FormFactory
             
             if (pi.GetIndexParameters().Any()) getMethod = null; //dont want to get indexed properties
 
-            if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
-            else if (getMethod != null && model != null)
+            //if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
+            //{
+            //    if (modelState.Value != null)
+            //        Value = modelState.Value.AttemptedValue;
+            //}
+            //else 
+                if (getMethod != null && model != null)
             {
                 Value = getMethod.Invoke(model, null);
             }
@@ -134,23 +109,20 @@ namespace FormFactory
             DataAttributes = new Dictionary<string, string>();
         }
 
-        public PropertyVm(FfHtmlHelper html, Type type, string name)
+        public PropertyVm(Type type, string name)
         {
             Type = type;
             Name = name;
             Id = Guid.NewGuid().ToString();
 
             ModelState modelState;
-            if (html.ViewData.ModelState.TryGetValue(name, out modelState))
-            {
-                if (modelState.Value != null)
-                    Value = modelState.Value.AttemptedValue;
-            }
-            Html = html;
+            //if (html.ViewData.ModelState.TryGetValue(name, out modelState))
+            //{
+            //    if (modelState.Value != null)
+            //        Value = modelState.Value.AttemptedValue;
+            //}
             GetCustomAttributes = () => new object[] { };
         }
-
-        protected internal FfHtmlHelper Html { get; set; }
 
         public string Id { get; set; }
         public Type Type { get; set; }

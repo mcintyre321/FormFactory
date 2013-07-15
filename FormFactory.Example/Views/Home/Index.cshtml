@@ -136,7 +136,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
         <pre class="prettyprint">
 var me = new Person() { ... set properties ... };
 
-Html.PropertiesFor(me).Render();
+Html.PropertiesFor(me).Render(Html);
 </pre>
         <pre class="prettyprint">
 @{
@@ -160,13 +160,13 @@ Html.PropertiesFor(me).Render();
                 @{
                     if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
                     {
-                    @(Html.PropertiesFor(Model).Render())
+                    @(Html.PropertiesFor(Model).Render(Html))
                     }
                     else
                     {
                         var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
                         var propertiesFor = helper.PropertiesFor(Model);
-                    @Html.Raw(propertiesFor.Render()) //needs to be made raw as we are in MVC
+                    @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
                     }
                 }
                 <input type="submit" value="submit" />

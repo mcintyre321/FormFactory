@@ -51,7 +51,7 @@ namespace FormFactory.RazorEngine
         }
 
 
-        public IEnumerable<PropertyVm<RazorTemplateHtmlHelper>> PropertiesFor(object model, Type type = null)
+        public IEnumerable<PropertyVm> PropertiesFor(object model, Type type = null)
         {
             type = type ?? model.GetType();
             return VmHelper.GetPropertyVmsUsingReflection(this, model, type);
@@ -106,7 +106,7 @@ namespace FormFactory.RazorEngine
         }
         public PropertyVm PropertyVm(Type type, string name, object value)
         {
-            return new PropertyVm(this, type, name) { Value = value };
+            return new PropertyVm(type, name) { Value = value };
         }
 
         public RawString Partial(string partialName, object model)
@@ -138,7 +138,7 @@ namespace FormFactory.RazorEngine
 
         public PropertyVm CreatePropertyVm(Type objectType, string name)
         {
-            return new PropertyVm(this, objectType, name);
+            return new PropertyVm(objectType, name);
         }
 
         public RawString Raw(object s)
@@ -182,17 +182,17 @@ namespace FormFactory.RazorEngine
         //string Partial(string partialName, object vm); 
         //string Partial(string partialName, object vm, TViewData viewData);
 
-        public static RawString Render(PropertyVm<RazorTemplateHtmlHelper> propertyVm)
+        public static RawString Render(PropertyVm propertyVm, RazorTemplateHtmlHelper html)
         {
-            return propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm);
+            return html.Partial("FormFactory/Form.Property", propertyVm);
         }
 
-        public static string ToHtmlString(IEnumerable<PropertyVm<RazorTemplateHtmlHelper>> properties)
+        public static string ToHtmlString(IEnumerable<PropertyVm> properties, RazorTemplateHtmlHelper html)
         {
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.AppendLine(propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm).ToString());
+                sb.AppendLine(html.Partial("FormFactory/Form.Property", propertyVm).ToString());
             }
             var htmlString = (sb.ToString());
             return htmlString;

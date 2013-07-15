@@ -11,8 +11,8 @@ namespace FormFactory.Tests
             var someObject = new SomeType() {SomeProperty = "SomeValue"};
             var properties = Properties.For(someObject);
             var annotation = new System.ComponentModel.DataAnnotations.DisplayAttribute();
-
-            var html = properties.Render();
+            var helper = new RazorTemplateHtmlHelper();
+            var html = properties.Render(helper);
             Assert.AreEqual(expected, html);
         }
 

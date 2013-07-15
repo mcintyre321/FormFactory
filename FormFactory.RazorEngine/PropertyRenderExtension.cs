@@ -7,19 +7,19 @@ namespace FormFactory.RazorEngine
 {
     public static class PropertyRenderExtension
     {
-        public static RawString Render(this IEnumerable<PropertyVm<RazorTemplateHtmlHelper>> properties)
+        public static RawString Render(this IEnumerable<PropertyVm> properties, RazorTemplateHtmlHelper html)
         {
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.AppendLine(propertyVm.Render().ToString());
+                sb.AppendLine(propertyVm.Render(html).ToString());
             }
             return new RawString(sb.ToString());
         }
 
-        public static RawString Render(this PropertyVm<RazorTemplateHtmlHelper> propertyVm)
+        public static RawString Render(this PropertyVm propertyVm, RazorTemplateHtmlHelper html)
         {
-            return (propertyVm.Html.Partial("FormFactory/Form.Property", propertyVm));
+            return (html.Partial("FormFactory/Form.Property", propertyVm));
         }
     }
 }
