@@ -21,7 +21,7 @@ namespace FormFactory
         public static IEnumerable<PropertyVm> PropertiesFor(IStringEncoder helper, object model, Type fallbackModelType = null)
         {
             fallbackModelType = fallbackModelType ?? model.GetType();
-            return VmHelper.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm>();
+            return GetPropertyVms(helper, model, fallbackModelType);
         }
 
 
