@@ -15,10 +15,9 @@ namespace FormFactory.Example.Models
         public Person()
         {
         }
-        public Person(DateTime dateOfBirth, string[] hobbies)
+        public Person(DateTime dateOfBirth)
         {
             DateOfBirth = dateOfBirth;
-            Hobbies = hobbies;
             Position = Models.Position.SeniorSubcontractor;
             Enabled = true;
             TopMovies = new List<Movie>()
@@ -43,7 +42,12 @@ namespace FormFactory.Example.Models
 
         public bool Enabled { get; set; }
 
-        public IEnumerable<string> Hobbies { get; private set; }
+        public IEnumerable<Hobby> Hobbies { get
+        {
+            yield return new Hobby("Swimming", 1) ;
+            yield return new Hobby("Knitting", 4);
+
+        }}
 
         public string Gender { get; set; }
         //choices for geneder rendered as a select list
@@ -78,5 +82,18 @@ namespace FormFactory.Example.Models
         {
             return new[] {"Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses"};
         } 
+    }
+
+    public class Hobby
+    {
+        public Hobby(string name, int years)
+        {
+            Name = name;
+            Years = years;
+        }
+
+        public string Name { get; private set; }
+
+        public int Years { get; private set; }
     }
 }

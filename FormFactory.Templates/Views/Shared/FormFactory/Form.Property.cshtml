@@ -20,7 +20,7 @@
     <div class="control-group @validClass">
         @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
         {
-            var optionalText = Model.HasAttribute<RequiredAttribute>() ? "" : "<span class='is-optional-hint'> (optional)</span>";
+            var optionalText = !Model.Readonly && Model.HasAttribute<RequiredAttribute>() ? "" : "<span class='is-optional-hint'> (optional)</span>";
             <label class="control-label" for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
         }
         <div class="controls">

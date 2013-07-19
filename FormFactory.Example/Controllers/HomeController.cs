@@ -13,7 +13,7 @@ namespace FormFactory.Example.Controllers
         private Person Person { get { return Session["person"] as Person; } set { Session["person"] = value; } }
         protected override void OnActionExecuting(ActionExecutingContext context)
         {
-            Person = Person ?? new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+            Person = Person ?? new Person(DateTime.Parse("22 Dec 1981")) { Name = "Harry" };
             base.OnActionExecuting(context);
         }
 
