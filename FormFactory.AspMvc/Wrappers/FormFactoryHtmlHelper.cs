@@ -67,7 +67,7 @@ namespace FormFactory.AspMvc.Wrappers
             var html = this;
             var choices = (from obj in model.Choices.Cast<object>().ToArray()
                            let choiceType = obj == null ? model.Type : obj.GetType()
-                           let properties = VmHelper.PropertiesFor(html, obj, choiceType)
+                           let properties = VmHelper.PropertiesFor(new Encoder(), obj, choiceType)
                                .Each(p => p.Name = model.Name + "." + p.Name)
                                .Each(p => p.Readonly |= model.Readonly)
                                .Each(p => p.Id = Guid.NewGuid().ToString())

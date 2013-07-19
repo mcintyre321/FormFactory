@@ -4,31 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using FormFactory.ModelBinding;
 
 namespace FormFactory
 {
-    public static class VmHelper<THelper> where THelper : FfHtmlHelper
+    public static class VmHelper
     {
         static VmHelper()
         {
             GetPropertyVms = FormFactory.VmHelper.GetPropertyVmsUsingReflection;
         }
-        public static Func<THelper, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
-    }
-    public static class VmHelper
-    {
-         
+        public static Func<IStringEncoder, object, Type, IEnumerable<PropertyVm>> GetPropertyVms { get; set; }
 
-        public static IEnumerable<PropertyVm> PropertiesFor<THelper>( THelper helper, object model, Type fallbackModelType = null)
-            where THelper : FfHtmlHelper
+
+
+        public static IEnumerable<PropertyVm> PropertiesFor(IStringEncoder helper, object model, Type fallbackModelType = null)
         {
             fallbackModelType = fallbackModelType ?? model.GetType();
-            return VmHelper<THelper>.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm>();
+            return VmHelper.GetPropertyVms(helper, model, fallbackModelType).Cast<PropertyVm>();
         }
 
 
-        public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection<THelper>(THelper helper, object model, Type fallbackModelType)
-            where THelper : FfHtmlHelper
+        public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(IStringEncoder helper, object model, Type fallbackModelType)
         {
             var type = model != null ? model.GetType() : fallbackModelType;
 
@@ -65,6 +62,6 @@ namespace FormFactory
             }
         }
 
-        
+
     }
 }

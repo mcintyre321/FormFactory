@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using FormFactory.ModelBinding;
 using FormFactory.ViewHelpers;
 using RazorEngine;
 using RazorEngine.Configuration;
@@ -54,7 +55,7 @@ namespace FormFactory.RazorEngine
         public IEnumerable<PropertyVm> PropertiesFor(object model, Type type = null)
         {
             type = type ?? model.GetType();
-            return VmHelper.GetPropertyVmsUsingReflection(this, model, type);
+            return VmHelper.GetPropertyVmsUsingReflection(new RazorEngineTypeEncoder(), model, type);
         }
 
         public RawString UnobtrusiveValidation(PropertyVm property)
@@ -198,5 +199,17 @@ namespace FormFactory.RazorEngine
             return htmlString;
         }
     }
-    
+
+    public class RazorEngineTypeEncoder : IStringEncoder
+    {
+        public Type ReadTypeFromString(string typeString)
+        {
+            return Type.GetType(typeString);
+        }
+
+        public string WriteTypeToString(Type type)
+        {
+            return type.AssemblyQualifiedName;
+        }
+    }
 }
