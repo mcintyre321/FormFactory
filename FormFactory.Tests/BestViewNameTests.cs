@@ -24,13 +24,14 @@ namespace FormFactory.Tests
         [Test]
         public void FindsFullyQualifiedNameFirrst()
         {
-            var fullyQualifiedViewName = "FormFactory/Property." + typeof (SomeType).FullName;
+            var fullyQualifiedViewName = "FormFactory/Property." + typeof(SomeType).FullName;
             var bestViewName = ViewFinderExtensions.BestViewName(
                 (IViewFinder)new DummyViewFinder("FormFactory/Property.Object.cshtml", fullyQualifiedViewName + ".cshtml"),
                 typeof(SomeType),
                 "FormFactory/Property.");
             Assert.AreEqual(fullyQualifiedViewName, bestViewName);
         }
+        
     }
 
     public class DummyViewFinder : IViewFinder

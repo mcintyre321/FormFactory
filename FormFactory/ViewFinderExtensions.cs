@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -30,6 +31,13 @@ namespace FormFactory
             t => t.FullName.StartsWith(t.Assembly.GetName().Name + ".") ? t.FullName.Substring(t.Assembly.GetName().Name.Length + 1) : t.FullName,
             t => t.Name
         };
+
+        private static string CleanPath(string fileName)
+        {
+            return Path.GetInvalidFileNameChars()
+                       .Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
+        }
+
         public static string BestViewName(IViewFinder cc, Type type, string prefix = null)
         {
             return SearchPathRules
@@ -44,7 +52,7 @@ namespace FormFactory
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
             Func<Type, string> getPartialViewName =
-                t => prefix + getName(t);
+                t => prefix + CleanPath(getName(t));
             string partialViewName = getPartialViewName(check);
 
             var engineResult = cc.FindPartialView(partialViewName);
