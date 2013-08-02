@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 
@@ -21,6 +22,21 @@ namespace FormFactory.Tests
             Assert.AreEqual(viewShouldBeFound, (bestViewName != null));
         }
 
+
+
+        [Test]
+        public void FindsInterface()
+        {
+            var fullyQualifiedViewName = "FormFactory/Property.IEnumerable." + typeof(SomeType).FullName;
+            var viewFinder = (IViewFinder) new DummyViewFinder("FormFactory/Property.IEnumerable.Object.cshtml", fullyQualifiedViewName + ".cshtml");
+
+            var bestViewName = ViewFinderExtensions.BestViewName(
+                viewFinder,
+                typeof(IEnumerable<SomeType>),
+                "FormFactory/Property.");
+            Assert.AreEqual(fullyQualifiedViewName, bestViewName);
+        }
+        
         [Test]
         public void FindsFullyQualifiedNameFirrst()
         {

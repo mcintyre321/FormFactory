@@ -11,9 +11,7 @@ namespace FormFactory
         public static string BestPropertyName<THelper>(THelper html, PropertyVm vm) where THelper : FfHtmlHelper
         {
             var viewname = BestViewName(html.ViewFinder, vm.Type, "FormFactory/Property.");
-            viewname = viewname ?? BestViewName(html.ViewFinder, vm.Type.GetEnumerableType(), "FormFactory/Property.IEnumerable.");
-            viewname = viewname ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
-            return viewname;
+           return viewname;
         }
         public static string BestPartialName<THelper>(THelper helper, object model, Type type = null, string prefix = null)where THelper : FfHtmlHelper
         {
@@ -48,6 +46,15 @@ namespace FormFactory
         public static string BestViewName(IViewFinder cc, Type type, string prefix, Func<Type, string> getNameIn)
         {
             if (type == null) return null;
+            var viewName = PartialViewNameInner(cc, type, prefix, getNameIn);
+            viewName = viewName ?? BestViewName(cc, type.GetEnumerableType(), prefix  + "IEnumerable.");
+            //viewName = viewName ?? "FormFactory/Property.System.Object"; //must be some unknown object exposed as an interface
+
+            return viewName;
+        }
+
+        private static string PartialViewNameInner(IViewFinder cc, Type type, string prefix, Func<Type, string> getNameIn)
+        {
             var getName = getNameIn ?? (t => t.FullName);
             var check = Nullable.GetUnderlyingType(type) ?? type;
 
