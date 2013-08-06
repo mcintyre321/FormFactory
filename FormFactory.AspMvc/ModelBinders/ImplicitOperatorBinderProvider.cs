@@ -47,7 +47,7 @@ namespace FormFactory.AspMvc.ModelBinders
             {
                 try
                 {
-                    var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                    var value = bindingContext.GetValueFromValueProvider();
                     bindingContext.ModelState.SetModelValue(bindingContext.ModelName, value);
                     var rawValue = (value == null ? null : value.RawValue as string[]) ?? new string[] { };
                     return _implicitConversionMethod.Invoke(null, new object[] { rawValue.SingleOrDefault() });
@@ -60,5 +60,17 @@ namespace FormFactory.AspMvc.ModelBinders
             }
         }
         #endregion
+    }
+
+    static class ModelBindingContextExtensions
+    {
+        public static ValueProviderResult GetValueFromValueProvider(this ModelBindingContext bindingContext)
+        {
+              var performRequestValidation = bindingContext.ModelMetadata.RequestValidationEnabled;
+            var unvalidatedValueProvider = bindingContext.ValueProvider as IUnvalidatedValueProvider;
+            return (unvalidatedValueProvider != null)
+                       ? unvalidatedValueProvider.GetValue(bindingContext.ModelName, !performRequestValidation)
+                       : bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+        }
     }
 }
