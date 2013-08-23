@@ -17,21 +17,19 @@
         else
         {
             var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
-    <div class="control-group @validClass">
+    <div class="form-group @validClass">
         @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
         {
             var optionalText = Model.Readonly || Model.HasAttribute<RequiredAttribute>() ? "" : "<span class='is-optional-hint'> (optional)</span>";
-            <label class="control-label" for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
+            <label for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
         }
-        <div class="controls">
-            @Html.BestProperty(Model)
-            <span class="help-inline">
-                <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">
-                    @Html.AllValidationMessages(Model.Name)
-                </span>
-                @(Model.GetCustomAttributes().OfType<System.ComponentModel.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
+        @Html.BestProperty(Model)
+        <span class="help-inline">
+            <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">
+                @Html.AllValidationMessages(Model.Name)
             </span>
-        </div>
+            @(Model.GetCustomAttributes().OfType<System.ComponentModel.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
+        </span>
     </div>
         }
     }

@@ -3,7 +3,7 @@
 </div>
 
     <div class="control-group valid">
-            <label class="control-label" for="b3fee6d2-c358-4428-9c1c-6cdc422aabb0">Some property</label>
+            <label for="b3fee6d2-c358-4428-9c1c-6cdc422aabb0">Some property</label>
         <div class="controls">
                 <input      class="input-large" name="SomeProperty" size="30" type="text" value="SomeValue" />
 

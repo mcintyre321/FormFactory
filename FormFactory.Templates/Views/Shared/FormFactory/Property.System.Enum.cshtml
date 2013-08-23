@@ -6,11 +6,11 @@
 }
 @if (Model.Readonly)
 {
-    <input type="text" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) value="@Model.Value" />
+    <input type="text"  class="form-control" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) value="@Model.Value" />
 }
 else
 {
-    <select name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+    <select class="form-control" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
         @if (Nullable.GetUnderlyingType(Model.Type) != null)
         {
             <option value="" @Html.Raw((Model.Value == null).Attr("selected"))></option>

@@ -15,7 +15,7 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    <select name="@Model.Name"  @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+    <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
         @foreach (var option in choices)
         {
             <option value="@option.Item2" @Html.Raw((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>    
@@ -40,11 +40,11 @@ else
          
     if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
     {
-    <textarea @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model)  @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
+    <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model)  @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
     }
     else
     {
-    <input @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model) class="input-large" name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+    <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model)  name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
     }
 
 }

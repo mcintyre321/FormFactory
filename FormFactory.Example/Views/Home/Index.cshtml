@@ -20,25 +20,25 @@
 </header>
 <div class="marketing">
     <div class="row">
-        <div class="span3">
+        <div class="col-md-3">
             <h2>Reflection form generation</h2>
             <p>
                 Because you shouldn't have to update your html when you update your object model
             </p>
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             <h2>Convention based rendering</h2>
             <p>
                 Specify custom templates for rendering different object types.
             </p>
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             <h2>Twitter bootstrap support</h2>
             <p>
                 Styled for bootstrap (by default)
             </p>
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             <h2>Portable, embeddable</h2>
             <p>
                 FormFactory.RazorEngine can be used in non ASP projects like console apps, services or WebAPI projects.  
@@ -53,7 +53,7 @@
         <h2>About <small></small></h2>
     </div>
     <div class="row">
-        <div class="span12">
+        <div class="col-md-12">
             <p>
                 FormFactory renders complex object forms automatically. It refects over an object model or method signature, 
                 and builds an intermediate model representing the form and properties. These models are then rendered
@@ -70,7 +70,7 @@
     </div>
 
     <div class="row">
-        <div class="span6">
+        <div class="col-md-6">
             Install the library
                 <pre class="prettyprint">Nuget install-package FormFactory.AspMvc</pre>
             <div>or for non ASP MVC projects</div>
@@ -84,7 +84,7 @@
 &lt;script src="/Scripts/FormFactory/FormFactory.js" type="text/javascript">&lt;/script></pre>
         </div>
         <div class="span1">&nbsp;</div>
-        <div class="span5">Note: To use FormFactory without installing FormFactory.Templates you must <a hef="http://nuget.org/packages/EmbeddedResourceVirtualPathProvider">install</a> and <a href="https://github.com/mcintyre321/FormFactory/blob/master/FormFactory.Example/App_Code/RegisterVirtualPathProvider.cs">configure</a> the <a href="https://github.com/mcintyre321/EmbeddedResourceVirtualPathProvider">EmbeddedResourceVirtualPathProvider </a></div>
+        <div class="col-md-5">Note: To use FormFactory without installing FormFactory.Templates you must <a hef="http://nuget.org/packages/EmbeddedResourceVirtualPathProvider">install</a> and <a href="https://github.com/mcintyre321/FormFactory/blob/master/FormFactory.Example/App_Code/RegisterVirtualPathProvider.cs">configure</a> the <a href="https://github.com/mcintyre321/EmbeddedResourceVirtualPathProvider">EmbeddedResourceVirtualPathProvider </a></div>
 
     </div>
     <!-- /row -->
@@ -93,7 +93,7 @@
     <h2>Form for MVC action:</h2>
 
     <div class="row">
-        <div class="span6">
+        <div class="col-md-6">
 
             <p>
                 Given this action...
@@ -115,7 +115,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 
         </div>
         <div class="span1">&nbsp;</div>
-        <div class="span5">
+        <div class="col-md-5">
             <p>...will render this form:</p>
             @{
 
@@ -132,7 +132,7 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1, bo
 <h1 class="page-header">Rendering objects
 </h1>
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
         <pre class="prettyprint">
 var me = new Person() { ... set properties ... };
 
@@ -155,7 +155,7 @@ Html.PropertiesFor(me).Render(Html);
     </div>
 
     <div class="row">
-        <div class="span5">
+        <div class="col-md-5">
             <form action="/home/save" method="POST">
                 @{
                     if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))

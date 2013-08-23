@@ -117,11 +117,11 @@ $(document).ready(function () {
         });
     }
     $(document).on("click", ".ff-add-item", function (e) {
-        var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()).text());
+        var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()));
 
         var modelName = $(this).data("modelname");
         var newObject = $('<li>').append($form.children().clone());
-
+        newObject.find("> *").css("display", "");
 
         var newIndex = newId(); // $(this).closest("ul").children().length - 1;
         var renumber = function (index, attr) {
@@ -163,10 +163,10 @@ $(document).ready(function () {
 if ($.validator) {
     $.validator.setDefaults({
         highlight: function (element) {
-            $(element).closest(".control-group").addClass("error");
+            $(element).closest(".form-group").addClass("error");
         },
         unhighlight: function (element) {
-            $(element).closest(".control-group").removeClass("error");
+            $(element).closest(".form-group").removeClass("error");
         }
     });
 }

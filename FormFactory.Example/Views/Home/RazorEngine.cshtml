@@ -18,20 +18,20 @@
 </header>
 <div class="marketing">
     <div class="row">
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 Reflection form generation</h2>
             <p>
                 Because you shouldn't have to update your html when you update your object model</p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 Convention based rendering</h2>
             <p>
                 Specify custom templates for rendering different object types.
             </p>
         </div>
-        <div class="span4">
+        <div class="col-md-4">
             <h2>
                 Twitter bootstrap support</h2>
             <p>
@@ -44,7 +44,7 @@
     Rendering objects
 </h1>
 <div class="row">
-    <div class="span6">
+    <div class="col-md-6">
         <pre class="prettyprint">
 var me = new Person() { ... set properties ... };
 
@@ -100,7 +100,7 @@ public class Person
     </div>
     <div class="span1">
         &nbsp;</div>
-    <div class="span5">
+    <div class="col-md-5">
         <form>
         @{
             var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };

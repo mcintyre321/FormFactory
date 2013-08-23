@@ -19,7 +19,7 @@ else
         {
             choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
         }
-        <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled() multiple="multiple">
+        <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled() class="form-control" multiple="multiple">
             @foreach (var choice in choices)
             {
                 var selected = (((IEnumerable<string>)Model.Value).Contains(choice.Item2));

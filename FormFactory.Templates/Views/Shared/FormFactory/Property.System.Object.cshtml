@@ -20,7 +20,7 @@
     {
 
             <div>
-                <select class="ff-choice-picker" @(Model).Disabled()>
+                <select class="ff-choice-picker form-control" @(Model).Disabled() >
                     @for (int i = 0; i < choices.Length; i++)
                     {
 
@@ -40,8 +40,8 @@
         var isSelected = (i == selectedIndex);
         var isDisabled = Model.Disabled | !isSelected;
                 <div class="ff-choice "  @Html.Raw((useRadio || isSelected) ? "" : "style='display:none'") >
-                    <div class="@Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
-                        <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@radioGroupName" @Html.Raw(isSelected.Attr("checked", null)) @Model.Disabled.Attr("Disabled", null)/>
+                    <div class="radio @Html.Raw((i < choices.Length - 1) && useRadio ? "bottom-separated" : "")">
+                        <input type="radio" class="form-control ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@radioGroupName" @Html.Raw(isSelected.Attr("checked", null)) @Model.Disabled.Attr("Disabled", null)/>
                         <div @Html.Raw(useRadio ? "class=\"radio-block\"" : "")>
                             @if (useRadio)
                             {

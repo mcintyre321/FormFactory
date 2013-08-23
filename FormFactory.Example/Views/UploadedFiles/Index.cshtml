@@ -65,7 +65,7 @@ public ActionResult UploadTest([FormModel] UploadedFilesTestModel model)
     </div>
     <div class="span1">
         &nbsp;</div>
-    <div class="span5">
+    <div class="col-md-5">
         @using (var form = Html.FormForAction((UploadedFilesController ctlr, UploadedFilesTestModel model) => ctlr.UploadTest(model)))
         {
             form.Render();
