@@ -84,6 +84,7 @@
   <ItemGroup>
     <Content Include="Content\FormFactory\FormFactory.css" />
     <Content Include="Scripts\FormFactory\FormFactory.js" />
+    <Content Include="Scripts\bootstrap3-typeahead.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />
     <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
   </ItemGroup>
