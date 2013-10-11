@@ -34,12 +34,12 @@ namespace FormFactory.AspMvc
 
         public static IHtmlString Attr(this bool value, string att, string attValue = null)
         {
-            return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
+            return value.Raw(att + "=\"" + (attValue ?? att).Replace("\"", "&quot;") + "\"");
         }
         public static IHtmlString Attr(this string value, string att)
         {
             if (value == null) return new HtmlString("");
-            return Raw(att + "=\"" + (value ?? att) + "\"");
+            return Raw(att + "=\"" + (value ?? att).Replace("\"", "&quot;") + "\"");
         }
 
         public static IHtmlString Placeholder(PropertyVm pi)

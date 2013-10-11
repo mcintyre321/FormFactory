@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using FormFactory.Attributes;
@@ -61,6 +62,21 @@ namespace FormFactory.Example.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public JsonResult CountrySuggestions(string query)
+        {
+            return Json(GetCountries().Where(c => c.StartsWith(query ?? Guid.NewGuid().ToString(), StringComparison.CurrentCultureIgnoreCase)).ToArray());
+        }
+        static IEnumerable<string> GetCountries()
+        {
+            return from ri in
+                       from ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+                       select new RegionInfo(ci.LCID)
+                   group ri by ri.TwoLetterISORegionName
+                   into g
+                       //where g.Key.Length == 2
+                   select g.First().DisplayName;
+        }
     }
 
     public class SignInModel

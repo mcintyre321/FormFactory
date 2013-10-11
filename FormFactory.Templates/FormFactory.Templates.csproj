@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\FormFactory\FormFactory.css" />
+    <Content Include="Scripts\bootstrap3-typeahead.unobtrusive.js" />
     <Content Include="Scripts\FormFactory\FormFactory.js" />
     <Content Include="Scripts\bootstrap3-typeahead.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />

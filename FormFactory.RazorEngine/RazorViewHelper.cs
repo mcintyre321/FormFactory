@@ -31,12 +31,12 @@ namespace FormFactory.RazorEngine
 
         public static RawString Attr(this bool value, string att, string attValue = null)
         {
-            return value.Raw(att + "=\"" + (attValue ?? att) + "\"");
+            return value.Raw(att + "=\"" + (attValue ?? att).Replace("\"", "&quot;") + "\"");
         }
         public static RawString Attr(this string value, string att)
         {
             if (value == null) return new RawString("");
-            return Raw(att + "=\"" + (value ?? att) + "\"");
+            return Raw(att + "=\"" + (value ?? att).Replace("\"", "&quot;") + "\"");
         }
 
         public static RawString Placeholder(PropertyVm pi)

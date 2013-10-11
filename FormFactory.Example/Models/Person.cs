@@ -56,12 +56,19 @@ namespace FormFactory.Example.Models
             return "male,female,not specified".Split(',');
         }
 
-        [Required][Placeholder("Type to find your location")]
+        [Required]
+        [Placeholder("Type to find your location")]
         public string Location { get; set; }
         public IEnumerable<string> Location_suggestions()
         {
             return "USA,UK,Canada".Split(',');
         }
+
+        [Required]
+        [DisplayName("Countries (via ajax)")]
+        [Placeholder(" via ajax using [SuggestionsUrl(\"...someurl...\")]")]
+        [SuggestionsUrl("/home/CountrySuggestions")]
+        public string CountryViaAjax { get; set; }
 
         public ContactMethod ContactMethod { get; set; }
         //you can use objects as choices to create complex nested menus
@@ -83,6 +90,7 @@ namespace FormFactory.Example.Models
             return new[] {"Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses"};
         } 
     }
+
 
     public class Hobby
     {

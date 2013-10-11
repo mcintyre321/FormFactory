@@ -7,7 +7,8 @@
 @using FormFactory
 @using FormFactory.AspMvc
 @model PropertyVm
- 
+
+
 @if (!Model.Readonly && Model.Choices != null)
 {
     var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
@@ -27,17 +28,25 @@ else
     var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
     var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
     var placeHolderText = Model.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
-
-    var needsAutoComplete = (!Model.Readonly && Model.Suggestions != null && Model.Suggestions.Cast<object>().Any());
+ 
+    var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
+    var needsAutoComplete = (!Model.Readonly && (suggestionsAttribute != null || (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())));
     var autoCompleteAtt = "";
     if (needsAutoComplete)
     {
-        var suggestions = Model.Suggestions.Cast<string>();
-        var escapedSuggestions = "\"" + string.Join("\", \"", suggestions.Select(a => a.Replace("\"", "\"\""))) + "\"";
-        autoCompleteAtt = "data-provide='typeahead' autocomplete='off' data-source='[" + escapedSuggestions + "]'";
+        if (suggestionsAttribute != null)
+        {
+            autoCompleteAtt = "data-provide='ajax-typeahead' autocomplete='off' data-link='" + suggestionsAttribute.Url + "'";
+        }
+        else
+        {
+            var suggestions = Model.Suggestions.Cast<string>();
+            var escapedSuggestions = "\"" + string.Join("\", \"", suggestions.Select(a => a.Replace("\"", "\"\""))) + "\"";
+            autoCompleteAtt = "data-provide='typeahead' autocomplete='off' data-source='[" + escapedSuggestions + "]'";
+        }
     }
-    
-         
+
+
     if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
     {
     <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model)  @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
