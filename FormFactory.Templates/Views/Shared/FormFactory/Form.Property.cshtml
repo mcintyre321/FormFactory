@@ -2,7 +2,7 @@
 @using FormFactory.Attributes
 @using FormFactory
 @using FormFactory.AspMvc
-@model PropertyVm
+@model FormFactory.PropertyVm
 @{
     if (Model.IsHidden)
     {
@@ -20,8 +20,12 @@
     <div class="form-group has-@validClass">
         @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
         {
-            var optionalText = Model.Readonly || Model.HasAttribute<RequiredAttribute>() ? "" : "<span class='is-optional-hint'> (optional)</span>";
-            <label class="control-label" for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
+            var required = Model.NotOptional ?? (Model.Readonly
+                           || Model.HasAttribute<RequiredAttribute>()
+                           || Model.Choices != null);
+            var optionalText = required ? "" : "<span class='is-optional-hint'> (optional)</span>";
+        
+                <label class="control-label" for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
         }
         @Html.BestProperty(Model)
         <span class="help-block">

@@ -109,6 +109,9 @@ namespace FormFactory
             DataAttributes = new Dictionary<string, string>();
         }
 
+
+        public bool? NotOptional { get; set; }
+
         public PropertyVm(Type type, string name)
         {
             Type = type;
