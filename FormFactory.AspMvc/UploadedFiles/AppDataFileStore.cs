@@ -28,7 +28,7 @@ namespace FormFactory.AspMvc.UploadedFiles
             var metadata = serializer.Serialize(uploadedFile);
             File.WriteAllText(Path.Combine(StoreFolderPath, uploadedFile.Id, "metadata.json"), metadata);
 
-            uploadedFile.SetGetStream(() => File.OpenRead(Path.Combine(StoreFolderPath, uploadedFile.Id, uploadedFile.FileName)));
+            //uploadedFile.SetGetStream(() => File.OpenRead(Path.Combine(StoreFolderPath, uploadedFile.Id, uploadedFile.FileName)));
 
             return uploadedFile;
         }
@@ -38,8 +38,12 @@ namespace FormFactory.AspMvc.UploadedFiles
             var serializer = new JavaScriptSerializer();
             var filename = Path.Combine(StoreFolderPath, id, "metadata.json");
             var uploadedFile = serializer.Deserialize<UploadedFile>(File.ReadAllText(filename));
-            uploadedFile.SetGetStream(() => File.OpenRead(Path.Combine(StoreFolderPath, id, uploadedFile.FileName)));
             return uploadedFile;
+        }
+
+        public Stream GetStream(UploadedFile file)
+        {
+            return File.OpenRead(Path.Combine(StoreFolderPath, file.Id, file.FileName));
         }
 
         private static string StoreFolderPath

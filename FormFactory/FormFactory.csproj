@@ -129,9 +129,6 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Object.cshtml</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml">
-      <Link>Views\Shared\FormFactory\Property.FormFactory.ValueTypes.UploadedFile.cshtml</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.TimeSpan.cshtml</Link>
     </EmbeddedResource>
@@ -158,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml">
+      <Link>Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml</Link>
     </EmbeddedResource>
     <None Include="FormFactory.nuspec" />
     <None Include="Views\Web.config" />

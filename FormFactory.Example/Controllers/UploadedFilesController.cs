@@ -34,7 +34,7 @@ namespace FormFactory.Example.Controllers
         public ActionResult Files(string id)
         {
             var file = FileStores.AppDataFileStore.GetById(id);
-            return File(file.GetStream(), file.ContentType, file.FileName);
+            return File(FileStores.AppDataFileStore.GetStream(file), file.ContentType, file.FileName);
         }
 
 

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,5 +13,6 @@ namespace FormFactory.AspMvc.UploadedFiles
     {
         UploadedFile Store(HttpPostedFileBase httpPostedFileBase, ControllerContext controllerContext, ModelBindingContext modelBindingContext);
         UploadedFile GetById(string id);
+        Stream GetStream(UploadedFile file);
     }
 }
