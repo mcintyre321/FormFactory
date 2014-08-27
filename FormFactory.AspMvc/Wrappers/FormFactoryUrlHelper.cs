@@ -13,13 +13,13 @@ namespace FormFactory.AspMvc.Wrappers
             _mvcUrlHelper = mvcUrlHelper;
         }
 
-        public string Action<TController>(Expression<Action<TController>> action)
-            where TController : Controller
-        {
-            var routeValuesFromExpression = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression<TController>(action);
-            var actionName = routeValuesFromExpression["action"].ToString();
-            return _mvcUrlHelper.Action(actionName);
-        }
+        //public string Action<TController>(Expression<Action<TController>> action)
+        //    where TController : Controller
+        //{
+        //    var routeValuesFromExpression = Microsoft.Web.Mvc.Internal.ExpressionHelper.GetRouteValuesFromExpression<TController>(action);
+        //    var actionName = routeValuesFromExpression["action"].ToString();
+        //    return _mvcUrlHelper.Action(actionName);
+        //}
 
         public string Action(string actionName, string controllerName)
         {
