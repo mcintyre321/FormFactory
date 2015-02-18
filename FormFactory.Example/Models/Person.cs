@@ -88,7 +88,11 @@ namespace FormFactory.Example.Models
         public IEnumerable<string> RestrictedMaterials_choices()
         {
             return new[] {"Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses"};
-        } 
+        }
+
+        [Required]
+        [SuggestionsUrl("/home/SearchUsers")]
+        public Guid? AutocompleteReturningGuid { get; set; }
     }
 
 
