@@ -11,6 +11,14 @@ namespace FormFactory.Example.Controllers
 {
     public class HomeController : Controller
     {
+        private static readonly List<UserModel> _users = new List<UserModel>
+        {
+            new UserModel { Id = Guid.NewGuid(), Name = "Bob" },
+            new UserModel { Id = Guid.NewGuid(), Name = "Anna" },
+            new UserModel { Id = Guid.NewGuid(), Name = "Tom" },
+            new UserModel { Id = Guid.NewGuid(), Name = "Richard" },
+        };
+
         private Person Person { get { return Session["person"] as Person; } set { Session["person"] = value; } }
         protected override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -76,6 +84,11 @@ namespace FormFactory.Example.Controllers
                    into g
                        //where g.Key.Length == 2
                    select g.First().DisplayName;
+        }
+
+        public JsonResult SearchUsers(string query)
+        {
+            return Json(_users.Where(u => u.Name.Contains(query ?? Guid.NewGuid().ToString())).ToArray(), JsonRequestBehavior.AllowGet);
         }
     }
 

@@ -1,0 +1,57 @@
+﻿@*@using System*@
+@using System.Linq
+@using FormFactory.Attributes
+@using FormFactory
+@model PropertyVm
+@{
+
+    var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
+
+    var lookupId = Model.Name + "Lookup";
+    var valueId = Model.Name + "Value";
+
+    <input type="hidden" id="@valueId" name="@Model.Name" value="@Model.Value" @Html.UnobtrusiveValidation(Model) />
+    <input class="form-control" size="30" type="text" id="@lookupId" />
+}
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        // Workaround for bug in mouse item selection
+        $.fn.typeahead.Constructor.prototype.blur = function () {
+            var that = this;
+            setTimeout(function () { that.hide(); }, 250);
+        };
+
+        var options = [];
+
+        var findOptionById = function (id) {
+            return _.find(options, function (u) { return u.Id == id; });
+        };
+
+        $("#@lookupId").typeahead({
+            source: function (query, process) {
+
+                $.getJSON("@suggestionsAttribute.Url" + "?query=" + query, function (data) {
+                    options = data;
+                    var results = _.map(options, function (option) {
+                        return option.Id + "";
+                    });
+                    process(results);
+                });
+            },
+
+            matcher: function (id) { return true; },
+
+            highlighter: function (id) { return findOptionById(id).Name; },
+
+            updater: function (id) {
+
+                var option = findOptionById(id);
+
+                $("#@valueId").val(option.Id);
+
+                return option.Name;
+            }
+        });
+    })
+</script>
