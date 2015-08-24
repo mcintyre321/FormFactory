@@ -112,14 +112,14 @@
                 Given this action...
 
                 <pre class="prettyprint">
-    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password, string returnUrl)
+    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
         { //... } 
 </pre>
             </p>
             <p>
                 ..writing this in the view...
                 <pre class="prettyprint"> 
-using (var form = Html.FormForAction((HomeController c, string p0, string p1, bool p2, string p3) => c.SignIn(p0, p1, p2, p3)))
+using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
 {
     form.Render(); //renders the form
 } //.Dispose() closes the form
