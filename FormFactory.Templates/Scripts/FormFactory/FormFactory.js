@@ -89,7 +89,7 @@ $.extend(ff.behaviours, {},
             return false;
         },
         datetimepicker: function (t) {
-            if (!$(t).hasClass("hasDatepicker") && $.datetimepicker && !$(t).attr("readonly")) {
+            if (!$(t).hasClass("hasDatepicker") && $.fn.datetimepicker && !$(t).attr("readonly")) {
                 $(t).datetimepicker({ showOn: "focus" }).focus();
                 return true;
             }

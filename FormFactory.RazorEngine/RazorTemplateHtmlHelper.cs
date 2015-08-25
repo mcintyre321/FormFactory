@@ -76,7 +76,7 @@ namespace FormFactory.RazorEngine
         public ViewData ViewData { get { return new RazorTemplateViewData(this); } }
         public IViewFinder ViewFinder
         {
-            get { return new RazorEngineContext(this); }
+            get { return new RazorEngineContext(); }
         }
 
         public object Model { get; set; }
