@@ -23,25 +23,25 @@
 <div class="marketing">
     <div class="row">
         <div class="col-md-3">
-            <h2>Reflection form generation</h2>
+            <h4>Reflection form generation</h4>
             <p>
                 Because you shouldn't have to update your html when you update your object model
             </p>
         </div>
         <div class="col-md-3">
-            <h2>Convention based rendering</h2>
+            <h4>Convention based rendering</h4>
             <p>
                 Specify custom templates for rendering different object types.
             </p>
         </div>
         <div class="col-md-3">
-            <h2>Twitter bootstrap support</h2>
+            <h4>Twitter bootstrap support</h4>
             <p>
                 Styled for bootstrap (by default)
             </p>
         </div>
         <div class="col-md-3">
-            <h2>Portable, embeddable</h2>
+            <h4>Embeddable</h4>
             <p>
                 FormFactory.RazorEngine can be used in non ASP projects like console apps, services or WebAPI projects.
             </p>
@@ -49,27 +49,13 @@
 
     </div>
     <!--/row-->
-    <div class="row">
-        <div class="col-md-3">
-            <h2>Automatically renders:</h2>
-            <ul>
-                <li>DateTime types as datepickers</li>
-                <li>Data driven select lists</li>
-                <li>Client or server side autocompletes</li>
-                <li>Complex types as multiple inputs</li>
-                <li>Placeholders</li>
-                <li>Sortable lists</li>
-            </ul>
-        </div>
-    </div>
+     
 </div>
 <section id="documentation">
-    <div class="page-header">
-        <h2>About <small></small></h2>
-    </div>
     <div class="row">
-        <div class="col-md-12">
-            <p>
+        <div class="col-md-6">
+            <h3>What is it?</h3>
+                <p>
                 FormFactory renders complex object forms automatically. It refects over an object model or method signature,
                 and builds an intermediate model representing the form and properties. These models are then rendered
                 using customisable templates.
@@ -78,6 +64,13 @@
                 FormFactory can build complex nested forms with rich content pickers. By following a few simple code conventions,
                 properties with multiple choices and suggested values can be written in a few lines of code.
             </p>
+        </div>
+        <div class="col-md-6">
+            <h3>How to use it</h3>
+            <pre class="prettyprint">
+//In a cshtml file
+Html.PropertiesFor(someObject).Render(Html);
+            </pre>
         </div>
     </div>
     <div class="page-header">
@@ -103,10 +96,7 @@
 
     </div>
     <!-- /row -->
-
-
-
-   <!-- /row -->
+    <!-- /row -->
 
 </section>
 <h1 class="page-header">
@@ -115,7 +105,8 @@
 @{
     var ex = typeof(NestedFormsExample);
     var exampleTypes = ex.Assembly.GetTypes()
-        .Where(t => t.Namespace == ex.Namespace && t.Name.Contains("Example"));
+        .Where(t => t.Namespace == ex.Namespace && t.Name.Contains("Example"))
+        .OrderBy(t => t.Name);
 }
 @foreach (var type in exampleTypes)
 {
@@ -129,12 +120,7 @@
 
         <div class="col-md-4">
             
-            <p>In your cshtml file:</p>
-            <pre class="prettyprint">
-var x = new @(type.Name)() { ... set properties ... };
-Html.PropertiesFor(x).Render(Html);
-            </pre>
-            <p>Renders:</p>
+             
             <form action="/home/save" method="POST">
                 @{
                     var instance = Activator.CreateInstance(type);
