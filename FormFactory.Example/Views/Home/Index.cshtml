@@ -105,43 +105,8 @@
     <!-- /row -->
 
 
-    <h2>Form for MVC action:</h2>
 
-    <div class="row">
-        <div class="col-md-6">
-
-            <p>
-                Given this action...
-
-                <pre class="prettyprint">
-    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
-        { //... } 
-</pre>
-            </p>
-            <p>
-                ..writing this in the view...
-                <pre class="prettyprint"> 
-using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
-{
-    form.Render(); //renders the form
-} //.Dispose() closes the form
-    </pre>
-            </p>
-
-        </div>
-        <div class="span1">&nbsp;</div>
-        <div class="col-md-5">
-            <p>...will render this form:</p>
-            @{
-
-                using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
-                {
-                    form.Render();
-                } //.Dispose() closes the form
-            }
-        </div>
-    </div>
-    <!-- /row -->
+   <!-- /row -->
 
 </section>
 <h1 class="page-header">
@@ -155,11 +120,41 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1) =>
 @foreach (var type in exampleTypes)
 {
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <h3>@type.Name.Sentencise(true).Replace("Examples", "").Replace("Example", "")</h3>
+            
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            
+            <p>In your cshtml file:</p>
             <pre class="prettyprint">
-var me = new @(type.Name)() { ... set properties ... };
-Html.PropertiesFor(me).Render(Html);
-</pre>
+var x = new @(type.Name)() { ... set properties ... };
+Html.PropertiesFor(x).Render(Html);
+            </pre>
+            <p>Renders:</p>
+            <form action="/home/save" method="POST">
+                @{
+                    var instance = Activator.CreateInstance(type);
+                    if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
+                    {
+
+                        @(Html.PropertiesFor(instance).Render(Html))
+                    }
+                    else
+                    {
+                        var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
+                        var propertiesFor = helper.PropertiesFor(instance);
+                        @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
+                    }
+                }
+                <input type="submit" value="submit"/>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <p>In @(type.Name).cs</p>
             <pre class="prettyprint">
 @{
     var html = Cache[type.Name + ".cs"] as string;
@@ -167,40 +162,49 @@ Html.PropertiesFor(me).Render(Html);
     {
         html = new WebClient()
             .DownloadString("https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs");
-
         html = string.Join(Environment.NewLine, html.Split(Environment.NewLine.ToCharArray()).Where(line => line.Trim().StartsWith("using ") == false));
-
         Cache[type.Name + ".cs"] = html;
     }
     @html
 }
 </pre>
         </div>
-        <div class="span1">
-            &nbsp;
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="col-md-5">
-                <form action="/home/save" method="POST">
-                    @{
-                        var instance = Activator.CreateInstance(type);
-                        if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
-                        {
+}
 
-                            @(Html.PropertiesFor(instance).Render(Html))
-                        }
-                        else
-                        {
-                            var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
-                            var propertiesFor = helper.PropertiesFor(instance);
-                            @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
-                        }
-                    }
-                    <input type="submit" value="submit" />
-                </form>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Form for MVC action:</h2>
+
+        <p>
+            Given this action...
+
+            <pre class="prettyprint">
+    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
+        { //... } 
+</pre>
+        </p>
+        <p>
+            ..writing this in the view...
+            <pre class="prettyprint"> 
+using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
+{
+    form.Render(); //renders the form
+} //.Dispose() closes the form
+    </pre>
+        </p>
 
     </div>
-                        }
+    <div class="span1">&nbsp;</div>
+    <div class="col-md-5">
+        <p>...will render this form:</p>
+        @{
+
+            using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
+            {
+                form.Render();
+            } //.Dispose() closes the form
+        }
+    </div>
+</div>

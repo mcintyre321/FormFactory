@@ -47,4 +47,17 @@ namespace FormFactory.Example.Models.Examples
         public string Title { get; set; }
     }
 
+    public class Hobby
+    {
+        public Hobby(string name, int years)
+        {
+            Name = name;
+            Years = years;
+        }
+
+        public string Name { get; private set; }
+
+        public int Years { get; private set; }
+    }
+
 }

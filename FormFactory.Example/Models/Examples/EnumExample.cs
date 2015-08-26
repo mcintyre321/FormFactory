@@ -7,15 +7,12 @@ namespace FormFactory.Example.Models.Examples
     {
         public EnumExample()
         {
-            Position = null;
             Position = Positions.SeniorSubcontractor;
         }
 
-        [Description("Enums are rendered as dropdowns - nullable ones have an empty option")]
-        public Positions? Position { get; set; }
+        [Description("Enums are rendered as dropdowns")]
+        public Positions Position { get; set; }
 
-        [Description("Enums are rendered as dropdowns - nullable ones have an empty option")]
-        public Positions NonNullablePosition { get; set; }
     }
 
     public enum Positions

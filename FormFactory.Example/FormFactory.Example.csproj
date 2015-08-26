@@ -128,6 +128,9 @@
     <Compile Include="Models\Examples\EasySelectListsExample.cs" />
     <Compile Include="Models\Examples\EnumExample.cs" />
     <Compile Include="Models\Examples\ListRenderingExample.cs" />
+    <Compile Include="Models\Examples\NestedFormsExample2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Models\Examples\SimplePropertiesExample.cs" />
     <Compile Include="Models\UploadedFilesResultModel.cs" />
     <Compile Include="Models\UploadedFilesTestModel.cs" />
@@ -150,6 +153,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" />
+    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" />
+    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" />
+    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" />
+    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
@@ -225,6 +233,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="bower.json" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -1,0 +1,6 @@
+{
+  "name": "n",
+  "dependencies": {
+    "jqueryui-timepicker-addon" : "1.5.5"
+  }
+}
