@@ -5,8 +5,13 @@ using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {
-    public class NestedFormsExample2 { 
+    public class NestedFormsExample2 {
 
+        public NestedFormsExample2()
+        {
+            //This data will be preselected by use of the .Selected() extension method
+            ContactMethod = new PhoneContactMethod() {Number = "0845 50 50 50", Type = new Mobile()};
+        }
 
         public ContactMethod ContactMethod { get; set; }
         //you can use objects as choices to create complex nested menus
@@ -22,6 +27,7 @@ namespace FormFactory.Example.Models.Examples
     public class NoContactMethod : ContactMethod
     {
     }
+
     public class PhoneContactMethod : ContactMethod
     {
         public PhoneContactMethod()
@@ -29,7 +35,9 @@ namespace FormFactory.Example.Models.Examples
             Type = new Landline();
         }
         public string Number { get; set; }
+
         public PhoneType Type { get; set; }
+
         public IEnumerable<PhoneType> Type_choices()
         {
             yield return Type is Mobile ? Type : new Mobile();

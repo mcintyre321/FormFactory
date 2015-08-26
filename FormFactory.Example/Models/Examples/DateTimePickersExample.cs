@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FormFactory.Example.Models.Examples
 {
-    public class DateTimeExample
+    public class DateTimePickersExample
     {
-        public DateTimeExample()
+        public DateTimePickersExample()
         {
             DateOfBirth = DateTime.Parse("15 Jan 1980");
             LastAccessTime = DateTime.UtcNow;

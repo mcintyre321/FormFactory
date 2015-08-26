@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Linq;
 using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {
-    public class EasyAutoCompleteExample
+    public class AutoCompleteExample
     {
 
         [Required]
@@ -13,12 +15,14 @@ namespace FormFactory.Example.Models.Examples
         public string Location { get; set; }
         public IEnumerable<string> Location_suggestions()
         {
-            return "USA,UK,Canada".Split(',');
+            return CultureInfo.GetCultures(CultureTypes.SpecificCultures)
+                .Select(c => c.Name).Distinct();
         }
 
         [Required]
-        [DisplayName("Countries (via ajax)")]
-        [Placeholder(" via ajax using [SuggestionsUrl(\"...someurl...\")]")]
+        [DisplayName("Countrie")]
+        [Placeholder("Type to find your location")]
+        [Description("AJAX suggestions using [SuggestionsUrl(\"...someurl...\")]")]
         [SuggestionsUrl("/home/CountrySuggestions")]
         public string CountryViaAjax { get; set; }
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace FormFactory.Example.Models.Examples
@@ -16,7 +17,7 @@ namespace FormFactory.Example.Models.Examples
 
         }
 
-        //Writable ICollections get rendered as re-orderable lists
+        [Description("Writable ICollections get rendered as re-orderable lists")]
         public ICollection<Movie> TopMovies { get; set; }
     }
 

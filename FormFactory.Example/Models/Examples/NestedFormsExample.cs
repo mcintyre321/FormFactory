@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using FormFactory.Attributes;
@@ -7,10 +8,11 @@ namespace FormFactory.Example.Models.Examples
 {
     public class NestedFormsExample { 
 
+        [Description("Choices can be objects too, FormFactory works recursively so you can create complex nested forms")]
         public PhoneModel PhoneModel  { get; set; }
         public IEnumerable<PhoneModel> PhoneModel_choices()
         {
-            //this could be a dynamic data source
+            //this data could come from your database
             var data = new[]
             {
                 new {Company = "Apple", Models = new[] { "iPhone 5s", "iPhone 6"}},

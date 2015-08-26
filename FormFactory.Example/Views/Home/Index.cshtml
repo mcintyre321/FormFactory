@@ -160,10 +160,19 @@ Html.PropertiesFor(x).Render(Html);
     var html = Cache[type.Name + ".cs"] as string;
     if (html == null)
     {
-        html = new WebClient()
-            .DownloadString("https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs");
-        html = string.Join(Environment.NewLine, html.Split(Environment.NewLine.ToCharArray()).Where(line => line.Trim().StartsWith("using ") == false));
-        Cache[type.Name + ".cs"] = html;
+        var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs";
+
+        try
+        {
+            html = new WebClient()
+                .DownloadString(address);
+            html = string.Join(Environment.NewLine, html.Split(Environment.NewLine.ToCharArray()).Where(line => line.Trim().StartsWith("using ") == false));
+            Cache[type.Name + ".cs"] = html;
+        }
+        catch (Exception)
+        {
+            html = "Could not get source from " + address;
+        }
     }
     @html
 }
