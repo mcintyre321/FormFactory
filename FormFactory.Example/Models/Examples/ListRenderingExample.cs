@@ -7,13 +7,8 @@ namespace FormFactory.Example.Models.Examples
     {
         public ListRenderingExample()
         {
-            TopMovies = new List<Movie>()
-            {
-                new Movie() {Title = "Fight Club"},
-                new Movie() {Title = "Bambi"},
-            };
-
-            RestrictedMaterials = new[] { "Guns", "Explosives" };
+            
+            RestrictedMaterials = new[] {"Guns", "Explosives"};
 
         }
 
@@ -26,8 +21,6 @@ namespace FormFactory.Example.Models.Examples
             }
         }
 
-
-
         //the interface model binder will bind IEnumerable<T> to T[]
         public IEnumerable<string> RestrictedMaterials { get; set; }
         //settable IEnumerable<strings> with choices get rendered as multi-selects.
@@ -36,16 +29,9 @@ namespace FormFactory.Example.Models.Examples
             return new[] { "Guns", "Knives", "Explosives", "Nuclear Waste", "Weaponised Viruses" };
         }
 
-        //Writable ICollections get rendered as re-orderable lists
-        public ICollection<Movie> TopMovies { get; set; }
     }
 
-    public class Movie
-    {
-        [Required]
-        [StringLength(64, MinimumLength = 2)]
-        public string Title { get; set; }
-    }
+
 
     public class Hobby
     {

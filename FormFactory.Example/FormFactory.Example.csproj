@@ -126,6 +126,7 @@
     <Compile Include="Models\Examples\DateTimeExample.cs" />
     <Compile Include="Models\Examples\EasyAutoCompleteExample.cs" />
     <Compile Include="Models\Examples\EasySelectListsExample.cs" />
+    <Compile Include="Models\Examples\EditableCollectionsExample.cs" />
     <Compile Include="Models\Examples\EnumExample.cs" />
     <Compile Include="Models\Examples\ListRenderingExample.cs" />
     <Compile Include="Models\Examples\NestedFormsExample2.cs">
