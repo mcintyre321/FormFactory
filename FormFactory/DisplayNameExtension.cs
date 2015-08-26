@@ -25,12 +25,12 @@ namespace FormFactory
             (type, o, tc) => lookup.GetValue(o, t => null),
             (type, o, tc) => o is IHasDisplayName ? ((IHasDisplayName) o).DisplayName : null,
             (type, o, tc) => o is IHasName ? ((IHasName) o).Name.Sentencise(tc): null,
-            (type, o, tc) => o is Enum ? GetNameFromDisplayAttribute(o): null,
+            (type, o, tc) => o is Enum ? GetNameFromEnum(o): null,
             (type, o, tc) => o is Type ? (((Type)o).Name).Sentencise(tc): null,
             (type, o, tc) => o.GetType().Name.Sentencise(tc)
         };
 
-        private static string GetNameFromDisplayAttribute(object enumValue)
+        private static string GetNameFromEnum(object enumValue)
         {
             if (enumValue == null) return "";
             

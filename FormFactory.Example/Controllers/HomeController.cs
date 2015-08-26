@@ -6,15 +6,14 @@ using System.Linq;
 using System.Web.Mvc;
 using FormFactory.Attributes;
 using FormFactory.Example.Models;
+using FormFactory.Example.Models.Examples;
 
 namespace FormFactory.Example.Controllers
 {
     public class HomeController : Controller
     {
-        private Person Person { get { return Session["person"] as Person; } set { Session["person"] = value; } }
         protected override void OnActionExecuting(ActionExecutingContext context)
         {
-            Person = Person ?? new Person(DateTime.Parse("22 Dec 1981")) { Name = "Harry" };
             base.OnActionExecuting(context);
         }
 
@@ -50,7 +49,7 @@ namespace FormFactory.Example.Controllers
 
         public ActionResult Index()
         {
-            return View("Index", Person);
+            return View("Index");
         }
 
         
@@ -58,7 +57,6 @@ namespace FormFactory.Example.Controllers
         [HttpPost]
         public ActionResult Save()
         {
-            this.UpdateModel(Person);
             return RedirectToAction("Index");
         }
 

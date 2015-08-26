@@ -2,6 +2,7 @@
 @using FormFactory.RazorEngine
 @using FormFactory.Example.Controllers
 @using FormFactory.Example.Models
+@using FormFactory.Example.Models.Examples
 @{
     ViewBag.Title = "FormFactory Examples";
 }
@@ -46,16 +47,16 @@
 <div class="row">
     <div class="col-md-6">
         <pre class="prettyprint">
-var me = new Person() { ... set properties ... };
+var me = new NestedFormsExample() { ... set properties ... };
 
 Html.PropertiesFor(me).Render(Html);
 </pre>
         <pre class="prettyprint">
-public class Person
+public class NestedFormsExample
 {
     DateTime _dateOfBirth;
 
-    public Person(DateTime dateOfBirth, string[] hobbies)
+    public NestedFormsExample(DateTime dateOfBirth, string[] hobbies)
     {
         _dateOfBirth = dateOfBirth;
         Hobbies = hobbies;
@@ -103,7 +104,7 @@ public class Person
     <div class="col-md-5">
         <form>
         @{
-            var me = new Person(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
+            var me = new NestedFormsExample(DateTime.Parse("22 Dec 1981"), "Fishing,Fighting".Split(',')) { Name = "Harry" };
             @Html.Raw(FormFactory.RazorEngine.Properties.For(me).Render(Html));
         }
         <input type="submit" value="submit" />
