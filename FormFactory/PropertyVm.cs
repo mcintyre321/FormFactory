@@ -16,6 +16,11 @@ namespace FormFactory
         {
         }
 
+        public PropertyVm()
+        {
+            
+        }
+
         public PropertyVm(ParameterInfo pi)
             : this(pi.ParameterType, pi.Name)
         {
@@ -60,7 +65,7 @@ namespace FormFactory
              
         }
 
-        public IDictionary<string, string> DataAttributes { get; private set; }
+        public IDictionary<string, string> DataAttributes { get; set; }
         public object Source { get; set; }
         public PropertyVm(object model, PropertyInfo pi) :
             this(pi.PropertyType, pi.Name)
