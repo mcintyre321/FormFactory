@@ -65,3 +65,9 @@ li.ff-choice-area > div {
 div.radio-block {
     display: inline-block;
 }
+
+.ff-dragging{
+   transform: rotate(3deg);
+   -moz-transform: rotate(3deg);
+   -webkit-transform: rotate(3deg);
+}

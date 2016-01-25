@@ -12,6 +12,7 @@ namespace FormFactory.Example.Models.Examples
             TopMovies = new List<Movie>()
             {
                 new Movie() {Title = "Fight Club"},
+                new Movie() {Title = "The Silent Partner" },
                 new Movie() {Title = "Bambi"},
             };
 

@@ -17,7 +17,7 @@
                     {
                         var id = Guid.NewGuid().ToString();
                         
-                        <li>
+                        <li draggable="true" id="listitem-@id">
                             <input type="hidden" name="@(Model.Name).Index" value="@id" />
                             @{
                                 var prop = Html.PropertyVm(obj.GetType(), Model.Name + "[" + id + "]", obj);

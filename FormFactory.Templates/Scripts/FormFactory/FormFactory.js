@@ -158,7 +158,40 @@ $(document).ready(function () {
     $(document).on("click", ".ff-move-down", function () {
         ff.transforms.swap($(this).closest("li"), $(this).closest("li").next(":not(.ff-not-collection-item)"));
         return false;
-    }); // live click
+    });
+
+    $(document).on("dragstart", function (e) {
+        $(this).addClass('ff-dragging');
+        e.originalEvent.dataTransfer.setData("text", e.srcElement.id);
+    });
+    $(document).on("dragover", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
+    $(document).on("dragleave", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        $(this).removeClass('ff-dragging');
+    });
+
+    $(document).on("drop", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $src = $(document.getElementById(e.originalEvent.dataTransfer.getData("text")))
+            .closest("li[draggable=true]");
+        var $target = $(e.target).closest("li[draggable=true]");
+        if ($target.length && $target[0] !== $src[0] && $target[0].parentElement === $src[0].parentElement) {
+            var beforeOrAfter = $src.index() > $target.index();
+            $src.remove();
+            if (beforeOrAfter) {
+                $src.insertBefore($target);
+            } else {
+                $src.insertAfter($target);
+            }
+            console.log("dropped");
+        }
+    });
 });
 if ($.validator) {
     $.validator.setDefaults({
