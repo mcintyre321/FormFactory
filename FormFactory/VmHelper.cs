@@ -41,7 +41,7 @@ namespace FormFactory
 
             foreach (var property in properties)
             {
-                if (properties.Any(p => p.Name + "Choices" == property.Name))
+                if (properties.Any(p => p.Name + "_choices" == property.Name))
                 {
                     continue; //skip this is it is choice
                 }
