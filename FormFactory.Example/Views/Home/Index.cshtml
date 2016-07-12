@@ -203,3 +203,50 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1) =>
         }
     </div>
 </div>
+<div class="row">
+   <div class="col-md-6">
+        <h2>Programatically created form</h2>
+
+        <p>
+            By default FF reflects against a view model to produce a `PropertyVm[]` array, but you can also create the properties programatically, e.g. you could load a form definition from a database then create `PropertyVm`s using that. 
+
+
+            <pre class="prettyprint">
+        var formModel = new[]{
+			new PropertyVm(typeof(string), "username"){
+				DisplayName = "Username",
+				NotOptional = true,
+			},
+			new PropertyVm(typeof(string), "password"){
+				DisplayName = "Password",
+				NotOptional = true,
+				GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+			}
+		};
+	    
+	    @formModel.Render();
+            </pre>
+        </p>
+
+    </div>
+    <div class="span1">&nbsp;</div>
+    <div class="col-md-5">
+        <p>...will render this form:</p>
+        @{
+
+              var formModel = new[]{
+			new PropertyVm(typeof(string), "username"){
+				DisplayName = "Username",
+				NotOptional = true,
+			},
+			new PropertyVm(typeof(string), "password"){
+				DisplayName = "Password",
+				NotOptional = true,
+				GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+			}
+		};
+	    
+	    @formModel.Render();
+        }
+    </div>
+</div>
