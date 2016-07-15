@@ -146,6 +146,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\FormFactory\Cell.System.Decimal.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.Decimal.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" />
     <None Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>

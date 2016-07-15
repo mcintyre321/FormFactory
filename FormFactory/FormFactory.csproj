@@ -168,6 +168,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml">
+      <Link>Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml</Link>
+    </EmbeddedResource>
     <None Include="FormFactory.nuspec" />
     <None Include="Views\Web.config" />
   </ItemGroup>
