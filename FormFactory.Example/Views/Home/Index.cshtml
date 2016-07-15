@@ -1,10 +1,14 @@
-﻿@using System.Reflection
+﻿@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Linq
+@using System.Net
+@using System.Reflection
+@using System.Web.Caching
 @using FormFactory
 @using FormFactory.AspMvc
 @using FormFactory.Example.Controllers
 @using FormFactory.Example.Models
 @using FormFactory.Example.Models.Examples
-@using FormFactory.RazorEngine
 @{
     ViewBag.Title = "FormFactory Examples";
 }
@@ -200,6 +204,59 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1) =>
             {
                 form.Render();
             } //.Dispose() closes the form
+        }
+    </div>
+</div>
+<div class="row">
+   <div class="col-md-6">
+        <h2>Programatically created form</h2>
+
+        <p>
+            By default FF reflects against a view model to produce a `PropertyVm[]` array, but you can also create the properties programatically, e.g. you could load a form definition from a database<br/>
+            You can build any of the examples above.
+
+            <pre class="prettyprint">
+//Build a model up in your controller or view   
+var formModel = new[]
+{
+    new PropertyVm(typeof(string), "username")
+    {
+        DisplayName = "Username",
+        NotOptional = true,
+    },
+    new PropertyVm(typeof(string), "password")
+    {
+        DisplayName = "Password",
+        NotOptional = true,
+        GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+    }
+};
+	    
+...
+//render it in your view
+
+@@formModel.Render(Html)            </pre>
+        </p>
+
+    </div>
+    <div class="span1">&nbsp;</div>
+    <div class="col-md-5">
+        <p>...will render this form:</p>
+        @{
+
+            var formModel = new[]{
+			    new PropertyVm(typeof(string), "username"){
+				    DisplayName = "Username",
+				    NotOptional = true,
+			    },
+			    new PropertyVm(typeof(string), "password"){
+				    DisplayName = "Password",
+				    NotOptional = true,
+				    GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+			    }
+		    };
+
+            @formModel.Render(Html)
         }
     </div>
 </div>
