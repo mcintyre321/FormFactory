@@ -7,7 +7,7 @@ using FormFactory.AspMvc.Wrappers;
 
 namespace FormFactory.AspMvc
 {
-    public static class PropertyRenderExtension
+    public static class RenderExtension
     {
         public static IHtmlString Render(this IEnumerable<PropertyVm> properties, HtmlHelper html)
         {
@@ -23,6 +23,10 @@ namespace FormFactory.AspMvc
         {
             return (html.Partial("FormFactory/Form.Property", propertyVm));
         }
+
+        public static IHtmlString Render(this FormVm formVm, HtmlHelper html)
+        {
+            return (html.Partial("FormFactory/Form", formVm));
+        }
     }
-     
 }

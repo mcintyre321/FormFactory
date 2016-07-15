@@ -1,0 +1,10 @@
+﻿@using FormFactory
+@using FormFactory.AspMvc
+@model FormVm
+@Html.Partial("FormFactory/Form.Start", Model)
+  @foreach (var input in Model.Inputs)
+  {
+      @Html.Partial("FormFactory/Form.Property", input)
+  }
+@Html.Partial("FormFactory/Form.Actions", Model)
+@Html.Partial("FormFactory/Form.Close", Model)

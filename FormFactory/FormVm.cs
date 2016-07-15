@@ -98,7 +98,8 @@ namespace FormFactory
 
         private string _actionUrlOverride;
         public string ActionUrl { get; set; }
-
+        public string Method { get; set; }
+        
         public IEnumerable<PropertyVm> Inputs { get; set; }
 
 
