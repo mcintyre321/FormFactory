@@ -171,6 +171,9 @@
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml</Link>
     </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.cshtml">
+      <Link>Views\Shared\FormFactory\Form.cshtml</Link>
+    </EmbeddedResource>
     <None Include="FormFactory.nuspec" />
     <None Include="Views\Web.config" />
   </ItemGroup>

@@ -5,7 +5,7 @@ using RazorEngine.Text;
 
 namespace FormFactory.RazorEngine
 {
-    public static class PropertyRenderExtension
+    public static class RenderExtension
     {
         public static RawString Render(this IEnumerable<PropertyVm> properties, RazorTemplateHtmlHelper html)
         {
@@ -20,6 +20,11 @@ namespace FormFactory.RazorEngine
         public static RawString Render(this PropertyVm propertyVm, RazorTemplateHtmlHelper html)
         {
             return (html.Partial("FormFactory/Form.Property", propertyVm));
+        }
+
+        public static RawString Render(this FormVm formVm, RazorTemplateHtmlHelper html)
+        {
+            return (html.Partial("FormFactory/Form", formVm));
         }
     }
 }
