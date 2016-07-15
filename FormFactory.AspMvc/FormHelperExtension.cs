@@ -15,7 +15,7 @@ namespace FormFactory
     {
         #region generic overrides
 
-        public static FormVm FormForAction<TController, TActionResult>(this System.Web.Mvc.HtmlHelper html,
+        public static FormRenderScope FormForAction<TController, TActionResult>(this System.Web.Mvc.HtmlHelper html,
                                                                        Expression<Func<TController, TActionResult>>
                                                                            action)
             where TController : IController
@@ -24,7 +24,7 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
 
-        public static FormVm FormForAction<TController, TArg1, TActionResult>(this System.Web.Mvc.HtmlHelper html,
+        public static FormRenderScope FormForAction<TController, TArg1, TActionResult>(this System.Web.Mvc.HtmlHelper html,
                                                                               Expression
                                                                                   <
                                                                                   Func
@@ -36,7 +36,7 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
 
-        public static FormVm FormForAction<TController, TArg1, TArg2, TActionResult>(
+        public static FormRenderScope FormForAction<TController, TArg1, TArg2, TActionResult>(
             this System.Web.Mvc.HtmlHelper html, Expression<Func<TController, TArg1, TArg2, TActionResult>> action)
             where TController : IController
             where TActionResult : ActionResult
@@ -44,7 +44,7 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
 
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TActionResult>(
+        public static FormRenderScope FormForAction<TController, TArg1, TArg2, TArg3, TActionResult>(
             this System.Web.Mvc.HtmlHelper html,
             Expression<Func<TController, TArg1, TArg2, TArg3, TActionResult>> action)
             where TController : IController
@@ -53,7 +53,7 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
 
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>(
+        public static FormRenderScope FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>(
             this System.Web.Mvc.HtmlHelper html,
             Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TActionResult>> action)
             where TController : IController
@@ -62,7 +62,7 @@ namespace FormFactory
             return FormFor(html, action.MethodInfo());
         }
 
-        public static FormVm FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>(
+        public static FormRenderScope FormForAction<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>(
             this System.Web.Mvc.HtmlHelper html,
             Expression<Func<TController, TArg1, TArg2, TArg3, TArg4, TArg5, TActionResult>> action)
             where TController : IController
@@ -73,9 +73,11 @@ namespace FormFactory
 
         #endregion
 
-        private static FormVm FormFor(System.Web.Mvc.HtmlHelper html, MethodInfo mi)
+        private static FormRenderScope FormFor(System.Web.Mvc.HtmlHelper html, MethodInfo mi)
         {
-            return new FormVm(new FormFactoryHtmlHelper(html), mi);
+            var formFactoryHtmlHelper = new FormFactoryHtmlHelper(html);
+            var formVm = new FormVm(formFactoryHtmlHelper, mi);
+            return new FormRenderScope(formFactoryHtmlHelper, formVm);
         }
 
         public static PropertyVm CreatePropertyVm(this HtmlHelper helper, Type objectType, string name)

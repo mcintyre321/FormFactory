@@ -6,18 +6,61 @@ using FormFactory.Attributes;
 
 namespace FormFactory
 {
-    public class FormVm : IDisposable, IHasDisplayName
-    {
-        private readonly string _actionName;
-        private readonly string _controllerName;
+    public class FormRenderScope : IDisposable {
+        public FfHtmlHelper HtmlHelper { get; set; }
+        public FormVm FormVm { get; private set; }
 
-        public FormVm(FfHtmlHelper html, MethodInfo mi) : this(html)
+        public FormRenderScope(FfHtmlHelper htmlHelper, FormVm formVm)
         {
-            this._actionName = mi.Name;
-            var controllerTypeName = mi.ReflectedType.Name;
-            this._controllerName = controllerTypeName.Substring(0, controllerTypeName.LastIndexOf("Controller"));
+            HtmlHelper = htmlHelper;
+            FormVm = formVm;
+        }
 
-            HtmlHelper = html;
+        public FormRenderScope Render()
+        {
+            RenderStart();
+            RenderActionInputs();
+            RenderButtons();
+            return this;
+        }
+
+        public FormRenderScope RenderButtons()
+        {
+            HtmlHelper.RenderPartial("FormFactory/Form.Actions", this.FormVm);
+            return this;
+        }
+
+        public FormRenderScope RenderActionInputs()
+        {
+            foreach (var input in FormVm.Inputs)
+            {
+                HtmlHelper.RenderPartial("FormFactory/Form.Property", input);
+            }
+            return this;
+        }
+
+        public FormRenderScope RenderStart()
+        {
+            HtmlHelper.RenderPartial("FormFactory/Form.Start", this.FormVm);
+            return this;
+        }
+
+
+        public void Dispose()
+        {
+            HtmlHelper.RenderPartial("FormFactory/Form.Close", this.FormVm);
+        }
+   
+    }
+
+    public class FormVm : IHasDisplayName
+    {
+
+        public FormVm(FfHtmlHelper html, MethodInfo mi)  
+        {
+            var _actionName = mi.Name;
+            var controllerTypeName = mi.ReflectedType.Name;
+            var _controllerName = controllerTypeName.Substring(0, controllerTypeName.LastIndexOf("Controller"));
 
             var inputs = new List<PropertyVm>();
 
@@ -38,35 +81,26 @@ namespace FormFactory
             Inputs = inputs;
             this.DisplayName = mi.Name.Sentencise(true);
             ExcludePropertyErrorsFromValidationSummary = true;
+
+
+            this.ActionUrl = UseHttps.HasValue
+                ? html.Url().Action(_actionName, _controllerName, null, UseHttps.Value ? "https" : "http")
+                : html.Url().Action(_actionName, _controllerName);
         }
-        public FormVm(FfHtmlHelper html)
+        public FormVm()
         {
             Inputs = new List<PropertyVm>();
             this.DisplayName = "";
-            this.HtmlHelper = html;
             ShowValidationSummary = true;
             ExcludePropertyErrorsFromValidationSummary = true;
             RenderAntiForgeryToken = Defaults.RenderAntiForgeryToken;
         }
 
         private string _actionUrlOverride;
-        public string ActionUrl
-        {
-            get
-            {
-                return _actionUrlOverride ??
-                       (
-                           UseHttps.HasValue
-                               ? HtmlHelper.Url().Action(_actionName, _controllerName, null, UseHttps.Value ? "https" : "http")
-                               : HtmlHelper.Url().Action(_actionName, _controllerName)
-                       );
-            }
-            set { _actionUrlOverride = value; }
-        }
+        public string ActionUrl { get; set; }
 
         public IEnumerable<PropertyVm> Inputs { get; set; }
 
-        public FfHtmlHelper HtmlHelper { get; set; }
 
         public string DisplayName { get; set; }
 
@@ -84,40 +118,7 @@ namespace FormFactory
         /// </summary>
         public bool? UseHttps { get; set; }
 
-        public FormVm Render()
-        {
-            RenderStart();
-            RenderActionInputs();
-            RenderButtons();
-            return this;
-        }
-
-        public FormVm RenderButtons()
-        {
-            HtmlHelper.RenderPartial("FormFactory/Form.Actions", this);
-            return this;
-        }
-
-        public FormVm RenderActionInputs()
-        {
-            foreach (var input in Inputs)
-            {
-                HtmlHelper.RenderPartial("FormFactory/Form.Property", input);
-            }
-            return this;
-        }
-
-        public FormVm RenderStart()
-        {
-            HtmlHelper.RenderPartial("FormFactory/Form.Start", this);
-            return this;
-        }
-
-
-        public void Dispose()
-        {
-            HtmlHelper.RenderPartial("FormFactory/Form.Close", this);
-        }
+       
 
         public override string ToString()
         {
