@@ -3,14 +3,34 @@ using System.Dynamic;
 using RazorEngine.Templating;
 
 namespace FormFactory.RazorEngine
-{ 
-    public class RazorTemplateFormFactoryTemplate<T> : TemplateBase<T> 
+{
+    public interface IRazorTemplateFormFactoryTemplate
+    {
+        RazorTemplateHtmlHelper Html { get; set; }
+        ViewData ViewData { get; set; }
+        void SetModel(object o);
+        string Run(ExecuteContext executeContext);
+    }
+
+    public class RazorTemplateFormFactoryTemplate<T> : TemplateBase<T>, IRazorTemplateFormFactoryTemplate
     {
         public RazorTemplateHtmlHelper Html { get; set; }
-        public IDictionary<string, object> ViewData { get; set; }
+        public ViewData ViewData { get; set; }
+
+
+        public void SetModel(object o)
+        {
+            this.Model = (T) o;
+        }
+
+        public string Run(ExecuteContext executeContext)
+        {
+            return ((ITemplate) this).Run(executeContext);
+        }
+
         public RazorTemplateFormFactoryTemplate()
         {
-            ViewData = new Dictionary<string, object>();
+            ViewData = new ViewData();
         }
     }
 

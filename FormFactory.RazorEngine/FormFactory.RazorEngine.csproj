@@ -58,9 +58,7 @@
     <Compile Include="RazorEngineContext.cs" />
     <Compile Include="RazorTemplateFormFactoryTemplate.cs" />
     <Compile Include="RazorTemplateHtmlHelper.cs" />
-    <Compile Include="RazorTemplateModelStateDictionary.cs" />
     <Compile Include="RazorTemplateView.cs" />
-    <Compile Include="RazorTemplateViewData.cs" />
     <Compile Include="RazorTemplateViewResult.cs" />
     <Compile Include="RazorViewHelper.cs" />
   </ItemGroup>

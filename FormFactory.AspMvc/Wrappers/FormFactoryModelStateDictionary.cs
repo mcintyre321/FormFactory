@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 
 namespace FormFactory.AspMvc.Wrappers
 {
@@ -17,7 +18,11 @@ namespace FormFactory.AspMvc.Wrappers
             var result = _modelState.TryGetValue(key, out ms);
             if (result)
             {
-                modelState = new FormFactoryModelState(ms);
+
+                modelState = new ModelState(
+                    ms?.Errors?.ToFfModelStateErrors(),
+                    new FormFactoryModelStateValue(ms?.Value?.AttemptedValue)
+                    );
             }
             else
             {
@@ -32,7 +37,10 @@ namespace FormFactory.AspMvc.Wrappers
             {
                 var value = _modelState[key];
                 if (value == null) return null;
-                return new FormFactoryModelState(value);
+                return new ModelState(
+                    value?.Errors?.ToFfModelStateErrors(),
+                    new FormFactoryModelStateValue(value?.Value?.AttemptedValue)
+                    );
             }
         }
 
@@ -40,5 +48,7 @@ namespace FormFactory.AspMvc.Wrappers
         {
             return _modelState.ContainsKey(key);
         }
+
+        public bool IsValid => _modelState.IsValid;
     }
 }

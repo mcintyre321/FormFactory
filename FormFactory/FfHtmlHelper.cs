@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace FormFactory
 {
@@ -13,6 +14,7 @@ namespace FormFactory
         //string Partial(string partialName, object vm); 
         void RenderPartial(string partialName, object model);
         PropertyVm CreatePropertyVm(Type objectType, string name);
+
     }
 
     public interface FfHtmlHelper<TViewData> : FfHtmlHelper
@@ -34,10 +36,27 @@ namespace FormFactory
     }
 
 
-    public interface ViewData
+    public class ViewData 
     {
-        IModelStateDictionary ModelState { get; }
-        object Model { get; }
+        public ViewData(IModelStateDictionary modelState, object model)
+        {
+            ModelState = modelState;
+            Model = model;
+        }
+
+        public ViewData()
+        {
+            ModelState = new FfModelStateDictionary();
+        }
+
+        public IModelStateDictionary ModelState { get; private set; }
+        public object Model { get; private set; }
+    }
+
+
+    public class FfModelStateDictionary : Dictionary<string, ModelState>, IModelStateDictionary
+    {
+        public bool IsValid => Values.SelectMany(v => v.Errors).Any(e => e != null) == false;
     }
 
     public interface IModelStateDictionary
@@ -45,12 +64,24 @@ namespace FormFactory
         bool TryGetValue(string key, out ModelState modelState);
         ModelState this[string key] { get; }
         bool ContainsKey(string key);
+        bool IsValid { get; }
     }
 
-    public interface ModelState
+    public class ModelState
     {
-        FormFactoryModelStateValue Value { get; }
-        FormFactoryModelStateErrors Errors { get; } 
+        public ModelState()
+        {
+                
+        }
+
+        public ModelState(FormFactoryModelStateErrors errors, FormFactoryModelStateValue value)
+        {
+            Errors = errors;
+            Value = value;
+        }
+
+        public FormFactoryModelStateValue Value { get; private set; }
+        public FormFactoryModelStateErrors Errors { get; private set; }
     }
 
     public class FormFactoryModelStateErrors : IEnumerable<FormFactoryModelStateError>
@@ -78,9 +109,14 @@ namespace FormFactory
         public string ErrorMessage { get; set; }
     }
 
-    public interface FormFactoryModelStateValue
+    public class FormFactoryModelStateValue
     {
-        object AttemptedValue { get;  }
+        public FormFactoryModelStateValue(object attemptedValue)
+        {
+            AttemptedValue = attemptedValue;
+        }
+
+        public object AttemptedValue { get; private set; }
     }
 
     public interface UrlHelper
