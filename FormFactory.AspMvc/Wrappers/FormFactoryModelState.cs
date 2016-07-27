@@ -1,38 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace FormFactory.AspMvc.Wrappers
 {
-    public class FormFactoryModelState : ModelState
+
+    static class MvcToFfMappingExtensions
     {
-        private readonly System.Web.Mvc.ModelState _ms;
-
-        public FormFactoryModelState(System.Web.Mvc.ModelState ms)
+        public static FormFactoryModelStateErrors ToFfModelStateErrors(this ModelErrorCollection mvcErrors)
         {
-            _ms = ms;
-        }
-
-        public FormFactoryModelStateValue Value { get { return new FormFactoryModelStateValueWrapper(_ms); } }
-        public FormFactoryModelStateErrors Errors { get{return _ms.Errors == null ? null : new  FormFactoryModelStateErrorsWrapper(_ms.Errors);}}
-    }
-
-    public class FormFactoryModelStateErrorsWrapper : FormFactoryModelStateErrors
-    {
-        public FormFactoryModelStateErrorsWrapper(ModelErrorCollection errors)
-            :base(Transform(errors))
-        {
-            
-        }
-
-        private static IEnumerable<FormFactoryModelStateError> Transform(ModelErrorCollection errors)
-        {
-            foreach (var error in errors)
+            return new FormFactoryModelStateErrors(mvcErrors.Select(e => new FormFactoryModelStateError()
             {
-                yield return new FormFactoryModelStateError()
-                {
-                    ErrorMessage = error.ErrorMessage
-                };
-            }
+                ErrorMessage = e.ErrorMessage
+            }));
         }
     }
+
 }

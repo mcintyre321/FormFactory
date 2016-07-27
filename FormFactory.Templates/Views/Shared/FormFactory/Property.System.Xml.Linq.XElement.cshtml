@@ -11,5 +11,7 @@
 
 @{
     var value = Model.Value as XElement;
-    if (value != null) @Html.Raw(value.ToString())
+    if (value != null) { 
+        @Html.Raw(value.ToString())
+    }
 }

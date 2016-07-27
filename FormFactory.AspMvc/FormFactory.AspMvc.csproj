@@ -91,7 +91,6 @@
     <Compile Include="Wrappers\FormFactoryHtmlHelper.cs" />
     <Compile Include="Wrappers\FormFactoryModelState.cs" />
     <Compile Include="Wrappers\FormFactoryModelStateDictionary.cs" />
-    <Compile Include="Wrappers\FormFactoryModelStateValue.cs" />
     <Compile Include="Wrappers\FormFactoryUrlHelper.cs" />
     <Compile Include="Wrappers\FormFactoryView.cs" />
     <Compile Include="Wrappers\FormFactoryViewData.cs" />

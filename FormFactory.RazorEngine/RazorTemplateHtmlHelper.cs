@@ -63,6 +63,12 @@ namespace FormFactory.RazorEngine
             return new RawString(ValidationHelper.UnobtrusiveValidation(this, property));
         }
 
+        public RawString AntiForgeryToken()
+        {
+            return new RawString("");
+        }
+
+
         public UrlHelper Url()
         {
             throw new NotImplementedException("Url not implemented in FormFactory.RazorTemplate");
@@ -73,11 +79,9 @@ namespace FormFactory.RazorEngine
             return type.AssemblyQualifiedName;
         }
 
-        public ViewData ViewData { get { return new RazorTemplateViewData(this); } }
-        public IViewFinder ViewFinder
-        {
-            get { return new RazorEngineContext(); }
-        }
+        public ViewData ViewData => new ViewData(new FfModelStateDictionary(), this.Model);
+
+        public IViewFinder ViewFinder => new RazorEngineContext();
 
         public object Model { get; set; }
 
@@ -97,6 +101,12 @@ namespace FormFactory.RazorEngine
                 return new RawString(ex.Message);
             }
         }
+
+        public RawString ValidationSummary(bool excludeFieldErrors)
+        {
+            return new RawString("");
+        }
+
         public bool HasErrors(string modelName)
         {
             return false;
@@ -110,17 +120,15 @@ namespace FormFactory.RazorEngine
             return new PropertyVm(type, name) { Value = value };
         }
 
-        public RawString Partial(string partialName, object model)
+        public RawString Partial(string partialName, object model, ViewData viewData = null)
         {
-            return Partial(partialName, model, null);
-        }
-        public RawString Partial(string partialName, object model, IDictionary<string, object> viewData)
-        {
-            var template = Razor.Resolve(partialName, model);
-            var dyn = (dynamic) template;
+            IRazorTemplateFormFactoryTemplate template = (IRazorTemplateFormFactoryTemplate) Razor.Resolve(partialName, model);
+            var dyn = template;
             dyn.Html = this;
-            dyn.Model = (dynamic) model;
-            if (viewData != null) dyn.ViewData = viewData;
+            dyn.SetModel(model);
+            
+            dyn.ViewData = viewData ?? new ViewData();
+            
             try
             {
                 string result = template.Run(new ExecuteContext());

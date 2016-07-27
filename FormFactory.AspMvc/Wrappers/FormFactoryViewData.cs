@@ -4,18 +4,8 @@ namespace FormFactory.AspMvc.Wrappers
 {
     public class FormFactoryViewData : ViewData
     {
-        private readonly ViewDataDictionary _viewData;
-
-        public FormFactoryViewData(ViewDataDictionary viewData)
+        public FormFactoryViewData(ViewDataDictionary viewData) : base(new FormFactoryModelStateDictionary(viewData.ModelState), viewData.Model)
         {
-            _viewData = viewData;
         }
-
-        public IModelStateDictionary ModelState
-        {
-            get { return new FormFactoryModelStateDictionary(_viewData.ModelState); }
-        }
-
-        public object Model { get; private set; }
     }
 }
