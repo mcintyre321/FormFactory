@@ -46,6 +46,23 @@ namespace FormFactory
                     continue; //skip this is it is choice
                 }
 
+                if (properties.Any(p => p.Name + "_choices" == property.Name))
+                {
+                    continue; //skip this is it is choice
+                }
+
+                if (properties.Any(p => p.Name + "_show" == property.Name))
+                {
+                    continue; //skip this is it is show
+                }
+
+
+                if (!(type.GetMethod(property.Name + "_show")?.Invoke(model, null) as bool? ?? true))
+                    continue;
+                if (!(type.GetProperty(property.Name + "_show")?.GetValue(model) as bool? ?? true))
+                    continue;
+
+
                 var inputVm = new PropertyVm(model, property);
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
                 if (choices != null)

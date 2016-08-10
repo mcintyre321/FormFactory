@@ -132,6 +132,7 @@
     <Compile Include="Models\Examples\NestedFormsExample2.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Models\Examples\DynamicallyHiddenPropertiesExample.cs" />
     <Compile Include="Models\Examples\SimplePropertiesExample.cs" />
     <Compile Include="Models\UploadedFilesResultModel.cs" />
     <Compile Include="Models\UploadedFilesTestModel.cs" />
