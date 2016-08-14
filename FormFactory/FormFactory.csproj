@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Attributes\SuggestionsUrlAttribute.cs" />
     <Compile Include="EmbeddedResourceRegistry.cs" />
+    <Compile Include="FormRenderScope.cs" />
     <Compile Include="UnobtrusiveValidation\ClientValidationRules.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="DisplayNameExtension.cs" />
