@@ -233,7 +233,7 @@ var formModel = new[]
     {
         DisplayName = "Operating System",
         NotOptional = true,
-        Choices = new List&lt;>() {"OSX", "IOS", "Windows".Selected(), "Android"},
+        Choices = new List&lt;>() {"OSX", "IOS", "Windows", "Android"},
         Value = "Windows", //Preselect windows
         GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
     }
@@ -267,7 +267,7 @@ var formModel = new[]
                 {
                     DisplayName = "Operating System",
                     NotOptional = true,
-                    Choices = new List<string>() {"OSX", "IOS", "Windows".Selected(), "Android"},
+                    Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
                     Value = "Windows", //Preselect windows
                     GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
                 }
