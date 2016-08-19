@@ -187,10 +187,8 @@ Html.PropertiesFor(someObject).Render(Html);
         <p>
             ..writing this in the view...
             <pre class="prettyprint"> 
-using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
-{
-    form.Render(); //renders the form
-} //.Dispose() closes the form
+        var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1));
+        @@form.Render(Html); //renders the form
     </pre>
         </p>
 
@@ -200,10 +198,8 @@ using (var form = Html.FormForAction((HomeController c, string p0, string p1) =>
         <p>...will render this form:</p>
         @{
 
-            using (var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1)))
-            {
-                form.Render();
-            } //.Dispose() closes the form
+            var form = Html.FormForAction((HomeController c, string p0, string p1) => c.SignIn(p0, p1));
+            @form.Render(Html);
         }
     </div>
 </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace FormFactory.AspMvc.Wrappers
 {
@@ -24,12 +25,7 @@ namespace FormFactory.AspMvc.Wrappers
         public string Action(string actionName, string controllerName)
         {
             return _mvcUrlHelper.Action(actionName, controllerName);
-
         }
-
-        public string Action(string actionName, string controllerName, object routeValues, string protocol)
-        {
-            return _mvcUrlHelper.Action(actionName, controllerName, routeValues, protocol);
-        }
+ 
     }
 }
