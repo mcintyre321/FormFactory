@@ -20,7 +20,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -45,7 +45,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Core">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -86,19 +88,9 @@
     <Content Include="Scripts\FormFactory\FormFactory.js" />
     <Content Include="Scripts\bootstrap3-typeahead.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />
-    <Content Include="Views\Shared\FormFactory\Form.Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\FormFactory\_README.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Close.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\FormFactory\Form.Start.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
@@ -142,13 +134,15 @@
     <Content Include="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
     <Content Include="Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" />
     <Content Include="Views\Shared\FormFactory\Cell.System.DateTime.cshtml" />
-    <None Include="app.config" />
     <None Include="packages.config" />
     <Content Include="Views\Shared\FormFactory\Cell.System.Decimal.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.Decimal.cshtml" />
     <Content Include="Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" />
     <Content Include="Views\Shared\FormFactory\Form.cshtml" />
-    <None Include="Views\Web.config" />
+    <Content Include="Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml" />
+    <Content Include="Views\Shared\FormFactory\Form.Property.cshtml" />
+    <None Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj">

@@ -1,40 +1,42 @@
 ﻿@using System.ComponentModel.DataAnnotations
-@using FormFactory.Attributes
 @using FormFactory
 @using FormFactory.AspMvc
-@model FormFactory.PropertyVm
-@{
-    if (Model.IsHidden)
-    {
-    <div style="display: none">@Html.BestProperty(Model)</div>
-    }
-    else
-    {
-        if (Model.IsHidden)
-        {
-    <div style="display: none">@Html.BestProperty(Model)</div>
-        }
-        else
-        {
-            var validClass = Html.HasErrors(Model.Name) ? "error" : "valid";
-    <div class="form-group has-@validClass">
-        @if (!Model.HasAttribute<NoLabelAttribute>() && !Model.HasAttribute<LabelOnRightAttribute>())
-        {
-            var required = Model.NotOptional ?? (Model.Readonly
-                           || Model.HasAttribute<RequiredAttribute>()
-                           || Model.Choices != null);
-            var optionalText = required ? "" : "<span class='is-optional-hint'> (optional)</span>";
-        
-                <label class="control-label" for="@Model.Id">@Model.DisplayName()@Html.Raw(optionalText)</label>
-        }
-        @Html.BestProperty(Model)
-        <span class="help-block">
-            <span class="field-validation-@validClass" data-valmsg-for="@Model.Name" data-valmsg-replace="true">
-                @Html.AllValidationMessages(Model.Name)
-            </span>
-            @(Model.GetCustomAttributes().OfType<System.ComponentModel.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
+@using FormFactory.Attributes
+@model PropertyVm
+ @{
+     var propertyVm = Model;
+     if (propertyVm.IsHidden)
+     {
+         <div style="display: none">@Html.BestProperty(propertyVm)</div>
+     }
+     else
+     {
+         if (propertyVm.IsHidden)
+         {
+             <div style="display: none">@Html.BestProperty(propertyVm)</div>
+         }
+         else
+         {
+             var validClass = Html.HasErrors(propertyVm.Name) ? "error" : "valid";
+             <div class="form-group has-@validClass">
+                 @if (!propertyVm.HasAttribute<NoLabelAttribute>() && !propertyVm.HasAttribute<LabelOnRightAttribute>())
+                 {
+                     var required = propertyVm.NotOptional ?? (propertyVm.Readonly
+                                                               || propertyVm.HasAttribute<RequiredAttribute>()
+                                                               || propertyVm.Choices != null);
+                     var optionalText = required ? "" : "<span class='is-optional-hint'> (optional)</span>";
+
+                     <label class="control-label" for="@propertyVm.Id">@propertyVm.DisplayName()@Html.Raw(optionalText)</label>
+                 }
+
+                 @Html.BestProperty(propertyVm)
+                 <span class="help-block">
+        <span class="field-validation-@validClass" data-valmsg-for="@propertyVm.Name" data-valmsg-replace="true">
+            @Html.AllValidationMessages(propertyVm.Name)
         </span>
-    </div>
-        }
-    }
-}
+        @(propertyVm.GetCustomAttributes().OfType<System.ComponentModel.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
+    </span>
+             </div>
+         }
+     }
+ }

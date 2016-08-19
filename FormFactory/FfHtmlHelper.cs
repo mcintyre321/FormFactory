@@ -122,10 +122,5 @@ namespace FormFactory
     public interface UrlHelper
     {
         string Action(string actionName, string controllerName);
-        string Action(string actionName, string controllerName, object routeValues, string protocol);
-    }
-
-    public interface RouteValueDictionary
-    {
     }
 }

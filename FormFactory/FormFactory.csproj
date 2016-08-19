@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\SuggestionsUrlAttribute.cs" />
+    <Compile Include="Components\Navbar.cs" />
+    <Compile Include="Components\SubmitButton.cs" />
     <Compile Include="EmbeddedResourceRegistry.cs" />
     <Compile Include="UnobtrusiveValidation\ClientValidationRules.cs" />
     <Compile Include="ValidationHelper.cs" />
@@ -81,18 +83,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Actions.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Actions.cshtml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Close.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Close.cshtml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Property.cshtml</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Start.cshtml">
-      <Link>Views\Shared\FormFactory\Form.Start.cshtml</Link>
-    </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml</Link>
     </EmbeddedResource>
@@ -173,6 +163,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.cshtml">
       <Link>Views\Shared\FormFactory\Form.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Form.Property.cshtml">
+      <Link>Views\Shared\FormFactory\Form.Property.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml">
+      <Link>Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\FormFactory.Templates\Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml">
+      <Link>Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml</Link>
     </EmbeddedResource>
     <None Include="FormFactory.nuspec" />
     <None Include="Views\Web.config" />

@@ -11,13 +11,14 @@ namespace FormFactory.AspMvc.ModelBinders
         public Type ReadTypeFromString(string typeString)
         {
             Debug.Assert(typeString != null, "typeString != null");
-            return Type.GetType(Encoding.UTF7.GetString(MachineKey.Decode(typeString, MachineKeyProtection.All)));
+            var unprotect = MachineKey.Unprotect(Encoding.UTF7.GetBytes(typeString)) ?? new byte[0] {};
+            return Type.GetType(Encoding.UTF7.GetString(unprotect));
         }
 
         public string WriteTypeToString(Type type)
         {
             Debug.Assert(type.AssemblyQualifiedName != null, "type.AssemblyQualifiedName != null");
-            return MachineKey.Encode(Encoding.UTF7.GetBytes(type.AssemblyQualifiedName), MachineKeyProtection.All);
+            return Encoding.UTF7.GetString(MachineKey.Protect(Encoding.UTF7.GetBytes(type.AssemblyQualifiedName)));
         }
     }
 }
