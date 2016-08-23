@@ -16,19 +16,35 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
-        @foreach (var option in choices)
+    if (Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(a => a.CustomDataType == "Radio"))
+    {
+        foreach (var option in choices)
         {
-            <option value="@option.Item2" @Html.Raw((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>    
+            var isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
+            <div class="radio">
+                <label>
+                    <input type="radio" name="@Model.Name" value="option1" @Html.Raw(isSelected ? "checked" : "")>
+                    @option.Item1
+                </label>
+            </div>
         }
-    </select>
+    }
+    else
+    {
+        <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+            @foreach (var option in choices)
+            {
+                <option value="@option.Item2" @Html.Raw((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>
+            }
+        </select>
+    }
 }
 else
 {
     var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
     var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
     var placeHolderText = Model.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
- 
+
     var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
     var needsAutoComplete = (!Model.Readonly && (suggestionsAttribute != null || (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())));
     var autoCompleteAtt = "";
@@ -49,11 +65,11 @@ else
 
     if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
     {
-    <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model)  @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
+        <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model) @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
     }
     else
     {
-    <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model)  name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
+        <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model) name="@Model.Name" size="30" type="@inputType" value="@Model.Value"/>
     }
 
 }
