@@ -53,13 +53,13 @@
 
     </div>
     <!--/row-->
-     
+
 </div>
 <section id="documentation">
     <div class="row">
         <div class="col-md-6">
             <h3>What is it?</h3>
-                <p>
+            <p>
                 FormFactory renders complex object forms automatically. It refects over an object model or method signature,
                 and builds an intermediate model representing the form and properties. These models are then rendered
                 using customisable templates.
@@ -117,14 +117,14 @@ Html.PropertiesFor(someObject).Render(Html);
     <div class="row">
         <div class="col-md-12">
             <h3>@type.Name.Sentencise(true).Replace("Examples", "").Replace("Example", "")</h3>
-            
+
         </div>
     </div>
     <div class="row">
 
         <div class="col-md-4">
-            
-             
+
+
             <form action="/home/save" method="POST">
                 @{
                     var instance = Activator.CreateInstance(type);
@@ -140,7 +140,7 @@ Html.PropertiesFor(someObject).Render(Html);
                         @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
                     }
                 }
-                <input type="submit" value="submit"/>
+                <input type="submit" value="submit" />
             </form>
         </div>
         <div class="col-md-8">
@@ -151,7 +151,6 @@ Html.PropertiesFor(someObject).Render(Html);
     if (html == null)
     {
         var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs";
-
         try
         {
             html = new WebClient()
@@ -170,7 +169,7 @@ Html.PropertiesFor(someObject).Render(Html);
         </div>
     </div>
 
-}
+    }
 
 <div class="row">
     <div class="col-md-6">
@@ -204,11 +203,11 @@ Html.PropertiesFor(someObject).Render(Html);
     </div>
 </div>
 <div class="row">
-   <div class="col-md-6">
+    <div class="col-md-6">
         <h2>Programatically created form</h2>
 
         <p>
-            By default FF reflects against a view model to produce a `PropertyVm[]` array, but you can also create the properties programatically, e.g. you could load a form definition from a database<br/>
+            By default FF reflects against a view model to produce a `PropertyVm[]` array, but you can also create the properties programatically, e.g. you could load a form definition from a database<br />
             You can build any of the examples above.
 
             <pre class="prettyprint">
@@ -225,12 +224,19 @@ var formModel = new[]
         DisplayName = "Password",
         NotOptional = true,
         GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+    },
+    new PropertyVm(typeof(string), "os")
+    {
+        DisplayName = "Operating System",
+        NotOptional = true,
+        Choices = new List&lt;>() {"OSX", "IOS", "Windows", "Android"},
+        Value = "Windows", //Preselect windows
+        GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
     }
 };
 	    
 ...
 //render it in your view
-
 @@formModel.Render(Html)            </pre>
         </p>
 
@@ -240,17 +246,28 @@ var formModel = new[]
         <p>...will render this form:</p>
         @{
 
-            var formModel = new[]{
-			    new PropertyVm(typeof(string), "username"){
-				    DisplayName = "Username",
-				    NotOptional = true,
-			    },
-			    new PropertyVm(typeof(string), "password"){
-				    DisplayName = "Password",
-				    NotOptional = true,
-				    GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
-			    }
-		    };
+            var formModel = new[]
+            {
+                new PropertyVm(typeof(string), "username")
+                {
+                    DisplayName = "Username",
+                    NotOptional = true,
+                },
+                new PropertyVm(typeof(string), "password")
+                {
+                    DisplayName = "Password",
+                    NotOptional = true,
+                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(DataType.Password)}
+                },
+                new PropertyVm(typeof(string), "os")
+                {
+                    DisplayName = "Operating System",
+                    NotOptional = true,
+                    Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
+                    Value = "Windows", //Preselect windows
+                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
+                }
+            };
 
             @formModel.Render(Html)
         }

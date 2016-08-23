@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -48,7 +47,7 @@ namespace FormFactory
 
         public string ActionUrl { get; set; }
         public string Method { get; set; }
-         
+        public string EncType { get; set; } = "multipart/form-data";
         public IList<PropertyVm> Inputs { get; set; } = new List<PropertyVm>();
         public IList<PropertyVm> Buttons { get; set; } = new List<PropertyVm>();
 
