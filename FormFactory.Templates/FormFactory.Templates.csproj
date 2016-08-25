@@ -87,14 +87,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\FormFactory\Content\FormFactory\FormFactory.css">
+      <Link>Content\FormFactory\FormFactory.css</Link>
+    </Content>
+    <Content Include="..\FormFactory\Scripts\bootstrap3-typeahead.js">
+      <Link>Scripts\bootstrap3-typeahead.js</Link>
+    </Content>
+    <Content Include="..\FormFactory\Scripts\bootstrap3-typeahead.unobtrusive.js">
+      <Link>Scripts\bootstrap3-typeahead.unobtrusive.js</Link>
+    </Content>
+    <Content Include="..\FormFactory\Scripts\FormFactory\FormFactory.js">
+      <Link>Scripts\FormFactory\FormFactory.js</Link>
+    </Content>
+    <Content Include="..\FormFactory\Scripts\jquery.validate.unobtrusive.dynamic.js">
+      <Link>Scripts\jquery.validate.unobtrusive.dynamic.js</Link>
+    </Content>
     <Content Include="..\FormFactory\Views\Shared\FormFactory\_README.txt">
       <Link>Views\Shared\FormFactory\_README.txt</Link>
     </Content>
-    <Content Include="Content\FormFactory\FormFactory.css" />
-    <Content Include="Scripts\bootstrap3-typeahead.unobtrusive.js" />
-    <Content Include="Scripts\FormFactory\FormFactory.js" />
-    <Content Include="Scripts\bootstrap3-typeahead.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTime.cshtml">
