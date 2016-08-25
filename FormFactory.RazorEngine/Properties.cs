@@ -8,7 +8,7 @@ namespace FormFactory.RazorEngine
     {
         public static IEnumerable<PropertyVm> For(object target)
         {
-            return new RazorTemplateHtmlHelper().PropertiesFor(target, target.GetType());
+            return FF.PropertiesFor(target, target.GetType());
         }
     }
 }

@@ -73,7 +73,7 @@
             <h3>How to use it</h3>
             <pre class="prettyprint">
 //In a cshtml file
-Html.PropertiesFor(someObject).Render(Html);
+FF.PropertiesFor(someObject).Render(Html);
             </pre>
         </div>
     </div>
@@ -131,7 +131,7 @@ Html.PropertiesFor(someObject).Render(Html);
                     if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
                     {
 
-                        @(Html.PropertiesFor(instance).Render(Html))
+                        @(FF.PropertiesFor(instance).Render(Html))
                     }
                     else
                     {

@@ -1,0 +1,75 @@
+﻿@*@using System*@
+@using System
+@using System.Collections.Generic
+@using System.ComponentModel.DataAnnotations
+@using System.Linq
+@using FormFactory.Attributes
+@using FormFactory
+@using FormFactory.AspMvc
+@model PropertyVm
+
+
+@if (!Model.Readonly && Model.Choices != null)
+{
+    var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
+    if (choices == null && Model.Choices is IEnumerable<string>)
+    {
+        choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+    }
+    if (Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(a => a.CustomDataType == "Radio"))
+    {
+        foreach (var option in choices)
+        {
+            var isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
+            <div class="radio">
+                <label>
+                    <input type="radio" name="@Model.Name" value="option1" @Html.Raw(isSelected ? "checked" : "")>
+                    @option.Item1
+                </label>
+            </div>
+        }
+    }
+    else
+    {
+        <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+            @foreach (var option in choices)
+            {
+                <option value="@option.Item2" @Html.Raw((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>
+            }
+        </select>
+    }
+}
+else
+{
+    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
+    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
+    var placeHolderText = Model.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+
+    var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
+    var needsAutoComplete = (!Model.Readonly && (suggestionsAttribute != null || (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())));
+    var autoCompleteAtt = "";
+    if (needsAutoComplete)
+    {
+        if (suggestionsAttribute != null)
+        {
+            autoCompleteAtt = "data-provide='ajax-typeahead' autocomplete='off' data-link='" + suggestionsAttribute.Url + "'";
+        }
+        else
+        {
+            var suggestions = Model.Suggestions.Cast<string>();
+            var escapedSuggestions = "\"" + string.Join("\", \"", suggestions.Select(a => a.Replace("\"", "\"\""))) + "\"";
+            autoCompleteAtt = "data-provide='typeahead' autocomplete='off' data-source='[" + escapedSuggestions + "]'";
+        }
+    }
+
+
+    if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
+    {
+        <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model) @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
+    }
+    else
+    {
+        <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model) name="@Model.Name" size="30" type="@inputType" value="@Model.Value"/>
+    }
+
+}

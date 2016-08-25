@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EmbeddedResourceVirtualPathProvider.1.2.16\lib\net40\EmbeddedResourceVirtualPathProvider.dll</HintPath>
     </Reference>
+    <Reference Include="FormFactory.Core">
+      <HintPath>..\FormFactory.Core\bin\Debug\netstandard1.6\FormFactory.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -320,10 +323,6 @@
     <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj">
       <Project>{2f4e3429-d62f-4382-9342-4734f9830cdc}</Project>
       <Name>FormFactory.RazorEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
-      <Project>{c5ddcc05-9f10-4039-b5d6-cb96325d832c}</Project>
-      <Name>FormFactory</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
