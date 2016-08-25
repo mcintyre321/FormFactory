@@ -41,6 +41,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FormFactory.Core">
+      <HintPath>..\FormFactory.Core\bin\Debug\netstandard1.6\FormFactory.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -102,29 +105,19 @@
     <Compile Include="ModelBinders\FormFactoryValueProviderResult.cs" />
     <Compile Include="ModelBinders\ImplicitOperatorBinderProvider.cs" />
     <Compile Include="ModelBinders\ModelBinderDelegate.cs" />
-    <Compile Include="ModelBinders\NestedDelegateModelBinderProvider.cs" />
     <Compile Include="ModelBinders\NestedModelBinderProvider.cs" />
     <Compile Include="ModelBinders\PolymorphicModelBinder.cs" />
     <Compile Include="UploadedFiles\FileStores.cs" />
     <Compile Include="UploadedFiles\ModelBinderExtensions.cs" />
     <Compile Include="UploadedFiles\SimpleAppDataFileUploader.cs" />
     <Compile Include="UploadedFiles\UploadedFileModelBinder.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AspMvcValidationHelper.cs" />
-    <Compile Include="AspMvcPropertiesForHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="FormFactory.AspMvc.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
-      <Project>{c5ddcc05-9f10-4039-b5d6-cb96325d832c}</Project>
-      <Name>FormFactory</Name>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

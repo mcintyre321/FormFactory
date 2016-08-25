@@ -49,6 +49,7 @@
     <Compile Include="Components\SubmitButton.cs" />
     <Compile Include="EmbeddedResourceRegistry.cs" />
     <Compile Include="FormRenderScope.cs" />
+    <Compile Include="NonEncodingStringencoder.cs" />
     <Compile Include="UnobtrusiveValidation\ClientValidationRules.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="DisplayNameExtension.cs" />
@@ -76,7 +77,7 @@
     <Compile Include="ViewHelper.cs" />
     <Compile Include="ViewHelpers\DateTimeOffsetVm.cs" />
     <Compile Include="ViewHelpers\String.cs" />
-    <Compile Include="VmHelper.cs" />
+    <Compile Include="FF.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\FormFactory.Templates\Content\FormFactory\FormFactory.css">

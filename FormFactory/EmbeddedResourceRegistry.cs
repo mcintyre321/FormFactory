@@ -11,7 +11,7 @@ namespace FormFactory
         static readonly ConcurrentDictionary<string, Assembly> resourceKeys = new ConcurrentDictionary<string, Assembly>();
         static EmbeddedResourceRegistry()
         {
-            var assembly = typeof(FormFactory.VmHelper).Assembly;
+            var assembly = typeof(FormFactory.FF).Assembly;
             AddResourcesFromAssemblyToRegistry(assembly);
         }
 
