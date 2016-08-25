@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FormFactory">
+      <HintPath>..\FormFactory\bin\Debug\net451\FormFactory.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
@@ -73,10 +76,6 @@
     <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj">
       <Project>{2f4e3429-d62f-4382-9342-4734f9830cdc}</Project>
       <Name>FormFactory.RazorEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
-      <Project>{c5ddcc05-9f10-4039-b5d6-cb96325d832c}</Project>
-      <Name>FormFactory</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

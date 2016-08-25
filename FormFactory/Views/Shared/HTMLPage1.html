@@ -1,0 +1,367 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>FormFactory Examples</title>
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/bootstrap-overrides.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="/Content/bootstrap-docs.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-migrate-1.1.0.min.js" type="text/javascript"></script>
+    <script src="/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery-ui-1.8.23.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.dynamic.js"></script>
+
+
+    <link href="/Content/FormFactory/FormFactory.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/FormFactory/FormFactory.js" type="text/javascript"></script>
+    <script src="/Scripts/Prettify/prettify.js"></script>
+    <link href="/Content/Prettify/prettify.css" type="text/css" rel="stylesheet" />
+</head>
+<body style="padding-top: 0px" onload="prettyPrint()">
+    <a href="https://github.com/mcintyre321/FormFactory">
+        <img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png" alt="Fork me on GitHub">
+    </a>
+    <div class="container">
+
+
+        <div class="row">
+            <div class="span5">
+                <form>
+                    <div style="display: none">
+                        <input class="input-large" id="c6619c7a-5aaf-45d9-9abe-17b1d4e66d84" name="__type" size="30" type="text" value="FormFactory.Example.Models.Person, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="89a60ec2-4d41-4164-bcf4-6918ca38b583">Date of birth</label>
+                        <div class="controls">
+                            <input type="text" class="ff-behaviour" data-ff-behaviour="datepicker" data-ff-format="dd MMM yyyy" name="DateOfBirth" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="DateOfBirth" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="6eb57b65-6bbf-4661-b942-b91105d04020">Age</label>
+                        <div class="controls">
+                            <input class="input-large" id="6eb57b65-6bbf-4661-b942-b91105d04020" name="Age" readonly="readonly" size="30" type="text" value="31" />
+
+                            <span class="field-validation-valid" data-valmsg-for="Age" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="27fea512-932d-4efa-8181-1898f544face">Name</label>
+                        <div class="controls">
+                            <input class="input-large" id="27fea512-932d-4efa-8181-1898f544face" name="Name" size="30" type="text" value="Harry" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="bede54e3-1243-473d-a621-61d9316bcd79">Position</label>
+                        <div class="controls">
+
+                            <select name="Position">
+                                <option value=""></option>
+                                <option value="Contractor">Contractor</option>
+                                <option value="SeniorSubcontractor" selected="selected">Snr. Subcontractor</option>
+                            </select>
+
+                            <span class="field-validation-valid" data-valmsg-for="Position" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="cd4efa1a-eb21-4eff-bc4d-9e8e85d693c4">Enabled</label>
+                        <div class="controls">
+
+                            <input type='hidden' value='true' id="hidden-cd4efa1a-eb21-4eff-bc4d-9e8e85d693c4" name='Enabled'>
+                            <input type="checkbox" id="cd4efa1a-eb21-4eff-bc4d-9e8e85d693c4" value="true" checked="checked" onchange="javascript: document.getElementById('hidden-cd4efa1a-eb21-4eff-bc4d-9e8e85d693c4').value = this.checked;" />
+
+                            <span class="field-validation-valid" data-valmsg-for="Enabled" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="8e5260ea-9f42-4c91-ab32-bb283a2219a3">Hobbies</label>
+                        <div class="controls">
+
+                            <ul>
+                                <li>
+                                    <input class="input-large" id="24d54990-e428-441e-b0a0-b633bed78fb8" name="Hobbies0" size="30" type="text" value="Fishing" />
+
+
+                                </li>
+                                <li>
+                                    <input class="input-large" id="f9c330ec-39f8-4147-8e29-b68afe8913e0" name="Hobbies0" size="30" type="text" value="Fighting" />
+
+
+                                </li>
+
+                            </ul>
+
+                            <span class="field-validation-valid" data-valmsg-for="Hobbies" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="1208abef-4ecd-4964-81d1-507bf6f534f4">Gender</label>
+                        <div class="controls">
+                            <select id="1208abef-4ecd-4964-81d1-507bf6f534f4" name="Gender">
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                                <option value="not specified">not specified</option>
+                            </select>
+
+
+                            <span class="field-validation-valid" data-valmsg-for="Gender" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="9a501b2c-e4d4-47f5-a017-f6eecea7c4e6">Location</label>
+                        <div class="controls">
+                            <input data-provide="typeahead" data-source='["USA","UK","Canada"]' autocomplete="off" class="input-large" id="9a501b2c-e4d4-47f5-a017-f6eecea7c4e6" name="Location" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="Location" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div style="display: none">
+                        <input disabled="disabled" class="input-large" id="221682ae-8de0-4a67-aa7f-d8c9b62d6b61" name="ContactMethod.__type" size="30" type="text" value="FormFactory.Example.Models.NoContactMethod, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div style="display: none">
+                        <input class="input-large" id="20259403-43fb-4be1-bf70-6ddbd011c103" name="ContactMethod.__type" size="30" type="text" value="FormFactory.Example.Models.SocialMedia, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div style="display: none">
+                        <input class="input-large" id="fb5afd54-cbd0-4919-8cab-ea522303bcc3" name="ContactMethod.SocialMediaType.__type" size="30" type="text" value="FormFactory.Example.Models.Twitter, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="6878ab63-e1e2-4075-8622-140a306db7c7">Twitter handle</label>
+                        <div class="controls">
+                            <input placeholder="@yourhandle" class="input-large" id="6878ab63-e1e2-4075-8622-140a306db7c7" name="ContactMethod.SocialMediaType.TwitterHandle" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.SocialMediaType.TwitterHandle" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div style="display: none">
+                        <input disabled="disabled" class="input-large" id="fbae8c41-2caa-4fb7-a5db-d19b95e164e3" name="ContactMethod.SocialMediaType.__type" size="30" type="text" value="FormFactory.Example.Models.Facebook, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="d72b0388-4370-4535-9a74-22b05131e511">Facebook name</label>
+                        <div class="controls">
+                            <input disabled="disabled" class="input-large" id="d72b0388-4370-4535-9a74-22b05131e511" name="ContactMethod.SocialMediaType.FacebookName" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.SocialMediaType.FacebookName" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="ce2ce6be-35e6-4572-825f-10fb5f7ff991">Social media type</label>
+                        <div class="controls">
+                            <div class="ff-choices-area">
+
+                                <div class="ff-choices">
+                                    <div class="ff-choice ">
+                                        <div class="bottom-separated">
+                                            <input type="radio" class="ff-choice-selector " name="a748ffd4-b3e8-43a6-b9c4-e49aff13edee" checked="checked" />
+                                            <div class="radio-block">
+                                                <div class="ff-choice-name">Twitter</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ff-choice ">
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " name="a748ffd4-b3e8-43a6-b9c4-e49aff13edee" />
+                                            <div class="radio-block">
+                                                <div class="ff-choice-name">Facebook</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.SocialMediaType" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div style="display: none">
+                        <input disabled="disabled" class="input-large" id="7d2a9d46-8917-4672-b2a5-9f999cb77d8f" name="ContactMethod.__type" size="30" type="text" value="FormFactory.Example.Models.PhoneContactMethod, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="44e24406-b363-431b-9665-e19fd7d82f17">Number</label>
+                        <div class="controls">
+                            <input disabled="disabled" class="input-large" id="44e24406-b363-431b-9665-e19fd7d82f17" name="ContactMethod.Number" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.Number" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div style="display: none">
+                        <input disabled="disabled" class="input-large" id="22c2eb25-f50c-45b2-be48-08e157437c8d" name="ContactMethod.Type.__type" size="30" type="text" value="FormFactory.Example.Models.Mobile, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="b50e173d-548d-470a-b4e8-2fed863ab359">Provider</label>
+                        <div class="controls">
+                            <input data-provide="typeahead" data-source='["Orange","TMobile","Three"]' autocomplete="off" disabled="disabled" class="input-large" id="b50e173d-548d-470a-b4e8-2fed863ab359" name="ContactMethod.Type.Provider" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.Type.Provider" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div style="display: none">
+                        <input disabled="disabled" class="input-large" id="f55f5f8e-7ba5-467f-8a6b-3b3e2013b301" name="ContactMethod.Type.__type" size="30" type="text" value="FormFactory.Example.Models.Landline, FormFactory.Example, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+
+                    </div>
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="97af7639-5ffd-452a-8cdd-2b94240d2a15">Provider</label>
+                        <div class="controls">
+                            <input data-provide="typeahead" data-source='["TalkTalk","BT"]' autocomplete="off" disabled="disabled" class="input-large" id="97af7639-5ffd-452a-8cdd-2b94240d2a15" name="ContactMethod.Type.Provider" size="30" type="text" value="" />
+
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.Type.Provider" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="437bfe7f-75c1-40b7-a1a1-3e38cda98ae7">Type</label>
+                        <div class="controls">
+                            <div class="ff-choices-area">
+                                <div>
+                                    <select class="ff-choice-picker" disabled="disabled">
+                                        <option value="0" selected="selected">Mobile</option>
+                                        <option value="1">Landline</option>
+                                    </select>
+                                </div>
+
+                                <div class="ff-choices">
+                                    <div class="ff-choice ">
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " style='display: none' name="6aa14faa-ba1a-4d2e-b444-2875ecb7efee" checked="checked" disabled="Disabled" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ff-choice " style='display: none'>
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " style='display: none' name="6aa14faa-ba1a-4d2e-b444-2875ecb7efee" disabled="Disabled" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod.Type" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="ba11ab15-852b-4399-9290-819431507fc9">Contact method</label>
+                        <div class="controls">
+                            <div class="ff-choices-area">
+                                <div>
+                                    <select class="ff-choice-picker">
+                                        <option value="0">No contact method</option>
+                                        <option value="1" selected="selected">Social media</option>
+                                        <option value="2">Phone contact method</option>
+                                    </select>
+                                </div>
+
+                                <div class="ff-choices">
+                                    <div class="ff-choice " style='display: none'>
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " style='display: none' name="11053af4-9373-4e06-9937-14f801263d02" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ff-choice ">
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " style='display: none' name="11053af4-9373-4e06-9937-14f801263d02" checked="checked" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ff-choice " style='display: none'>
+                                        <div class="">
+                                            <input type="radio" class="ff-choice-selector " style='display: none' name="11053af4-9373-4e06-9937-14f801263d02" />
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <span class="field-validation-valid" data-valmsg-for="ContactMethod" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+                    <div class="control-group valid">
+                        <label class="control-label" for="8167c32d-46c3-41d3-8313-bf0587e0f8d3">Top movies</label>
+                        <div class="controls">
+                            Unable to compile template. No overload for method 'PropertiesFor' takes 1 arguments
+
+Other compilation errors may have occurred. Check the Errors property for more information.
+            <span class="field-validation-valid" data-valmsg-for="TopMovies" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+
+
+                    <input type="submit" value="submit" />
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+    </footer>
+</body>
+</html>

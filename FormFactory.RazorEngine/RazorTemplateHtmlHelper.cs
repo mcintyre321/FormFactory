@@ -110,10 +110,7 @@ namespace FormFactory.RazorEngine
         {
             return string.Empty;
         }
-        public PropertyVm PropertyVm(Type type, string name, object value)
-        {
-            return new PropertyVm(type, name) { Value = value };
-        }
+       
 
         public RawString Partial(string partialName, object model, ViewData viewData = null)
         {

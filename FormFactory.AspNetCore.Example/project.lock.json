@@ -3805,11 +3805,28 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "FormFactory/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v1.6",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0",
+          "System.ComponentModel.Annotations": "4.0.0",
+          "System.ComponentModel.Primitives": "4.1.0",
+          "System.Reflection": "4.0.0",
+          "System.Reflection.TypeExtensions": "4.1.0"
+        },
+        "compile": {
+          "netstandard1.6/FormFactory.dll": {}
+        },
+        "runtime": {
+          "netstandard1.6/FormFactory.dll": {}
+        }
+      },
       "FormFactory.AspNetCore/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "FormFactory.Core": "1.0.0",
+          "FormFactory": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
           "Microsoft.AspNetCore.Razor": "1.0.0",
@@ -3821,22 +3838,6 @@
         },
         "runtime": {
           "netstandard1.6/FormFactory.AspNetCore.dll": {}
-        }
-      },
-      "FormFactory.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v1.6",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
-          "System.ComponentModel.Primitives": "4.1.0",
-          "System.Reflection": "4.1.0"
-        },
-        "compile": {
-          "netstandard1.6/FormFactory.Core.dll": {}
-        },
-        "runtime": {
-          "netstandard1.6/FormFactory.Core.dll": {}
         }
       }
     }
@@ -9909,21 +9910,21 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "FormFactory/1.0.0": {
+      "type": "project",
+      "path": "../FormFactory/project.json",
+      "msbuildProject": "../FormFactory/FormFactory.xproj"
+    },
     "FormFactory.AspNetCore/1.0.0": {
       "type": "project",
       "path": "../FormFactory.AspNetCore/project.json",
       "msbuildProject": "../FormFactory.AspNetCore/FormFactory.AspNetCore.xproj"
-    },
-    "FormFactory.Core/1.0.0": {
-      "type": "project",
-      "path": "../FormFactory.Core/project.json",
-      "msbuildProject": "../FormFactory.Core/FormFactory.Core.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
+      "FormFactory >= 1.0.0-*",
       "FormFactory.AspNetCore >= 1.0.0-*",
-      "FormFactory.Core >= 1.0.0-*",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.0.0",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",

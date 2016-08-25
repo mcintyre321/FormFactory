@@ -1,0 +1,6 @@
+﻿@using FormFactory.AspMvc
+@using FormFactory
+@model PropertyVm
+
+@using FormFactory.AspMvc
+<input class="form-control" id="@Model.Id" @Html.UnobtrusiveValidation(Model) name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) size="30" type="text" value="@(Model.Value ?? "")" />

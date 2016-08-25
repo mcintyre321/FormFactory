@@ -1,0 +1,49 @@
+﻿@using System
+@using System.Collections.Generic
+@using System.Linq
+@using FormFactory.AspMvc
+@using FormFactory
+@model PropertyVm
+
+@if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof (ICollection<>))
+{
+    @Html.Partial("FormFactory/Property.ICollection.System.Object", Model)
+}
+else
+{
+    
+    if (!Model.Readonly && Model.Choices != null)
+    {
+        var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
+        if (choices == null && Model.Choices is IEnumerable<string>)
+        {
+            choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
+        }
+        <select id="@Model.Id" name="@Model.Name"  @Model.Readonly() @Model.Disabled() class="form-control" multiple="multiple">
+            @foreach (var choice in choices)
+            {
+                var selected = (((IEnumerable<string>)Model.Value).Contains(choice.Item2));
+                <option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</option>
+            }
+        </select>
+    }
+    else
+    {
+        <ul>
+            @{
+                var i = 0;
+
+                foreach (var obj in (IEnumerable<object>) Model.Value)
+                {
+                    <li>
+                        @{
+                            var prop = Html.CreatePropertyVm(obj.GetType(), Model.Name + i++);
+                            prop.Value = obj;
+                            @Html.BestProperty(prop)
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    }
+}

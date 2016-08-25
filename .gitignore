@@ -19,3 +19,4 @@ LPRun.5.1.ReSharper.user
 FormFactory.Example/App_Data/UploadedFiles/*
 packages
 bower_components
+project.lock.json

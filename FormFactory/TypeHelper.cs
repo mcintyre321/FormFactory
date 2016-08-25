@@ -12,14 +12,14 @@ namespace FormFactory
     {
         public static Type GetEnumerableType(this Type type)
         {
-            var interfaceTypes = type.GetInterfaces().ToList();
+            var interfaceTypes = type.GetTypeInfo().ImplementedInterfaces.ToList();
             interfaceTypes.Insert(0, type);
             foreach (Type intType in interfaceTypes)
             {
-                if (intType.IsGenericType
+                if (intType.GetTypeInfo().IsGenericType
                     && intType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
                 {
-                    return intType.GetGenericArguments()[0];
+                    return intType.GetTypeInfo().GenericTypeArguments[0];
                 }
             }
             return null;
@@ -44,7 +44,7 @@ namespace FormFactory
                 };
                 Func<FieldInfo, string> getLabel =
                     fieldInfo => getDisplayName(fieldInfo) ?? getName(fieldInfo).Sentencise();
-                return enumType.GetFields(BindingFlags.Static | BindingFlags.GetField | BindingFlags.Public)
+                return enumType.GetTypeInfo().DeclaredFields.Where(f => f.IsStatic) 
                     .Select(x => Tuple.Create(getLabel(x), x.GetValue(null))).ToList().Select(f => f);
             });
             foreach (var field in choices)

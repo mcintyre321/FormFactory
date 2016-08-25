@@ -24,7 +24,10 @@ namespace FormFactory
             fallbackModelType = fallbackModelType ?? model.GetType();
             return GetPropertyVms(model, fallbackModelType);
         }
-
+        public static PropertyVm PropertyVm(Type type, string name, object value)
+        {
+            return new PropertyVm(type, name) { Value = value };
+        }
 
         public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(object model, Type fallbackModelType)
         {
@@ -38,7 +41,7 @@ namespace FormFactory
                 };
 
             yield return typeVm;
-            var properties = type.GetProperties();
+            var properties = type.GetTypeInfo().DeclaredProperties;
 
             foreach (var property in properties)
             {
@@ -58,9 +61,9 @@ namespace FormFactory
                 }
 
 
-                if (!(type.GetMethod(property.Name + "_show")?.Invoke(model, null) as bool? ?? true))
+                if (!(type.GetTypeInfo().GetDeclaredMethod(property.Name + "_show")?.Invoke(model, null) as bool? ?? true))
                     continue;
-                if (!(type.GetProperty(property.Name + "_show")?.GetValue(model) as bool? ?? true))
+                if (!(type.GetTypeInfo().GetDeclaredProperty(property.Name + "_show")?.GetValue(model) as bool? ?? true))
                     continue;
 
 
@@ -68,12 +71,12 @@ namespace FormFactory
                 PropertyInfo choices = properties.SingleOrDefault(p => p.Name == property.Name + "_choices");
                 if (choices != null)
                 {
-                    inputVm.Choices = (IEnumerable)choices.GetGetMethod().Invoke(model, null);
+                    inputVm.Choices = (IEnumerable)choices.GetMethod.Invoke(model, null);
                 }
                 PropertyInfo suggestions = properties.SingleOrDefault(p => p.Name == property.Name + "_suggestions");
                 if (suggestions != null)
                 {
-                    inputVm.Suggestions = (IEnumerable)suggestions.GetGetMethod().Invoke(model, null);
+                    inputVm.Suggestions = (IEnumerable)suggestions.GetMethod.Invoke(model, null);
                 }
 
                 yield return inputVm;

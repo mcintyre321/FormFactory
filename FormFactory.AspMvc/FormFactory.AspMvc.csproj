@@ -41,8 +41,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FormFactory.Core">
-      <HintPath>..\FormFactory.Core\bin\Debug\netstandard1.6\FormFactory.Core.dll</HintPath>
+    <Reference Include="FormFactory">
+      <HintPath>..\FormFactory\bin\Debug\net451\FormFactory.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>

@@ -36,6 +36,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FormFactory">
+      <HintPath>..\FormFactory\bin\Debug\net451\FormFactory.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
     </Reference>
@@ -52,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmbeddedResourceRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="RenderExtension.cs" />
@@ -65,12 +69,6 @@
   <ItemGroup>
     <None Include="FormFactory.RazorEngine.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FormFactory\FormFactory.csproj">
-      <Project>{C5DDCC05-9F10-4039-B5D6-CB96325D832C}</Project>
-      <Name>FormFactory</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

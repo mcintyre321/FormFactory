@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace FormFactory
@@ -26,7 +27,7 @@ namespace FormFactory
         public static IList<Func<Type, string>> SearchPathRules = new List<Func<Type, string>>()
         {
             t => t.FullName,
-            t => t.FullName.StartsWith(t.Assembly.GetName().Name + ".") ? t.FullName.Substring(t.Assembly.GetName().Name.Length + 1) : t.FullName,
+            t => t.FullName.StartsWith(t.GetTypeInfo().Assembly.GetName().Name + ".") ? t.FullName.Substring(t.GetTypeInfo().Assembly.GetName().Name.Length + 1) : t.FullName,
             t => t.Name
         };
 
@@ -63,9 +64,9 @@ namespace FormFactory
             string partialViewName = getPartialViewName(check);
 
             var engineResult = cc.FindPartialView(partialViewName);
-            while (engineResult.View == null && check.BaseType != null)
+            while (engineResult.View == null && check.GetTypeInfo().BaseType != null)
             {
-                check = check.BaseType;
+                check = check.GetTypeInfo().BaseType;
                 partialViewName = getPartialViewName(check);
                 engineResult = cc.FindPartialView(partialViewName);
                 ;
