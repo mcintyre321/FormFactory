@@ -1,0 +1,11 @@
+﻿@using FormFactory
+@model FormFactory.PropertyVm
+@using FormFactory.AspMvc
+@{
+    if (Model != null && Model.Value != null)
+    {
+        Model.Readonly = true;
+        @Html.BestPartial(Model, Model.Type, "FormFactory/Property.")
+    }
+}
+

@@ -136,7 +136,7 @@ FF.PropertiesFor(someObject).Render(Html);
                     else
                     {
                         var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
-                        var propertiesFor = helper.PropertiesFor(instance);
+                        var propertiesFor = FF.PropertiesFor(instance);
                         @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
                     }
                 }

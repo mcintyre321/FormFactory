@@ -1,0 +1,24 @@
+﻿@using FormFactory.AspMvc
+@using FormFactory
+@model PropertyVm
+@{
+    var choices = (IEnumerable<Tuple<string, object>>)Model.Choices ?? Model.Type.GetChoicesForEnumType();
+}
+@if (Model.Readonly)
+{
+    <input type="text"  class="form-control" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) value="@Model.Value" />
+}
+else
+{
+    <select class="form-control" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+        @if (Nullable.GetUnderlyingType(Model.Type) != null)
+        {
+            <option value="" @Html.Raw((Model.Value == null).Attr("selected"))></option>
+        }
+        @foreach (var choice in choices)
+        {
+            var selected = (Model.Value != null && Model.Value.ToString() == choice.Item2.ToString());
+            <option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</option>
+        }
+    </select>
+}

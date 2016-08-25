@@ -73,7 +73,7 @@ namespace FormFactory
         {
             Source = model;
             ModelState modelState;
-            var getMethod = pi.GetGetMethod();
+            var getMethod = pi.GetMethod;
             
             if (pi.GetIndexParameters().Any()) getMethod = null; //dont want to get indexed properties
 
@@ -89,23 +89,23 @@ namespace FormFactory
             }
             if (model != null)
             {
-                MethodInfo choices = model.GetType().GetMethod(pi.Name + "_choices");
+                MethodInfo choices = model.GetType().GetTypeInfo().GetDeclaredMethod(pi.Name + "_choices");
                 if (choices != null)
                 {
                     Choices = (IEnumerable)choices.Invoke(model, null);
                 }
-                MethodInfo suggestions = model.GetType().GetMethod(pi.Name + "_suggestions");
+                MethodInfo suggestions = model.GetType().GetTypeInfo().GetDeclaredMethod(pi.Name + "_suggestions");
                 if (suggestions != null)
                 {
                     Suggestions = (IEnumerable)suggestions.Invoke(model, null);
                 }
-                var setter = pi.GetSetMethod();
+                var setter = pi.SetMethod;
                 var getter = getMethod;
                 Readonly = !(setter != null);
                 Value = getter == null ? null : getter.Invoke(model, null);
             }
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
-            Readonly = !(pi.GetSetMethod() != null);
+            Readonly = !(pi.SetMethod != null);
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
 

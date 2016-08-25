@@ -1,0 +1,8 @@
+﻿@using FormFactory
+@using FormFactory.AspMvc
+@model PropertyVm
+@if(!Model.Readonly)
+{
+    <input type="hidden" name="@Model.Name"  /> @*here to trick model binding into working :( *@
+    <input type="file" class="form-control" name="@Model.Name" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) />
+}

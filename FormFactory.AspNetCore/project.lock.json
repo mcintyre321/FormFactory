@@ -2060,20 +2060,21 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "FormFactory.Core/1.0.0": {
+      "FormFactory/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "System.ComponentModel.Annotations": "4.1.0",
+          "System.ComponentModel.Annotations": "4.0.0",
           "System.ComponentModel.Primitives": "4.1.0",
-          "System.Reflection": "4.1.0"
+          "System.Reflection": "4.0.0",
+          "System.Reflection.TypeExtensions": "4.1.0"
         },
         "compile": {
-          "netstandard1.6/FormFactory.Core.dll": {}
+          "netstandard1.6/FormFactory.dll": {}
         },
         "runtime": {
-          "netstandard1.6/FormFactory.Core.dll": {}
+          "netstandard1.6/FormFactory.dll": {}
         }
       }
     }
@@ -6299,15 +6300,15 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "FormFactory.Core/1.0.0": {
+    "FormFactory/1.0.0": {
       "type": "project",
-      "path": "../FormFactory.Core/project.json",
-      "msbuildProject": "../FormFactory.Core/FormFactory.Core.xproj"
+      "path": "../FormFactory/project.json",
+      "msbuildProject": "../FormFactory/FormFactory.xproj"
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "FormFactory.Core >= 1.0.0-*",
+      "FormFactory >= 1.0.0-*",
       "Microsoft.AspNetCore.Mvc.Abstractions >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.ViewFeatures >= 1.0.0",
       "Microsoft.AspNetCore.Razor >= 1.0.0",

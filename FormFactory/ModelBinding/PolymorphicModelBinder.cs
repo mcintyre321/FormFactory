@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Text;
 
 namespace FormFactory.ModelBinding
@@ -20,7 +21,7 @@ namespace FormFactory.ModelBinding
                 if (!string.IsNullOrWhiteSpace(value))
                 {
                     var type = readTypeFromString(value);
-                    if (type != null && modelType.IsAssignableFrom(type))
+                    if (type != null && modelType.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
                     {
                         var instance = fallback();
                         bindingContext.SetModelMetadataForType(() => instance, type);
@@ -50,19 +51,19 @@ namespace FormFactory.ModelBinding
         }
 
 
-        public ICustomTypeDescriptor GetTypeDescriptor(IModelBindingContext bindingContext, Func<ICustomTypeDescriptor> fallback)
-        {
-            if (bindingContext.Model != null)
-            {
-                var concreteType = bindingContext.Model.GetType();
+        //public ICustomTypeDescriptor GetTypeDescriptor(IModelBindingContext bindingContext, Func<ICustomTypeDescriptor> fallback)
+        //{
+        //    if (bindingContext.Model != null)
+        //    {
+        //        var concreteType = bindingContext.Model.GetType();
 
-                if (Nullable.GetUnderlyingType(concreteType) == null)
-                {
-                    return new AssociatedMetadataTypeTypeDescriptionProvider(concreteType).GetTypeDescriptor(concreteType);
-                }
-            }
+        //        if (Nullable.GetUnderlyingType(concreteType) == null)
+        //        {
+        //            return new AssociatedMetadataTypeTypeDescriptionProvider(concreteType).GetTypeDescriptor(concreteType);
+        //        }
+        //    }
 
-            return fallback();
-        }
+        //    return fallback();
+        //}
     }
 }
