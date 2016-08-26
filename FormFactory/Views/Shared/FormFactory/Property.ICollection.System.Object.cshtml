@@ -2,10 +2,10 @@
 @using System.Collections.Generic
 @using FormFactory
 @using FormFactory.AspMvc
-
+@using System.Reflection
 @model PropertyVm
 @{
-    var templateType = Model.Type.GetGenericArguments()[0];
+    var templateType = System.Reflection.IntrospectionExtensions.GetTypeInfo(Model.Type).GenericTypeArguments[0];
     
     <div class="ff-collection">
         

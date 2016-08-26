@@ -7,6 +7,7 @@
 @using System.Collections
 @using FormFactory
 @using FormFactory.ViewHelpers
+@using System.Reflection
 @if (Model.Choices != null && !Model.Readonly)
 {
     ObjectChoices[] choices = Html.Choices(Model);
@@ -82,6 +83,6 @@ else
     foreach (var p in properties)
     {
         p.Name = Model.Name == null ? p.Name : Model.Name + "." + p.Name;
-    @Html.Partial("FormFactory/Form.Property", p);
+        @Html.Partial("FormFactory/Form.Property", p);
     }
 }
