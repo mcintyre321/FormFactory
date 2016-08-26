@@ -3,9 +3,9 @@
 @using System.Linq
 @using FormFactory.AspMvc
 @using FormFactory
+@using System.Reflection
 @model PropertyVm
-
-@if (Model.Type.IsGenericType && Model.Type.GetGenericTypeDefinition() == typeof (ICollection<>))
+@if (System.Reflection.IntrospectionExtensions.GetTypeInfo(Model.Type).IsGenericType && System.Reflection.IntrospectionExtensions.GetTypeInfo(Model.Type).GetGenericTypeDefinition() == typeof (ICollection<>))
 {
     @Html.Partial("FormFactory/Property.ICollection.System.Object", Model)
 }

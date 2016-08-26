@@ -20,9 +20,9 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "FormFactory": "1.0.0-*",
-    "FormFactory.AspNetCore": "1.0.0-*"
-
+    "FormFactory": "1.0.0",
+    "FormFactory.AspNetCore": "1.0.0",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0"
   },
 
   "tools": {

@@ -1134,6 +1134,19 @@
           "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Composite.dll": {}
         }
       },
+      "Microsoft.Extensions.FileProviders.Embedded/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.FileProviders.Abstractions": "1.0.0",
+          "System.Runtime.Extensions": "4.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Embedded.dll": {}
+        }
+      },
       "Microsoft.Extensions.FileProviders.Physical/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -4704,6 +4717,17 @@
         "Microsoft.Extensions.FileProviders.Composite.nuspec",
         "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Composite.dll",
         "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Composite.xml"
+      ]
+    },
+    "Microsoft.Extensions.FileProviders.Embedded/1.0.0": {
+      "sha512": "mMCI3/BLXAyBCDneqOI4ohETd0IXjbXZdoiCm1dYdnOdV193ByEOCFQ6/Vn9RVdU5UlC4Nn1P4J5Df7pXG/vGg==",
+      "type": "package",
+      "path": "Microsoft.Extensions.FileProviders.Embedded/1.0.0",
+      "files": [
+        "Microsoft.Extensions.FileProviders.Embedded.1.0.0.nupkg.sha512",
+        "Microsoft.Extensions.FileProviders.Embedded.nuspec",
+        "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Embedded.dll",
+        "lib/netstandard1.0/Microsoft.Extensions.FileProviders.Embedded.xml"
       ]
     },
     "Microsoft.Extensions.FileProviders.Physical/1.0.0": {
@@ -9923,8 +9947,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FormFactory >= 1.0.0-*",
-      "FormFactory.AspNetCore >= 1.0.0-*",
+      "FormFactory >= 1.0.0",
+      "FormFactory.AspNetCore >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Mvc >= 1.0.0",
       "Microsoft.AspNetCore.Razor.Tools >= 1.0.0-preview2-final",
@@ -9933,6 +9957,7 @@
       "Microsoft.AspNetCore.StaticFiles >= 1.0.0",
       "Microsoft.Extensions.Configuration.EnvironmentVariables >= 1.0.0",
       "Microsoft.Extensions.Configuration.Json >= 1.0.0",
+      "Microsoft.Extensions.FileProviders.Embedded >= 1.0.0",
       "Microsoft.Extensions.Logging >= 1.0.0",
       "Microsoft.Extensions.Logging.Console >= 1.0.0",
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",

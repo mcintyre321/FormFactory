@@ -6,7 +6,7 @@
     "Microsoft.AspNetCore.Razor": "1.0.0",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
     "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.0",
-    "FormFactory": "1.0.0-*",
+    "FormFactory": "1.0.0",
     "System.Linq": "4.1.0"
   },
 
