@@ -23,7 +23,13 @@
                                 var prop = FF.PropertyVm(obj.GetType(), Model.Name + "[" + id + "]", obj);
                             }
                             @Html.BestProperty(prop)
-                            @Links()
+                            <a class="btn btn-sm ff-move-up btn-default" href="#moveup" title="Move Up"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                            <a class="btn btn-sm ff-move-down btn-default" href="#moveup" title="Move Down">
+                                <i class="glyphicon glyphicon-arrow-down">
+                                </i>
+                            </a> <a class="btn btn-mini ff-remove-parent btn-danger btn-sm" href="#remove" title="Remove">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a> 
                         </li>
                     }
                 }
@@ -33,18 +39,17 @@
                 <script type="text/html">
                     <div class="ff-collection-new-item ff-form" style="display: none"><input type='hidden' name='' value='' />
                         @FF.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render(Html)
-                        @Links()
+                        <a class="btn btn-sm ff-move-up btn-default" href="#moveup" title="Move Up"><span class="glyphicon glyphicon-arrow-up"></span></a>
+                        <a class="btn btn-sm ff-move-down btn-default" href="#moveup" title="Move Down">
+                            <i class="glyphicon glyphicon-arrow-down">
+                            </i>
+                        </a> <a class="btn btn-mini ff-remove-parent btn-danger btn-sm" href="#remove" title="Remove">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a> 
                     </div>
                 </script>
             </li>
         </ul>
     </div>
     
-}
-@helper Links()
-{
-    <a class="btn btn-sm ff-move-up btn-default" href="#moveup" title="Move Up"><span class="glyphicon glyphicon-arrow-up"></span></a> 
-    <a class="btn btn-sm ff-move-down btn-default" href="#moveup" title="Move Down"><i class="glyphicon glyphicon-arrow-down">
-    </i></a> <a class="btn btn-mini ff-remove-parent btn-danger btn-sm" href="#remove" title="Remove">
-        <span class="glyphicon glyphicon-remove"></span></a> 
 }
