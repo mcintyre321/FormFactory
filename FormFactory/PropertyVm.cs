@@ -25,12 +25,6 @@ namespace FormFactory
         public PropertyVm(ParameterInfo pi)
             : this(pi.ParameterType, pi.Name)
         {
-            ModelState modelState;
-            //if (html.ViewData.ModelState.TryGetValue(pi.Name, out modelState))
-            //{
-            //    if (modelState.Value != null)
-            //        Value = modelState.Value.AttemptedValue;
-            //}
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
@@ -39,22 +33,10 @@ namespace FormFactory
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
                 .FirstOrDefault();
             DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
-
-             
         }
         public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi)
             : this(pi.PropertyType, pi.Name)
         {
-            ModelState modelState;
-            //if (html.ViewData.ModelState.TryGetValue(modelParamInfo.Name + "." + pi.Name, out modelState))
-            //{
-            //    if (modelState.Value != null)
-            //        Value = modelState.Value.AttemptedValue;
-            //}
-            //else if (html.ViewData.Model != null && (html.ViewData.Model.GetType() == modelParamInfo.ParameterType))
-            //{
-            //    Value = pi.GetValue(html.ViewData.Model, new object[0]);
-            //}
             Readonly = !true;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
