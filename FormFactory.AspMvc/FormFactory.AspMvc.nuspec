@@ -13,7 +13,6 @@
   <tags>Html EditorTemplates Razor AspMvc</tags>
   <dependencies>
     <group>
-      <dependency id="FormFactory" version="$version$" />
     </group>
   </dependencies>
 </metadata>
