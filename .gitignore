@@ -21,3 +21,4 @@ FormFactory.Example/App_Data/UploadedFiles/*
 packages
 bower_components
 project.lock.json
+/.vs/*.dg

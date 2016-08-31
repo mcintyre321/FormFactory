@@ -11,5 +11,10 @@
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <description>$description$</description>
   <tags>Html EditorTemplates Razor AspMvc</tags>
+  <dependencies>
+    <group>
+      <dependency id="FormFactory" version="$version$" />
+    </group>
+  </dependencies>
 </metadata>
 </package>
