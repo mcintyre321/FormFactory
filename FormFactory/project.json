@@ -1,6 +1,8 @@
 {
-  "version": "2.0.0-*",
-
+  "version": "1.0.0-*",
+  "tools": {
+    "dotnet-version": "1.1.0"
+  },
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "System.ComponentModel.Annotations": "4.0.0.0",
@@ -9,7 +11,7 @@
     "System.Reflection.TypeExtensions": "4.1.0"
   },
   "buildOptions": {
-    "embed": [ "Views/**/*", "Content/**/*", "Scripts/**/*" ] 
+    "embed": [ "Views/**/*", "Content/**/*", "Scripts/**/*" ]
   },
   "frameworks": {
     "netstandard1.6": {
