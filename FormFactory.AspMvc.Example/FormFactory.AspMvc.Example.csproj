@@ -165,11 +165,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" />
-    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" />
-    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" />
-    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" />
-    <Content Include="bower_components\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
