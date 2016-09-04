@@ -33,10 +33,7 @@ namespace FormFactory.AspNetCore.Example
             // Add framework services.
             services.AddMvc();
 
-            var embeddedFileProvider = new EmbeddedFileProvider(
-                typeof(FormFactory.FF).GetTypeInfo().Assembly,
-                "FormFactory"
-                );
+            var embeddedFileProvider = new EmbeddedFileProvider(typeof(FormFactory.FF).GetTypeInfo().Assembly,nameof(FormFactory)); 
             //Add the file provider to the Razor view engine
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -61,6 +58,15 @@ namespace FormFactory.AspNetCore.Example
             }
 
             app.UseStaticFiles();
+            {
+                var options = new StaticFileOptions
+                {
+                    RequestPath = "",
+                    FileProvider = new EmbeddedFileProvider(typeof(FormFactory.FF).GetTypeInfo().Assembly, nameof(FormFactory))
+                };
+
+                app.UseStaticFiles(options);
+            }
 
             app.UseMvc(routes =>
             {
