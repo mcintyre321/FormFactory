@@ -106,11 +106,11 @@ FF.PropertiesFor(someObject).Render(Html);
 @{
     
 }
-@foreach (var type in Model.exampleTypes)
+@foreach (var typeWithSource in Model.exampleTypes)
 {
     <div class="row">
         <div class="col-md-12">
-            <h3>@type.Name</h3>
+            <h3>@typeWithSource.Item1</h3>
 
         </div>
     </div>
@@ -121,7 +121,7 @@ FF.PropertiesFor(someObject).Render(Html);
 
             <form action="/home/save" method="POST">
                 @{
-                    var instance = Activator.CreateInstance(type);
+                    var instance = Activator.CreateInstance(typeWithSource.Item1);
                     //if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
                     {
 
@@ -138,28 +138,8 @@ FF.PropertiesFor(someObject).Render(Html);
             </form>
         </div>
         <div class="col-md-8">
-            <p>In @(type.Name).cs</p>
-            <pre class="prettyprint">
-@{
-    @*var html = Cache[type.Name + ".cs"] as string;
-    if (html == null)
-    {
-        var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs";
-        try
-        {
-            html = new WebClient()
-                .DownloadString(address);
-            html = string.Join(Environment.NewLine, html.Split(Environment.NewLine.ToCharArray()).Where(line => line.Trim().StartsWith("using ") == false));
-            Cache[type.Name + ".cs"] = html;
-        }
-        catch (Exception)
-        {
-            html = "Could not get source from " + address;
-        }
-    }
-    @html*@
-}
-</pre>
+            <p>In @(typeWithSource.Item1.Name).cs</p>
+            <pre class="prettyprint">@(typeWithSource.Item2)</pre>
         </div>
     </div>
 

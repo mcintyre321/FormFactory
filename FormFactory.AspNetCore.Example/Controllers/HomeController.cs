@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using FormFactory.Attributes;
@@ -46,16 +48,40 @@ namespace FormFactory.Example.Controllers
         public ActionResult Index()
         {
             var ex = typeof(NestedFormsExample);
-            var exampleTypes = ex.GetTypeInfo().Assembly.GetTypes()
+            IOrderedEnumerable<Tuple<Type, string>> exampleTypes = ex.GetTypeInfo().Assembly.GetTypes()
                 .Where(t => t.Namespace == ex.Namespace && t.Name.Contains("Example"))
-                .OrderBy(t => t.Name);
+                
+                .Select(t => Tuple.Create(t, GetSourceForType(t)))
+                .OrderBy(t => t.Item1.Name);
+
             return View("Index", new IndexModel() { exampleTypes = exampleTypes });
 
+        }
+        static Hashtable Cache = new Hashtable();
+        private string GetSourceForType(Type type)
+        {
+            var html = Cache[type.Name + ".cs"] as string;
+            if (html == null)
+            {
+                var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs";
+                try
+                {
+                    html = new HttpClient().GetAsync(address).Result.Content.ReadAsStringAsync().Result;
+                    html = string.Join(Environment.NewLine, html.Split(Environment.NewLine.ToCharArray()).Where(line => line.Trim().StartsWith("using ") == false));
+                    Cache[type.Name + ".cs"] = html;
+                }
+                catch (Exception)
+                {
+                    return "Could not get source from " + address;
+                }
+            }
+            return html;
+            
         }
 
         public class IndexModel
         {
-            public IOrderedEnumerable<Type> exampleTypes { get; set; }
+            public IOrderedEnumerable<Tuple<Type, string>> exampleTypes { get; set; }
         }
 
 
