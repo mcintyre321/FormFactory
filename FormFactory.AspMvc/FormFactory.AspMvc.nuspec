@@ -11,5 +11,9 @@
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <description>$description$</description>
   <tags>Html EditorTemplates Razor AspMvc</tags>
+  <dependencies>
+    <group>
+    </group>
+  </dependencies>
 </metadata>
 </package>
