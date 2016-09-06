@@ -2,17 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FormFactory.Attributes;
+using FormFactory.Components;
 
 namespace FormFactory
 {
     public class FormVm : IHasDisplayName
     {
 
-        public FormVm(FfHtmlHelper html, MethodInfo mi)  
+        public FormVm(MethodInfo mi, string actionUrl)  
         {
-            var _actionName = mi.Name;
-            var controllerTypeName = mi.ReflectedType.Name;
-            var _controllerName = controllerTypeName.Substring(0, controllerTypeName.LastIndexOf("Controller"));
 
             var inputs = new List<PropertyVm>();
 
@@ -21,7 +19,7 @@ namespace FormFactory
             {
                 if (pi.GetCustomAttributes(true).Any(x => x is FormModelAttribute))
                 {
-                    inputs.AddRange(pi.ParameterType.GetProperties()
+                    inputs.AddRange(pi.ParameterType.GetTypeInfo().DeclaredProperties
                                         .Select(pi2 => new PropertyVm(pi, pi2).Then(p => p.Name = pi.Name + "." + p.Name)));
                 }
                 else
@@ -29,19 +27,18 @@ namespace FormFactory
                     inputs.Add(new PropertyVm(pi));
                 }
             }
+            
 
             Inputs = inputs;
+            Buttons.Add(new PropertyVm(typeof(SubmitButton), "") { Value = new FormFactory.Components.SubmitButton()});
             this.DisplayName = mi.Name.Sentencise(true);
             ExcludePropertyErrorsFromValidationSummary = true;
 
 
-            this.ActionUrl = UseHttps.HasValue
-                ? html.Url().Action(_actionName, _controllerName, null, UseHttps.Value ? "https" : "http")
-                : html.Url().Action(_actionName, _controllerName);
+            this.ActionUrl = actionUrl;
         }
         public FormVm()
         {
-            Inputs = new List<PropertyVm>();
             this.DisplayName = "";
             ShowValidationSummary = true;
             ExcludePropertyErrorsFromValidationSummary = true;
@@ -51,7 +48,8 @@ namespace FormFactory
         public string ActionUrl { get; set; }
         public string Method { get; set; }
         public string EncType { get; set; } = "multipart/form-data";
-        public IEnumerable<PropertyVm> Inputs { get; set; }
+        public IList<PropertyVm> Inputs { get; set; } = new List<PropertyVm>();
+        public IList<PropertyVm> Buttons { get; set; } = new List<PropertyVm>();
 
 
         public string DisplayName { get; set; }
@@ -68,7 +66,6 @@ namespace FormFactory
         /// True to force https from http; False to force http from https.
         /// NOTE: Does not apply if ActionUrl has been explicitly set.
         /// </summary>
-        public bool? UseHttps { get; set; }
 
        
 
@@ -78,3 +75,4 @@ namespace FormFactory
         }
     }
 }
+

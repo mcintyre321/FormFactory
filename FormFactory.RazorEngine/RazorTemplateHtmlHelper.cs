@@ -51,12 +51,7 @@ namespace FormFactory.RazorEngine
             Razor.SetTemplateService(new TemplateService(templateConfig));
         }
 
-
-        public IEnumerable<PropertyVm> PropertiesFor(object model, Type type = null)
-        {
-            type = type ?? model.GetType();
-            return VmHelper.GetPropertyVmsUsingReflection(new RazorEngineTypeEncoder(), model, type);
-        }
+ 
 
         public RawString UnobtrusiveValidation(PropertyVm property)
         {
@@ -115,10 +110,7 @@ namespace FormFactory.RazorEngine
         {
             return string.Empty;
         }
-        public PropertyVm PropertyVm(Type type, string name, object value)
-        {
-            return new PropertyVm(type, name) { Value = value };
-        }
+       
 
         public RawString Partial(string partialName, object model, ViewData viewData = null)
         {
@@ -164,7 +156,7 @@ namespace FormFactory.RazorEngine
             var html = this;
             var choices = (from obj in model.Choices.Cast<object>().ToArray()
                            let choiceType = obj == null ? model.Type : obj.GetType()
-                           let properties = html.PropertiesFor(obj, choiceType)
+                           let properties = FF.PropertiesFor(obj, choiceType)
                                .Each(p => p.Name = model.Name + "." + p.Name)
                                .Each(p => p.Readonly |= model.Readonly)
                                .Each(p => p.Id = Guid.NewGuid().ToString())
@@ -209,16 +201,5 @@ namespace FormFactory.RazorEngine
         }
     }
 
-    public class RazorEngineTypeEncoder : IStringEncoder
-    {
-        public Type ReadTypeFromString(string typeString)
-        {
-            return Type.GetType(typeString);
-        }
-
-        public string WriteTypeToString(Type type)
-        {
-            return type.AssemblyQualifiedName;
-        }
-    }
+    
 }
