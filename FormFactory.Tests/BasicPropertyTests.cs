@@ -5,7 +5,7 @@ namespace FormFactory.Tests
 {
     public class BasicPropertyTests
     {
-        [Test, Ignore("The ids keep changing!")]
+        [Test]
         public void CanRenderAPropertyWithoutThrowingAnException()
         {
             var someObject = new SomeType() {SomeProperty = "SomeValue"};
