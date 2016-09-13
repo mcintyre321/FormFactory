@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("FormFactory.AspMvc.Example")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Totaljobs Group")]
+[assembly: AssemblyCompany("Harry McIntyre")]
 [assembly: AssemblyProduct("FormFactory.AspMvc.Example")]
-[assembly: AssemblyCopyright("Copyright © Totaljobs Group 2016")]
+[assembly: AssemblyCopyright("Copyright © Harry McIntyre 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
