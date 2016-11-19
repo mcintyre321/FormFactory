@@ -117,7 +117,11 @@ $(document).ready(function () {
         });
     }
     $(document).on("click", ".ff-add-item", function (e) {
-        var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()));
+        // debug here -- try using HTML encoding to store template form instead of using a script tag
+        var encodedForm = $(this).closest("li").find("div.new-ff-collection-outer-container");
+        var contentsOfEncodedForm = encodedForm.html();
+        var decodedForm = htmlDecode(contentsOfEncodedForm);
+        var $form = $($('<div/>').html(decodedForm));
 
         var modelName = $(this).data("modelname");
         var newObject = $('<li>').append($form.children().clone());
@@ -207,4 +211,7 @@ if ($.validator) {
 $(document).on("click keydown", "input[type='checkbox']", function () {
     return !($(this).attr("readonly"));
 });
- 
+
+function htmlDecode(value) {
+    return $('<div/>').html(value).text();
+}
