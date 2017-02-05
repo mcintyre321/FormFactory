@@ -260,13 +260,13 @@ var formModel = new[]
                     {
                         DisplayName = "Check if happy",
                         NotOptional = true,
-                        Value = false, //Preselect true
-                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() }
+                        Value = false, //Preselect false (unchecked)
+                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() } // right label
                      },
                     new PropertyVm(typeof(bool), "check2")
                     {
                         DisplayName = "Check if sad",
-                        Value = false, //Preselect true
+                        Value = false, //Preselect false (unchecked)
                         NotOptional =true
 
                      }
@@ -327,13 +327,13 @@ var formModel = new[]
                     {
                         DisplayName = "Check if happy",
                         NotOptional = true,
-                        Value = false, //Preselect true
-                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() }
+                        Value = false, //Preselect false (unchecked)
+                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() } // right label
                      },
                     new PropertyVm(typeof(bool), "check2")
                     {
                         DisplayName = "Check if sad",
-                        Value = false, //Preselect true
+                        Value = false, //Preselect false (unchecked)
                         NotOptional =true
 
                      }
