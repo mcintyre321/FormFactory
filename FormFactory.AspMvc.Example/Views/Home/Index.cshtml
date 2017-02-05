@@ -216,28 +216,62 @@ Then configure core to serve embedded files (<a href="https://github.com/mcintyr
 
             <pre class="prettyprint">
 //Build a model up in your controller or view   
-var formModel = new[]
-{
-    new PropertyVm(typeof(string), "username")
-    {
-        DisplayName = "Username",
-        NotOptional = true,
-    },
-    new PropertyVm(typeof(string), "password")
-    {
-        DisplayName = "Password",
-        NotOptional = true,
-        GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
-    },
-    new PropertyVm(typeof(string), "os")
-    {
-        DisplayName = "Operating System",
-        NotOptional = true,
-        Choices = new List&lt;>() {"OSX", "IOS", "Windows", "Android"},
-        Value = "Windows", //Preselect windows
-        GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
-    }
-};
+var formModel = formModel = new[]
+            {
+                    new PropertyVm(typeof(DateTime) , "date")
+                    {
+                        DisplayName = "Your birthday",
+                        NotOptional =true,
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.Date) }
+                    },
+                    new PropertyVm(typeof(string) , "textmessage")
+                    {
+                        DisplayName = "Type a message:",
+                        Suggestions = new List<string>() {"cryzy","piggzy" },
+                        NotOptional =false,
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
+                    },
+                     new PropertyVm(typeof(string) , "number")
+                    {
+                        DisplayName = "Select a number",
+                        NotOptional =false,
+                        Choices = new List<string>() {"one","two","three","four" },
+                    },
+                    new PropertyVm(typeof(string), "username")
+                    {
+                        DisplayName = "Username",
+                        NotOptional = true,
+                        Suggestions = new List<string>() { "holy poo" },
+                    },
+                    new PropertyVm(typeof(string), "password")
+                    {
+                        DisplayName = "Password",
+                        NotOptional = true,
+                        GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+                    },
+                    new PropertyVm(typeof(string), "os")
+                    {
+                        DisplayName = "Operating System",
+                        NotOptional = true,
+                        Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
+                        Value = "Windows", //Preselect windows
+                        GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio"), new System.ComponentModel.DescriptionAttribute("Make a choice above.") }
+                     },
+                    new PropertyVm(typeof(bool), "check")
+                    {
+                        DisplayName = "Check if happy",
+                        NotOptional = true,
+                        Value = false, //Preselect true
+                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() }
+                     },
+                    new PropertyVm(typeof(bool), "check2")
+                    {
+                        DisplayName = "Check if sad",
+                        Value = false, //Preselect true
+                        NotOptional =true
+
+                     }
+              };
 	    
 ...
 //render it in your view
@@ -252,26 +286,60 @@ var formModel = new[]
 
             var formModel = new[]
             {
-                new PropertyVm(typeof(string), "username")
-                {
-                    DisplayName = "Username",
-                    NotOptional = true,
-                },
-                new PropertyVm(typeof(string), "password")
-                {
-                    DisplayName = "Password",
-                    NotOptional = true,
-                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(DataType.Password)}
-                },
-                new PropertyVm(typeof(string), "os")
-                {
-                    DisplayName = "Operating System",
-                    NotOptional = true,
-                    Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
-                    Value = "Windows", //Preselect windows
-                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
-                }
-            };
+                    new PropertyVm(typeof(DateTime) , "date")
+                    {
+                        DisplayName = "Your birthday",
+                        NotOptional =true,
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.Date) }
+                    },
+                    new PropertyVm(typeof(string) , "textmessage")
+                    {
+                        DisplayName = "Type a message:",
+                        Suggestions = new List<string>() {"cryzy","piggzy" },
+                        NotOptional =false,
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
+                    },
+                     new PropertyVm(typeof(string) , "number")
+                    {
+                        DisplayName = "Select a number",
+                        NotOptional =false,
+                        Choices = new List<string>() {"one","two","three","four" },
+                    },
+                    new PropertyVm(typeof(string), "username")
+                    {
+                        DisplayName = "Username",
+                        NotOptional = true,
+                        Suggestions = new List<string>() { "holy poo" },
+                    },
+                    new PropertyVm(typeof(string), "password")
+                    {
+                        DisplayName = "Password",
+                        NotOptional = true,
+                        GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+                    },
+                    new PropertyVm(typeof(string), "os")
+                    {
+                        DisplayName = "Operating System",
+                        NotOptional = true,
+                        Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
+                        Value = "Windows", //Preselect windows
+                        GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio"), new System.ComponentModel.DescriptionAttribute("Make a choice above.") }
+                     },
+                    new PropertyVm(typeof(bool), "check")
+                    {
+                        DisplayName = "Check if happy",
+                        NotOptional = true,
+                        Value = false, //Preselect true
+                        GetCustomAttributes = () => new object[] {new FormFactory.Attributes.LabelOnRightAttribute() }
+                     },
+                    new PropertyVm(typeof(bool), "check2")
+                    {
+                        DisplayName = "Check if sad",
+                        Value = false, //Preselect true
+                        NotOptional =true
+
+                     }
+              };
 
             @formModel.Render(Html)
         }
