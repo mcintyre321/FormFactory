@@ -216,7 +216,7 @@ Then configure core to serve embedded files (<a href="https://github.com/mcintyr
 
             <pre class="prettyprint">
 //Build a model up in your controller or view   
-var formModel = formModel = new[]
+var formModel = new[]
             {
                     new PropertyVm(typeof(DateTime) , "date")
                     {
@@ -227,7 +227,6 @@ var formModel = formModel = new[]
                     new PropertyVm(typeof(string) , "textmessage")
                     {
                         DisplayName = "Type a message:",
-                        Suggestions = new List<string>() {"cryzy","piggzy" },
                         NotOptional =false,
                         GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
                     },
@@ -295,7 +294,6 @@ var formModel = formModel = new[]
                     new PropertyVm(typeof(string) , "textmessage")
                     {
                         DisplayName = "Type a message:",
-                        Suggestions = new List<string>() {"cryzy","piggzy" },
                         NotOptional =false,
                         GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
                     },
