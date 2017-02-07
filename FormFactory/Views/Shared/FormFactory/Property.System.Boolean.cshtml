@@ -9,7 +9,7 @@
 @if (Model.GetCustomAttributes().OfType<LabelOnRightAttribute>().Any())
 {
     <label class="checkbox">
-        if (Model.GetCustomAttributes().OfType<RequiredAttribute>
+        @if (Model.GetCustomAttributes().OfType<RequiredAttribute>
             ().Any())
             {
             <input @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model) type="checkbox" id="@Model.Id" name="@Model.Name" value="true" @Html.Raw(posted.Attr("checked")) />
