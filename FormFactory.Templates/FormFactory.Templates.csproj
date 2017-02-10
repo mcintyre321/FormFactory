@@ -107,96 +107,96 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTime.cshtml">
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTime.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.DateTime.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Decimal.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Decimal.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Decimal.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Double.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Double.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Double.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Enum.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Enum.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Enum.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int32.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int32.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Int32.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int64.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int64.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Int64.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Object.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.Object.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.String.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.String.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.String.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml">
       <Link>Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Form.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Form.cshtml">
       <Link>Views\Shared\FormFactory\Form.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Form.Property.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Form.Property.cshtml">
       <Link>Views\Shared\FormFactory\Form.Property.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.AspMvc.UploadedFiles.UploadedFile.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml">
       <Link>Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml">
       <Link>Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Boolean.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Boolean.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Boolean.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTime.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTime.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.DateTime.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Decimal.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Decimal.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Decimal.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Double.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Double.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Double.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Enum.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Enum.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Enum.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int32.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int32.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Int32.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int64.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int64.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Int64.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Object.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Object.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Object.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.String.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.String.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.String.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.TimeSpan.cshtml</Link>
-    </None>
-    <None Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml">
+    </Content>
+    <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml">
       <Link>Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml</Link>
-    </None>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.config" />
   </ItemGroup>
