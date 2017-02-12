@@ -23,7 +23,7 @@
             var isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
             <div class="radio">
                 <label>
-                    <input type="radio" name="@Model.Name" value="option1" @Html.Raw(isSelected ? "checked" : "")>
+                    <input type="radio" name="@Model.Name" value="@option.Item1" @Html.Raw(isSelected ? "checked" : "")>
                     @option.Item1
                 </label>
             </div>
