@@ -12,6 +12,7 @@ namespace FormFactory.AspMvc.Example
     {
         protected void Application_Start()
         {
+            var x = typeof(FormFactory.RazorEngine.DictionaryDynamic);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

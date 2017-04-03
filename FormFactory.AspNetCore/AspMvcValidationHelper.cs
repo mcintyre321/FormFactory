@@ -10,7 +10,6 @@ using FormFactory.AspMvc.Wrappers;
 using FormFactory.UnobtrusiveValidation;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace FormFactory
 {

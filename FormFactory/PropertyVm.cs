@@ -30,9 +30,9 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
-            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-                .FirstOrDefault();
-            DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
+            ////    .FirstOrDefault();
+            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
         }
         public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi)
             : this(pi.PropertyType, pi.Name)
@@ -41,9 +41,9 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
-            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-                .FirstOrDefault();
-            DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
+            ////    .FirstOrDefault();
+            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
 
              
         }
@@ -91,9 +91,9 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
 
-            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-                .FirstOrDefault();
-            DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
+            ////    .FirstOrDefault();
+            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
             DataAttributes = new Dictionary<string, string>();
         }
 

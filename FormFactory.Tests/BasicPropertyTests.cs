@@ -5,12 +5,12 @@ namespace FormFactory.Tests
 {
     public class BasicPropertyTests
     {
-        [Test, Ignore]
+        [Test, Ignore("Guids stop this working")]
         public void CanRenderAPropertyWithoutThrowingAnException()
         {
             var someObject = new SomeType() {SomeProperty = "SomeValue"};
             var properties = Properties.For(someObject);
-            var annotation = new System.ComponentModel.DataAnnotations.DisplayAttribute();
+            ////var annotation = new System.ComponentModel.DataAnnotations.DisplayAttribute();
             var helper = new RazorTemplateHtmlHelper();
             var html = properties.Render(helper);
             Assert.AreEqual(expected, html);

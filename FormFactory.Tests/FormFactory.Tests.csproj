@@ -1,7 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>net451</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="moq" Version="4.7.8" />
+    <PackageReference Include="NUnit" Version="3.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj" />
+    <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj" />
+    <ProjectReference Include="..\FormFactory\FormFactory.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 
 </Project>

@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
     <Authors>Harry McIntyre</Authors>
-    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net451;netcoreapp1.1</TargetFrameworks>
     <Title>FormFactory.Templates - Install this to add the cshtml files into your project - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>
@@ -13,4 +13,61 @@
     <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
+<ItemGroup>
+  <Content Include="..\FormFactory\Content\FormFactory\FormFactory.css" Link="Content\FormFactory\FormFactory.css" />
+  <Content Include="..\FormFactory\Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" Link="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" />
+  <Content Include="..\FormFactory\Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" Link="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\_README.txt" Link="Views\Shared\FormFactory\_README.txt" />
+</ItemGroup>
+
+<ItemGroup>
+  <Folder Include="Content\FormFactory\" />
+  <Folder Include="Properties\" />
+  <Folder Include="Scripts\FormFactory\" />
+  <Folder Include="Scripts\jqueryui-timepicker-addon\dist\" />
+  <Folder Include="Views\Shared\FormFactory\" />
+</ItemGroup>
+
+<ItemGroup>
+  <Content Include="..\FormFactory\Scripts\bootstrap3-typeahead.js" Link="Scripts\bootstrap3-typeahead.js" />
+  <Content Include="..\FormFactory\Scripts\bootstrap3-typeahead.unobtrusive.js" Link="Scripts\bootstrap3-typeahead.unobtrusive.js" />
+  <Content Include="..\FormFactory\Scripts\FormFactory\FormFactory.js" Link="Scripts\FormFactory\FormFactory.js" />
+  <Content Include="..\FormFactory\Scripts\jquery.validate.unobtrusive.dynamic.js" Link="Scripts\jquery.validate.unobtrusive.dynamic.js" />
+  <Content Include="..\FormFactory\Scripts\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" Link="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" />
+  <Content Include="..\FormFactory\Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" Link="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" />
+  <Content Include="..\FormFactory\Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" Link="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" />
+</ItemGroup>
+
+<ItemGroup>
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTime.cshtml" Link="Views\Shared\FormFactory\Cell.System.DateTime.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" Link="Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Decimal.cshtml" Link="Views\Shared\FormFactory\Cell.System.Decimal.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Double.cshtml" Link="Views\Shared\FormFactory\Cell.System.Double.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Enum.cshtml" Link="Views\Shared\FormFactory\Cell.System.Enum.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int32.cshtml" Link="Views\Shared\FormFactory\Cell.System.Int32.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Int64.cshtml" Link="Views\Shared\FormFactory\Cell.System.Int64.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.Object.cshtml" Link="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.String.cshtml" Link="Views\Shared\FormFactory\Cell.System.String.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" Link="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Form.cshtml" Link="Views\Shared\FormFactory\Form.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Form.Property.cshtml" Link="Views\Shared\FormFactory\Form.Property.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml" Link="Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml" Link="Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" Link="Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml" Link="Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" Link="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Boolean.cshtml" Link="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTime.cshtml" Link="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" Link="Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Decimal.cshtml" Link="Views\Shared\FormFactory\Property.System.Decimal.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Double.cshtml" Link="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Enum.cshtml" Link="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int32.cshtml" Link="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Int64.cshtml" Link="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Object.cshtml" Link="Views\Shared\FormFactory\Property.System.Object.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.String.cshtml" Link="Views\Shared\FormFactory\Property.System.String.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" Link="Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" />
+  <Content Include="..\FormFactory\Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" Link="Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" />
+</ItemGroup>
 </Project>

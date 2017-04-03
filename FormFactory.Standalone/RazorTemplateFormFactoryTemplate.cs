@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Dynamic;
-using System.IO;
 using RazorEngine.Templating;
 
 namespace FormFactory.RazorEngine
@@ -26,9 +25,7 @@ namespace FormFactory.RazorEngine
 
         public string Run(ExecuteContext executeContext)
         {
-            var writer = new StringWriter();
-            ((ITemplate) this).Run(executeContext, writer);
-            return writer.ToString();
+            return ((ITemplate) this).Run(executeContext);
         }
 
         public RazorTemplateFormFactoryTemplate()
