@@ -63,7 +63,7 @@ namespace FormFactory.Example.Controllers
             var html = Cache[type.Name + ".cs"] as string;
             if (html == null)
             {
-                var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.Example/Models/Examples/" + type.Name + ".cs";
+                var address = "https://raw.github.com/mcintyre321/FormFactory/master/FormFactory.AspMvc.Example/Models/Examples/" + type.Name + ".cs";
                 try
                 {
                     html = new HttpClient().GetAsync(address).Result.Content.ReadAsStringAsync().Result;

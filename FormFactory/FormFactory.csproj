@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp1.1;net451</TargetFrameworks>
+   <Title>FormFactory Core Library - MVC5 and AspNetCore Dynamic Forms Component Engine</Title>
+    <Company>Harry McIntyre</Company>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Product>Harry McIntyre</Product>
+    <Description>FormFactory is a UI component engine for ASP.NET Core and MVC5. It reflects over your view models to build a component tree, then renders that according to customisable templates. Drive yuour views by convention instead of hard coding them.</Description>
+    <PackageProjectUrl>https://github.com/mcintyre321/FormFactory</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/mcintyre321/SirenDotNet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild></PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System.ComponentModel.DataAnnotations">
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Content\FormFactory\FormFactory.css" />
+    <None Remove="Scripts\bootstrap3-typeahead.js" />
+    <None Remove="Scripts\bootstrap3-typeahead.unobtrusive.js" />
+    <None Remove="Scripts\FormFactory\FormFactory.js" />
+    <None Remove="Scripts\jquery.validate.unobtrusive.dynamic.js" />
+    <None Remove="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" />
+    <None Remove="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" />
+    <None Remove="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" />
+    <None Remove="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" />
+    <None Remove="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.DateTime.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Decimal.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Double.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Enum.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Int32.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Int64.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.String.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Form.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Form.Property.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Decimal.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Object.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.String.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" />
+    <None Remove="Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Content\FormFactory\FormFactory.css" />
+    <EmbeddedResource Include="Scripts\bootstrap3-typeahead.js" />
+    <EmbeddedResource Include="Scripts\bootstrap3-typeahead.unobtrusive.js" />
+    <EmbeddedResource Include="Scripts\FormFactory\FormFactory.js" />
+    <EmbeddedResource Include="Scripts\jquery.validate.unobtrusive.dynamic.js" />
+    <EmbeddedResource Include="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-sliderAccess.js" />
+    <EmbeddedResource Include="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.css" />
+    <EmbeddedResource Include="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.js" />
+    <EmbeddedResource Include="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.css" />
+    <EmbeddedResource Include="Scripts\jqueryui-timepicker-addon\dist\jquery-ui-timepicker-addon.min.js" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.DateTime.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.DateTimeOffset.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Decimal.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Double.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Enum.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Int32.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Int64.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.Object.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.String.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Cell.System.TimeSpan.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Form.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Form.Property.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.FormFactory.Components.Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.FormFactory.Components.SubmitButton.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.ICollection.System.Object.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.IEnumerable.System.Enum.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.IEnumerable.System.Object.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Boolean.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.DateTime.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.DateTimeOffset.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Decimal.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Double.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Enum.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Int32.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Int64.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Object.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.String.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.TimeSpan.cshtml" />
+    <EmbeddedResource Include="Views\Shared\FormFactory\Property.System.Xml.Linq.XElement.cshtml" />
+  </ItemGroup>
+
+</Project>
