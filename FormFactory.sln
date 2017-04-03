@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.AspMvc", "FormFactory.AspMvc\FormFactory.AspMvc.csproj", "{D6251FB0-69D2-42C9-8C23-2D7D56EC79BA}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -13,20 +13,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.Tests", "FormFa
 		{CF72F71F-F49D-4211-A838-0CEE44211764} = {CF72F71F-F49D-4211-A838-0CEE44211764}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.RazorEngine", "FormFactory.RazorEngine\FormFactory.RazorEngine.csproj", "{2F4E3429-D62F-4382-9342-4734F9830CDC}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CF72F71F-F49D-4211-A838-0CEE44211764} = {CF72F71F-F49D-4211-A838-0CEE44211764}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFactory.AspNetCore.Example", "FormFactory.AspNetCore.Example\FormFactory.AspNetCore.Example.csproj", "{B539800A-2803-4FBC-8385-C9EEA5E28180}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FormFactory.AspNetCore.Example", "FormFactory.AspNetCore.Example\FormFactory.AspNetCore.Example.xproj", "{B539800A-2803-4FBC-8385-C9EEA5E28180}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFactory.AspNetCore", "FormFactory.AspNetCore\FormFactory.AspNetCore.csproj", "{52FF087D-78B3-4929-A0E1-67E6615C1182}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FormFactory.AspNetCore", "FormFactory.AspNetCore\FormFactory.AspNetCore.xproj", "{52FF087D-78B3-4929-A0E1-67E6615C1182}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FormFactory", "FormFactory\FormFactory.xproj", "{CF72F71F-F49D-4211-A838-0CEE44211764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFactory", "FormFactory\FormFactory.csproj", "{CF72F71F-F49D-4211-A838-0CEE44211764}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.Templates", "FormFactory.Templates\FormFactory.Templates.csproj", "{4FFDDBA3-3A11-4087-890F-260F815AF4BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.AspMvc.Example", "FormFactory.AspMvc.Example\FormFactory.AspMvc.Example.csproj", "{A7D3D0F6-3CD9-490A-8053-AAF7F72D81AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFactory.Standalone", "FormFactory.Standalone\FormFactory.Standalone.csproj", "{1B877C74-6655-40A2-8E8B-F174E4A7BBBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +39,6 @@ Global
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05082AEF-45DC-42DE-81CE-86090F15FB03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F4E3429-D62F-4382-9342-4734F9830CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B539800A-2803-4FBC-8385-C9EEA5E28180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B539800A-2803-4FBC-8385-C9EEA5E28180}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B539800A-2803-4FBC-8385-C9EEA5E28180}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,6 +59,10 @@ Global
 		{A7D3D0F6-3CD9-490A-8053-AAF7F72D81AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7D3D0F6-3CD9-490A-8053-AAF7F72D81AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7D3D0F6-3CD9-490A-8053-AAF7F72D81AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B877C74-6655-40A2-8E8B-F174E4A7BBBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B877C74-6655-40A2-8E8B-F174E4A7BBBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B877C74-6655-40A2-8E8B-F174E4A7BBBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B877C74-6655-40A2-8E8B-F174E4A7BBBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

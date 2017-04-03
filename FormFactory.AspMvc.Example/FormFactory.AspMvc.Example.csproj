@@ -340,10 +340,6 @@
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj">
-      <Project>{2f4e3429-d62f-4382-9342-4734f9830cdc}</Project>
-      <Name>FormFactory.RazorEngine</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

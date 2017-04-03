@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
-    <Authors>Harry McIntyre</Authors>
+  <PropertyGroup>
     <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
-    <Title>FormFactory.Templates - Install this to add the cshtml files into your project - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
+    <Authors>Harry McIntyre</Authors>
+    <Title>FormFactory - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>
     <Product>Harry McIntyre</Product>
@@ -13,4 +13,5 @@
     <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+
 </Project>

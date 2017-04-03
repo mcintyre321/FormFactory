@@ -1,131 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6251FB0-69D2-42C9-8C23-2D7D56EC79BA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FormFactory.AspMvc</RootNamespace>
-    <AssemblyName>FormFactory.AspMvc</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <Authors>Harry McIntyre</Authors>
+    <TargetFrameworks>net451</TargetFrameworks>
+    <Title>FormFactory.AspMvc - Install this for .net451/MVC5 - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
+    <Company>Harry McIntyre</Company>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Product>Harry McIntyre</Product>
+    <Description>FormFactory is a UI component engine for ASP.NET Core and MVC5. It reflects over your view models to build a component tree, then renders that according to customisable templates. Drive yuour views by convention instead of hard coding them.</Description>
+    <PackageProjectUrl>https://github.com/mcintyre321/FormFactory</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/mcintyre321/SirenDotNet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="FormFactory">
-      <HintPath>..\FormFactory\bin\Debug\net451\FormFactory.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>False</Private>
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ModelBinders\InterfaceModelBinderProvider.cs" />
-    <Compile Include="RenderExtension.cs" />
-    <Compile Include="AspMvcViewHelper.cs" />
-    <Compile Include="UploadedFiles\AppDataFileStore.cs" />
-    <Compile Include="UploadedFiles\UploadedFile.cs" />
-    <Compile Include="AspMvcViewFinderExtensions.cs" />
-    <Compile Include="Wrappers\FormFactoryContext.cs" />
-    <Compile Include="Wrappers\FormFactoryHtmlHelper.cs" />
-    <Compile Include="Wrappers\FormFactoryModelState.cs" />
-    <Compile Include="Wrappers\FormFactoryModelStateDictionary.cs" />
-    <Compile Include="Wrappers\FormFactoryUrlHelper.cs" />
-    <Compile Include="Wrappers\FormFactoryView.cs" />
-    <Compile Include="Wrappers\FormFactoryViewData.cs" />
-    <Compile Include="Wrappers\FormFactoryViewResult.cs" />
-    <Compile Include="FormHelperExtension.cs" />
-    <Compile Include="ModelBinders\Encoder.cs" />
-    <Compile Include="ModelBinders\FormFactoryModelBindingContext.cs" />
-    <Compile Include="ModelBinders\FormFactoryValueProvider.cs" />
-    <Compile Include="ModelBinders\FormFactoryValueProviderResult.cs" />
-    <Compile Include="ModelBinders\ImplicitOperatorBinderProvider.cs" />
-    <Compile Include="ModelBinders\ModelBinderDelegate.cs" />
-    <Compile Include="ModelBinders\NestedModelBinderProvider.cs" />
-    <Compile Include="ModelBinders\PolymorphicModelBinder.cs" />
-    <Compile Include="UploadedFiles\FileStores.cs" />
-    <Compile Include="UploadedFiles\ModelBinderExtensions.cs" />
-    <Compile Include="UploadedFiles\SimpleAppDataFileUploader.cs" />
-    <Compile Include="UploadedFiles\UploadedFileModelBinder.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="AspMvcValidationHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="FormFactory.AspMvc.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
