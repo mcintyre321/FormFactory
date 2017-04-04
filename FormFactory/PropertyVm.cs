@@ -30,9 +30,9 @@ namespace FormFactory
                 .Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
-            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-            ////    .FirstOrDefault();
-            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<System.ComponentModel.DataAnnotations.DisplayAttribute>()
+                .FirstOrDefault();
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
         public PropertyVm(ParameterInfo modelParamInfo, PropertyInfo pi)
             : this(pi.PropertyType, pi.Name)
@@ -41,11 +41,11 @@ namespace FormFactory
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
-            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-            ////    .FirstOrDefault();
-            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault();
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
 
-             
+
         }
 
         public IDictionary<string, string> DataAttributes { get; set; }
@@ -83,17 +83,17 @@ namespace FormFactory
                 }
                 var setter = pi.SetMethod;
                 var getter = getMethod;
-                Readonly = !(setter != null);
-                Value = getter == null ? null : getter.Invoke(model, null);
+                Readonly = setter == null;
+                Value = getter?.Invoke(model, null);
             }
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
-            Readonly = !(pi.SetMethod != null);
+            Readonly = pi.SetMethod == null;
             IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
                 .Any(x => x.CustomDataType == "Hidden");
 
-            ////var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayNameAttribute>()
-            ////    .FirstOrDefault();
-            ////DisplayName = descriptionAttr != null ? descriptionAttr.DisplayName : pi.Name.Sentencise();
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
+                .FirstOrDefault();
+            DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
             DataAttributes = new Dictionary<string, string>();
         }
 
