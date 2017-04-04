@@ -229,7 +229,7 @@ var formModel = new[]
                     {
                         DisplayName = "Type a message:",
                         NotOptional =false,
-                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new DisplayAttribute(){Prompt = "placeholder??"}, new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
                     },
                      new PropertyVm(typeof(string) , "number")
                     {
@@ -296,7 +296,7 @@ var formModel = new[]
                     {
                         DisplayName = "Type a message:",
                         NotOptional =false,
-                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new PlaceholderAttribute("placeholder??"), new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
+                        GetCustomAttributes = () => new object[] { new DataTypeAttribute(DataType.MultilineText),  new DisplayAttribute() { Prompt = "placeholder??" }, new System.ComponentModel.DescriptionAttribute("Type anything here.")  },
                     },
                      new PropertyVm(typeof(string) , "number")
                     {

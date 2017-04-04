@@ -43,7 +43,7 @@ else
 {
     var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
     var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
-    var placeHolderText = Model.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+    var placeHolderText = Model.GetCustomAttributes().OfType<System.ComponentModel.DataAnnotations.DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
 
     var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
     var needsAutoComplete = (!Model.Readonly && (suggestionsAttribute != null || (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())));
