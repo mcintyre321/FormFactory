@@ -1,6 +1,7 @@
 ﻿using FormFactory.Attributes;
 using FormFactory.Components;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FormFactory.Example.Models.Examples
 {
@@ -48,7 +49,7 @@ namespace FormFactory.Example.Models.Examples
                     Position = Navbar.NavbarPosition.Left,
                     Form = new FormVm() { Inputs =
                     {
-                        new PropertyVm(typeof(string),"q") { GetCustomAttributes = () => new[] { (object) new PlaceholderAttribute("Search")}}
+                        new PropertyVm(typeof(string),"q") { GetCustomAttributes = () => new[] { (object) new DisplayAttribute(){Prompt = "Search"}}}
                     }}
                 },
                 new Navbar.NavbarComponent.Text()

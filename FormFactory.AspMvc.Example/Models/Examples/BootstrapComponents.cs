@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using FormFactory.Attributes;
 using FormFactory.Components;
 
@@ -48,7 +49,7 @@ namespace FormFactory.AspMvc.Example.Models.Examples
                     Position = Navbar.NavbarPosition.Left,
                     Form = new FormVm() { Inputs =
                     {
-                        new PropertyVm(typeof(string),"q") { GetCustomAttributes = () => new[] { (object) new PlaceholderAttribute("Search")}}
+                        new PropertyVm(typeof(string),"q") { GetCustomAttributes = () => new[] { (object) new DisplayAttribute(){ Prompt="Search"}}}
                     }}
                 },
                 new Navbar.NavbarComponent.Text()

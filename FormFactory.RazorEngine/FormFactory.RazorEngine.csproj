@@ -16,4 +16,8 @@
     <PackageReference Include="RazorEngine" Version="3.9.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
+
 </Project>

@@ -6,12 +6,12 @@ namespace FormFactory.Example.Models
     public class LogInModel
     {
         [Required]
-        [NoLabel, Placeholder("Email address")]
+        [NoLabel, Display(Prompt="Email address")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
-        [NoLabel, Placeholder("Password")]
+        [NoLabel, Display(Prompt="Password")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

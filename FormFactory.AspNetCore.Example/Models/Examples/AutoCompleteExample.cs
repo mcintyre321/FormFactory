@@ -11,7 +11,7 @@ namespace FormFactory.Example.Models.Examples
     {
 
         [Required]
-        [Placeholder("Type to find your location")]
+        [Display(Prompt="Type to find your location")]
         public string Location { get; set; }
         public IEnumerable<string> Location_suggestions()
         {
@@ -20,7 +20,7 @@ namespace FormFactory.Example.Models.Examples
 
         [Required]
         [DisplayName("Countrie")]
-        [Placeholder("Type to find your location")]
+        [Display(Prompt="Type to find your location")]
         [Description("AJAX suggestions using [SuggestionsUrl(\"...someurl...\")]")]
         [SuggestionsUrl("/home/CountrySuggestions")]
         public string CountryViaAjax { get; set; }

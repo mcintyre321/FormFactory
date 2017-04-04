@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using FormFactory.AspMvc.Wrappers;
 using FormFactory.Attributes;
 using Microsoft.AspNetCore.Html;
@@ -42,7 +43,7 @@ namespace FormFactory.AspMvc
 
         public static IHtmlContent Placeholder(PropertyVm pi)
         {
-            var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+            var placeHolderText = pi.GetCustomAttributes().OfType<DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
             return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
         }
     }

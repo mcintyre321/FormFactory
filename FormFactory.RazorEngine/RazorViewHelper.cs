@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using FormFactory.Attributes;
 using RazorEngine.Text;
 
@@ -41,7 +42,7 @@ namespace FormFactory.RazorEngine
 
         public static RawString Placeholder(PropertyVm pi)
         {
-            var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+            var placeHolderText = pi.GetCustomAttributes().OfType<DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
             return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
         }
     }

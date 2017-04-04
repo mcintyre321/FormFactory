@@ -94,7 +94,7 @@ namespace FormFactory.Example.Models.Examples
     {
         public class Twitter : SocialMediaType
         {
-            [Required, Placeholder("@yourhandle")]
+            [Required, Display(Prompt="@yourhandle")]
             public string TwitterHandle { get; set; }
         }
 
