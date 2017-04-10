@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
@@ -8,15 +8,15 @@ namespace FormFactory.Example.Models
     public class RegisterModel
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [Email]
         [Display(Name = "Email address")]
         public string Email { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
+        [Password]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
+        [Password]
         [Compare("Password", ErrorMessage = "Passwords did not match")]
         public string ConfirmPassword { get; set; }
 
@@ -34,7 +34,7 @@ namespace FormFactory.Example.Models
         public string LastName { get; set; }
 
         [Display(Name = "Tell us about yourself")]
-        [DataType(DataType.MultilineText)]
+        [MultilineText]
         public string AboutYou { get; set; }
 
         [Required]
@@ -49,10 +49,10 @@ namespace FormFactory.Example.Models
             UrbanAndStreetArt
         }
 
-        [DataType(DataType.Date), DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+        [Date, DisplayFormat(DataFormatString = "dd/MM/yyyy")]
         public DateTime BritishDate { get; set; }
 
-        [DataType(DataType.Date)]
+        [Date]
         public DateTime DefaultDate { get; set; }
 
         public bool RegularCheckBox { get; set; }

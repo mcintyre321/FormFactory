@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Linq;
 using FormFactory.Attributes;
 
@@ -78,7 +78,7 @@ namespace FormFactory.Example.Models.Examples
             SocialMediaType = new SocialMediaType.Twitter();
         }
 
-        [DataType("Radio")]
+        [Radio]
         public SocialMediaType SocialMediaType { get; set; }
 
         public IEnumerable<SocialMediaType> SocialMediaType_choices()

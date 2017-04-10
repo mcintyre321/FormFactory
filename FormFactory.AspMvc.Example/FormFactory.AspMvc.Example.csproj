@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FormFactory.AspMvc.Example</RootNamespace>
     <AssemblyName>FormFactory.AspMvc.Example</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,16 +56,13 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -106,6 +104,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -334,9 +333,9 @@
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj">
-      <Project>{443bd0c5-fd92-4e76-85fb-df4197ef3f8f}</Project>
-      <Name>FormFactory.RazorEngine</Name>
+    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj">
+      <Project>{1b540534-4e83-4da4-a977-e1a005fc9dad}</Project>
+      <Name>FormFactory.Standalone</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{bb14651d-5a7e-45f9-8895-8c09d9107232}</Project>

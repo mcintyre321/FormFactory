@@ -8,7 +8,7 @@ using FormFactory.ModelBinding;
 using FormFactory.ViewHelpers;
 using RazorEngine;
 using RazorEngine.Configuration;
-using RazorEngine.Templating;
+using RazorLight.Templating;
 using RazorEngine.Text;
 
 namespace FormFactory.RazorEngine

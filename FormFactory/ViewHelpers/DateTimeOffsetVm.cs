@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Linq;
 
 namespace FormFactory.ViewHelpers
@@ -8,11 +8,10 @@ namespace FormFactory.ViewHelpers
     {
         public DateTimeOffsetVm(PropertyVm model)
         {
-            var dateAttr = model.GetCustomAttributes()
-                                .OfType<DataTypeAttribute>()
-                                .FirstOrDefault(dt => dt.DataType == DataType.Date || dt.DataType == DataType.DateTime)
-                           ?? new DataTypeAttribute(DataType.DateTime);
-            var isDate = dateAttr.DataType == DataType.Date;
+            var dateAttr = model
+                .GetCustomAttributes()
+                .FirstOrDefault(a => a is DateAttribute || a is DateTimeAttribute);
+            var isDate = dateAttr is DateAttribute;
             var displayFormatAttribute = model.GetCustomAttributes().OfType<DisplayFormatAttribute>().SingleOrDefault();
             stringFormat = (displayFormatAttribute != null ? displayFormatAttribute.DataFormatString : null) ??
                                (isDate ? "dd MMM yyyy" : "g");

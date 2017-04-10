@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {
@@ -14,12 +14,12 @@ namespace FormFactory.Example.Models.Examples
 
         }
 
-        [DataType(DataType.Date)]
+        [Date]
         public DateTime DateOfBirth { get; set; }
 
         public DateTime LastAccessTime { get; set; }
 
-        [DataType(DataType.Date)]
+        [Date]
         public DateTimeOffset DateOfBirthAsDateTimeOffset { get; set; }
 
         public DateTimeOffset LastAccessTimeAsDateTimeOffset { get; set; }

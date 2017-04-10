@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Linq;
 using System.Reflection;
 using FormFactory.Attributes;
@@ -26,11 +26,10 @@ namespace FormFactory
             : this(pi.ParameterType, pi.Name)
         {
             Readonly = !true;
-            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
-                .Any(x => x.CustomDataType == "Hidden");
+            IsHidden = pi.GetCustomAttributes(true).OfType<HiddenAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
-            var descriptionAttr = pi.GetCustomAttributes(true).OfType<System.ComponentModel.DataAnnotations.DisplayAttribute>()
+            var descriptionAttr = pi.GetCustomAttributes(true).OfType<FormFactory.Attributes.DisplayAttribute>()
                 .FirstOrDefault();
             DisplayName = descriptionAttr != null ? descriptionAttr.Name : pi.Name.Sentencise();
         }
@@ -38,7 +37,7 @@ namespace FormFactory
             : this(pi.PropertyType, pi.Name)
         {
             Readonly = !true;
-            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>().Any(x => x.CustomDataType == "Hidden");
+            IsHidden = pi.GetCustomAttributes(true).OfType<HiddenAttribute>().Any();
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
@@ -88,8 +87,7 @@ namespace FormFactory
             }
             GetCustomAttributes = () => pi.GetCustomAttributes(true);
             Readonly = pi.SetMethod == null;
-            IsHidden = pi.GetCustomAttributes(true).OfType<DataTypeAttribute>()
-                .Any(x => x.CustomDataType == "Hidden");
+            IsHidden = pi.GetCustomAttributes(true).OfType<HiddenAttribute>().Any();
 
             var descriptionAttr = pi.GetCustomAttributes(true).OfType<DisplayAttribute>()
                 .FirstOrDefault();

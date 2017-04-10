@@ -1,5 +1,5 @@
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {

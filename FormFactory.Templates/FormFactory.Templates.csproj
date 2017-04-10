@@ -2,7 +2,7 @@
 
 <PropertyGroup>
     <Authors>Harry McIntyre</Authors>
-    <TargetFrameworks>net451;netcoreapp1.1</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <Title>FormFactory.Templates - Install this to add the cshtml files into your project - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>

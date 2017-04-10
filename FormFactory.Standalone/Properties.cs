@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FormFactory.RazorEngine
+namespace FormFactory.Standalone
 {
     public class Properties
     {

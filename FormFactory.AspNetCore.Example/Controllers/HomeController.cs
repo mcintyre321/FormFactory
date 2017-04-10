@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
@@ -16,7 +16,7 @@ namespace FormFactory.Example.Controllers
        
 
         [HttpPost]
-        public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
+        public virtual ActionResult SignIn(string email, [Password] string password)
         {
             if (string.IsNullOrWhiteSpace(email) || password != "password")
             {
@@ -105,7 +105,7 @@ namespace FormFactory.Example.Controllers
     public class SignInModel
     {
         public string Email { get; set; }
-        [DataType(DataType.Password)]
+        [Password]
         public string Password { get; set; }
     }
 }

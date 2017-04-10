@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using FormFactory.Attributes;
+using System.Linq;
 using FormFactory.Attributes;
-using RazorEngine.Text;
+using RazorLight.Text;
 
-namespace FormFactory.RazorEngine
+namespace FormFactory.Standalone
 {
     public static class RazorViewHelper
     {
@@ -41,7 +42,7 @@ namespace FormFactory.RazorEngine
 
         public static RawString Placeholder(PropertyVm pi)
         {
-            var placeHolderText = pi.GetCustomAttributes().OfType<PlaceholderAttribute>().Select(a => a.Text).FirstOrDefault();
+            var placeHolderText = pi.GetCustomAttributes().OfType<DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
             return Attr((!string.IsNullOrWhiteSpace(placeHolderText)), "placeholder", placeHolderText);
         }
     }

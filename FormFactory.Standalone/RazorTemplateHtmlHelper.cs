@@ -1,55 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using FormFactory.ModelBinding;
 using FormFactory.ViewHelpers;
-using RazorEngine;
-using RazorEngine.Configuration;
-using RazorEngine.Templating;
-using RazorEngine.Text;
+using RazorLight;
+using RazorLight.Rendering;
+using RazorLight.Templating;
+using RazorLight.Text;
 
-namespace FormFactory.RazorEngine
+namespace FormFactory.Standalone
 {
     public class RazorTemplateHtmlHelper : FfHtmlHelper<IDictionary<string, object>> 
     {
         
-
-        static RazorTemplateHtmlHelper()
-        {
-            var templateConfig = new TemplateServiceConfiguration
-                {
-                    Resolver = new DelegateTemplateResolver(name =>
-                        {
-                            var stream = EmbeddedResourceRegistry.ResolveResourceStream(name);
-                            using (var reader = new StreamReader(stream))
-                            {
-                                var inherits = "";
-                                var sb = new StringBuilder();
-                                while (reader.Peek()> 0)
-                                {
-                                    var readLine = reader.ReadLine();
-                                    if (readLine.StartsWith("@model "))
-                                    {
-                                        inherits = ("@inherits FormFactory.RazorEngine.RazorTemplateFormFactoryTemplate<" + readLine.Substring(7) + ">\r\n");
-                                        continue;
-                                    }
-                                    if (readLine == "@using FormFactory.AspMvc")
-                                    {
-                                        sb.AppendLine("@using FormFactory.RazorEngine");
-                                        continue;
-                                    }
-                                    sb.AppendLine(readLine);
-                                }
-                                return inherits + sb.ToString();
-                            }
-                        })
-                };
-            templateConfig.BaseTemplateType = typeof (RazorTemplateFormFactoryTemplate<>);
-            Razor.SetTemplateService(new TemplateService(templateConfig));
-        }
+         
 
  
 
@@ -76,7 +44,7 @@ namespace FormFactory.RazorEngine
 
         public ViewData ViewData => new ViewData(new FfModelStateDictionary(), this.Model);
 
-        public IViewFinder ViewFinder => new RazorEngineContext();
+        public IViewFinder ViewFinder => new RazorLightContext();
 
         public object Model { get; set; }
 
@@ -114,27 +82,37 @@ namespace FormFactory.RazorEngine
 
         public RawString Partial(string partialName, object model, ViewData viewData = null)
         {
-            IRazorTemplateFormFactoryTemplate template = (IRazorTemplateFormFactoryTemplate) Razor.Resolve(partialName, model);
-            var dyn = template;
-            dyn.Html = this;
-            dyn.SetModel(model);
+            var engine = FormFactory.Standalone.EngineFactory.CreateEmbedded(typeof(FF));
+
             
-            dyn.ViewData = viewData ?? new ViewData();
+            var templateBase = (FormFactoryTemplateBase) engine.Activate(typeof(FormFactoryTemplateBase));
+            templateBase.Html = new RazorTemplateHtmlHelper();
+            templateBase.ViewData = viewData ?? new ViewData();
             
-            try
-            {
-                string result = template.Run(new ExecuteContext());
-                return new RawString(result);
-            }
-            catch (Exception ex)
-            {
-                return new RawString(ex.Message);
-            }
+            templateBase.PageContext = new PageContext(new ExpandoObject()) { ModelTypeInfo = new ModelTypeInfo(model.GetType())};
+
+            return new RawString(engine.RunTemplate(templateBase, model));
+            //IRazorTemplateFormFactoryTemplate template = (IRazorTemplateFormFactoryTemplate) Razor.Resolve(partialName, model);
+            //var dyn = template;
+            //dyn.Html = this;
+            //dyn.SetModel(model);
+
+            //dyn.ViewData = viewData ?? new ViewData();
+
+            //try
+            //{
+            //    string result = template.Run(new ExecuteContext());
+            //    return new RawString(result);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return new RawString(ex.Message);
+            //}
         }
          
         public void RenderPartial(string partialName, object model)
         {
-            throw new NotImplementedException("RenderPartial is not implemented as there is no context to write to in RazorEngine");
+            throw new NotImplementedException("RenderPartial is not implemented as there is no context to write to in RazorLight");
         }
 
 

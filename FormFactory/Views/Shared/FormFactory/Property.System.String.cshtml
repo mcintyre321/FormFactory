@@ -1,7 +1,7 @@
 ﻿@*@using System*@
 @using System
 @using System.Collections.Generic
-@using System.ComponentModel.DataAnnotations
+@using FormFactory.Attributes
 @using System.Linq
 @using FormFactory.Attributes
 @using FormFactory
@@ -16,7 +16,7 @@
     {
         choices = Model.Choices.Cast<string>().Select(c => Tuple.Create(c, c));
     }
-    if (Model.GetCustomAttributes().OfType<DataTypeAttribute>().Any(a => a.CustomDataType == "Radio"))
+    if (Model.GetCustomAttributes().OfType<RadioAttribute>().Any())
     {
         foreach (var option in choices)
         {
@@ -41,9 +41,9 @@
 }
 else
 {
-    var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>();
-    var inputType = dataAttributes.Any(da => da.DataType == DataType.Password) ? "password" : "text";
-    var placeHolderText = Model.GetCustomAttributes().OfType<System.ComponentModel.DataAnnotations.DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
+    var dataAttributes = Model.GetCustomAttributes();
+    var inputType = dataAttributes.Any(da => da is PasswordAttribute) ? "password" : "text";
+    var placeHolderText = Model.GetCustomAttributes().OfType<FormFactory.Attributes.DisplayAttribute>().Select(a => a.Prompt).FirstOrDefault();
 
     var suggestionsAttribute = Model.GetCustomAttributes().OfType<SuggestionsUrlAttribute>().SingleOrDefault();
     var needsAutoComplete = (!Model.Readonly && (suggestionsAttribute != null || (Model.Suggestions != null && Model.Suggestions.Cast<object>().Any())));
@@ -63,7 +63,7 @@ else
     }
 
 
-    if (dataAttributes.Any(x => x.DataType == DataType.MultilineText))
+    if (dataAttributes.Any(x => x is MultilineTextAttribute))
     {
         <textarea class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.UnobtrusiveValidation(Model) @Html.Raw(placeHolderText.Attr("placeholder")) name="@Model.Name" rows="5">@Model.Value</textarea>
     }

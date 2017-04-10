@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using System.Web;
-using RazorEngine.Text;
+using RazorLight.Text;
 
-namespace FormFactory.RazorEngine
+namespace FormFactory.Standalone
 {
     public static class RenderExtension
     {

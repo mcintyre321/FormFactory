@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net451</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj" />
-    <ProjectReference Include="..\FormFactory.RazorEngine\FormFactory.RazorEngine.csproj" />
+    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj" />
     <ProjectReference Include="..\FormFactory\FormFactory.csproj" />
   </ItemGroup>
 

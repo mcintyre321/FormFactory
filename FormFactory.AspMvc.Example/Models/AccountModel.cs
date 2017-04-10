@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Models
 {
     public class AccountModel
     {
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [Email]
         [Display(Name = "Email address")]
         public string Email { get; set; }
 

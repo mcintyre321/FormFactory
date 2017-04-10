@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Web.Mvc;
 using FormFactory.AspMvc.Example.Models;
 using FormFactory.Attributes;
@@ -52,7 +52,7 @@ namespace FormFactory.AspMvc.Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register([FormModel] RegisterModel model, [DataType("Hidden")] string returnUrl)
+        public ActionResult Register([FormModel] RegisterModel model, [Hidden] string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace FormFactory.AspMvc.Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogIn([FormModel] LogInModel model, [DataType("Hidden")] string returnUrl)
+        public ActionResult LogIn([FormModel] LogInModel model, [Hidden] string returnUrl)
         {
             if (ModelState.IsValid)
             {

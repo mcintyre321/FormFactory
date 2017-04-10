@@ -1,4 +1,4 @@
-﻿namespace FormFactory.RazorEngine
+﻿namespace FormFactory.Standalone
 {
     public class RazorTemplateView : View
     {

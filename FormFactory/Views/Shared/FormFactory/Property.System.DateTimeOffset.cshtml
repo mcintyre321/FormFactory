@@ -1,12 +1,11 @@
-﻿@using System.ComponentModel.DataAnnotations
+﻿@using FormFactory.Attributes
 @using FormFactory.AspMvc
 @using FormFactory
 @model PropertyVm
 @{
-    var dateAttr = Model.GetCustomAttributes().OfType<DataTypeAttribute>().FirstOrDefault(
-        dt => dt.DataType == DataType.Date || dt.DataType == DataType.DateTime) 
-        ?? new DataTypeAttribute(DataType.DateTime);
-    var isDate = dateAttr.DataType == DataType.Date;
+    var dateAttr = Model.GetCustomAttributes().FirstOrDefault(dt => dt is DateAttribute || dt is DateTimeAttribute) 
+        ?? new DateTimeAttribute();
+    var isDate = dateAttr is DateAttribute;
     var displayFormatAttribute = Model.GetCustomAttributes().OfType<DisplayFormatAttribute>().SingleOrDefault();
     var stringFormat = (displayFormatAttribute != null ? displayFormatAttribute.DataFormatString : null) ?? (isDate ? "dd MMM yyyy" : "g");
     var behaviour = isDate ? "datepicker" : "datetimepicker";

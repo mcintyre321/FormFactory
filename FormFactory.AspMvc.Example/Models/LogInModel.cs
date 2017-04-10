@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Models
@@ -7,12 +7,12 @@ namespace FormFactory.AspMvc.Example.Models
     {
         [Required]
         [NoLabel, Display(Prompt="Email address")]
-        [DataType(DataType.EmailAddress)]
+        [Email]
         public string Email { get; set; }
 
         [Required]
         [NoLabel, Display(Prompt="Password")]
-        [DataType(DataType.Password)]
+        [Password]
         public string Password { get; set; }
 
         [LabelOnRight]

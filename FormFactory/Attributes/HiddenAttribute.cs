@@ -1,15 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using FormFactory.Attributes;
 
 namespace FormFactory.Attributes
 {
-    public class HiddenAttribute : DataTypeAttribute
-    {
-        public HiddenAttribute() : base("Hidden")
-        {
-        }
-
-        public HiddenAttribute(string customDataType) : base(customDataType)
-        {
-        }
-    }
+    public class HiddenAttribute : Attribute { }
 }

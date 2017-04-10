@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using FormFactory.Attributes;
 using System.Linq;
 using System.Text;
 
@@ -10,10 +10,10 @@ namespace FormFactory.ViewHelpers
     {
         public static string GetInputTypeFromDataTypeAttribute(PropertyVm Model)
         {
-            var dataAttributes = Model.GetCustomAttributes().OfType<DataTypeAttribute>().ToList();
+            var dataAttributes = Model.GetCustomAttributes().ToArray();
             var inputType = "text";
-            if (dataAttributes.Any(da => da.DataType == DataType.Password)) inputType = "password";
-            if (dataAttributes.Any(da => da.DataType == DataType.MultilineText)) inputType = "textarea";
+            if (dataAttributes.OfType<PasswordAttribute>().Any()) inputType = "password";
+            if (dataAttributes.OfType<MultilineTextAttribute>().Any()) inputType = "textarea";
             return inputType;
         }
 
@@ -51,7 +51,7 @@ namespace FormFactory.ViewHelpers
         }
         public static bool UseRadio(PropertyVm vm)
         {
-            return vm.GetCustomAttributes().OfType<DataTypeAttribute>().Any(dt => dt.CustomDataType == "Radio");
+            return vm.GetCustomAttributes().OfType<RadioAttribute>().Any();
         }
     }
 

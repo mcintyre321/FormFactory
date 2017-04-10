@@ -1,6 +1,6 @@
-﻿namespace FormFactory.RazorEngine
+﻿namespace FormFactory.Standalone
 {
-    public class RazorEngineContext : IViewFinder
+    public class RazorLightContext : IViewFinder
     {
         public IViewFinderResult FindPartialView(string partialViewName)
         {

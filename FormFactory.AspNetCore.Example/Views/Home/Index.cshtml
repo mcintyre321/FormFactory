@@ -1,5 +1,5 @@
 ﻿@using System
-@using System.ComponentModel.DataAnnotations
+@using FormFactory.Attributes
 @using System.Net
 @using FormFactory.Example.Controllers
 @using FormFactory.Example.Models.Examples
@@ -33,14 +33,14 @@
             <form action="/home/save" method="POST">
                 @{
                     var instance = Activator.CreateInstance(typeWithSource.Item1);
-                    //if (string.IsNullOrWhiteSpace(Request.Params["UseRazorEngine"]))
+                    //if (string.IsNullOrWhiteSpace(Request.Params["UseStandalone"]))
                     {
 
                         @(FormFactory.FF.PropertiesFor(instance).Render(Html))
                     }
                     @*else
                     {
-                        var helper = new FormFactory.RazorEngine.RazorTemplateHtmlHelper();
+                        var helper = new FormFactory.Standalone.RazorTemplateHtmlHelper();
                         var propertiesFor = helper.PropertiesFor(instance);
                         @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
                     }*@
@@ -64,7 +64,7 @@
             Given this action...
 
             <pre class="prettyprint">
-    [HttpPost] public virtual ActionResult SignIn(string email, [DataType(DataType.Password)] string password)
+    [HttpPost] public virtual ActionResult SignIn(string email, [Password] string password)
         { //... } 
 </pre>
         </p>
@@ -108,7 +108,7 @@ var formModel = new[]
     {
         DisplayName = "Password",
         NotOptional = true,
-        GetCustomAttributes = () => new object[]{ new DataTypeAttribute(DataType.Password) }
+        GetCustomAttributes = () => new object[]{ new PasswordAttribute() }
     },
     new PropertyVm(typeof(string), "os")
     {
@@ -116,7 +116,7 @@ var formModel = new[]
         NotOptional = true,
         Choices = new List&lt;>() {"OSX", "IOS", "Windows", "Android"},
         Value = "Windows", //Preselect windows
-        GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
+        GetCustomAttributes = () => new object[] {new RadioAttribute()},
     }
 };
 	    
@@ -142,7 +142,7 @@ var formModel = new[]
                 {
                     DisplayName = "Password",
                     NotOptional = true,
-                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(DataType.Password)}
+                    GetCustomAttributes = () => new object[] {new PasswordAttribute()}
                 },
                 new PropertyVm(typeof(string), "os")
                 {
@@ -150,7 +150,7 @@ var formModel = new[]
                     NotOptional = true,
                     Choices = new List<string>() {"OSX", "IOS", "Windows", "Android"},
                     Value = "Windows", //Preselect windows
-                    GetCustomAttributes = () => new object[] {new DataTypeAttribute(customDataType: "Radio")},
+                    GetCustomAttributes = () => new object[] {new RadioAttribute()},
                 }
             };
 
