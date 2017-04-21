@@ -121,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Examples\InheritanceExample.cs" />
     <Compile Include="Views\Home\Test.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
