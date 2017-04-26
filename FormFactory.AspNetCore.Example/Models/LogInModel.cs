@@ -1,5 +1,4 @@
 using FormFactory.Attributes;
-using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models
 {

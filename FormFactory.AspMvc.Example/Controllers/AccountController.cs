@@ -2,7 +2,6 @@
 using FormFactory.Attributes;
 using System.Web.Mvc;
 using FormFactory.AspMvc.Example.Models;
-using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Controllers
 {

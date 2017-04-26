@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 
-namespace FormFactory
+namespace FormFactory.Standalone
 {
     public static class EmbeddedResourceRegistry
     {

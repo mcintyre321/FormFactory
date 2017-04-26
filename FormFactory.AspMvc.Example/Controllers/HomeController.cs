@@ -4,7 +4,6 @@ using FormFactory.Attributes;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Controllers
 {

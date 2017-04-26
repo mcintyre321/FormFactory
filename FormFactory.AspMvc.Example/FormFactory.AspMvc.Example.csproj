@@ -333,10 +333,6 @@
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj">
-      <Project>{1b540534-4e83-4da4-a977-e1a005fc9dad}</Project>
-      <Name>FormFactory.Standalone</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{bb14651d-5a7e-45f9-8895-8c09d9107232}</Project>
       <Name>FormFactory</Name>

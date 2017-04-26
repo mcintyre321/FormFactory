@@ -3,14 +3,14 @@ using RazorLight;
 
 namespace FormFactory.Standalone
 {
-    public class FormFactoryTemplateBase : TemplatePage
+    public class FormFactoryTemplatePage<T> : RazorLight.TemplatePage<T>, IFormFactoryTemplatePage
     {
         public RazorTemplateHtmlHelper Html { get; set; }
         public ViewData ViewData { get; set; }
 
 
 
-        public FormFactoryTemplateBase()
+        public FormFactoryTemplatePage()
         {
             ViewData = new ViewData();
         }

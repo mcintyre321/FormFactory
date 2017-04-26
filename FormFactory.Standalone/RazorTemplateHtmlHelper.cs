@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using FormFactory.ModelBinding;
 using FormFactory.ViewHelpers;
 using RazorLight;
-using RazorLight.Rendering;
-using RazorLight.Templating;
 using RazorLight.Text;
 
 namespace FormFactory.Standalone
@@ -82,32 +76,17 @@ namespace FormFactory.Standalone
 
         public RawString Partial(string partialName, object model, ViewData viewData = null)
         {
-            var engine = FormFactory.Standalone.EngineFactory.CreateEmbedded(typeof(FF));
+            var engine = EngineFactory.CreateEmbedded(typeof(FF));
 
-            
-            var templateBase = (FormFactoryTemplateBase) engine.Activate(typeof(FormFactoryTemplateBase));
-            templateBase.Html = new RazorTemplateHtmlHelper();
-            templateBase.ViewData = viewData ?? new ViewData();
-            
-            templateBase.PageContext = new PageContext(new ExpandoObject()) { ModelTypeInfo = new ModelTypeInfo(model.GetType())};
 
-            return new RawString(engine.RunTemplate(templateBase, model));
-            //IRazorTemplateFormFactoryTemplate template = (IRazorTemplateFormFactoryTemplate) Razor.Resolve(partialName, model);
-            //var dyn = template;
-            //dyn.Html = this;
-            //dyn.SetModel(model);
-
-            //dyn.ViewData = viewData ?? new ViewData();
-
-            //try
-            //{
-            //    string result = template.Run(new ExecuteContext());
-            //    return new RawString(result);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return new RawString(ex.Message);
-            //}
+            var resourceName = "Views.Shared." + partialName.Replace("/", ".");
+            var str = engine.Parse(resourceName, model: model, viewBag: null, prerenderCallback: new Action<TemplatePage>((t) =>
+            {
+                var templateBase = (IFormFactoryTemplatePage)t;
+                templateBase.Html = new RazorTemplateHtmlHelper();
+                templateBase.ViewData = viewData ?? new ViewData();
+            }));
+            return new RawString(str);
         }
          
         public void RenderPartial(string partialName, object model)

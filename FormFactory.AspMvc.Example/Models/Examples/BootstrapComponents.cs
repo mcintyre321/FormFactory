@@ -1,6 +1,5 @@
 ﻿using System;
 using FormFactory.Attributes;
-using FormFactory.Attributes;
 using FormFactory.Components;
 
 namespace FormFactory.AspMvc.Example.Models.Examples

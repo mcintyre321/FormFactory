@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using RazorLight.Templating;
-using RazorLight.Templating.Embedded;
 using RazorLight;
 using RazorLight.Compilation;
+using RazorLight.Templating;
+using RazorLight.Templating.Embedded;
 
 namespace FormFactory.Standalone
 {
@@ -13,18 +13,34 @@ namespace FormFactory.Standalone
 
 
 
-        public static IRazorLightEngine CreateEmbedded(Type rootType)
+        public static RazorLightEngine CreateEmbedded(Type rootType)
         {
             return CreateEmbedded(rootType, EngineConfiguration.Default);
         }
 
 
-        public static IRazorLightEngine CreateEmbedded(Type rootType, IEngineConfiguration configuration)
+        static RazorLightEngine CreateEmbedded(Type rootType, IEngineConfiguration configuration)
         {
-            ITemplateManager manager = new FormFactoryTemplateMananger(new EmbeddedResourceTemplateManager(rootType));
-            var dependencies = CreateDefaultDependencies(manager, configuration);
+            var manager = new FormFactoryTemplateMananger(new EmbeddedResourceTemplateManager(rootType));
+            var core = new EngineCore(manager, configuration);
+            
+            IPageFactoryProvider pageFactory = new DefaultPageFactory((key) =>
+            {
+                ITemplateSource source = manager.Resolve(key);
+                string razorTemplate = core.GenerateRazorTemplate(source, new ModelTypeInfo(typeof(FormFactoryTemplatePage<>)));
+                var context = new CompilationContext(razorTemplate, configuration.Namespaces);
 
-            return new RazorLightEngine(dependencies.Item1, dependencies.Item2);
+                CompilationResult compilationResult = configuration.CompilerService.Compile(context);
+
+                return compilationResult;
+            });
+
+            IPageLookup lookup = new DefaultPageLookup(pageFactory);
+
+
+
+
+            return new RazorLightEngine(core, lookup);
         }
 
         public class FormFactoryTemplateMananger : ITemplateManager
@@ -50,14 +66,19 @@ namespace FormFactory.Standalone
                 {
                     get
                     {
-                        if (_content != null)
+                        if (_content == null)
                         {
                             _content = _inner.Content;
-                            var inherits = "@inherits FormFactory.Standalone.FormFactoryTemplateBase";
+                            var inherits = "@inherits FormFactory.Standalone.FormFactoryTemplatePage";
                             var sb = new StringBuilder();
                             var lines = _inner.Content.Split(Environment.NewLine.ToCharArray());
                             foreach (var readLine in lines)
                             {
+                                if (readLine.StartsWith("@model "))
+                                {
+                                    inherits = ("@inherits FormFactory.Standalone.FormFactoryTemplatePage<" + readLine.Substring(7) + ">\r\n");
+                                    continue;
+                                }
                                 if (readLine == "@using FormFactory.AspMvc")
                                 {
                                     sb.AppendLine("@using FormFactory.Standalone");
@@ -90,28 +111,7 @@ namespace FormFactory.Standalone
         }
 
 
-        private static Tuple<IEngineCore, IPageLookup> CreateDefaultDependencies(
-            ITemplateManager manager,
-            IEngineConfiguration configuration)
-        {
-            IEngineCore core = new EngineCore(manager, configuration);
-
-            IPageFactoryProvider pageFactory = new DefaultPageFactory((key) =>
-            {
-                ITemplateSource source = manager.Resolve(key);
-
-                string razorTemplate = core.GenerateRazorTemplate(source, new ModelTypeInfo(typeof(FormFactoryTemplateBase)));
-                var context = new CompilationContext(razorTemplate, configuration.Namespaces);
-
-                CompilationResult compilationResult = configuration.CompilerService.Compile(context);
-
-                return compilationResult;
-            });
-
-            IPageLookup lookup = new DefaultPageLookup(pageFactory);
-
-            return new Tuple<IEngineCore, IPageLookup>(core, lookup);
-        }
+       
 
     }
 }

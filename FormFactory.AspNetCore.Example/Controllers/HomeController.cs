@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using FormFactory.Attributes;
 using FormFactory.Example.Models.Examples;
 
 namespace FormFactory.Example.Controllers

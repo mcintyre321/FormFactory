@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using FormFactory.Attributes;
-using System.Linq;
-using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {

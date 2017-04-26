@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using FormFactory.Attributes;
 using System.Linq;
 using System.Reflection;
-using FormFactory.Attributes;
-using System.ComponentModel;
 
 namespace FormFactory
 {
@@ -53,7 +51,6 @@ namespace FormFactory
             this(pi.PropertyType, pi.Name)
         {
             Source = model;
-            ModelState modelState;
             var getMethod = pi.GetMethod;
             
             if (pi.GetIndexParameters().Any()) getMethod = null; //dont want to get indexed properties
@@ -104,7 +101,6 @@ namespace FormFactory
             Name = name;
             Id = Guid.NewGuid().ToString();
 
-            ModelState modelState;
             //if (html.ViewData.ModelState.TryGetValue(name, out modelState))
             //{
             //    if (modelState.Value != null)

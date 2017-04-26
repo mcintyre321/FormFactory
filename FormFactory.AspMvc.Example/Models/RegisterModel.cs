@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using FormFactory.Attributes;
-using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Models
 {

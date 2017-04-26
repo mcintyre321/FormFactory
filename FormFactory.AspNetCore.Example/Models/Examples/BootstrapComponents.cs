@@ -1,7 +1,6 @@
 ﻿using FormFactory.Attributes;
 using FormFactory.Components;
 using System;
-using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {

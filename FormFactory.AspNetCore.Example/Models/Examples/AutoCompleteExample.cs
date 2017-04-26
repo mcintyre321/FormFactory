@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using FormFactory.Attributes;
-using System.Globalization;
-using System.Linq;
-using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
 {

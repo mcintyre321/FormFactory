@@ -1,4 +1,4 @@
-﻿namespace FormFactory.Tests
+﻿namespace FormFactory.NetFramework.Tests
 {
     public class SomeType : SomeBaseType
     {
