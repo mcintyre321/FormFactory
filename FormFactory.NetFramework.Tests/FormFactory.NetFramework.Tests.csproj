@@ -1,16 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+
+
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
+    <ApplicationIcon />
+    <OutputTypeEx>library</OutputTypeEx>
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="CsQuery" Version="1.3.4" />
     <PackageReference Include="moq" Version="4.7.8" />
     <PackageReference Include="NUnit" Version="3.6.1" />
-    <PackageReference Include="RazorLight" Version="1.0.1" />
+    <PackageReference Include="RazorLight" Version="1.1.0" />
+    <PackageReference Include="System.Collections.Immutable" Version="1.1.37" />
+    <PackageReference Include="System.Reflection.Metadata" Version="1.2.0" />
     <PackageReference Include="System.Runtime" Version="4.3.0" />
   </ItemGroup>
 
@@ -20,10 +30,10 @@
 
   <ItemGroup>
     <Reference Include="FormFactory">
-      <HintPath>..\FormFactory.Standalone\bin\Debug\net461\FormFactory.dll</HintPath>
+      <HintPath>..\FormFactory.Standalone\bin\$(Configuration)\net461\FormFactory.dll</HintPath>
     </Reference>
     <Reference Include="FormFactory.Standalone">
-      <HintPath>..\FormFactory.Standalone\bin\Debug\net461\FormFactory.Standalone.dll</HintPath>
+      <HintPath>..\FormFactory.Standalone\bin\$(Configuration)\net461\FormFactory.Standalone.dll</HintPath>
     </Reference>
   </ItemGroup>
 

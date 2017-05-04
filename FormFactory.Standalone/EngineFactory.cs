@@ -28,7 +28,7 @@ namespace FormFactory.Standalone
             {
                 ITemplateSource source = manager.Resolve(key);
                 string razorTemplate = core.GenerateRazorTemplate(source, new ModelTypeInfo(typeof(FormFactoryTemplatePage<>)));
-                var context = new CompilationContext(razorTemplate, configuration.Namespaces);
+                var context = new CompilationContext(razorTemplate);
 
                 CompilationResult compilationResult = configuration.CompilerService.Compile(context);
 
