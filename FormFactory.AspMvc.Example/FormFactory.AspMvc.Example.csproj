@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FormFactory.AspMvc.Example</RootNamespace>
     <AssemblyName>FormFactory.AspMvc.Example</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -61,9 +61,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -332,6 +332,10 @@
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj">
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj">
+      <Project>{75d94395-0e77-49cb-8112-65d75574d5eb}</Project>
+      <Name>FormFactory.Standalone</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{bb14651d-5a7e-45f9-8895-8c09d9107232}</Project>
