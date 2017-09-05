@@ -41,7 +41,17 @@ namespace FormFactory
                 };
 
             yield return typeVm;
-            var properties = type.GetTypeInfo().DeclaredProperties;
+
+            var typeProperties = type.GetTypeInfo().DeclaredProperties;
+
+            if (type.GetTypeInfo().BaseType != null)
+            {
+                var baseTypeProperties = type.GetTypeInfo().BaseType.GetTypeInfo().DeclaredProperties;
+                typeProperties = typeProperties.Union(baseTypeProperties);
+            }
+
+            var properties = typeProperties as IList<PropertyInfo> ?? typeProperties.ToList();
+
 
             foreach (var property in properties)
             {
