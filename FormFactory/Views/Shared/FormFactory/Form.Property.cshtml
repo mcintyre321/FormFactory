@@ -2,6 +2,7 @@
 @using FormFactory
 @using FormFactory.AspMvc
 @using FormFactory.Attributes
+@using System.Linq
 @model PropertyVm
  @{
      var propertyVm = Model;
@@ -34,7 +35,7 @@
         <span class="field-validation-@validClass" data-valmsg-for="@propertyVm.Name" data-valmsg-replace="true">
             @Html.AllValidationMessages(propertyVm.Name)
         </span>
-        @(propertyVm.GetCustomAttributes().OfType<System.ComponentModel.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
+        @(propertyVm.GetCustomAttributes().OfType<FormFactory.Attributes.DescriptionAttribute>().Select(a => a.Description).SingleOrDefault())
     </span>
              </div>
          }

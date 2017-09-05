@@ -10,7 +10,7 @@
 @model PropertyVm
 
 @{
-    var value = Model.Value as XElement;
+    var value = Model.Value as System.Xml.Linq.XElement;
     if (value != null) { 
         @Html.Raw(value.ToString())
     }

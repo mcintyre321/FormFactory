@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using FormFactory.Attributes;
 
 namespace FormFactory.Example.Models.Examples
@@ -16,8 +15,7 @@ namespace FormFactory.Example.Models.Examples
         }
 
         [Required]
-        [DisplayName("Countrie")]
-        [Display(Prompt="Type to find your location")]
+        [Display(Name="What country are you in?", Prompt="Type to find your location")]
         [Description("AJAX suggestions using [SuggestionsUrl(\"...someurl...\")]")]
         [SuggestionsUrl("/home/CountrySuggestions")]
         public string CountryViaAjax { get; set; }

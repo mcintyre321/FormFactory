@@ -3,7 +3,7 @@
 @using FormFactory.AspMvc
 @using FormFactory.Attributes
 @model FormVm
-<form role="form" action="@Model.ActionUrl" method="@Model.Method" enctype="multipart/form-data" encoding="multipart/form-data" class="@ViewBag.FormClass @Model.AdditionalClasses">
+<form role="form" action="@Model.ActionUrl" method="@Model.Method" enctype="multipart/form-data" encoding="multipart/form-data" class="@Model.AdditionalClasses">
     @if (Model.RenderAntiForgeryToken)
     {
         @Html.AntiForgeryToken()

@@ -1,26 +1,31 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using CsQuery;
+using FormFactory.NetCore.Tests;
 using FormFactory.Standalone;
-using Xunit;
+using FormFactory;
+using NUnit.Framework;
 
-namespace FormFactory.NetCore.Tests
+namespace FormFactory.Tests
 {
-    public class Program
+    public class Tests
     {
-        
-        public static void Main(string[] args)
+
+        [Test]
+        public async Task Test()
         {
             var someObject = new SomeType() { SomeProperty = "SomeValue" };
-            var properties = Properties.For(someObject);
-            ////var annotation = new FormFactory.Attributes.DisplayAttribute();
-            var helper = new RazorTemplateHtmlHelper();
-            var html = properties.Render(helper);
+            var properties =  FF.PropertiesFor(someObject);
+
+            var html = await properties.RenderAsync();
+            var annotation = new FormFactory.Attributes.DisplayAttribute();
             var actualCq = CQ.CreateFragment(html.ToString());
             var input = actualCq.Find("input").Single(el => el.GetAttribute("name") == "SomeProperty");
 
-            Assert.Equal("SomeValue", input.GetAttribute("value"));
+            Assert.AreEqual("SomeValue", input.GetAttribute("value"));
         }
 
 
     }
+     
 }

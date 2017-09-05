@@ -140,9 +140,8 @@ Then configure core to serve embedded files (<a href="https://github.com/mcintyr
                     }
                     else
                     {
-                        var helper = new FormFactory.Standalone.RazorTemplateHtmlHelper();
                         var propertiesFor = FF.PropertiesFor(instance);
-                        @Html.Raw(propertiesFor.Render(Html)) //needs to be made raw as we are in MVC
+                        @Html.Raw(FormFactory.Standalone.RenderAsyncExtension.RenderAsync(propertiesFor).Result) //needs to be made raw as we are in MVC
                     }
                 }
                 <input type="submit" value="submit" />

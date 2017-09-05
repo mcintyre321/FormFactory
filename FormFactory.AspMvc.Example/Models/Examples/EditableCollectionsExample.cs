@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using FormFactory.Attributes;
 
 namespace FormFactory.AspMvc.Example.Models.Examples
