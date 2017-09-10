@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -314,7 +315,6 @@
       <LastGenOutput>Test.generated.cs</LastGenOutput>
     </Content>
     <Content Include="Views\Shared\FormFactory\Property.FormFactory.Example.Models.Titles.cshtml" />
-    <Content Include="Views\UploadedFiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj" />
     <ProjectReference Include="..\FormFactory\FormFactory.csproj" />
     <ProjectReference Include="..\FormFactory.AspNetCore\FormFactory.AspNetCore.csproj" />
   </ItemGroup>
