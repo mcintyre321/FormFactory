@@ -3,7 +3,15 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>FormFactory Standalone - Use FormFactory in non-web apps</Title>
+    <Company>Harry McIntyre</Company>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Product>Harry McIntyre</Product>
+    <Description>FormFactory is a UI component engine for ASP.NET Core and MVC5. It reflects over your view models to build a component tree, then renders that according to customisable templates. Drive yuour views by convention instead of hard coding them.</Description>
+    <PackageProjectUrl>https://github.com/mcintyre321/FormFactory</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/mcintyre321/SirenDotNet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
