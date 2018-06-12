@@ -1,14 +1,17 @@
-﻿@using System
+﻿
+@using System
 @using System.Collections.Generic
 @using FormFactory
 @using FormFactory.AspMvc
+@using FormFactory.AspMvc.Wrappers
 @using System.Reflection
+@using System.Text.Encodings.Web;
 @model PropertyVm
 @{
     var templateType = Model.Type.GetTypeInfo().GenericTypeArguments[0];
-    
+
     <div class="ff-collection">
-        
+
         <ul>
             @{
                 if (Model.Value != null)
@@ -16,7 +19,7 @@
                     foreach (var obj in (IEnumerable<object>)Model.Value)
                     {
                         var id = Guid.NewGuid().ToString();
-                        
+
                         <li draggable="true" id="listitem-@id">
                             <input type="hidden" name="@(Model.Name).Index" value="@id" />
                             @{
@@ -29,27 +32,30 @@
                                 </i>
                             </a> <a class="btn btn-mini ff-remove-parent btn-danger btn-sm" href="#remove" title="Remove">
                                 <span class="glyphicon glyphicon-remove"></span>
-                            </a> 
+                            </a>
                         </li>
                     }
                 }
             }
-            <li class="ff-not-collection-item"><a class="btn btn-mini btn-primary ff-add-item" href="#add"  data-modelname="@Model.Name" title="Add">
-                <span class="glyphicon glyphicon-plus"></span></a>
-                <script type="text/html">
-                    <div class="ff-collection-new-item ff-form" style="display: none"><input type='hidden' name='' value='' />
-                        @FF.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render(Html)
-                        <a class="btn btn-sm ff-move-up btn-default" href="#moveup" title="Move Up"><span class="glyphicon glyphicon-arrow-up"></span></a>
-                        <a class="btn btn-sm ff-move-down btn-default" href="#moveup" title="Move Down">
-                            <i class="glyphicon glyphicon-arrow-down">
-                            </i>
-                        </a> <a class="btn btn-mini ff-remove-parent btn-danger btn-sm" href="#remove" title="Remove">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </a> 
-                    </div>
-                </script>
+            <li class="ff-not-collection-item">
+                <a class="btn btn-mini btn-primary ff-add-item" href="#add" data-modelname="@Model.Name" title="Add">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+                <div class="new-ff-collection-outer-container" style="display: none">
+                    @(@"<div class=""ff-collection-new-item ff-form"" style=""display: none"">
+                                    <input type = 'hidden' name='' value='' />" +
+                                FF.PropertiesFor(Activator.CreateInstance(templateType), templateType).Render(Html).ToHtmlString() +
+                                @"<a class=""btn btn-sm ff-move-up btn-default"" href=""#moveup"" title=""Move Up""><span class=""glyphicon glyphicon-arrow-up""></span></a>
+                                    <a class=""btn btn-sm ff-move-down btn-default"" href=""#movedown"" title=""Move Down"">
+                                        <i class=""glyphicon glyphicon-arrow-down"">
+                                        </i>
+                                    </a> <a class=""btn btn-mini ff-remove-parent btn-danger btn-sm"" href=""#remove"" title=""Remove"">
+                                        <span class=""glyphicon glyphicon-remove""></span>
+                                    </a>
+                                </div>")
+                </div>
             </li>
         </ul>
     </div>
-    
+
 }
