@@ -123,7 +123,7 @@ $(document).ready(function () {
         var $form = $($('<div/>').html(decodedForm));
 
         var modelName = $(this).data("modelname");
-        var newObject = $('<li>').append($form.children().clone());
+        var newObject = $('<li draggable="true" id="listitem-' + newId() + '">').append($form.children().clone());
         newObject.find("> *").css("display", "");
 
         var newIndex = newId(); // $(this).closest("ul").children().length - 1;
@@ -184,6 +184,7 @@ $(document).ready(function () {
         var $src = $(document.getElementById(e.originalEvent.dataTransfer.getData("text")))
             .closest("li[draggable=true]");
         var $target = $(e.target).closest("li[draggable=true]");
+
         if ($target.length && $target[0] !== $src[0] && $target[0].parentElement === $src[0].parentElement) {
             var beforeOrAfter = $src.index() > $target.index();
             $src.remove();
