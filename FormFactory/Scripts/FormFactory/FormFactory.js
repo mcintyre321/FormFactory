@@ -117,10 +117,13 @@ $(document).ready(function () {
         });
     }
     $(document).on("click", ".ff-add-item", function (e) {
-        var $form = $($('<div/>').html($(this).closest("li").find("script[type='text/html']").html()));
+        var encodedForm = $(this).closest("li").find("div.new-ff-collection-outer-container");
+        var contentsOfEncodedForm = encodedForm.html();
+        var decodedForm = htmlDecode(contentsOfEncodedForm);
+        var $form = $($('<div/>').html(decodedForm));
 
         var modelName = $(this).data("modelname");
-        var newObject = $('<li>').append($form.children().clone());
+        var newObject = $('<li draggable="true" id="listitem-' + newId() + '">').append($form.children().clone());
         newObject.find("> *").css("display", "");
 
         var newIndex = newId(); // $(this).closest("ul").children().length - 1;
@@ -181,6 +184,7 @@ $(document).ready(function () {
         var $src = $(document.getElementById(e.originalEvent.dataTransfer.getData("text")))
             .closest("li[draggable=true]");
         var $target = $(e.target).closest("li[draggable=true]");
+
         if ($target.length && $target[0] !== $src[0] && $target[0].parentElement === $src[0].parentElement) {
             var beforeOrAfter = $src.index() > $target.index();
             $src.remove();
@@ -207,4 +211,7 @@ if ($.validator) {
 $(document).on("click keydown", "input[type='checkbox']", function () {
     return !($(this).attr("readonly"));
 });
- 
+
+function htmlDecode(value) {
+    return $('<div/>').html(value).text();
+}
