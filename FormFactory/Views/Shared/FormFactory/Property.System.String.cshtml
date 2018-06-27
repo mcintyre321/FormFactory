@@ -34,7 +34,8 @@
         <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
             @foreach (var option in choices)
             {
-                <option value="@option.Item2" @Html.Raw((Model.Value != null && option.Item2 == Model.Value.ToString()).Attr("selected"))>@option.Item1</option>
+                bool isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
+                <option value="@option.Item2" selected="@isSelected">@option.Item1</option>            
             }
         </select>
     }
