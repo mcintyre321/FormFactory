@@ -10,8 +10,11 @@ namespace FormFactory.Attributes
 
         public string FormatErrorMessage(string propertyVmDisplayName)
         {
-            var msg = !string.IsNullOrWhiteSpace(FriendlyFormat) ? ("be " + FriendlyFormat) : ($"match pattern '{Pattern}'");
-            return $"{propertyVmDisplayName} must {msg}";
+            var msg = !string.IsNullOrWhiteSpace(FriendlyFormat)
+                ? string.Format(Resources.RegularExpression_friendlyformat, FriendlyFormat)
+                : string.Format(Resources.RegularExpression_pattern, Pattern);
+
+            return string.Format(Resources.RegularExpression, propertyVmDisplayName, msg);
         }
 
         public string FriendlyFormat { get; set; }

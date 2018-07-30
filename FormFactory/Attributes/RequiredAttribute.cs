@@ -6,7 +6,7 @@ namespace FormFactory.Attributes
     {
         public string FormatErrorMessage(string propertyVmDisplayName)
         {
-            return $"{propertyVmDisplayName} is required";
+            return string.Format(Resources.Required, propertyVmDisplayName);
         }
     }
 }

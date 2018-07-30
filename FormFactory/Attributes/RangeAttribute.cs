@@ -14,7 +14,7 @@ namespace FormFactory.Attributes
 
         public string FormatErrorMessage(string fieldName)
         {
-            return $"{fieldName} must be between {Minimum} and {Maximum}";
+            return string.Format(Resources.Range, fieldName, Minimum, Maximum);
         }
 
         public object Minimum { get;  }

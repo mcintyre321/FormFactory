@@ -10,11 +10,38 @@
     <PackageProjectUrl>https://github.com/mcintyre321/FormFactory</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/mcintyre321/SirenDotNet/blob/master/LICENSE</PackageLicenseUrl>
     <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild></PropertyGroup>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ApplicationIcon />
+    <Win32Resource />
+    <NeutralLanguage>en</NeutralLanguage></PropertyGroup>
 
    <ItemGroup>
     <EmbeddedResource Include="Views\**\*;Content\**\*;Scripts\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
+
+   <ItemGroup>
+     <Folder Include="Properties\" />
+   </ItemGroup>
+
+   <ItemGroup>
+     <Compile Update="Resources\Resources.Designer.cs">
+       <DesignTime>True</DesignTime>
+       <AutoGen>True</AutoGen>
+       <DependentUpon>Resources.resx</DependentUpon>
+     </Compile>
+   </ItemGroup>
+
+   <ItemGroup>
+     <EmbeddedResource Update="Resources\Resources.nl.resx">
+       <Generator>PublicResXFileCodeGenerator</Generator>
+       <CustomToolNamespace>FormFactory</CustomToolNamespace>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Resources\Resources.resx">
+       <Generator>PublicResXFileCodeGenerator</Generator>
+       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+       <CustomToolNamespace>FormFactory</CustomToolNamespace>
+     </EmbeddedResource>
+   </ItemGroup>
  
  
 

@@ -13,7 +13,7 @@ namespace FormFactory.Attributes
 
         public string FormatErrorMessage(string fieldName)
         {
-            return $"{fieldName} must have between {MinimumLength} and {MaximumLength} letters";
+            return string.Format(Resources.StringLength, fieldName, MinimumLength, MaximumLength);
         }
 
         public int MinimumLength { get; set; } = 0;

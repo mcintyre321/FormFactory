@@ -14,7 +14,7 @@ namespace FormFactory.Attributes
 
         public string FormatErrorMessage(string fieldName)
         {
-            return $"{fieldName} must be equal to {propertyToCompareTo}";
+            return string.Format(Resources.Compare, fieldName, propertyToCompareTo);
         }
 
     }
