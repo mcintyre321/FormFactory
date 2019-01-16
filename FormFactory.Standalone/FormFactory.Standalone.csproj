@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <Title>FormFactory Standalone - Use FormFactory in non-web apps</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>

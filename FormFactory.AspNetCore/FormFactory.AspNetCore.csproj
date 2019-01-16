@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Authors>Harry McIntyre</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <Title>FormFactory.AspNetCore - Install this for AspNetCore - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>
