@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace FormFactory
 {
-    public interface FfHtmlHelper 
+    public interface FfHtmlHelper  
     {
         UrlHelper Url();
         string WriteTypeToString(Type type);

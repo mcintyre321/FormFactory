@@ -12,7 +12,6 @@ namespace FormFactory.AspMvc.Example
     {
         protected void Application_Start()
         {
-            var x = typeof(FormFactory.Standalone.RenderAsyncExtension);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

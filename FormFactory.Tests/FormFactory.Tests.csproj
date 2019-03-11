@@ -6,7 +6,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <ApplicationIcon />
     <OutputTypeEx>exe</OutputTypeEx>
     <StartupObject />
@@ -15,13 +14,12 @@
 
   <ItemGroup>
     <PackageReference Include="CsQuery.NETStandard" Version="1.3.6.1" />
-    <PackageReference Include="microsoft.net.test.sdk" Version="15.5.0-preview-20170810-02" />
+    <PackageReference Include="microsoft.net.test.sdk" Version="15.9.0" />
     <PackageReference Include="NUnit" Version="3.8.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FormFactory.AspNetCore\FormFactory.AspNetCore.csproj" />
     <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj" />
     <ProjectReference Include="..\FormFactory\FormFactory.csproj" />
   </ItemGroup>

@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
-    <Title>FormFactory Core Library - MVC5 and AspNetCore Dynamic Forms Component Engine</Title>
+   <Title>FormFactory Core Library - MVC5 and AspNetCore Dynamic Forms Component Engine</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>
     <Product>Harry McIntyre</Product>

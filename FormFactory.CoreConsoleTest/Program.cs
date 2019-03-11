@@ -15,7 +15,7 @@ namespace FormFactory.CoreConsoleTest
             var someObject = new { SomeProperty = "SomeValue" };
             var properties = FF.PropertiesFor(someObject);
 
-            var s = await properties.RenderAsync();
+            var s = properties.Render();
             Console.WriteLine(s);
             Console.ReadLine();
         }

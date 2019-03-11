@@ -4,7 +4,6 @@
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -334,10 +333,6 @@
     <ProjectReference Include="..\FormFactory.AspMvc\FormFactory.AspMvc.csproj">
       <Project>{d6251fb0-69d2-42c9-8c23-2d7d56ec79ba}</Project>
       <Name>FormFactory.AspMvc</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj">
-      <Project>{75d94395-0e77-49cb-8112-65d75574d5eb}</Project>
-      <Name>FormFactory.Standalone</Name>
     </ProjectReference>
     <ProjectReference Include="..\FormFactory\FormFactory.csproj">
       <Project>{bb14651d-5a7e-45f9-8895-8c09d9107232}</Project>

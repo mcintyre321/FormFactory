@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using FormFactory.AspMvc.Wrappers;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
     public static class RenderExtension
     {

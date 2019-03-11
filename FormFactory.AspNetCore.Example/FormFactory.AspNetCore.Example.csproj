@@ -1,8 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>FormFactory.AspNetCore.Example</AssemblyName>
     <OutputType>Exe</OutputType>
@@ -16,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FormFactory.Standalone\FormFactory.Standalone.csproj" />
     <ProjectReference Include="..\FormFactory\FormFactory.csproj" />
     <ProjectReference Include="..\FormFactory.AspNetCore\FormFactory.AspNetCore.csproj" />
   </ItemGroup>

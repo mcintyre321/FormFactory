@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using CsQuery;
 using FormFactory.NetCore.Tests;
-using FormFactory.Standalone;
 using FormFactory;
+using FormFactory.Standalone;
 using NUnit.Framework;
 
 namespace FormFactory.Tests
@@ -17,7 +17,7 @@ namespace FormFactory.Tests
             var someObject = new SomeType() { SomeProperty = "SomeValue" };
             var properties =  FF.PropertiesFor(someObject);
 
-            var html = await properties.RenderAsync();
+            var html = properties.Render();
             var annotation = new FormFactory.Attributes.DisplayAttribute();
             var actualCq = CQ.CreateFragment(html.ToString());
             var input = actualCq.Find("input").Single(el => el.GetAttribute("name") == "SomeProperty");

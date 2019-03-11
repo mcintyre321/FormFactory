@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
     public static class AspMvcViewHelper
     {

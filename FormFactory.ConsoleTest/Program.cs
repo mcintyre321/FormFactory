@@ -11,7 +11,7 @@ namespace FormFactory.ConsoleTest
     {
         static void Main(string[] args)
         {
-            MainAsync(args).GetAwaiter().GetResult();
+            MainAsync(args).RunSynchronously();
         }
 
         public static async Task MainAsync(string[] args)
@@ -19,7 +19,7 @@ namespace FormFactory.ConsoleTest
             var someObject = new { SomeProperty = "SomeValue" };
             var properties = FF.PropertiesFor(someObject);
 
-            var s = await properties.RenderAsync();
+            var s = properties.Render();
             Console.WriteLine(s);
             Console.ReadLine();
         }

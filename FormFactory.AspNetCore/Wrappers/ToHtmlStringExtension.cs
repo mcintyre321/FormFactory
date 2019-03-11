@@ -1,7 +1,7 @@
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Html;
 
-namespace FormFactory.AspMvc.Wrappers
+namespace FormFactory
 {
     public static class ToHtmlStringExtension
     {

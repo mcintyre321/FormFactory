@@ -1,42 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.DependencyInjection;
+using FormFactory.Standalone;
 
-namespace FormFactory.Standalone
+namespace FormFactory
 {
     public static class RenderAsyncExtension
     {
-        public static async Task<string> RenderAsync(this IEnumerable<PropertyVm> properties)
+        public static string Render(this IEnumerable<PropertyVm> properties)
         {
+            var helper = new MyFfHtmlHelper();
             var sb = new StringBuilder();
             foreach (var propertyVm in properties)
             {
-                sb.AppendLine(await propertyVm.RenderAsync());
+                sb.AppendLine(propertyVm.Render(helper).ToString()).ToString();
             }
+
             return sb.ToString();
+
         }
 
-        public static async Task<string> RenderAsync(this FormVm formVm)
-        {
-            using (var serviceScope = RazorContextBuilder.ServiceScopeFactory.Value.CreateScope())
-            {
-                var helper = serviceScope.ServiceProvider.GetRequiredService<RazorViewToStringRenderer>();
 
-                return await helper.RenderViewToStringAsync("Views/Shared/FormFactory/Form.cshtml", formVm);
-            }
-        }
-
-        public static async Task<string> RenderAsync(this PropertyVm propertyVm)
-        {
-            using (var serviceScope = RazorContextBuilder.ServiceScopeFactory.Value.CreateScope())
-            {
-                var helper = serviceScope.ServiceProvider.GetRequiredService<RazorViewToStringRenderer>();
-
-                return await helper.RenderViewToStringAsync("Views/Shared/FormFactory/Form.Property.cshtml",
-                    propertyVm);
-            }
-        }
     }
+
+    // the sample base template class. It's not mandatory but I think it's much easier.
 }

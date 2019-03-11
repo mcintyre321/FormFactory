@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormFactory.CoreConsoleTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.ConsoleTest", "FormFactory.ConsoleTest\FormFactory.ConsoleTest.csproj", "{AA30F1B6-C29E-4033-895A-6AC980036D17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.Standalone.Example", "FormFactory.Standalone.Example\FormFactory.Standalone.Example.csproj", "{EEC79F6E-626A-4BC4-8F19-5802B8065CC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormFactory.Examples.Shared", "FormFactory.Examples.Shared\FormFactory.Examples.Shared.csproj", "{93CC9CEF-1ADE-4B01-908A-0AA0DAC18046}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{AA30F1B6-C29E-4033-895A-6AC980036D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA30F1B6-C29E-4033-895A-6AC980036D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA30F1B6-C29E-4033-895A-6AC980036D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC79F6E-626A-4BC4-8F19-5802B8065CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC79F6E-626A-4BC4-8F19-5802B8065CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC79F6E-626A-4BC4-8F19-5802B8065CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC79F6E-626A-4BC4-8F19-5802B8065CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93CC9CEF-1ADE-4B01-908A-0AA0DAC18046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93CC9CEF-1ADE-4B01-908A-0AA0DAC18046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93CC9CEF-1ADE-4B01-908A-0AA0DAC18046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93CC9CEF-1ADE-4B01-908A-0AA0DAC18046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

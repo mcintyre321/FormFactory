@@ -3,7 +3,7 @@ using System.Linq;
 using FormFactory.AspMvc.Wrappers;
 using Microsoft.AspNetCore.Html;
 
-namespace FormFactory.AspMvc
+namespace FormFactory
 {
     public static class AspMvcViewHelper
     {
