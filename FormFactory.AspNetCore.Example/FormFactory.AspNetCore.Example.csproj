@@ -7,6 +7,8 @@
     <OutputType>Exe</OutputType>
     <PackageId>FormFactory.AspNetCore.Example</PackageId>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
 
   <ItemGroup>
