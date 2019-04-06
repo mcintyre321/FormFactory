@@ -24,3 +24,4 @@ project.lock.json
 /.vs/*.dg
 /.vs
 /.vscode
+*.DS_Store
