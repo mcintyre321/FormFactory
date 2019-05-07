@@ -24,11 +24,13 @@
                 {
 
                     <div>
-                        <select class="ff-choice-picker form-control" @(Model).Disabled() >
+                        <select class="ff-choice-picker form-control" @Model.Disabled()>
                             @for (int i = 0; i < choices.Length; i++)
                             {
-
-                                <option value="@i" @Html.Raw((i == selectedIndex).Attr("selected", null))>@(choices[i] == null ? "None" : choices[i].name)</option>
+                                var selctedAtt = ((i == selectedIndex) ? "selected=\"selected\"" : "");
+                                var text = choices[i] == null ? "None" : choices[i].name;
+                                var option = $@"<option value=""{i}"" {selctedAtt}>{text}</option>";
+                                @Html.Raw(option);
                             }
                         </select>
                     </div>
@@ -45,7 +47,7 @@
                         var isDisabled = Model.Disabled | !isSelected;
                         <div class="ff-choice "  @Html.Raw((useRadio || isSelected) ? "" : "style='display:none'") >
                             <div class="radio">
-                                <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@radioGroupName" @Html.Raw(isSelected.Attr("checked", null)) @Model.Disabled.Attr("Disabled", null)/>
+                                <input type="radio" class="ff-choice-selector " @Html.Raw(!useRadio ? "style='display:none'" : "") name="@radioGroupName" @Html.Raw(isSelected.Attr("checked", null)) @Model.Disabled.Attr("disabled", null)/>
                                 <div @Html.Raw(useRadio ? "class=\"radio-block\"" : "")>
                                     @if (useRadio)
                                     {

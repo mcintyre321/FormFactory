@@ -31,6 +31,11 @@ namespace FormFactory
 
         public static IEnumerable<PropertyVm> GetPropertyVmsUsingReflection(object model, Type fallbackModelType)
         {
+            if (model is PropertyVm vm)
+            {
+                yield return vm;
+                yield break;
+            }
             var type = model != null ? model.GetType() : fallbackModelType;
 
             var typeVm = new PropertyVm(typeof(string), "__type")

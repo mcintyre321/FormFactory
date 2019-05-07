@@ -331,7 +331,24 @@ var formModel = new[]
                         Value = false, //Preselect false (unchecked)
                         NotOptional =true
 
-                     }
+                    },new PropertyVm(typeof(object) , "Things")
+                    {
+                        DisplayName = "Pick a thing",
+                        NotOptional =true,
+                        Choices = new List<object>
+                        {
+                            new PropertyVm(typeof(string) , "ThingOne")
+                            {
+                                IsHidden = true,
+                                DisplayName = "Thing One"
+                            },
+                            new PropertyVm(typeof(string) , "ThingTwo")
+                            {
+                                IsHidden = true,
+                                DisplayName = "Thing Two"
+                            },
+                        }
+                    }
               };
 
             @formModel.Render(Html)

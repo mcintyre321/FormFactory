@@ -19,6 +19,7 @@
     <EmbeddedResource Include="Views\**\*;Content\**\*;Scripts\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
 
+  
    <ItemGroup>
      <Folder Include="Properties\" />
    </ItemGroup>
