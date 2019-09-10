@@ -26,7 +26,7 @@
                                                                || propertyVm.Choices != null);
                      var optionalText = required ? "" : "<span class='is-optional-hint'> (optional)</span>";
 
-                     <label class="control-label" for="@propertyVm.Id">@propertyVm.DisplayName()@Html.Raw(optionalText)</label>
+                     <label class="control-label" for="@propertyVm.Name">@propertyVm.DisplayName()@Html.Raw(optionalText)</label>
                  }
 
                  @Html.BestProperty(propertyVm)
