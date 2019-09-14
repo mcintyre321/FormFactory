@@ -25,6 +25,9 @@
    </ItemGroup>
 
    <ItemGroup>
+     <Compile Remove="Resources\Resources.pt-BR.Designer.cs" />
+   </ItemGroup>
+   <ItemGroup>
      <Compile Update="Resources\Resources.Designer.cs">
        <DesignTime>True</DesignTime>
        <AutoGen>True</AutoGen>
@@ -41,6 +44,10 @@
        <Generator>PublicResXFileCodeGenerator</Generator>
        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
        <CustomToolNamespace>FormFactory</CustomToolNamespace>
+     </EmbeddedResource>
+     <EmbeddedResource Update="Resources\Resources.pt-BR.resx">
+       <Generator>ResXFileCodeGenerator</Generator>
+       <LastGenOutput>Resources.pt-BR.Designer.cs</LastGenOutput>
      </EmbeddedResource>
    </ItemGroup>
  
