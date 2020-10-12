@@ -124,13 +124,13 @@
     <value>{0} debe estar entre {1} y {2}</value>
   </data>
   <data name="RegularExpression" xml:space="preserve">
-    <value>{0} debe {1}</value>
+    <value>{0} {1}</value>
   </data>
   <data name="RegularExpression_friendlyformat" xml:space="preserve">
     <value>{0}</value>
   </data>
   <data name="RegularExpression_pattern" xml:space="preserve">
-    <value>respetar el patrón '{0}'</value>
+    <value>debe respetar el patrón '{0}'</value>
   </data>
   <data name="Required" xml:space="preserve">
     <value>{0} es obligatorio</value>
