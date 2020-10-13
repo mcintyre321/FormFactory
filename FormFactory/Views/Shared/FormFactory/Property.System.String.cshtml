@@ -1,5 +1,4 @@
-﻿@*@using System*@
-@using System
+﻿@using System
 @using System.Collections.Generic
 @using FormFactory.Attributes
 @using System.Linq
@@ -7,7 +6,9 @@
 @using FormFactory
 @model PropertyVm
 
-
+@{
+    bool isRequired = Model.NotOptional.HasValue && Model.NotOptional.Value;
+}
 @if (!Model.Readonly && Model.Choices != null)
 {
     var choices = Model.Choices as IEnumerable<Tuple<string, string>>;
@@ -22,7 +23,7 @@
             var isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
             <div class="radio">
                 <label>
-                    <input type="radio" name="@Model.Name" value="@option.Item2" @Html.Raw(isSelected ? "checked" : "")>
+                    <input type="radio" name="@Model.Name" value="@option.Item2" @Html.Raw(isSelected ? "checked" : "") @Html.Raw(isRequired?"required":"")>
                     @option.Item1
                 </label>
             </div>
@@ -30,11 +31,15 @@
     }
     else
     {
-        <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled())>
+        if(isRequired && choices.All(c => c.Item2 != null))
+        {
+            choices = choices.Prepend(new Tuple<string, string>(null, null));
+        }
+        <select name="@Model.Name" class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(Model.Disabled()) @Html.Raw(isRequired?"required":"")>
             @foreach (var option in choices)
             {
                 bool isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
-                <option value="@option.Item2" selected="@isSelected">@option.Item1</option>            
+                <option value="@option.Item2" selected="@isSelected">@option.Item1</option>
             }
         </select>
     }
@@ -69,7 +74,7 @@ else
     }
     else
     {
-        <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model) name="@Model.Name" size="30" type="@inputType" value="@Model.Value"/>
+        <input class="form-control" @Html.Raw(Model.Readonly()) @Html.Raw(autoCompleteAtt) @Html.Raw(Model.Disabled()) @Html.Raw(placeHolderText.Attr("placeholder")) @Html.UnobtrusiveValidation(Model) name="@Model.Name" size="30" type="@inputType" value="@Model.Value" />
     }
 
 }
