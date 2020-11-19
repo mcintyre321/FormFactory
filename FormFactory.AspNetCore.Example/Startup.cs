@@ -1,20 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Primitives;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace FormFactory.AspNetCore.Example
+    
 {
     public class Startup
     {
+        private IHostingEnvironment _env;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -23,56 +27,60 @@ namespace FormFactory.AspNetCore.Example
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            _env = env;
         }
 
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
-            // Add framework services.
-            services.AddMvc();
-
-            var embeddedFileProvider = new EmbeddedFileProvider(typeof(FormFactory.FF).GetTypeInfo().Assembly,nameof(FormFactory)); 
-            //Add the file provider to the Razor view engine
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.FileProviders.Add(embeddedFileProvider);
-            });
+        {
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation(options => options.FileProviders.Add(
+                    new EmbeddedFileProvider(typeof(FormFactory.FF).GetTypeInfo().Assembly, nameof(FormFactory))
+                ));
+            
+            var embeddedProvider = new EmbeddedFileProvider(typeof(FF).Assembly,nameof(FormFactory));
+            services.AddSingleton<IFileProvider>(embeddedProvider);
+         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
-            app.UseStaticFiles();
+            app.UseHttpsRedirection();
+            
+            var embeddedProvider = new EmbeddedFileProvider(typeof(FF).Assembly,nameof(FormFactory));
+            var physicalFileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot"));
+            var compositeProvider = new CompositeFileProvider( embeddedProvider, physicalFileProvider);
+            app.UseStaticFiles(new StaticFileOptions
             {
-                var options = new StaticFileOptions
-                {
-                    RequestPath = "",
-                    FileProvider = new EmbeddedFileProvider(typeof(FormFactory.FF).GetTypeInfo().Assembly, nameof(FormFactory))
-                };
+                FileProvider = compositeProvider,
+                RequestPath = new PathString("")
+            });
 
-                app.UseStaticFiles(options);
-            }
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+            
+           
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -23,7 +23,7 @@ else
             @foreach (var choice in choices)
             {
                 var selected = (((IEnumerable<string>)Model.Value).Contains(choice.Item2));
-                <option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</option>
+                <!option value="@choice.Item2" @Html.Raw(selected.Attr("selected"))>@choice.Item1</!option>
             }
         </select>
     }

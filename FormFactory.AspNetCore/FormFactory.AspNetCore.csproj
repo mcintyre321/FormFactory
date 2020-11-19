@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <Authors>Harry McIntyre</Authors>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <Title>FormFactory.AspNetCore - Install this for AspNetCore - MVC5 and AspNetCore Dynamic Forms Component Engine (shared component package)</Title>
     <Company>Harry McIntyre</Company>
     <PackageVersion>1.0.0</PackageVersion>
@@ -13,6 +12,7 @@
     <PackageTags>dynamic forms, asp, editortemplates</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

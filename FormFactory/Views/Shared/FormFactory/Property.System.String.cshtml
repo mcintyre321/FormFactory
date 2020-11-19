@@ -39,7 +39,7 @@
             @foreach (var option in choices)
             {
                 bool isSelected = Model.Value != null && option.Item2 == Model.Value.ToString();
-                <option value="@option.Item2" selected="@isSelected">@option.Item1</option>
+                <!option value="@option.Item2" selected="@isSelected">@option.Item1</!option>
             }
         </select>
     }

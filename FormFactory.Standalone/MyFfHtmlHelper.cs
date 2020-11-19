@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Razor.Hosting;
 using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.AspNetCore.Razor.Language.Extensions;
@@ -101,6 +102,7 @@ namespace FormFactory.Standalone
                         .Location), // this file (that contains the MyTemplate base class)
                     MetadataReference.CreateFromFile(typeof(System.Linq.EnumerableExecutor).Assembly.Location),
                     MetadataReference.CreateFromFile(typeof(System.Linq.Expressions.Expression).Assembly.Location),
+                    MetadataReference.CreateFromFile(typeof(XElement).Assembly.Location),
 
                     // for some reason on .NET core, I need to add this... this is not needed with .NET framework
                     MetadataReference.CreateFromFile(Path.Combine(Path.GetDirectoryName(typeof(object).Assembly.Location),

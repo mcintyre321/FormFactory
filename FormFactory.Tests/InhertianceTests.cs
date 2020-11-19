@@ -7,10 +7,10 @@ using NUnit.Framework;
 
 namespace FormFactory.Tests
 {
-    public class InhertianceTests
+    public class InheritanceTests
     {
         [Test]
-        public void FindsInhertitedProperties()
+        public void FindsInheritedProperties()
         {
             var model = new InhertitingClass();
             var propertyVmsUsingReflection = FF.GetPropertyVmsUsingReflection(model, typeof(object)).ToList();
