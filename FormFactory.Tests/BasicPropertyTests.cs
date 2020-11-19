@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using CsQuery;
@@ -39,6 +40,24 @@ namespace FormFactory.Tests
 
             Assert.AreEqual("hello", input.InnerText);
         }
+
+        [Test]
+        public async Task TestForm()
+        {
+            var form = new FormVm
+            {
+                ActionUrl = "http://example.org/foo",
+                DisplayName = "somelink",
+                Method = "GET",
+                Inputs = new List<PropertyVm>()
+
+            };
+            var html = form.Render(new MyFfHtmlHelper()).ToString();
+            var actualCq = CQ.CreateFragment("<div>" + html.ToString() + "</div>");
+            actualCq.Find("form").Single();
+        }
+
+
 
 
     }

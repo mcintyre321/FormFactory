@@ -36,6 +36,8 @@ namespace FormFactory.Standalone
             throw new NotImplementedException();
         }
 
+        public string AntiForgeryToken() => "";
+
         public void RenderPartial(string partialName, object model)
         {
             throw new NotImplementedException();
@@ -51,12 +53,16 @@ namespace FormFactory.Standalone
             throw new NotImplementedException();
         }
 
+        public string ValidationSummary(bool foo) => "";
+
+
+
         public MvcHtmlString Partial(string viewPath, object model)
         {
             var templateType = compiledViews.GetOrAdd(viewPath, s => new Lazy<Type>(() => GetTemplateType(s)))
                 .Value;
             var template = (MyTemplate)Activator.CreateInstance(templateType);
-
+            template.ViewData = new ViewData();
             template.Model = model;
             template.Html = this;
             template.ExecuteAsync().Wait();

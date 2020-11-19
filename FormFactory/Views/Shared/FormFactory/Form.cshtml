@@ -1,9 +1,8 @@
 ﻿@using FormFactory.Attributes
 @using FormFactory
 
-@using FormFactory.Attributes
 @model FormVm
-<form role="form" action="@Model.ActionUrl" method="@Model.Method" enctype="multipart/form-data" encoding="multipart/form-data" class="@Model.AdditionalClasses">
+<!form role="form" action="@Html.Raw(Model.ActionUrl)" method="@Html.Raw(Model.Method)" enctype="@Model.EncType" encoding="multipart/form-data" class="@Html.Raw(Model.AdditionalClasses)">
     @if (Model.RenderAntiForgeryToken)
     {
         @Html.AntiForgeryToken()
@@ -27,4 +26,4 @@
            }
         </div>
     </fieldset>
-</form>
+</!form>
