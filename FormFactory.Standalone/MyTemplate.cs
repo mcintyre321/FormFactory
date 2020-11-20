@@ -70,6 +70,7 @@ namespace FormFactory.Standalone
             Suffix = suffix;
             SuffixOffset = suffixOffset;
             AttributeValuesCount = attributeValuesCount;
+            Suppressed = false;
             
             // Single valued attributes might be omitted in entirety if it the attribute value strictly evaluates to
             // null  or false. Consequently defer the prefix generation until we encounter the attribute value.

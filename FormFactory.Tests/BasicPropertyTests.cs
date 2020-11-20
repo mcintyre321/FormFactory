@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using CsQuery;
 using FormFactory.NetCore.Tests;
-using FormFactory;
 using FormFactory.Standalone;
 using NUnit.Framework;
 
@@ -52,6 +51,11 @@ namespace FormFactory.Tests
                 Inputs = new List<PropertyVm>()
 
             };
+            form.Inputs.Add(new PropertyVm(typeof(string), "_method")
+            {
+                DisplayName = "HttpMethod",
+                Choices = new[] { "get", "put", "post", "delete" }
+            });
             var html = form.Render(new MyFfHtmlHelper()).ToString();
             var actualCq = CQ.CreateFragment("<div>" + html.ToString() + "</div>");
             actualCq.Find("form").Single();
